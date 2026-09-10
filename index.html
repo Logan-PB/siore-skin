@@ -10,22 +10,28 @@
   <meta name="description" content="시오레 취급약국 전용 피부 상담 및 제품 추천 도구" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css" />
   <link rel="stylesheet" href="style.css?v=heat-priority-20260804-11" />
+  <link rel="stylesheet" href="consultation.css?v=20260910-1" />
 </head>
 <body>
   <header class="site-header brand-ribbon" aria-label="SIORE 브랜드">
     <div class="nav-shell">
       <a class="brand" href="#" aria-label="SIORE 상담 홈">
-        <span class="brand-word">SIORÉ</span>
+        <img class="brand-logo" src="images/brand/siore-logo-official-black.png" alt="SIORÉ" width="588" height="221" />
       </a>
       <p class="brand-slogan" data-i18n="brandSlogan">피부에 바르는 영양제, 약국 상담을 위한 더마 루틴</p>
-      <div class="language-switcher brand-language" aria-label="언어 선택">
+      <div class="header-certs" aria-label="제품 시험·인증">
+        <img src="images/cert/dermatest-excellent-2025.png" alt="Dermatest Excellent" />
+        <img src="images/cert/cert-irritation.png" alt="피부자극지수 0.00" />
+        <img src="images/cert/cert-noncomedo.png" alt="논코메도제닉 테스트" />
+      </div>
+    </div>
+  </header>
+  <div class="language-bar">      <div class="language-switcher" aria-label="언어 선택">
         <button class="language-option active" type="button" data-lang="ko"><img class="flag-icon" src="images/flags/kr.svg" alt="" /><span>한국어</span></button>
         <button class="language-option" type="button" data-lang="en"><img class="flag-icon" src="images/flags/us.svg" alt="" /><span>English</span></button>
         <button class="language-option" type="button" data-lang="zh"><img class="flag-icon" src="images/flags/cn.svg" alt="" /><span>中文</span></button>
         <button class="language-option" type="button" data-lang="ja"><img class="flag-icon" src="images/flags/jp.svg" alt="" /><span>日本語</span></button>
-      </div>
-    </div>
-  </header>
+      </div></div>
 
   <main class="wrapper">
     <nav class="steps-nav" aria-label="상담 단계">
@@ -52,13 +58,11 @@
         <p data-i18n="step1Desc">나이대와 성별은 추천을 더 섬세하게 보정하는 선택 조건입니다. 선택하지 않아도 피부 고민만으로 상담을 진행할 수 있습니다.</p>
       </div>
 
-      <div class="intake-grid">
-        <section class="intake-card">
-          <div class="field-head">
-            <h3 data-i18n="ageTitle">나이대</h3>
-            <span data-i18n="optionalRefine">Optional · 선택 시 보정</span>
-          </div>
-          <div class="segmented-grid" id="age-options">
+      <div class="profile-bar"><div class="profile-field "><h3 data-i18n="genderTitle">성별</h3><div class="segmented-grid gender-grid" id="gender-options">
+            <button type="button" data-gender="female" data-i18n="female">여성</button>
+            <button type="button" data-gender="male" data-i18n="male">남성</button>
+            <button type="button" data-gender="none" class="selected" data-i18n="notSelected">선택 안 함</button>
+          </div></div><div class="profile-field age-field"><h3 data-i18n="ageTitle">나이대</h3><div class="segmented-grid" id="age-options">
             <button type="button" data-age="none" class="selected" data-i18n="notSelected">선택 안 함</button>
             <button type="button" data-age="20대">20대</button>
             <button type="button" data-age="30대">30대</button>
@@ -66,22 +70,10 @@
             <button type="button" data-age="50대">50대</button>
             <button type="button" data-age="60대">60대</button>
             <button type="button" data-age="70대 이상">70+</button>
-          </div>
-        </section>
+          </div></div><span class="profile-note" data-i18n="optionalRefine">선택 사항</span></div>
 
-        <section class="intake-card">
-          <div class="field-head">
-            <h3 data-i18n="genderTitle">성별</h3>
-            <span data-i18n="optionalRefine">Optional · 선택 시 보정</span>
-          </div>
-          <div class="segmented-grid gender-grid" id="gender-options">
-            <button type="button" data-gender="female" data-i18n="female">여성</button>
-            <button type="button" data-gender="male" data-i18n="male">남성</button>
-            <button type="button" data-gender="none" class="selected" data-i18n="notSelected">선택 안 함</button>
-          </div>
-        </section>
-      </div>
-
+      <div class="concern-layout">
+      <figure class="face-guide"><img src="images/skin-analysis-model.png" alt="피부 고민 예시" width="1536" height="1024" /><figcaption data-i18n="faceNote"></figcaption><div class="selected-chips" id="selected-concern-chips" aria-live="polite"></div></figure>
       <section class="choice-block">
         <div class="field-head center">
           <h3 data-i18n="concernTitle">주요 피부 고민</h3>
@@ -98,7 +90,9 @@
           <button class="concern-card" type="button" data-concern="장벽회복"><img src="images/concerns/barrier.svg" alt="" /><span data-i18n="concernBarrier">장벽 회복</span><small>Barrier</small></button>
           <button class="concern-card" type="button" data-concern="각질"><img src="images/concerns/texture.svg" alt="" /><span data-i18n="concernTexture">각질·피부결</span><small>Texture</small></button>
         </div>
+        <div class="priority-box" id="priority-box" hidden><h4 data-i18n="priorityTitle"></h4><div class="priority-options" id="priority-options"></div><p class="priority-note" data-i18n="priorityNote"></p></div>
       </section>
+      </div>
 
       <div class="panel-actions">
         <button class="btn-primary" id="btn-to-step2" type="button" disabled data-i18n="nextStep">다음 단계</button>
@@ -152,6 +146,9 @@
         </section>
       </div>
 
+      <details class="habit-panel" open>
+        <summary data-i18n="habitTitle"></summary>
+        <fieldset><legend data-i18n="currentProducts"></legend><div class="habit-options"><button type="button" data-habit="products" data-term="클렌저" aria-pressed="false">클렌저</button><button type="button" data-habit="products" data-term="토너" aria-pressed="false">토너</button><button type="button" data-habit="products" data-term="세럼·앰플" aria-pressed="false">세럼·앰플</button><button type="button" data-habit="products" data-term="크림" aria-pressed="false">크림</button><button type="button" data-habit="products" data-term="선크림" aria-pressed="false">선크림</button><button type="button" data-habit="products" data-term="잘 모르겠어요" aria-pressed="false">잘 모르겠어요</button></div></fieldset><fieldset><legend data-i18n="reactions"></legend><div class="habit-options"><button type="button" data-habit="reactions" data-term="따가움" aria-pressed="false">따가움</button><button type="button" data-habit="reactions" data-term="붉어짐" aria-pressed="false">붉어짐</button><button type="button" data-habit="reactions" data-term="가려움" aria-pressed="false">가려움</button><button type="button" data-habit="reactions" data-term="트러블" aria-pressed="false">트러블</button><button type="button" data-habit="reactions" data-term="없음" aria-pressed="false">없음</button></div></fieldset><label for="habit-note" data-i18n="productNote"></label><input id="habit-note" type="text" maxlength="300" data-placeholder="productNote" autocomplete="off" /><p class="priority-note" data-i18n="referenceOnly"></p></details>
       <div class="panel-actions">
         <button class="btn-ghost" type="button" onclick="goToStep(1)" data-i18n="previous">이전</button>
         <button class="btn-primary" id="btn-to-step3" type="button" disabled data-i18n="viewResults">추천 결과 보기</button>
@@ -179,7 +176,7 @@
       <div class="evidence-section" id="evidence-section"></div>
       <div class="script-section" id="consultation-script-section"></div>
       <div class="routine-section" id="routine-section"></div>
-      <div class="panel-actions result-actions">
+      <div class="panel-actions result-actions"><button type="button" class="btn-ghost" onclick="goToStep(1)" data-i18n="editProfile"></button><button type="button" class="btn-primary" id="print-summary" data-i18n="saveSummary"></button>
         <button class="btn-ghost" type="button" onclick="resetAll()" data-i18n="restart">처음으로 돌아가기</button>
       </div>
     </section>
@@ -191,5 +188,7 @@
   </footer>
 
   <script src="script.js?v=heat-priority-20260804-11"></script>
+  <script src="product-copy.js?v=20260910-1"></script>
+  <script src="consultation.js?v=20260910-1"></script>
 </body>
 </html>
