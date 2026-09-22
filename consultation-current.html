@@ -5545,6 +5545,35 @@ document.addEventListener('DOMContentLoaded',()=>{
 .focus-lobby .lobby-top .brand-proof{margin-left:auto}
 .focus-dialog .focus-toolbar .siore-home-logo{--siore-logo-height:30px;margin-right:4px}
 .focus-lobby .lobby-top .glass-brand-slogan{flex:0 1 auto;text-align:left!important}
+/* Open, guided routine input: each selection reveals the next visual checkpoint. */
+.focus-dialog .habit-panel.habit-guided{margin-top:24px;padding:0 18px 18px;border:1px solid #a9c4d1;border-radius:12px;background:linear-gradient(180deg,#f7fbfc 0,#fff 100%);box-shadow:0 8px 22px #2f60760b;overflow:hidden}
+.focus-dialog .habit-panel.habit-guided>summary{list-style:none;margin:0 -18px;padding:16px 18px;border-bottom:1px solid #dbe8ed;background:#eef6f9;font-size:16px;font-weight:700;cursor:default}
+.focus-dialog .habit-panel.habit-guided>summary::-webkit-details-marker{display:none}
+.focus-dialog .habit-panel.habit-guided>summary::before{content:'✓';display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;margin-right:9px;border-radius:50%;background:#3e7187;color:#fff;font-size:12px;vertical-align:1px}
+.habit-guide-head{padding:16px 1px 5px}
+.habit-guide-copy{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.habit-guide-eyebrow{font-size:11px;line-height:1.5;color:#6d8490;font-weight:500}
+.habit-guide-progress-label{font-size:12px;color:#3f6f84;font-weight:700;white-space:nowrap}
+.habit-guide-track{height:4px;margin:11px 0 10px;border-radius:999px;background:#e1ebef;overflow:hidden}
+.habit-guide-track i{display:block;width:var(--habit-progress,0%);height:100%;border-radius:inherit;background:linear-gradient(90deg,#83bfd0,#3f7187);transition:width .32s ease}
+.habit-guide-status{margin:0!important;color:#365f73!important;font-size:12px!important;font-weight:650;line-height:1.5!important}
+.focus-dialog .habit-panel.habit-guided>fieldset,.habit-note-step{position:relative;margin:12px 0 0;padding:15px 15px 16px;border:1px solid #d9e5ea;border-radius:10px;background:#fbfcfd;opacity:.72;transition:border-color .2s,box-shadow .2s,background .2s,opacity .2s,transform .2s}
+.focus-dialog .habit-panel.habit-guided>fieldset{min-width:0}
+.focus-dialog .habit-panel.habit-guided>fieldset legend{font-size:15px;margin:13px 0 10px;padding:0;font-weight:700;color:#2b4959}
+.habit-step-meta{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.habit-step-name{font-size:11px;font-weight:750;letter-spacing:.02em;color:#6d8490}
+.habit-step-state{display:inline-flex;align-items:center;min-height:24px;padding:4px 9px;border-radius:999px;background:#e9eff2;color:#78909b;font-size:10px;font-weight:700;white-space:nowrap}
+.habit-step-current{opacity:1!important;border-color:#4f8ba5!important;background:#f2f9fb!important;box-shadow:0 0 0 3px #83bfd02c,0 9px 22px #48778b12;transform:translateY(-1px)}
+.habit-step-current .habit-step-name{color:#315f74}
+.habit-step-current .habit-step-state{background:#3f7187;color:#fff;animation:habitAttention 1.15s ease-in-out 2}
+.habit-step-complete{opacity:1!important;border-color:#b9d4c9!important;background:#f8fcfa!important}
+.habit-step-complete .habit-step-state{background:#dcefe7;color:#356c55}
+.habit-step-complete .habit-step-state::before{content:'✓';margin-right:4px;font-weight:900}
+.habit-note-step>label{display:block;margin:13px 0 10px;color:#2b4959;font-size:15px}
+.habit-note-step>#habit-note{width:100%;margin:0}
+.habit-note-step>.priority-note{margin:10px 0 0!important}
+@keyframes habitAttention{0%,100%{box-shadow:0 0 0 0 #3f718700}50%{box-shadow:0 0 0 5px #3f718722}}
+@media(prefers-reduced-motion:reduce){.habit-guide-track i,.focus-dialog .habit-panel.habit-guided>fieldset,.habit-note-step{transition:none}.habit-step-current .habit-step-state{animation:none}}
 </style><script>/* Product values transcribed from the user-provided 2026-06-11 leaflet.
    Percentages are preserved as printed; study dates are not exposure durations. */
 window.SIORE_REFERENCE = (()=>{
@@ -5589,7 +5618,7 @@ window.SIORE_REFERENCE = (()=>{
    tests:L('미백·주름개선 2중 기능성 · 주름 개선 테스트','Brightening and wrinkle care · wrinkle improvement tested','美白及皱纹改善双重功能 · 皱纹改善测试','美白・シワ改善の2重機能性・シワ改善テスト'),
    period:'2025.06.12–2025.08.11',subjects:L('31–58세 성인 여성 23명','23 women, ages 31–58','23名31–58岁成年女性','31～58歳の成人女性23名')},
   essenceToner:{page:7,line:'RELIEF',name:'데일리 릴리프(밸런스) 에센스 토너',capacity:'150 mL',
-   summary:L('감나무잎수를 담은 가벼운 사용감의 보습 에센스 토너.','A lightweight moisturizing essence toner with persimmon leaf water.','含柿叶水的轻盈保湿精华爽肤水。','柿の葉水を配合した軽い使用感の保湿エッセンストナー。'),
+   summary:L('탄닌을 주요 성분으로 소개하는 제주 감나무잎수를 담은 보습 에센스 토너.','A moisturizing essence toner with Jeju persimmon leaf water, highlighted for its tannin content.','含济州柿叶水、以单宁为主要特色成分的保湿精华爽肤水。','タンニンを主要な特徴成分として紹介する済州柿葉水配合の保湿エッセンストナー。'),
    target:L('민감·수분 부족·복합성 피부','Sensitive, dehydrated and combination skin','敏感、缺水及混合性肌肤','敏感・乾燥・混合肌'),
    metrics:[metric('136.58%',hydration,['건조']),metric('11.84%',texture,['각질'])],
    condition:L('1회 사용 후','After one use','使用1次后','1回使用後'),
@@ -5622,6 +5651,7 @@ window.SIORE_REFERENCE = (()=>{
   ingredient('pycnogenol','피크노제놀','PYCNOGENOL','NMN',3,L('해안송 껍질 · 항산화 케어','Maritime pine bark · antioxidant care','海岸松树皮 · 抗氧化护理','海岸松樹皮・抗酸化ケア'),L('프랑스 해안송 껍질에서 얻는 폴리페놀 복합체입니다. 항산화 특성을 바탕으로 피부 컨디셔닝에 활용합니다.','A polyphenol complex from French maritime pine bark, used for its antioxidant and skin-conditioning properties.','来自法国海岸松树皮的多酚复合物，用于抗氧化及肌肤调理。','フランス海岸松の樹皮由来のポリフェノール複合体。抗酸化・整肌目的に用います。')),
   ingredient('resveratrol','레스베라트롤','RESVERATROL','NMN',4,L('폴리페놀 · 항산화 케어','Polyphenol · antioxidant care','多酚 · 抗氧化护理','ポリフェノール・抗酸化ケア'),L('포도 등에 존재하는 폴리페놀 성분입니다. 산화 스트레스 관련 연구를 바탕으로 피부 컨디셔닝에 활용합니다.','A polyphenol found in grapes and other plants, used in skin conditioning with research into oxidative stress.','存在于葡萄等植物中的多酚，基于氧化应激研究用于肌肤调理。','ブドウなどに含まれるポリフェノール。酸化ストレスに関する研究を背景に整肌に活用します。')),
   ingredient('wheat','밀싹추출물','WHEAT SPROUT EXTRACT','RELIEF',0,L('식물 유래 · 보습·컨디셔닝','Botanical · moisturizing and conditioning','植物来源 · 保湿调理','植物由来・保湿と整肌'),L('어린 밀싹에서 얻은 식물 유래 성분입니다. 피부를 촉촉하고 편안하게 관리하기 위한 배합에 활용합니다.','A botanical ingredient from young wheat sprouts, used in formulas for moisturizing and comfortable skin conditioning.','从幼嫩麦芽中提取的植物成分，用于保湿及舒适的肌肤调理。','若い小麦の芽由来の植物成分。肌をうるおいのある心地よい状態に保つ処方に用います。')),
+  ingredient('kaki','제주 감나무잎수','DIOSPYROS KAKI LEAF WATER · TANNIN','RELIEF',0,L('탄닌 주성분 · 피부결·유분 밸런스','Tannin-focused · texture and oil balance','以单宁为主 · 肌理与油脂平衡','タンニンを主成分に・キメと皮脂バランス'),L('제주 감나무잎수의 대표 폴리페놀인 탄닌을 중심으로 소개하는 원료입니다. 에센스 토너에 정제수 대신 고함량 배합되어 세안 후 피부를 촉촉하고 편안하게 정돈하는 데 도움을 줍니다.','Jeju persimmon leaf water is highlighted for tannin, a representative polyphenol. Used at a high level in the essence toner in place of purified water, it helps leave post-cleansing skin hydrated and comfortable.','济州柿叶水以代表性多酚单宁为核心成分。精华爽肤水以高含量替代纯净水使用，帮助洁面后的肌肤保持水润舒适。','済州柿葉水に含まれる代表的なポリフェノール、タンニンに着目した原料です。エッセンストナーでは精製水の代わりに高配合し、洗顔後の肌をうるおいのある心地よい状態に整えます。')),
   ingredient('centella','병풀추출물','CENTELLA ASIATICA EXTRACT','RELIEF',1,L('진정 · 보습','Soothing · moisturizing','舒缓 · 保湿','整肌・保湿'),L('마데카소사이드 등 지표성분을 함유한 식물 추출물입니다. 예민해진 피부의 진정과 보습 관리에 활용합니다.','A plant extract containing compounds such as madecassoside, used for soothing and moisturizing sensitive-feeling skin.','含羟基积雪草苷等标志成分的植物提取物，用于舒缓及保湿。','マデカッソシドなどを含む植物エキス。敏感に感じる肌の整肌と保湿に用います。')),
   ingredient('peptides','펩타이드','PEPTIDES','RELIEF',2,L('피부 컨디셔닝','Skin conditioning','肌肤调理','整肌'),L('아미노산이 짧게 이어진 사슬 형태의 성분입니다. 피부를 좋은 상태로 유지하는 데 사용하며 종류마다 특성이 다릅니다.','Short chains of amino acids used for skin conditioning. Properties differ by peptide type.','由氨基酸连接而成的短链，用于肌肤调理；不同种类特性各异。','アミノ酸が短くつながった成分。整肌に用い、種類により特性が異なります。')),
   ingredient('hyaluronic','히알루론산','HYALURONIC ACID','RELIEF',3,L('수분 보유 · 보습','Moisture retention · hydration','锁水 · 保湿','水分保持・保湿'),L('물을 끌어당기고 붙잡는 보습 성분입니다. 피부 표면의 수분을 유지해 촉촉하고 부드럽게 관리합니다.','A humectant that attracts and retains water, helping keep the skin surface hydrated and soft.','吸引并保持水分的保湿成分，帮助皮肤表面维持滋润柔软。','水分を引き寄せて保持する保湿成分。肌表面をうるおいのある柔らかな状態に保ちます。')),
@@ -5630,7 +5660,8 @@ window.SIORE_REFERENCE = (()=>{
  ];
  const extraVisuals={
   pdrn:{file:'pdrn-dna-unsplash.jpg',size:[1600,900],creator:'Logan Voss / Unsplash',source:'https://unsplash.com/photos/a-close-up-of-a-pink-ribbon-on-a-white-background-UPifb0WKOAY',credit:L('DNA 구조 콘셉트 이미지','DNA structure concept image','DNA结构概念图','DNA構造のコンセプト画像')},
-  panthenol:{file:'panthenol-gel-pexels.jpg',size:[1280,1600],creator:'Jana Kukebal / Pexels',source:'https://www.pexels.com/photo/water-drops-on-clear-glass-6496467/',credit:L('보습 젤 질감 콘셉트 사진','Moisturizing gel texture concept photo','保湿凝胶质感概念照片','保湿ジェルの質感イメージ写真')}
+ panthenol:{file:'panthenol-gel-pexels.jpg',size:[1280,1600],creator:'Jana Kukebal / Pexels',source:'https://www.pexels.com/photo/water-drops-on-clear-glass-6496467/',credit:L('보습 젤 질감 콘셉트 사진','Moisturizing gel texture concept photo','保湿凝胶质感概念照片','保湿ジェルの質感イメージ写真')}
+  ,kaki:{file:'leaflet-07.jpg',size:[2364,3782],squareCrop:[300,1280,1080,1080],portraitCrop:[250,980,1180,1880],creator:'SIORÉ 제품 리플렛',source:'reference-assets/leaflet-07.jpg',credit:L('제주 감나무잎수 함유 에센스 토너 제품 자료','Essence toner reference with Jeju persimmon leaf water','含济州柿叶水的精华爽肤水产品资料','済州柿葉水配合エッセンストナーの製品資料')}
  };
  ingredients.forEach(item=>{if(extraVisuals[item.key])item.visual=extraVisuals[item.key];});
  return {products:productData,ingredients,L};
@@ -5675,6 +5706,8 @@ window.SIORE_REFERENCE = (()=>{
   productDialog.querySelector('[data-ref-close]').onclick=()=>productDialog.close();productDialog.showModal();productDialog.scrollTop=0;
  }
  function imageCrop(item,square=false){
+  if(item.visual?.squareCrop&&square)return item.visual.squareCrop;
+  if(item.visual?.portraitCrop&&!square)return item.visual.portraitCrop;
   if(item.visual){const [w,h]=item.visual.size,cw=square?Math.min(w,h):Math.min(w,h*.6),ch=square?cw:h;return [(w-cw)/2,(h-ch)/2,cw,ch];}
   const n=item.line==='NMN'?5:4,cw=6496/n;
   return square?[item.column*cw+60,1350,cw-120,cw-120]:[item.column*cw+35,780,cw-70,2320];
@@ -5684,13 +5717,13 @@ window.SIORE_REFERENCE = (()=>{
   const size=item.visual?item.visual.size:[6496,4490],label=item.name+' · '+(item.visual?item.visual.credit.ko:'브랜드 자료 이미지');
   return '<svg class="ref-ingredient-photo" preserveAspectRatio="xMidYMid slice" viewBox="'+imageCrop(item,square).join(' ')+'" role="img" aria-label="'+E(label)+'"><image href="'+ingredientSource(item)+'" width="'+size[0]+'" height="'+size[1]+'"/></svg>';
  }
- const ingredientNames={nmn:L('NMN','NMN','NMN','NMN'),carnosine:L('카르노신','Carnosine','肌肽','カルノシン'),ala:L('알파리포산','Alpha lipoic acid','硫辛酸','αリポ酸'),pycnogenol:L('피크노제놀','Pycnogenol','碧萝芷','ピクノジェノール'),resveratrol:L('레스베라트롤','Resveratrol','白藜芦醇','レスベラトロール'),wheat:L('밀싹추출물','Wheat sprout extract','小麦芽提取物','小麦芽エキス'),centella:L('병풀추출물','Centella extract','积雪草提取物','ツボクサエキス'),peptides:L('펩타이드','Peptides','肽','ペプチド'),hyaluronic:L('히알루론산','Hyaluronic acid','透明质酸','ヒアルロン酸'),pdrn:L('PDRN','PDRN','PDRN','PDRN'),panthenol:L('판테놀','Panthenol','泛醇','パンテノール')};
+ const ingredientNames={nmn:L('NMN','NMN','NMN','NMN'),carnosine:L('카르노신','Carnosine','肌肽','カルノシン'),ala:L('알파리포산','Alpha lipoic acid','硫辛酸','αリポ酸'),pycnogenol:L('피크노제놀','Pycnogenol','碧萝芷','ピクノジェノール'),resveratrol:L('레스베라트롤','Resveratrol','白藜芦醇','レスベラトロール'),wheat:L('밀싹추출물','Wheat sprout extract','小麦芽提取物','小麦芽エキス'),kaki:L('제주 감나무잎수 · 탄닌','Jeju persimmon leaf water · tannin','济州柿叶水 · 单宁','済州柿葉水・タンニン'),centella:L('병풀추출물','Centella extract','积雪草提取物','ツボクサエキス'),peptides:L('펩타이드','Peptides','肽','ペプチド'),hyaluronic:L('히알루론산','Hyaluronic acid','透明质酸','ヒアルロン酸'),pdrn:L('PDRN','PDRN','PDRN','PDRN'),panthenol:L('판테놀','Panthenol','泛醇','パンテノール')};
  function ingredientName(item){return T(ingredientNames[item.key]);}
  function syncReferenceLabels(){
   document.querySelectorAll('.reference-planet').forEach(node=>{
    const item=data.ingredients[Number(node.dataset.index)],text=node.querySelector('.planet-name');
    const name=ingredientNames[item.key][languageMode]||item.name;
-   text.replaceChildren();text.style.fontSize=languageMode==='ko'?(item.key==='nmn'||item.key==='pdrn'?'17px':'14.3px'):'11px';
+   text.replaceChildren();text.style.fontSize=languageMode==='ko'?(item.key==='nmn'||item.key==='pdrn'?'17px':item.key==='kaki'?'11px':'14.3px'):'11px';
    if(languageMode==='ko'){text.setAttribute('y','38');text.textContent=item.name;return;}
    const main=document.createElementNS(ns,'tspan');main.setAttribute('x','0');main.setAttribute('y','30');main.textContent=name;
    if(name.length>14){main.setAttribute('textLength','82');main.setAttribute('lengthAdjust','spacingAndGlyphs');}
@@ -5701,10 +5734,10 @@ window.SIORE_REFERENCE = (()=>{
  const beforeReferenceLanguage=applyPageLanguage;
  applyPageLanguage=function(){beforeReferenceLanguage();syncReferenceLabels();syncSpotlightLanguage();};
  function lineLabel(item){return item.line==='EXTRA'?T(L('추가 원료','ADDITIONAL INGREDIENT','补充成分','追加成分')):item.line==='NMN'?'SIORÉ NMN LINE':'SIORÉ RELIEF / BALANCE LINE';}
- function visualCredit(item){return item.visual?T(item.visual.credit)+' · <a href="'+E(item.visual.source)+'" target="_blank" rel="noopener noreferrer">'+E(item.visual.creator)+' ↗</a>':T(L('시오레 브랜드 소개 자료 이미지','Image from the SIORÉ brand presentation','图片来自SIORÉ品牌介绍资料','SIORÉブランド紹介資料の画像'));}
+ function visualCredit(item){if(!item.visual)return T(L('시오레 브랜드 소개 자료 이미지','Image from the SIORÉ brand presentation','图片来自SIORÉ品牌介绍資料','SIORÉブランド紹介資料の画像'));const source=/^https?:/.test(item.visual.source)?item.visual.source:root+item.visual.file;return T(item.visual.credit)+' · <a href="'+E(source)+'" target="_blank" rel="noopener noreferrer">'+E(item.visual.creator)+' ↗</a>';}
  function renderIngredient(index){
   activeIngredient=index;const item=data.ingredients[index];
-  ingredientDialog.innerHTML='<header class="ref-dialog-head"><div><small>SIORÉ INGREDIENT GUIDE</small><h2 id="ingredient-popup-title">'+T(L('시오레 주요 배합성분','SIORÉ key ingredients','SIORÉ主要配方成分','SIORÉの主な配合成分'))+'</h2></div><button type="button" data-ref-close aria-label="성분 안내 닫기">'+T(L('닫기 ×','Close ×','关闭 ×','閉じる ×'))+'</button></header><div class="ref-ingredient-detail"><div class="ref-ingredient-hero">'+ingredientImage(item)+'</div><section><small class="ref-line-tag">'+lineLabel(item)+'</small><h3>'+ingredientName(item)+'</h3><small class="ref-inci">'+E(item.en)+'</small><strong>'+T(item.role)+'</strong><p>'+T(item.text)+'</p><span class="ref-visual-credit">'+visualCredit(item)+'</span></section></div><nav class="ref-ingredient-list" aria-label="전체 성분 11종">'+data.ingredients.map((x,i)=>'<button type="button" data-ref-ingredient="'+i+'" aria-pressed="'+(i===index)+'">'+ingredientImage(x,true)+'<span>'+ingredientName(x)+'</span></button>').join('')+'</nav>'+(item.line==='EXTRA'?'':'<details class="ref-source-original"><summary>'+T(L('브랜드 자료 원본 보기','View the brand slide','查看品牌资料原图','ブランド資料原本を見る'))+'</summary><img loading="lazy" src="'+root+(item.line==='NMN'?'ingredients-nmn.jpg':'ingredients-relief.jpg')+'" alt="'+item.line+' 주요성분 브랜드 소개 슬라이드"></details>')+'<footer>'+T(L('원료의 일반적 특성에 대한 설명입니다. 원료 이미지와 연구 내용은 개별 완제품의 시험 결과를 뜻하지 않으며, 성분·함량은 제품별로 다릅니다.','Descriptions concern general ingredient properties. Ingredient imagery and research do not represent finished-product test results; ingredients and amounts vary by product.','内容为原料的一般特性。原料图片及研究不代表成品试验结果，成分及含量因产品而异。','原料の一般的な特性の説明です。画像や研究は各完成品の試験結果を示すものではなく、成分・配合量は製品により異なります。'))+'</footer>';
+  ingredientDialog.innerHTML='<header class="ref-dialog-head"><div><small>SIORÉ INGREDIENT GUIDE</small><h2 id="ingredient-popup-title">'+T(L('시오레 주요 배합성분','SIORÉ key ingredients','SIORÉ主要配方成分','SIORÉの主な配合成分'))+'</h2></div><button type="button" data-ref-close aria-label="성분 안내 닫기">'+T(L('닫기 ×','Close ×','关闭 ×','閉じる ×'))+'</button></header><div class="ref-ingredient-detail"><div class="ref-ingredient-hero">'+ingredientImage(item)+'</div><section><small class="ref-line-tag">'+lineLabel(item)+'</small><h3>'+ingredientName(item)+'</h3><small class="ref-inci">'+E(item.en)+'</small><strong>'+T(item.role)+'</strong><p>'+T(item.text)+'</p><span class="ref-visual-credit">'+visualCredit(item)+'</span></section></div><nav class="ref-ingredient-list" aria-label="전체 성분 '+data.ingredients.length+'종">'+data.ingredients.map((x,i)=>'<button type="button" data-ref-ingredient="'+i+'" aria-pressed="'+(i===index)+'">'+ingredientImage(x,true)+'<span>'+ingredientName(x)+'</span></button>').join('')+'</nav>'+(item.line==='EXTRA'?'':'<details class="ref-source-original"><summary>'+T(L('브랜드 자료 원본 보기','View the brand slide','查看品牌资料原图','ブランド資料原本を見る'))+'</summary><img loading="lazy" src="'+root+(item.line==='NMN'?'ingredients-nmn.jpg':'ingredients-relief.jpg')+'" alt="'+item.line+' 주요성분 브랜드 소개 슬라이드"></details>')+'<footer>'+T(L('원료의 일반적 특성에 대한 설명입니다. 원료 이미지와 연구 내용은 개별 완제품의 시험 결과를 뜻하지 않으며, 성분·함량은 제품별로 다릅니다.','Descriptions concern general ingredient properties. Ingredient imagery and research do not represent finished-product test results; ingredients and amounts vary by product.','内容为原料的一般特性。原料图片及研究不代表成品试验结果，成分及含量因产品而异。','原料の一般的な特性の説明です。画像や研究は各完成品の試験結果を示すものではなく、成分・配合量は製品により異なります。'))+'</footer>';
   ingredientDialog.querySelector('[data-ref-close]').onclick=()=>ingredientDialog.close();
   ingredientDialog.querySelectorAll('[data-ref-ingredient]').forEach(b=>b.onclick=()=>{renderIngredient(Number(b.dataset.refIngredient));ingredientDialog.querySelector('[data-ref-ingredient="'+activeIngredient+'"]').focus({preventScroll:true});});
  }
@@ -5872,6 +5905,90 @@ window.SIORE_REFERENCE = (()=>{
     new ResizeObserver(syncHeight).observe(slogan);
     document.fonts.ready.then(syncHeight);
   });
+})();
+</script><script>(()=>{
+ const guideCopy={
+  eyebrow:copy4('상담 참고용 · 추천 점수에는 반영되지 않아요','For consultation reference · does not affect your score','仅供咨询参考 · 不计入推荐评分','カウンセリング参考用・おすすめ点数には反映されません'),
+  progress:copy4('사용 습관 {count}/2 확인','Routine {count}/2 reviewed','使用习惯已确认 {count}/2','使用習慣 {count}/2 確認済み'),
+  first:copy4('먼저 확인','Start here','先确认这里','まず確認'),
+  next:copy4('다음 확인','Check next','下一项','次に確認'),
+  done:copy4('확인 완료','Done','已确认','確認済み'),
+  optional:copy4('선택 입력','Optional','选填','任意入力'),
+  products:copy4('1 · 현재 제품','1 · Current products','1 · 当前产品','1・現在の製品'),
+  reactions:copy4('2 · 불편 경험','2 · Discomfort','2 · 不适体验','2・不快な経験'),
+  note:copy4('3 · 제품명·상황 메모','3 · Product or situation note','3 · 产品名或情况备注','3・製品名・状況メモ'),
+  startStatus:copy4('1단계부터 확인해주세요.','Start with step 1.','请从第1步开始。','ステップ1から確認してください。'),
+  reactionStatus:copy4('1단계 완료 · 다음은 불편 경험을 확인해주세요.','Step 1 complete · next, review any discomfort.','第1步完成 · 接下来确认不适体验。','ステップ1完了・次に不快な経験を確認してください。'),
+  noteStatus:copy4('기본 확인 완료 · 필요하면 제품명이나 상황을 적어주세요.','Basic review complete · add a product or situation if helpful.','基本确认完成 · 如有需要可填写产品名或情况。','基本確認完了・必要なら製品名や状況を入力してください。'),
+  completeStatus:copy4('사용 습관 확인 완료','Routine review complete','使用习惯确认完成','使用習慣の確認完了')
+ };
+ const text=entry=>bilingual(entry);
+ let panel,steps,status,progressLabel;
+ function renderLabels(){
+  if(!panel)return;
+  panel.querySelector('.habit-guide-eyebrow').innerHTML=text(guideCopy.eyebrow);
+  panel.querySelector('[data-habit-guide="products"] .habit-step-name').innerHTML=text(guideCopy.products);
+  panel.querySelector('[data-habit-guide="reactions"] .habit-step-name').innerHTML=text(guideCopy.reactions);
+  panel.querySelector('[data-habit-guide="note"] .habit-step-name').innerHTML=text(guideCopy.note);
+  sync();
+ }
+ function stepLabel(step,state){
+  const label=step.querySelector('.habit-step-state');
+  if(!label)return;
+  label.innerHTML=text(state==='done'?guideCopy.done:state==='current'?(step.dataset.habitGuide==='products'?guideCopy.first:guideCopy.next):guideCopy.optional);
+ }
+ function sync(){
+  if(!panel||!steps)return;
+  const productDone=habits.products.size>0;
+  const reactionDone=habits.reactions.size>0;
+  const noteDone=Boolean(document.querySelector('#habit-note')?.value.trim());
+  const current=!productDone?'products':!reactionDone?'reactions':'note';
+  steps.forEach(step=>{
+   const key=step.dataset.habitGuide;
+   const done=key==='products'?productDone:key==='reactions'?reactionDone:noteDone;
+   const state=done?'done':key===current?'current':'upcoming';
+   step.dataset.state=state;
+   step.classList.toggle('habit-step-current',state==='current');
+   step.classList.toggle('habit-step-complete',state==='done');
+   stepLabel(step,state);
+  });
+  const count=Number(productDone)+Number(reactionDone);
+  progressLabel.innerHTML=text(guideCopy.progress).replace('{count}',count);
+  panel.style.setProperty('--habit-progress',`${count/2*100}%`);
+  status.innerHTML=text(!productDone?guideCopy.startStatus:!reactionDone?guideCopy.reactionStatus:noteDone?guideCopy.completeStatus:guideCopy.noteStatus);
+ }
+ document.addEventListener('DOMContentLoaded',()=>{
+  panel=document.querySelector('.habit-panel');
+  if(!panel)return;
+  panel.open=true;
+  panel.classList.add('habit-guided');
+  const summary=panel.querySelector('summary');
+  summary.addEventListener('click',event=>event.preventDefault());
+  panel.addEventListener('toggle',()=>{if(!panel.open)panel.open=true;});
+  summary.insertAdjacentHTML('afterend','<div class="habit-guide-head"><div class="habit-guide-copy"><strong class="habit-guide-eyebrow"></strong><span class="habit-guide-progress-label"></span></div><div class="habit-guide-track" aria-hidden="true"><i></i></div><p class="habit-guide-status" role="status" aria-live="polite"></p></div>');
+  progressLabel=panel.querySelector('.habit-guide-progress-label');
+  status=panel.querySelector('.habit-guide-status');
+  const fieldsets=[...panel.querySelectorAll(':scope>fieldset')];
+  fieldsets[0].dataset.habitGuide='products';
+  fieldsets[1].dataset.habitGuide='reactions';
+  const noteLabel=panel.querySelector('label[for="habit-note"]');
+  const note=document.querySelector('#habit-note');
+  const reference=panel.querySelector('.priority-note');
+  const noteStep=document.createElement('div');
+  noteStep.className='habit-note-step';
+  noteStep.dataset.habitGuide='note';
+  noteLabel.before(noteStep);
+  noteStep.append(noteLabel,note,reference);
+  steps=[...fieldsets,noteStep];
+  steps.forEach(step=>step.insertAdjacentHTML('afterbegin','<div class="habit-step-meta"><span class="habit-step-name"></span><span class="habit-step-state"></span></div>'));
+  panel.querySelectorAll('[data-habit]').forEach(button=>button.addEventListener('click',()=>queueMicrotask(sync)));
+  note.addEventListener('input',sync);
+  renderLabels();
+  const priorLanguage=setLanguage;
+  setLanguage=function(lang){priorLanguage(lang);renderLabels();};
+  const priorReset=resetAll;
+  resetAll=function(){priorReset();panel.open=true;sync();};
+ });
 })();
 </script><!-- REFERENCE UPDATE END --></body>
 </html>
