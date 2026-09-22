@@ -5186,13 +5186,13 @@ document.addEventListener('DOMContentLoaded',()=>{
  lead.append(art);
  const planets=[...art.querySelectorAll('.orbit-planet')],lines=[...art.querySelectorAll('.orbital-connections line')],meridians=[...art.querySelectorAll('.globe-meridians ellipse')].slice(0,3);
  let time=0,last=0,frame=0,paused=false;const reduced=matchMedia('(prefers-reduced-motion: reduce)');
- function draw(){planets.forEach((p,i)=>{const outer=i>=6,j=i%6,a=time*(outer?.054:.073)+j*Math.PI/3-Math.PI/2+(outer?Math.PI/6:0)+Math.sin(time*.15+i*1.7)*.08,r=(outer?273:167)+Math.sin(time*.21+i*1.9)*8,x=300+Math.cos(a)*r,y=270+Math.sin(a)*r*.94;const beat=2.8,phase=time%beat,active=Math.floor(time/beat)%planets.length;
- const pop=!reduced.matches&&i===active&&phase<2.3?Math.pow(Math.sin(Math.PI*phase/2.3),2):0;
- const lift=pop*8,scale=(outer?.76:(i<2?1.2:1))*(1+pop*.16);
+ function draw(){planets.forEach((p,i)=>{const outer=i>=6,j=i%6,a=time*(outer?.075:.1)+j*Math.PI/3-Math.PI/2+(outer?Math.PI/6:0)+Math.sin(time*.32+i*1.7)*.045,r=(outer?285:187)+Math.sin(time*.55+i*1.9)*10,x=300+Math.cos(a)*r,y=270+Math.sin(a)*r*.94;const beat=1.8,phase=time%beat,active=Math.floor(time/beat)%planets.length;
+ const pop=!reduced.matches&&i===active&&phase<1.7?Math.pow(Math.sin(Math.PI*phase/1.7),2):0;
+ const lift=pop*10+Math.sin(time*.8+i*1.9)*4,scale=(outer?.86:(i<2?1.13:1))*(1+pop*.12+Math.sin(time*.7+i)*.025);
  p.style.filter=pop>0?'drop-shadow(0 '+(3+pop*6)+'px '+(4+pop*5)+'px rgba(66,103,125,'+(.07+pop*.13)+'))':'';
  p.dataset.lift=pop.toFixed(3);p.setAttribute('transform',`translate(${x} ${y-lift}) scale(${scale})`);lines[i].setAttribute('x2',x);lines[i].setAttribute('y2',y-lift);if(outer){const parent=planets[j].getAttribute('transform').match(/translate\(([^ ]+) ([^)]+)/);if(parent){lines[i].setAttribute('x1',parent[1]);lines[i].setAttribute('y1',parent[2]);}}});meridians.forEach((e,i)=>e.setAttribute('rx',Math.abs(Math.cos(time*.23+i*Math.PI/3))*90));}
  function tick(now){if(last)time+=Math.min(now-last,64)/1000;last=now;draw();frame=requestAnimationFrame(tick);}
- function sync(){cancelAnimationFrame(frame);last=0;const stopped=paused||document.querySelector('#ingredient-guide-popup')?.open||art.matches(':hover')||art.contains(document.activeElement)||!art.querySelector('#ingredient-detail').hidden||reduced.matches||document.hidden||document.querySelector('#focus-dialog').open;if(!stopped)frame=requestAnimationFrame(tick);else draw();}
+ function sync(){cancelAnimationFrame(frame);last=0;const stopped=paused||document.querySelector('#ingredient-guide-popup')?.open||!art.querySelector('#ingredient-detail').hidden||reduced.matches||document.hidden||document.querySelector('#focus-dialog').open;if(!stopped)frame=requestAnimationFrame(tick);else draw();}
  art.addEventListener('pointerenter',sync);art.addEventListener('pointerleave',sync);art.addEventListener('focusin',sync);art.addEventListener('focusout',()=>queueMicrotask(sync));document.addEventListener('visibilitychange',sync);reduced.addEventListener('change',sync);new MutationObserver(sync).observe(document.querySelector('#focus-dialog'),{attributes:true,attributeFilter:['open']});sync();
  const ingredientData=[{"name":"NMN","en":"NICOTINAMIDE MONONUCLEOTIDE","role":"시오레의 시그니처 원료","text":"세포 에너지 대사에 관여하는 NAD+의 전구체. 시오레가 성분 설계의 중심에 둔 원료입니다.","color":"#e2b191"},{"name":"PDRN","en":"POLYDEOXYRIBONUCLEOTIDE","role":"보습 · 피부 컨디셔닝","text":"연어 유래 DNA를 정제한 핵산 성분. 스킨케어에서 보습과 피부를 부드럽게 관리하는 목적으로 배합합니다.","color":"#d4b3c3"},{"name":"피크노제놀","en":"PYCNOGENOL","role":"항산화 · 광채 케어","text":"프랑스 해안송 껍질에서 얻은 폴리페놀 복합체. 항산화 특성을 바탕으로 광채·탄력 케어에 활용합니다.","color":"#bfc9a2"},{"name":"감나무잎수","en":"DIOSPYROS KAKI LEAF WATER","role":"피부결 정돈 · 수렴","text":"탄닌과 플라보노이드를 함유한 식물 유래 원료. 수렴 특성을 활용해 피부결·피지 관리에 배합합니다.","color":"#a6cbb3"},{"name":"히알루론산","en":"HYALURONIC ACID","role":"수분 보유 · 보습","text":"물을 끌어당기고 붙잡는 보습 성분. 피부의 수분을 유지해 촉촉하고 부드럽게 가꿔줍니다.","color":"#a7cad9"},{"name":"콜라겐","en":"FISH COLLAGEN PEPTIDE","role":"저분자 콜라겐 보충","text":"이너뷰티에 사용하는 저분자 피쉬콜라겐펩타이드. 마시는 PDRN에 1포당 1,000mg을 담았습니다.","color":"#d9c5a2"},{"name":"알파리포산","en":"ALPHA LIPOIC ACID · 티옥틱산","role":"항산화 케어","text":"수용성·지용성 양쪽에 친화성을 가진 항산화 성분. 산화로 인한 변화를 줄이는 목적으로 배합합니다.","color":"#e2b191"},{"name":"글루타치온","en":"GLUTATHIONE","role":"항산화 · 맑은 톤 케어","text":"세 가지 아미노산으로 이루어진 성분. 항산화 특성을 바탕으로 맑은 피부 톤 관리에 활용합니다.","color":"#d4b3c3"},{"name":"카르노신","en":"CARNOSINE","role":"항산화 · 항당화 연구","text":"두 가지 아미노산으로 이루어진 성분. 당이 단백질에 달라붙는 당화 반응을 억제하는 특성이 연구됩니다.","color":"#d9c5a2"},{"name":"병풀추출물","en":"CENTELLA ASIATICA","role":"진정 · 보습","text":"마데카소사이드 등 지표성분을 함유한 식물 추출물. 예민해진 피부의 진정과 보습 관리에 활용합니다.","color":"#a6cbb3"},{"name":"판테놀","en":"PANTHENOL · PROVITAMIN B5","role":"보습 · 피부 유연화","text":"프로비타민 B5 성분. 수분을 붙잡아 건조한 피부를 촉촉하고 부드럽게 관리하는 데 사용합니다.","color":"#a7cad9"},{"name":"펩타이드","en":"PEPTIDES","role":"피부 컨디셔닝","text":"아미노산이 짧게 이어진 사슬 형태의 성분. 피부를 좋은 상태로 유지하는 데 사용하며 종류마다 특성이 다릅니다.","color":"#bfc9a2"}];
  const detail=art.querySelector('#ingredient-detail');let activeNode=null;
@@ -5226,7 +5226,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  const helix=core.querySelector('.bio-helix');
  if(helix)helix.innerHTML=Array.from({length:18},()=>'<g><line stroke="#a4b3c4" stroke-width="2.3"/><circle r="6.5" fill="url(#bio-bead)"/><circle r="6.5" fill="url(#bio-bead2)"/></g>').join('');
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');let last=0,t=0;
- function draw(now){const stop=document.querySelector('#ingredient-guide-popup')?.open||reduced.matches||document.hidden||art.matches(':hover')||art.contains(document.activeElement)||!art.querySelector('.ingredient-detail').hidden||document.querySelector('#focus-dialog').open;if(last&&!stop)t+=Math.min(now-last,64)/1000;last=now;
+ function draw(now){const stop=document.querySelector('#ingredient-guide-popup')?.open||reduced.matches||document.hidden||!art.querySelector('.ingredient-detail').hidden||document.querySelector('#focus-dialog').open;if(last&&!stop)t+=Math.min(now-last,64)/1000;last=now;
  art.classList.toggle('bio-paused',stop);
  if(helix)[...helix.children].forEach((row,i)=>{const a=i*.43+t*.65,y=164+i*11.4,x=Math.sin(a)*48,depth=Math.cos(a),line=row.children[0],left=row.children[1],right=row.children[2];line.setAttribute('x1',300+x);line.setAttribute('x2',300-x);line.setAttribute('y1',y);line.setAttribute('y2',y+4);[[left,x,depth],[right,-x,-depth]].forEach(([c,dx,d])=>{c.setAttribute('cx',300+dx);c.setAttribute('cy',y);c.setAttribute('r',5.7+d*1.5);c.setAttribute('opacity',.72+d*.26);});});
  requestAnimationFrame(draw);}requestAnimationFrame(draw);
@@ -5253,7 +5253,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  nodes.forEach(node=>{node.setAttribute('aria-haspopup','dialog');node.setAttribute('aria-controls',popup.id);node.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();open(node);},true);node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();e.stopImmediatePropagation();open(node);}},true);});
  popup.querySelector('button').onclick=()=>popup.close();popup.addEventListener('close',()=>{document.body.style.overflow=previousOverflow;nodes.forEach(n=>n.setAttribute('aria-expanded','false'));opener?.focus({preventScroll:true});document.dispatchEvent(new Event('visibilitychange'));});
 });
-</script><script>document.addEventListener('DOMContentLoaded',()=>{const face=document.querySelector('.face-guide'),img=face.querySelector(':scope>img');function sync(){face.style.setProperty('--model-atmosphere-image','url('+JSON.stringify(img.getAttribute('src'))+')');}sync();new MutationObserver(sync).observe(img,{attributes:true,attributeFilter:['src']});});
+</script><script>document.addEventListener('DOMContentLoaded',()=>{const face=document.querySelector('.face-guide'),img=face?.querySelector('img');if(!face||!img)return;function sync(){face.style.setProperty('--model-atmosphere-image','url('+JSON.stringify(img.getAttribute('src'))+')');}sync();new MutationObserver(sync).observe(img,{attributes:true,attributeFilter:['src']});});
 </script><script>document.addEventListener('DOMContentLoaded',()=>{
  const lobby=document.querySelector('.focus-lobby'),copy=lobby.querySelector('.lobby-lead').firstElementChild,h1=copy.querySelector('h1'),em=h1.querySelector('em'),intro=copy.querySelector(':scope>p');
  const first=document.createElement('span');first.className='lobby-title-first';h1.replaceChildren(first,document.createElement('br'),em);
@@ -5270,5 +5270,608 @@ document.addEventListener('DOMContentLoaded',()=>{
  function sync(){document.body.dataset.displayLanguage=languageMode;document.documentElement.lang=languageMode==='zh'?'zh-CN':languageMode;first.innerHTML=bilingual(maps.title);em.innerHTML=bilingual(maps.emphasis);intro.innerHTML=bilingual(maps.intro);copy.querySelectorAll('.brand-method>span').forEach((x,i)=>x.innerHTML=bilingual(maps.steps[i]));lobby.querySelector('.research-art-head h2').innerHTML=bilingual(maps.ingredients);lobby.querySelector('.lobby-start').innerHTML=bilingual(maps.start);document.querySelector('.focus-close').innerHTML=bilingual(maps.close);document.querySelector('#mood-name').innerHTML=bilingual(maps.toolbar);requestAnimationFrame(()=>dispatchEvent(new Event('resize')));}
  const original=setLanguage;setLanguage=function(next){original(next);sync();};document.querySelector('#focus-dialog').addEventListener('close',()=>queueMicrotask(sync));sync();
 });
-</script></body>
+</script><script>document.addEventListener('DOMContentLoaded', () => {
+  const art = document.querySelector('.orbit-research');
+  const core = art.querySelector('.bio-core');
+  const ns = 'http://www.w3.org/2000/svg';
+  const mode = new URLSearchParams(location.search).get('motion') || 'morph';
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const logo = new Image();
+  logo.src = 'images/brand/siore-logo-official-black.png';
+  logo.onload = () => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 300; canvas.height = Math.round(300 * logo.height / logo.width);
+    const ctx = canvas.getContext('2d', {willReadFrequently:true});
+    ctx.drawImage(logo, 0, 0, canvas.width, canvas.height);
+    const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    const points = [];
+    for(let y=0;y<canvas.height;y+=3) for(let x=0;x<300;x+=3){
+      const k=(y*300+x)*4;
+      if(pixels[k+3]>100 && pixels[k]+pixels[k+1]+pixels[k+2]<420) points.push([x,y]);
+    }
+    if(!points.length) return;
+    const minX=Math.min(...points.map(p=>p[0])),maxX=Math.max(...points.map(p=>p[0]));
+    const minY=Math.min(...points.map(p=>p[1])),maxY=Math.max(...points.map(p=>p[1]));
+    const scale=250/(maxX-minX);
+    core.innerHTML='<ellipse cx="300" cy="270" rx="111" ry="126" fill="#eaf1f7" opacity=".55"/><ellipse cx="300" cy="386" rx="69" ry="9" fill="#547386" opacity=".1"/>';
+    const bonds=document.createElementNS(ns,'g');core.append(bonds);
+    const beadLayer=document.createElementNS(ns,'g');core.append(beadLayer);
+    const beads=Array.from({length:36},(_,i)=>{const c=document.createElementNS(ns,'circle');c.setAttribute('fill',i%2?'url(#bio-bead2)':'url(#bio-bead)');beadLayer.append(c);return c});
+    const group=document.createElementNS(ns,'g');core.append(group);
+    const dots=points.map((p,i)=>{
+      const circle=document.createElementNS(ns,'circle');
+      circle.setAttribute('fill',i%5===0?'url(#bio-bead2)':'url(#bio-bead)');
+      group.append(circle);
+      return {circle,x:(p[0]-(minX+maxX)/2)*scale,y:(p[1]-(minY+maxY)/2)*scale};
+    });
+    const finishedLogo=document.createElementNS(ns,'image');
+    finishedLogo.classList.add('siore-complete-logo');
+    finishedLogo.setAttribute('href',logo.src);
+    finishedLogo.setAttribute('x',300-(minX+maxX)/2*scale);
+    finishedLogo.setAttribute('y',270-(minY+maxY)/2*scale);
+    finishedLogo.setAttribute('width',canvas.width*scale);
+    finishedLogo.setAttribute('height',canvas.height*scale);
+    finishedLogo.setAttribute('opacity','0');
+    finishedLogo.setAttribute('aria-label','SIORÉ 공식 로고');
+    finishedLogo.style.mixBlendMode='multiply';
+    core.append(finishedLogo);
+    const lines=Array.from({length:18},()=>{const l=document.createElementNS(ns,'line');l.setAttribute('stroke','#a4b3c4');l.setAttribute('stroke-width','2.3');bonds.append(l);return l});
+    art.querySelector('svg').setAttribute('aria-label',mode==='logo'?'시오레 로고를 이루는 입체 분자 애니메이션':'DNA 분자가 시오레 로고로 모이는 애니메이션');
+    const ease=x=>x*x*(3-2*x);
+    let time=0,last=0;
+    function draw(now){
+      const stop=document.hidden||document.querySelector('#focus-dialog').open||document.querySelector('.ref-dialog[open]');
+      if(last&&!stop&&!reduced.matches)time+=Math.min(now-last,64)/1000;
+      last=now;
+      const phase=time%10;
+      const mix=reduced.matches||mode==='logo'?1:phase<2?0:phase<3.8?ease((phase-2)/1.8):phase<6.8?1:phase<8.6?1-ease((phase-6.8)/1.8):0;
+      const solid=ease(Math.max(0,Math.min(1,(mix-.7)/.3)));
+      finishedLogo.setAttribute('opacity',solid);
+      group.setAttribute('opacity',1-solid);
+      core.dataset.phase=mix===0?'dna':mix===1?'logo':'transition';
+      const tilt=Math.sin(time*.45)*.16*(1-solid);
+      dots.forEach((d,i)=>{
+        const bead=i%36,row=Math.floor(bead/2),side=bead%2?-1:1;
+        const angle=row*.43+time*.65;
+        const dx=side*Math.sin(angle)*48,dy=-106+row*11.4,dz=side*Math.cos(angle)*24;
+        const lx=d.x*Math.cos(tilt),ly=d.y+Math.sin(time*.65)*3*(1-solid),lz=d.x*Math.sin(tilt);
+        const x=300+dx*(1-mix)+lx*mix,y=270+dy*(1-mix)+ly*mix,z=dz*(1-mix)+lz*mix;
+        d.circle.setAttribute('cx',x);d.circle.setAttribute('cy',y);
+        d.circle.setAttribute('r',(1.55+(z+25)/65)*(1+.12*Math.sin(time*1.4+i*.13)));
+        d.circle.setAttribute('opacity',Math.min(1,mix*3)*(.72+(z+25)/180));
+      });
+      beads.forEach((c,i)=>{const row=Math.floor(i/2),side=i%2?-1:1,a=row*.43+time*.65,depth=side*Math.cos(a);c.setAttribute('cx',300+side*Math.sin(a)*48);c.setAttribute('cy',164+row*11.4);c.setAttribute('r',5.7+depth*1.5);c.setAttribute('opacity',Math.max(0,1-mix*3)*(.72+depth*.26))});
+      lines.forEach((l,i)=>{const a=i*.43+time*.65,x=Math.sin(a)*48,y=164+i*11.4;l.setAttribute('x1',300+x);l.setAttribute('x2',300-x);l.setAttribute('y1',y);l.setAttribute('y2',y+4);l.setAttribute('opacity',1-mix)});
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+  };
+});
+</script><script>document.addEventListener('DOMContentLoaded',()=>{
+ const ns='http://www.w3.org/2000/svg',svg=document.querySelector('.orbital-system');
+ // Illustrative ingredient symbols, not molecular structure diagrams.
+ const items=[
+  ['#af5678','#faeaf1','<path d="m5 8 7-4 7 4v8l-7 4-7-4Z M12 4v-3 M19 8l4-2 M5 16l-4 3"/><circle cx="5" cy="8" r="2.3"/><circle cx="19" cy="16" r="2.3"/><circle cx="12" cy="4" r="2.3"/>'],
+  ['#8568b0','#f0eafa','<path d="M6 1c0 9 12 13 12 22 M18 1C18 10 6 14 6 23 M7 4h10 M9 8h6 M9 16h6 M7 20h10"/>'],
+  ['#448fae','#e5f4fc','<path d="M12 1C9 6 4 11 4 15a8 8 0 0 0 16 0C20 11 15 6 12 1Z"/><path d="M8 14c-1 3 1 5 3 5"/>'],
+  ['#8a78b4','#f0edfb','<path d="M4 3c12 0 4 18 16 18 M8 1c12 0 4 18 16 18 M1 5c12 0 4 18 16 18 M5 7l6-2 M8 12l6-2 M10 17l7-2"/>'],
+  ['#588c75','#e9f5ed','<path d="M3 20C-1 8 7 2 21 3c0 13-7 20-18 17Z M3 20 17 7 M8 15V9 M8 15h7"/>'],
+  ['#b07b66','#faeee6','<path d="M12 1v22 M12 3 5 9 M12 3l7 6 M12 8 2 15 M12 8l10 7 M12 14 4 20 M12 14l8 6"/>'],
+  ['#b39549','#faf4df','<path d="m5 4 12 0 5 10-10 8L2 14Z M12 22v-6 M5 4l4 7"/><circle cx="5" cy="4" r="2"/><circle cx="22" cy="14" r="2"/>'],
+  ['#b66c93','#f9eaf3','<path d="m4 16 7-10 9 9 M11 6l5-5"/><circle cx="4" cy="16" r="3.5"/><circle cx="11" cy="6" r="3.5"/><circle cx="20" cy="15" r="3.5"/>'],
+  ['#758db8','#edf1fc','<path d="m2 7 6-4 6 4v7l-6 4-6-4Z M14 10l6 3v8 M20 13l3-3"/><circle cx="20" cy="21" r="2"/>'],
+  ['#67977c','#edf6e9','<path d="M12 22V11 M12 13C-5 15 0 0 8 3c5 1 4 7 4 10Z M12 13c17 2 12-13 4-10-5 1-4 7-4 10Z M12 13 5 7 M12 13l7-6"/>'],
+  ['#50979e','#e5f6f5','<path d="m12 2 9 4v8c0 5-9 8-9 8s-9-3-9-8V6Z M7 12l3 3 7-7"/>'],
+  ['#6989a5','#eaf3f9','<path d="m3 18 6-12 7 12 6-12"/><circle cx="3" cy="18" r="3"/><circle cx="9" cy="6" r="3"/><circle cx="16" cy="18" r="3"/><circle cx="22" cy="6" r="3"/>']
+ ];
+ const defs=document.createElementNS(ns,'defs');svg.prepend(defs);
+ svg.querySelectorAll('.orbit-planet').forEach((planet,i)=>{
+  const [ink,tint,drawing]=items[i];
+  const gradient=document.createElementNS(ns,'radialGradient');gradient.id='ingredient-tint-'+i;gradient.setAttribute('cx','30%');gradient.setAttribute('cy','20%');gradient.setAttribute('r','85%');
+  gradient.innerHTML=`<stop stop-color="#fff"/><stop offset=".55" stop-color="${tint}"/><stop offset="1" stop-color="${tint}"/>`;defs.append(gradient);
+  const rings=planet.querySelectorAll(':scope>circle');
+  rings[0].style.fill=`url(#ingredient-tint-${i})`;rings[0].style.stroke=ink;rings[0].style.strokeOpacity='.5';rings[0].setAttribute('r','46');
+  rings[1].setAttribute('r','41');
+  rings[2].style.fill=ink;rings[2].setAttribute('cx','29');rings[2].setAttribute('cy','-31');
+  const icon=document.createElementNS(ns,'g');icon.classList.add('ingredient-symbol');icon.setAttribute('transform','translate(-15 -29) scale(1.25)');icon.setAttribute('fill','none');icon.setAttribute('stroke',ink);icon.setAttribute('stroke-width','1.4');icon.setAttribute('stroke-linecap','round');icon.setAttribute('stroke-linejoin','round');icon.setAttribute('aria-hidden','true');icon.innerHTML=drawing;
+  planet.insertBefore(icon,planet.querySelector('text'));
+  const name=planet.querySelector('.planet-name');name.setAttribute('y','24');name.style.fontSize=i<2?'15px':'12.5px';name.style.fill=ink;name.style.fontWeight='700';
+  planet.querySelector('.planet-en').remove();
+  const line=svg.querySelectorAll('.orbital-connections line')[i];line.style.stroke=ink;line.style.strokeOpacity='.26';
+ });
+});
+</script><script>document.addEventListener('DOMContentLoaded',()=>{
+ const value=new URLSearchParams(location.search).get('palette');
+ const palette=['pastel','accent','glass'].includes(value)?value:'pastel';
+ const art=document.querySelector('.orbit-research'),svg=art.querySelector('svg'),ns='http://www.w3.org/2000/svg';
+ art.dataset.ingredientPalette=palette;
+ const hues=[338,269,196,252,145,22,42,320,221,130,177,207];
+ const e=(tag,attributes,parent)=>{const el=document.createElementNS(ns,tag);Object.entries(attributes).forEach(([k,v])=>el.setAttribute(k,v));parent.append(el);return el};
+ svg.querySelectorAll('.orbit-planet').forEach((planet,i)=>{
+  const hue=hues[i],ink=`hsl(${hue} 40% 35%)`,vivid=`hsl(${hue} 66% 48%)`;
+  const grad=svg.querySelector('#ingredient-tint-'+i),rings=planet.querySelectorAll(':scope>circle'),icon=planet.querySelector('.ingredient-symbol'),name=planet.querySelector('.planet-name');
+  planet.style.setProperty('--ingredient-color',vivid);
+  name.style.fill=ink;icon.setAttribute('stroke',palette==='accent'?vivid:ink);
+  rings[2].style.fill=vivid;
+  grad.setAttribute('cx',palette==='glass'?'26%':'30%');grad.setAttribute('cy','20%');
+  if(palette==='pastel'){
+   grad.innerHTML=`<stop stop-color="hsl(${hue} 90% 99%)"/><stop offset=".6" stop-color="hsl(${hue} 66% 92%)"/><stop offset="1" stop-color="hsl(${hue} 52% 86%)"/>`;
+   rings[0].style.stroke=`hsl(${hue} 43% 65%)`;rings[0].style.strokeOpacity='.6';rings[0].style.strokeWidth='1';
+   icon.setAttribute('fill',`hsl(${hue} 65% 85% / .4)`);icon.setAttribute('stroke-width','1.45');
+  }else if(palette==='accent'){
+   grad.innerHTML='<stop stop-color="#fff"/><stop offset="1" stop-color="#fff"/>';
+   rings[0].style.stroke=vivid;rings[0].style.strokeOpacity='.65';rings[0].style.strokeWidth='1.8';
+   const halo=e('circle',{cx:0,cy:-13,r:21,fill:`hsl(${hue} 84% 94%)`,stroke:'none'},planet);planet.insertBefore(halo,icon);
+   icon.setAttribute('fill',`hsl(${hue} 80% 68% / .35)`);icon.setAttribute('stroke-width','1.9');
+   name.style.fontWeight='750';rings[2].setAttribute('r','3.5');
+  }else{
+   grad.innerHTML=`<stop stop-color="#fff"/><stop offset=".25" stop-color="hsl(${hue} 80% 97%)"/><stop offset=".58" stop-color="hsl(${hue} 63% 91% / .7)"/><stop offset=".83" stop-color="hsl(${hue} 61% 78% / .85)"/><stop offset="1" stop-color="hsl(${hue} 48% 62%)"/>`;
+   rings[0].style.stroke=`hsl(${hue} 52% 73%)`;rings[0].style.strokeOpacity='.75';rings[0].style.strokeWidth='1';
+   rings[1].style.stroke='#fff';rings[1].style.strokeWidth='1.2';rings[1].style.strokeOpacity='.9';
+   icon.setAttribute('fill',`hsl(${hue} 70% 90% / .55)`);icon.setAttribute('stroke-width','1.55');
+   const shine=e('path',{d:'M-34 -19 A39 39 0 0 1 8 -38',fill:'none',stroke:'#fff','stroke-width':4,'stroke-linecap':'round',opacity:'.8','pointer-events':'none'},planet);planet.insertBefore(shine,icon);
+   const lower=e('path',{d:'M-20 36 A40 40 0 0 0 35 18',fill:'none',stroke:`hsl(${hue} 62% 60%)`,'stroke-width':1.1,opacity:'.45','pointer-events':'none'},planet);planet.insertBefore(lower,icon);
+  }
+ });
+ svg.querySelectorAll('.orbital-connections line').forEach(l=>{l.style.stroke='#93b3c4';l.style.strokeOpacity='.25'});
+});
+</script><!-- REFERENCE UPDATE START --><style>.ref-line-tag{display:block;font-size:10px;letter-spacing:.1em;color:#b87b66;font-weight:650;margin:0 0 9px}
+[data-ref-line=RELIEF] .ref-line-tag{color:#588da6}
+.solution-card[data-ref-line]{background:#fff}
+.solution-card[data-ref-line] .product-stage{background:#fff;height:230px;padding:0}
+.ref-photo-button{width:100%;height:100%;border:0;padding:0;background:none;cursor:pointer;display:flex;justify-content:center}
+.ref-product-photo{height:100%;max-width:100%;width:auto;display:block;overflow:hidden!important}
+.ref-photo-button:focus-visible{outline:2px solid #478ba3;outline-offset:-3px}
+.solution-card[data-ref-line] .solution-product{min-height:110px}
+.solution-card[data-ref-line] .clinical-evidence{background:#fbf3ef;border-color:#ead8d0}
+.solution-card[data-ref-line=RELIEF] .clinical-evidence{background:#f0f7fa;border-color:#d5e5ed}
+.solution-card[data-ref-line] .clinical-number{color:#a2644f}
+.solution-card[data-ref-line=RELIEF] .clinical-number{color:#377995}
+.ref-source-button{border:1px solid #c6d8df;border-radius:7px;background:#fff;color:#315e70;padding:9px 12px;font:inherit;font-size:12px;cursor:pointer;display:inline-block;margin-top:10px;line-height:1.5;text-align:left}
+.ref-source-button:hover{background:#edf5f8}
+.ref-dialog,#ingredient-guide-popup.ref-dialog{max-width:94vw;width:1160px;max-height:94dvh;border:1px solid #d0dce1;border-radius:16px;background:#fff;color:#293e49;padding:22px;box-sizing:border-box;overflow:auto;overscroll-behavior:contain;font-family:inherit;box-shadow:0 22px 100px #21384430}
+.ref-dialog::backdrop{background:#1c303759;backdrop-filter:blur(8px)}
+.ref-dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;border-bottom:3px solid;border-image:linear-gradient(90deg,#ff939f 50%,#83bfd0 50%) 1;padding-bottom:15px;background:#fff;position:sticky;top:-22px;padding-top:4px;z-index:3}
+.ref-dialog-head small{font-size:10px;letter-spacing:.14em;color:#718a97}
+.ref-dialog-head h2{font-size:25px;line-height:1.4;letter-spacing:-.04em;margin:7px 0 0}
+.ref-dialog-head button{flex-shrink:0;border:1px solid #cbdce4;background:#f5f9fa;color:#365e70;border-radius:8px;padding:11px 17px;min-height:44px;cursor:pointer;font:inherit;font-size:13px}
+.ref-product-detail{display:grid;grid-template-columns:310px 1fr;gap:30px;padding:23px 8px 16px;align-items:center}
+.ref-product-visual{height:380px;display:flex;justify-content:center;background:#fff}
+.ref-product-detail h3{font-size:19px;line-height:1.6;letter-spacing:-.03em;margin:0 0 10px;font-weight:650}
+.ref-product-detail section>p{font-size:13px;color:#597280;line-height:1.7;margin:9px 0}
+.ref-metric-list{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid #e2e9ed;border-radius:10px;overflow:hidden;margin:18px 0}
+.ref-metric-list>div{padding:15px 13px;background:#f7fafb;border-right:1px solid #e2e9ed}
+.ref-metric-list strong{display:block;font-size:29px;letter-spacing:-.045em;color:#3a7189;font-weight:600}
+.ref-metric-list span{display:block;font-size:11px;line-height:1.5;margin-top:6px}
+.ref-test-badge{border-left:3px solid #83bfd0;padding-left:12px}
+.ref-study{font-size:11px;line-height:1.5;color:#56707e;margin:13px 0 0}
+.ref-study>div{display:grid;grid-template-columns:88px 1fr;padding:5px 0}
+.ref-study dt{font-weight:600}.ref-study dd{margin:0}
+.ref-product-detail .ref-study-note{font-size:10px!important;line-height:1.6}
+.ref-source-original{border:1px solid #dce5ea;border-radius:8px;margin-top:12px;background:#fafcfd;overflow:hidden}
+.ref-source-original summary{padding:12px 15px;font-size:12px;cursor:pointer;color:#4c7083}
+.ref-source-original img{display:block;max-width:100%;width:100%;height:auto;background:white}
+.ref-dialog footer,#ingredient-guide-popup.ref-dialog footer{display:block;border-top:1px solid #dce6eb;padding-top:12px;margin-top:14px;font-size:10px;line-height:1.7;color:#698390}
+.ref-ingredient-detail{display:grid;grid-template-columns:240px 1fr;gap:30px;padding:20px 0 16px;align-items:center}
+.ref-ingredient-hero{height:272px;border-radius:12px;overflow:hidden;background:#f1f4f6;box-shadow:0 7px 18px #2d485c13}
+.ref-ingredient-photo{width:100%;height:100%;display:block;overflow:hidden!important}
+.ref-ingredient-hero .ref-ingredient-photo{height:100%;width:100%;object-fit:cover}
+.ref-ingredient-detail h3{font-size:32px;letter-spacing:-.04em;margin:7px 0;color:#233b49}
+.ref-ingredient-detail h3 .i18n-main{font-size:25px}
+.ref-ingredient-detail .ref-inci{display:block;font-size:10px;letter-spacing:.1em;color:#758793;margin-bottom:20px}
+.ref-ingredient-detail section>strong{font-size:16px;color:#547d91;font-weight:650}
+.ref-ingredient-detail section>p{font-size:15px;line-height:1.85;max-width:660px;word-break:keep-all;margin:12px 0}
+.ref-visual-credit{font-size:10px;color:#8c9ba4;display:block;margin-top:18px}
+.ref-ingredient-list{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}
+.ref-ingredient-list button{display:flex;align-items:center;gap:8px;border:1px solid #d5e1e7;border-radius:8px;background:white;padding:6px;min-height:49px;text-align:left;cursor:pointer;font:inherit;font-size:11px;color:#3c5a6a}
+.ref-ingredient-list button[aria-pressed=true]{background:#eff6f9;border-color:#6b9bb0;box-shadow:inset 0 0 0 1px #6b9bb0}
+.ref-ingredient-list .ref-ingredient-photo{width:37px;height:37px;border-radius:50%;overflow:hidden;flex-shrink:0}
+.ref-ingredient-list button>span{font-weight:600}
+.reference-planet{filter:drop-shadow(0 5px 4px #384d581d)!important;cursor:pointer}
+.reference-planet:hover,.reference-planet:focus-visible{filter:drop-shadow(0 5px 7px #52768960)!important;outline:none}
+.reference-planet .planet-name{font-family:inherit}
+.reference-planet[data-spotlight=true]>circle:first-child{stroke:#c38b77!important;stroke-width:3.4!important}
+.focus-lobby .lobby-lead{grid-template-columns:minmax(0,1.34fr) minmax(0,.62fr) minmax(0,1fr);gap:26px;position:relative}
+.orbit-research .orbital-system,.orbit-research .research-art-head{width:100%!important;margin-left:0!important;margin-right:0!important}
+.lobby-lead>div:first-child{min-width:0}
+.research-title h1{min-width:0}
+.ingredient-spotlight{align-self:center;min-width:0;width:100%;padding:0 0 8px;--spot-accent:#bd8a76}
+.ingredient-spotlight[data-line=RELIEF]{--spot-accent:#73a7bb}
+.ingredient-spotlight[data-line=EXTRA]{--spot-accent:#a496b6}
+.spotlight-eyebrow{font-size:8px;letter-spacing:.14em;color:#80939d;margin:0 0 13px;white-space:nowrap}
+.spotlight-photo{border:0;background:transparent;padding:0;display:block;width:100%;aspect-ratio:1/1.12;cursor:pointer;position:relative}
+.spotlight-photo-inner{display:block;width:100%;height:100%;border-radius:30px;overflow:hidden;background:#f4f7f8;box-shadow:0 10px 24px #31506514;transform-origin:center;will-change:opacity,transform}
+.spotlight-photo .ref-ingredient-photo{width:100%;height:100%}
+.spotlight-photo:focus-visible{outline:2px solid #58889c;outline-offset:6px;border-radius:30px}
+.spotlight-copy{min-height:89px;padding-top:19px}
+.spotlight-copy h3{font-size:25px;font-weight:650;letter-spacing:-.045em;line-height:1.25;margin:0 0 9px;color:#2b4c5a;overflow-wrap:anywhere}
+.spotlight-copy p{font-size:11px!important;font-weight:400;line-height:1.65!important;margin:0!important;color:#758993!important;word-break:keep-all}
+.spotlight-copy .i18n-ko{display:block;font-size:9px!important;line-height:1.4;color:#8798a0;margin-top:4px;font-weight:400}
+.spotlight-copy h3 .i18n-main{font-size:22px;line-height:1.25}
+.spotlight-bottom{display:flex;align-items:center;gap:12px;margin-top:7px}
+.spotlight-counter{font-size:10px;letter-spacing:.07em;color:#7a909c;white-space:nowrap}
+.spotlight-progress{height:2px;background:#e7edf0;flex:1;overflow:hidden}
+.spotlight-progress i{height:100%;width:100%;display:block;background:var(--spot-accent);transform-origin:left}
+.spotlight-next{border:1px solid #d7e3e8;border-radius:50%;background:#fff;color:#638292;width:27px;height:27px;font-size:16px;line-height:1;padding:0;cursor:pointer;flex-shrink:0}
+.spotlight-next:hover{background:#f0f6f8}
+.ref-cert-badge{display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;border:0;background:transparent;padding:0;cursor:pointer;border-radius:8px}
+.ref-cert-badge:hover{background:#edf5f8;box-shadow:0 0 0 3px #edf5f8}
+.ref-cert-badge:focus-visible{outline:2px solid #588ba1;outline-offset:4px}
+.ref-cert-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:17px 0 22px}
+.ref-cert-tabs button{border:1px solid #d6e2e8;border-radius:10px;background:#fff;display:flex;align-items:center;gap:13px;padding:10px 15px;color:#456576;text-align:left;font:inherit;font-size:13px;cursor:pointer}
+.ref-cert-tabs button[aria-pressed=true]{border-color:#719aaa;background:#f0f7fa;box-shadow:inset 0 0 0 1px #719aaa}
+.ref-cert-tabs img{width:37px;height:45px;object-fit:contain}
+.ref-cert-layout{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:28px;align-items:start}
+.ref-cert-summary{padding:16px 0 12px 8px}
+.ref-cert-result{font-size:38px;color:#446f82;letter-spacing:-.04em;font-weight:650;line-height:1.2}
+.ref-cert-result .i18n-main{font-size:30px}
+.ref-cert-summary h3{font-size:17px;line-height:1.6;margin:15px 0 12px;color:#304f5f;letter-spacing:-.03em}
+.ref-cert-summary>p{font-size:13px;line-height:1.8;color:#6d818c;word-break:keep-all}
+.ref-cert-summary .ref-study{border-top:1px solid #e0e8eb;padding-top:10px;margin-top:16px}
+.ref-cert-products{margin-top:19px}
+.ref-cert-products h4{font-size:11px;line-height:1.5;color:#718a97;font-weight:600;margin:0 0 8px}
+.ref-cert-products button{display:inline-block;max-width:100%;font:inherit;font-size:11px;line-height:1.5;text-align:left;color:#496b7d;border:1px solid #dbe6eb;border-radius:7px;padding:7px 9px;background:#fafcfd;margin:0 4px 5px 0;cursor:pointer}
+.ref-cert-products button:hover{background:#edf5f8;border-color:#8aafbe}
+.ref-cert-document{border:1px solid #e0e8ec;border-radius:10px;background:#fff;overflow:hidden}
+.ref-cert-document-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f5f9fa;padding:9px 13px;font-size:10px;color:#718893}
+.ref-cert-document-toolbar button{font:inherit;font-size:11px;border:1px solid #cfdee5;background:#fff;color:#3c697f;border-radius:6px;padding:7px 10px;cursor:pointer;flex-shrink:0}
+.ref-cert-source{display:block;width:100%;height:480px;overflow:hidden!important;background:#fff}
+.ref-cert-dialog[data-zoom=true] .ref-cert-layout{grid-template-columns:minmax(0,1fr)}
+.ref-cert-dialog[data-zoom=true] .ref-cert-summary{display:none}
+.ref-cert-dialog[data-zoom=true] .ref-cert-document{width:min(100%,820px);margin:auto}
+.ref-cert-dialog[data-zoom=true] .ref-cert-source{height:auto}
+.reference-catalog-mode .focus-lobby{display:none!important}
+#reference-catalog{max-width:1330px;padding:30px 34px 40px;margin:auto;color:#254655}
+#reference-catalog>header{padding-bottom:22px;border-bottom:3px solid;border-image:linear-gradient(90deg,#ff939f 50%,#83bfd0 50%) 1;margin-bottom:24px}
+#reference-catalog>header small{font-size:11px;letter-spacing:.1em;color:#6e8a98}
+#reference-catalog h1{font-size:29px;letter-spacing:-.035em;margin:12px 0}
+#reference-catalog>header p{font-size:13px;margin:0;color:#718792}
+.ref-catalog-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.ref-catalog-card{display:flex;flex-direction:column;border:1px solid #dbe6eb;border-radius:13px;overflow:hidden;background:#fff;box-shadow:0 8px 26px #2e516310}
+.ref-catalog-photo{height:215px;display:flex;justify-content:center}
+.ref-catalog-card>div:last-child{padding:16px 22px 22px;display:flex;flex-direction:column;align-items:flex-start;flex:1}
+.ref-catalog-card h2{font-size:19px;line-height:1.4;margin:0 0 10px;letter-spacing:-.035em}
+.ref-catalog-card p{font-size:12px;line-height:1.7;margin:0 0 13px;color:#6b8390;min-height:40px}
+.ref-catalog-metric{font-size:30px;letter-spacing:-.04em;color:#b17a66;margin-top:auto}
+.ref-catalog-card[data-ref-line=RELIEF] .ref-catalog-metric{color:#4d91ad}
+.ref-catalog-card>div>span{font-size:12px}
+.ref-dialog .i18n-ko{display:block;font-size:10px!important;color:#8997a1;font-weight:400;line-height:1.5;margin-top:3px}
+@media(max-width:700px){.ref-dialog,#ingredient-guide-popup.ref-dialog{padding:15px}.ref-dialog-head{top:-15px}.ref-product-detail{grid-template-columns:150px 1fr;gap:15px}.ref-product-visual{height:260px}.ref-metric-list{grid-template-columns:1fr}.ref-ingredient-detail{grid-template-columns:150px 1fr;gap:18px}.ref-ingredient-hero{height:235px}.ref-ingredient-detail h3{font-size:25px}.ref-ingredient-detail section>p{font-size:12px}.ref-ingredient-list{grid-template-columns:repeat(3,1fr)}}
+/* Official header logo: proportionate to the two-line brand statement. */
+.siore-home-logo{--siore-logo-height:48px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;align-self:center;min-height:44px;padding:0;border:0;border-radius:3px;background:transparent;color:#000;cursor:pointer;line-height:1}
+.siore-home-logo svg{display:block;width:auto;height:var(--siore-logo-height);aspect-ratio:467/126;overflow:visible;filter:drop-shadow(.32px 0 0 #000) drop-shadow(-.32px 0 0 #000)}
+.siore-home-logo:focus-visible{outline:2px solid #315e70;outline-offset:6px}
+.focus-lobby .lobby-top{justify-content:flex-start!important}
+.focus-lobby .lobby-top .brand-proof{margin-left:auto}
+.focus-dialog .focus-toolbar .siore-home-logo{--siore-logo-height:30px;margin-right:4px}
+.focus-lobby .lobby-top .glass-brand-slogan{flex:0 1 auto;text-align:left!important}
+</style><script>/* Product values transcribed from the user-provided 2026-06-11 leaflet.
+   Percentages are preserved as printed; study dates are not exposure durations. */
+window.SIORE_REFERENCE = (()=>{
+ const L=(ko,en,zh,ja)=>({ko,en,zh,ja});
+ const metric=(value,label,concerns=[])=>({value,label,concerns});
+ const hydration=L('피부 수분량 개선','Skin hydration improvement','肌肤水分改善','肌の水分量改善');
+ const radiance=L('피부 광채 개선','Skin radiance improvement','肌肤光泽改善','肌のツヤ改善');
+ const texture=L('피부결 개선','Skin texture improvement','肌肤纹理改善','肌のキメ改善');
+ const instant=L('즉각적 피부 보습량 개선','Immediate hydration improvement','即时保湿改善','直後の保湿改善');
+ const wrinkle=L('평균 주름 개선율','Average wrinkle improvement','平均皱纹改善率','平均シワ改善率');
+ const productData={
+  cleansing:{page:2,line:'NMN',name:'NMN 하이드로 캡슐 클렌징 밀크',capacity:'150 mL',
+   summary:L('NMN 500 ppm·판테놀 캡슐을 담은 촉촉한 클렌징 밀크.','Hydrating cleansing milk with NMN 500 ppm and panthenol capsules.','含NMN 500 ppm与泛醇胶囊的保湿洁面乳。','NMN 500 ppmとパンテノールカプセル配合のクレンジングミルク。'),
+   target:L('민감·건조·트러블 고민 피부','Sensitive, dehydrated and blemish-prone skin','敏感、缺水及痘痘困扰肌肤','敏感・乾燥・肌荒れが気になる肌'),
+   metrics:[metric('99.55%',L('미세먼지 제거율','Fine dust removal','细微粉尘清除率','微細粉塵の除去率')),metric('91.59%',L('메이크업 세정력','Makeup removal','彩妆清洁率','メイク洗浄率')),metric('99.48%',L('노폐물 세정력','Impurity removal','污垢清洁率','汚れの洗浄率'))],
+   tests:L('논코메도제닉·피부 저자극 테스트 완료','Non-comedogenic and low-irritation tested','通过非致粉刺及低刺激测试','ノンコメドジェニック・低刺激テスト済み'),
+   period:'2025.06.12–2025.07.14',subjects:L('31–58세 성인 여성 23명','23 women, ages 31–58','23名31–58岁成年女性','31～58歳の成人女性23名')},
+  bubbleToner:{page:3,line:'NMN',name:'NMN 프레쉬 버블 토너',capacity:'145 mL',
+   summary:L('NMN 10,000 ppm을 담은 버블 제형의 광채·수분 토너.','A bubble-texture toner with NMN 10,000 ppm for radiance and hydration.','含NMN 10,000 ppm的泡沫质地补水光泽爽肤水。','NMN 10,000 ppm配合の泡状ツヤ・保湿トナー。'),
+   target:L('칙칙함·수분 부족·피부결 고민','Dullness, dehydration and uneven texture','暗沉、缺水及纹理困扰','くすみ・乾燥・キメの悩み'),
+   metrics:[metric('403%',radiance,['광채톤업']),metric('148%',hydration,['건조']),metric('10.43%',texture,['각질'])],
+   tests:L('미백·주름개선 2중 기능성','Brightening and wrinkle-care functions','美白及皱纹改善双重功能','美白・シワ改善の2重機能性'),
+   period:'2025.06.19–2025.07.11',subjects:L('39–63세 성인 여성 22명','22 women, ages 39–63','22名39–63岁成年女性','39～63歳の成人女性22名')},
+  serum:{page:4,line:'NMN',name:'NMN 인텐시브 세럼',capacity:'50 mL',
+   summary:L('NMN 10,000 ppm을 담은 탄력·주름·광채 집중 케어 세럼.','A targeted serum with NMN 10,000 ppm for firmness, wrinkles and radiance.','含NMN 10,000 ppm的弹力、皱纹及光泽集中护理精华。','NMN 10,000 ppm配合のハリ・シワ・ツヤ集中ケア美容液。'),
+   target:L('잔주름·주름·탄력 저하 고민','Fine lines, wrinkles and loss of firmness','细纹、皱纹及弹力下降','小ジワ・シワ・ハリ不足の悩み'),
+   metrics:[metric('11.36%',wrinkle,['안티에이징']),metric('13.60%',L('피부 탄력 개선','Skin firmness improvement','肌肤弹力改善','肌のハリ改善'),['안티에이징']),metric('564.64%',radiance,['광채톤업'])],
+   tests:L('미백·주름개선 2중 기능성 · 주름 개선 테스트','Brightening and wrinkle care · wrinkle improvement tested','美白及皱纹改善双重功能 · 皱纹改善测试','美白・シワ改善の2重機能性・シワ改善テスト'),
+   period:'2025.06.20–2025.08.01',subjects:L('34–69세 성인 여성 23명','23 women, ages 34–69','23名34–69岁成年女性','34～69歳の成人女性23名'),
+   note:L('리플렛의 시험명에는 일부 주름 항목의 크림 병행 사용 조건이 포함되어 있습니다.','The leaflet study title includes cream co-use for some wrinkle endpoints.','宣传页试验名称中，部分皱纹项目包含配合面霜使用的条件。','リーフレットの試験名には、一部のシワ項目でクリーム併用の条件が含まれます。')},
+  soothingCream:{page:5,line:'NMN',name:'NMN 하이드레이팅 수딩 크림',capacity:'50 mL',
+   summary:L('NMN 10,000 ppm을 담아 건조한 피부에 보습을 더하는 수딩 크림.','A soothing cream with NMN 10,000 ppm for dry skin hydration.','含NMN 10,000 ppm，为干燥肌肤补充水分的舒缓面霜。','NMN 10,000 ppm配合で乾燥肌にうるおいを与えるクリーム。'),
+   target:L('건조·민감·수분 부족 피부','Dry, sensitive and moisture-depleted skin','干燥、敏感及缺水肌肤','乾燥・敏感・水分不足の肌'),
+   metrics:[metric('148.87%',hydration,['건조'])],
+   condition:L('1회 사용 후','After one use','使用1次后','1回使用後'),
+   tests:L('미백·주름개선 2중 기능성 · 피부톤·투명도 개선 시험','Brightening and wrinkle care · skin tone and clarity testing','美白及皱纹改善双重功能 · 肤色及透明度改善测试','美白・シワ改善の2重機能性・肌色と透明感の改善試験'),
+   period:'2025.06.13–2025.07.11',subjects:L('39–63세 성인 여성 22명','22 women, ages 39–63','22名39–63岁成年女性','39～63歳の成人女性22名')},
+  richCream:{page:6,line:'NMN',name:'NMN 딥 글로우 리치 크림',capacity:'50 g',
+   summary:L('NMN 10,000 ppm을 담은 풍부한 제형의 영양·탄력 마무리 크림.','A rich finishing cream with NMN 10,000 ppm for nourishment and firmness.','含NMN 10,000 ppm的丰润滋养弹力面霜。','NMN 10,000 ppm配合のこっくりした栄養・ハリケアクリーム。'),
+   target:L('건조함과 탄력 저하가 함께 고민인 피부','Dry skin with loss of firmness','伴有弹力下降的干燥肌肤','乾燥とハリ不足が気になる肌'),
+   metrics:[metric('10.19%',L('피부 노화 개선','Skin aging improvement','肌肤老化改善','肌のエイジング指標改善'),['안티에이징']),metric('45.11%',hydration,['건조']),metric('564.64%',radiance,['광채톤업']),metric('21.89%',L('팔자주름 개선','Nasolabial-fold improvement','法令纹改善','ほうれい線改善'),['안티에이징'])],
+   tests:L('미백·주름개선 2중 기능성 · 주름 개선 테스트','Brightening and wrinkle care · wrinkle improvement tested','美白及皱纹改善双重功能 · 皱纹改善测试','美白・シワ改善の2重機能性・シワ改善テスト'),
+   period:'2025.06.12–2025.08.11',subjects:L('31–58세 성인 여성 23명','23 women, ages 31–58','23名31–58岁成年女性','31～58歳の成人女性23名')},
+  essenceToner:{page:7,line:'RELIEF',name:'데일리 릴리프(밸런스) 에센스 토너',capacity:'150 mL',
+   summary:L('감나무잎수를 담은 가벼운 사용감의 보습 에센스 토너.','A lightweight moisturizing essence toner with persimmon leaf water.','含柿叶水的轻盈保湿精华爽肤水。','柿の葉水を配合した軽い使用感の保湿エッセンストナー。'),
+   target:L('민감·수분 부족·복합성 피부','Sensitive, dehydrated and combination skin','敏感、缺水及混合性肌肤','敏感・乾燥・混合肌'),
+   metrics:[metric('136.58%',hydration,['건조']),metric('11.84%',texture,['각질'])],
+   condition:L('1회 사용 후','After one use','使用1次后','1回使用後'),
+   tests:L('피부 자극 테스트 완료','Skin irritation test completed','已完成皮肤刺激测试','皮膚刺激テスト済み'),
+   period:'2025.06.18–2025.07.07',subjects:L('30–68세 성인 남녀 23명','23 adults, ages 30–68','23名30–68岁成年男女','30～68歳の成人男女23名')},
+  repairAmpoule:{page:8,line:'RELIEF',name:'데일리 릴리프(밸런스) 리페어 앰플',capacity:'30 mL',
+   summary:L('병풀추출물 기반의 촉촉한 진정·장벽 케어 앰플.','A hydrating, centella-based ampoule for soothing and barrier care.','以积雪草提取物为基础的保湿舒缓屏障护理安瓶。','ツボクサエキスをベースにした保湿・整肌・バリアケアアンプル。'),
+   target:L('예민함·트러블·장벽 고민 피부','Sensitive, blemish-prone skin with barrier concerns','敏感、痘痘及屏障困扰肌肤','敏感・肌荒れ・バリアが気になる肌'),
+   metrics:[metric('47.08%',L('피부 장벽 개선','Skin barrier improvement','肌肤屏障改善','肌のバリア改善'),['장벽회복','민감']),metric('475.98%',radiance,['광채톤업'])],
+   tests:L('여드름성 피부 사용 적합·논코메도제닉 시험 완료','Acne-prone skin suitability and non-comedogenic testing completed','已完成痘痘肌使用适合性及非致粉刺测试','ニキビ肌への使用適合・ノンコメドジェニック試験済み'),
+   period:'2025.06.13–2025.08.20',subjects:L('42–64세 성인 남녀 22명','22 adults, ages 42–64','22名42–64岁成年男女','42～64歳の成人男女22名')},
+  soothingGel:{page:9,line:'RELIEF',name:'데일리 릴리프(밸런스) 카밍 수딩 젤',capacity:'80 mL',
+   summary:L('열감과 자극으로 예민해진 피부를 위한 가벼운 쿨링 젤.','A lightweight cooling gel for skin stressed by heat and irritation.','适合因热感及刺激而敏感肌肤的轻盈清凉凝胶。','熱感や刺激で敏感になった肌向けの軽いクーリングジェル。'),
+   target:L('열감·예민함·트러블 고민 피부','Sensitive, irritated and blemish-prone skin','热感、敏感及痘痘困扰肌肤','熱感・敏感・肌荒れの悩み'),
+   metrics:[metric('76.04%',instant,['건조']),metric('15.42%',L('피부 수분손실량 감소','Reduction in skin water loss','皮肤水分流失减少','肌の水分損失量減少'),['장벽회복'])],
+   tests:L('여드름성 피부 사용 적합·논코메도제닉 시험 완료','Acne-prone skin suitability and non-comedogenic testing completed','已完成痘痘肌使用适合性及非致粉刺测试','ニキビ肌への使用適合・ノンコメドジェニック試験済み'),
+   period:'2025.06.13–2025.07.11',subjects:L('21–69세 성인 남녀 22명','22 adults, ages 21–69','22名21–69岁成年男女','21～69歳の成人男女22名')},
+  comfortCream:{page:10,line:'RELIEF',name:'데일리 릴리프(밸런스) 컴포트 크림',capacity:'50 mL',
+   summary:L('수분 보호막으로 건조하고 민감한 피부를 감싸는 데일리 보습 크림.','A daily moisturizing cream that helps retain moisture for dry, sensitive skin.','帮助干燥敏感肌肤保持水分的日常保湿面霜。','乾燥・敏感肌のうるおいを守るデイリー保湿クリーム。'),
+   target:L('민감·트러블·장벽 손상 고민 피부','Sensitive, acne-prone skin with barrier concerns','敏感、痘痘及屏障困扰肌肤','敏感・ニキビ・バリアが気になる肌'),
+   metrics:[metric('110.79%',instant,['건조']),metric('60.58%',L('24시간 보습 지속력 개선','24-hour hydration improvement','24小时持续保湿改善','24時間の保湿持続力改善'),['장벽회복'])],
+   tests:L('여드름성 피부 사용 적합·논코메도제닉 시험 완료','Acne-prone skin suitability and non-comedogenic testing completed','已完成痘痘肌使用适合性及非致粉刺测试','ニキビ肌への使用適合・ノンコメドジェニック試験済み'),
+   period:'2025.06.18–2025.07.25',subjects:L('30–68세 성인 남녀 22명','22 adults, ages 30–68','22名30–68岁成年男女','30～68歳の成人男女22名')}
+ };
+ const ingredient=(key,name,en,line,column,role,text)=>({key,name,en,line,column,role,text});
+ const ingredients=[
+  ingredient('nmn','NMN','NICOTINAMIDE MONONUCLEOTIDE','NMN',0,L('피부 컨디셔닝 · 시그니처 원료','Skin conditioning · signature ingredient','肌肤调理 · 标志性成分','整肌・シグネチャー成分'),L('NAD+의 전구체로 알려진 성분입니다. 시오레 NMN 라인의 성분 설계에 활용하며, 배합량은 제품별로 확인할 수 있습니다.','Known as a precursor to NAD+. Used in the formulation of the SIORÉ NMN line; the amount varies by product.','作为NAD+前体而为人所知，用于SIORÉ NMN系列配方；添加量请按产品确认。','NAD+の前駆体として知られる成分。SIORÉ NMNラインの処方に用い、配合量は製品ごとに確認できます。')),
+  ingredient('carnosine','카르노신','CARNOSINE','NMN',1,L('항산화 · 항당화 연구','Antioxidant · anti-glycation research','抗氧化 · 抗糖化研究','抗酸化・抗糖化研究'),L('두 가지 아미노산으로 이루어진 성분입니다. 산화와 당화에 관한 연구를 바탕으로 피부 컨디셔닝 목적으로 배합합니다.','A compound made of two amino acids, used for skin conditioning with research into oxidation and glycation.','由两种氨基酸组成，基于氧化及糖化相关研究用于肌肤调理。','2つのアミノ酸からなる成分。酸化・糖化に関する研究を背景に整肌目的で配合します。')),
+  ingredient('ala','알파리포산','ALPHA LIPOIC ACID','NMN',2,L('항산화 · 피부 컨디셔닝','Antioxidant · skin conditioning','抗氧化 · 肌肤调理','抗酸化・整肌'),L('티옥틱산으로도 불리는 항산화 성분입니다. 피부를 좋은 상태로 유지하기 위한 성분 조합에 활용합니다.','Also called thioctic acid, an antioxidant used in ingredient combinations for skin conditioning.','也称硫辛酸，作为抗氧化成分用于肌肤调理配方。','チオクト酸とも呼ばれる抗酸化成分。肌をすこやかに保つ成分の組み合わせに活用します。')),
+  ingredient('pycnogenol','피크노제놀','PYCNOGENOL','NMN',3,L('해안송 껍질 · 항산화 케어','Maritime pine bark · antioxidant care','海岸松树皮 · 抗氧化护理','海岸松樹皮・抗酸化ケア'),L('프랑스 해안송 껍질에서 얻는 폴리페놀 복합체입니다. 항산화 특성을 바탕으로 피부 컨디셔닝에 활용합니다.','A polyphenol complex from French maritime pine bark, used for its antioxidant and skin-conditioning properties.','来自法国海岸松树皮的多酚复合物，用于抗氧化及肌肤调理。','フランス海岸松の樹皮由来のポリフェノール複合体。抗酸化・整肌目的に用います。')),
+  ingredient('resveratrol','레스베라트롤','RESVERATROL','NMN',4,L('폴리페놀 · 항산화 케어','Polyphenol · antioxidant care','多酚 · 抗氧化护理','ポリフェノール・抗酸化ケア'),L('포도 등에 존재하는 폴리페놀 성분입니다. 산화 스트레스 관련 연구를 바탕으로 피부 컨디셔닝에 활용합니다.','A polyphenol found in grapes and other plants, used in skin conditioning with research into oxidative stress.','存在于葡萄等植物中的多酚，基于氧化应激研究用于肌肤调理。','ブドウなどに含まれるポリフェノール。酸化ストレスに関する研究を背景に整肌に活用します。')),
+  ingredient('wheat','밀싹추출물','WHEAT SPROUT EXTRACT','RELIEF',0,L('식물 유래 · 보습·컨디셔닝','Botanical · moisturizing and conditioning','植物来源 · 保湿调理','植物由来・保湿と整肌'),L('어린 밀싹에서 얻은 식물 유래 성분입니다. 피부를 촉촉하고 편안하게 관리하기 위한 배합에 활용합니다.','A botanical ingredient from young wheat sprouts, used in formulas for moisturizing and comfortable skin conditioning.','从幼嫩麦芽中提取的植物成分，用于保湿及舒适的肌肤调理。','若い小麦の芽由来の植物成分。肌をうるおいのある心地よい状態に保つ処方に用います。')),
+  ingredient('centella','병풀추출물','CENTELLA ASIATICA EXTRACT','RELIEF',1,L('진정 · 보습','Soothing · moisturizing','舒缓 · 保湿','整肌・保湿'),L('마데카소사이드 등 지표성분을 함유한 식물 추출물입니다. 예민해진 피부의 진정과 보습 관리에 활용합니다.','A plant extract containing compounds such as madecassoside, used for soothing and moisturizing sensitive-feeling skin.','含羟基积雪草苷等标志成分的植物提取物，用于舒缓及保湿。','マデカッソシドなどを含む植物エキス。敏感に感じる肌の整肌と保湿に用います。')),
+  ingredient('peptides','펩타이드','PEPTIDES','RELIEF',2,L('피부 컨디셔닝','Skin conditioning','肌肤调理','整肌'),L('아미노산이 짧게 이어진 사슬 형태의 성분입니다. 피부를 좋은 상태로 유지하는 데 사용하며 종류마다 특성이 다릅니다.','Short chains of amino acids used for skin conditioning. Properties differ by peptide type.','由氨基酸连接而成的短链，用于肌肤调理；不同种类特性各异。','アミノ酸が短くつながった成分。整肌に用い、種類により特性が異なります。')),
+  ingredient('hyaluronic','히알루론산','HYALURONIC ACID','RELIEF',3,L('수분 보유 · 보습','Moisture retention · hydration','锁水 · 保湿','水分保持・保湿'),L('물을 끌어당기고 붙잡는 보습 성분입니다. 피부 표면의 수분을 유지해 촉촉하고 부드럽게 관리합니다.','A humectant that attracts and retains water, helping keep the skin surface hydrated and soft.','吸引并保持水分的保湿成分，帮助皮肤表面维持滋润柔软。','水分を引き寄せて保持する保湿成分。肌表面をうるおいのある柔らかな状態に保ちます。')),
+  ingredient('pdrn','PDRN','POLYDEOXYRIBONUCLEOTIDE','EXTRA',0,L('보습 · 피부 컨디셔닝','Moisturizing · skin conditioning','保湿 · 肌肤调理','保湿・整肌'),L('정제한 DNA 유래 성분입니다. 스킨케어에서는 보습과 피부 컨디셔닝 목적으로 사용하며, 제품별 배합 여부를 확인하세요.','A purified DNA-derived ingredient used in skincare for moisturizing and skin conditioning. Check each product for inclusion.','纯化DNA来源成分，在护肤中用于保湿及肌肤调理；请按产品确认是否添加。','精製したDNA由来成分。スキンケアでは保湿・整肌目的に用い、配合の有無は製品ごとに確認してください。')),
+  ingredient('panthenol','판테놀','PANTHENOL · PROVITAMIN B5','EXTRA',1,L('보습 · 피부 유연화','Moisturizing · skin softening','保湿 · 柔润肌肤','保湿・肌を柔らかく保つ'),L('프로비타민 B5 성분입니다. 수분을 붙잡아 건조한 피부를 촉촉하고 부드럽게 관리하는 데 사용합니다.','Provitamin B5, used to retain moisture and keep dry skin hydrated and soft.','维生素B5前体，帮助保持水分，使干燥肌肤滋润柔软。','プロビタミンB5。水分を保持し、乾燥した肌をうるおいのある柔らかな状態に保ちます。'))
+ ];
+ const extraVisuals={
+  pdrn:{file:'pdrn-dna-unsplash.jpg',size:[1600,900],creator:'Logan Voss / Unsplash',source:'https://unsplash.com/photos/a-close-up-of-a-pink-ribbon-on-a-white-background-UPifb0WKOAY',credit:L('DNA 구조 콘셉트 이미지','DNA structure concept image','DNA结构概念图','DNA構造のコンセプト画像')},
+  panthenol:{file:'panthenol-gel-pexels.jpg',size:[1280,1600],creator:'Jana Kukebal / Pexels',source:'https://www.pexels.com/photo/water-drops-on-clear-glass-6496467/',credit:L('보습 젤 질감 콘셉트 사진','Moisturizing gel texture concept photo','保湿凝胶质感概念照片','保湿ジェルの質感イメージ写真')}
+ };
+ ingredients.forEach(item=>{if(extraVisuals[item.key])item.visual=extraVisuals[item.key];});
+ return {products:productData,ingredients,L};
+})();
+</script><script>(()=>{
+ const data=window.SIORE_REFERENCE,root='images/consultation/references/';
+ const L=data.L,T=x=>bilingual(x),E=escaped;
+ const ns='http://www.w3.org/2000/svg';
+ const file=d=>root+'leaflet-'+String(d.page).padStart(2,'0')+'.jpg';
+ const metricText=(m,lang)=>m.label[lang]+' '+m.value;
+ const sourceLabel=L('제공 리플렛 기준','From the supplied leaflet','依据提供的宣传页','提供リーフレットに基づく');
+ Object.entries(data.products).forEach(([key,d])=>{
+  const p=window.SIORE_PRODUCTS[key];if(!p)return;
+  p.name=d.name;p.capacity=d.capacity;p.clinical=d.metrics.map(m=>metricText(m,'ko'));p.cert=[d.tests.ko];p.benefit=d.summary.ko;p.source='260611 시오레 양면 리플렛 · '+d.page+'페이지';p.sourceUrl=file(d);p.clinicalImage=file(d);
+  ['en','zh','ja'].forEach(lang=>{p.i18n[lang]=p.i18n[lang]||{};p.i18n[lang].clinical=d.metrics.map(m=>metricText(m,lang));p.i18n[lang].benefit=d.summary[lang];});
+  const m=d.metrics[0];medicalEvidence[key]={metric:m.value,label:Object.values(m.label),condition:Object.values(d.condition||sourceLabel),source:file(d)};
+ });
+ function photo(d,className='ref-product-photo'){
+  return '<svg class="'+className+'" viewBox="110 550 550 900" role="img" aria-label="'+E(d.name)+' · 제공 리플렛 제품 이미지"><image href="'+file(d)+'" width="1280" height="2048"/></svg>';
+ }
+ function relevantMetric(d){for(const concern of selectedConcerns){const match=d.metrics.find(m=>m.concerns.includes(concern));if(match)return match;}return d.metrics[0];}
+ const beforeReferenceRender=paperRender;
+ paperRender=function(){
+  beforeReferenceRender();
+  document.querySelectorAll('.solution-card').forEach(card=>{
+   const key=card.dataset.product,d=data.products[key];if(!d)return;
+   card.dataset.refLine=d.line;
+   card.querySelector('.product-stage').innerHTML='<button class="ref-photo-button" type="button" data-ref-product="'+key+'" aria-label="'+E(d.name)+' 상세 자료 보기">'+photo(d)+'</button>';
+   card.querySelector('.solution-product').insertAdjacentHTML('afterbegin','<small class="ref-line-tag">'+(d.line==='NMN'?'SIORÉ NMN':'SIORÉ DAILY RELIEF')+'</small>');
+   const metric=relevantMetric(d);
+   card.querySelector('.clinical-evidence').innerHTML='<span>'+T(L('제품별 시험 근거','PRODUCT EVIDENCE','产品试验依据','製品の試験根拠'))+'</span><strong class="clinical-number">'+metric.value+'</strong><b>'+T(metric.label)+'</b><p>'+T(d.condition||sourceLabel)+'</p><button type="button" class="ref-source-button" data-ref-product="'+key+'">'+T(L('제품·시험 자료 보기 ↗','Product & study details ↗','产品与试验资料 ↗','製品・試験資料を見る ↗'))+'</button>';
+  });
+ };
+ let productDialog,ingredientDialog,lastProductOpener,lastIngredientOpener,activeIngredient=0;
+ function initProductDialog(){
+  productDialog=document.createElement('dialog');productDialog.id='reference-product-dialog';productDialog.className='ref-dialog';productDialog.setAttribute('aria-labelledby','ref-product-title');document.body.append(productDialog);
+  productDialog.addEventListener('close',()=>lastProductOpener?.focus({preventScroll:true}));
+ }
+ function openProduct(key,opener){
+  const d=data.products[key],p=window.SIORE_PRODUCTS[key];if(!d)return;lastProductOpener=opener;
+  productDialog.innerHTML='<header class="ref-dialog-head"><div><small>SIORÉ / '+d.line+' / PRODUCT REFERENCE</small><h2 id="ref-product-title">'+productName({...p,short:d.name})+'</h2></div><button type="button" data-ref-close>'+T(L('닫기 ×','Close ×','关闭 ×','閉じる ×'))+'</button></header><div class="ref-product-detail"><div class="ref-product-visual">'+photo(d)+'</div><section><span class="ref-line-tag">'+d.line+' · '+d.capacity+'</span><h3>'+T(d.summary)+'</h3><p>'+T(d.target)+'</p><div class="ref-metric-list" style="grid-template-columns:repeat('+(d.metrics.length===4?2:d.metrics.length)+',minmax(0,1fr))">'+d.metrics.map(m=>'<div><strong>'+m.value+'</strong><span>'+T(m.label)+'</span></div>').join('')+'</div><p class="ref-test-badge">'+T(d.tests)+'</p><dl class="ref-study"><div><dt>'+T(L('시험기관','Institute','试验机构','試験機関'))+'</dt><dd>'+T(L('한국피부과학연구원','Korea Institute of Dermatological Sciences','韩国皮肤科学研究院','韓国皮膚科学研究院'))+'</dd></div><div><dt>'+T(L('시험기간','Study dates','试验期间','試験期間'))+'</dt><dd>'+d.period+'</dd></div><div><dt>'+T(L('시험대상','Participants','受试者','試験対象'))+'</dt><dd>'+T(d.subjects)+'</dd></div></dl>'+(d.note?'<p class="ref-study-note">'+T(d.note)+'</p>':'')+'</section></div><details class="ref-source-original"><summary>'+T(L('리플렛 원본 · 이미지와 시험 각주 확인','Original leaflet · image and study footnotes','宣传页原图 · 图片与试验脚注','リーフレット原本・画像と試験注記'))+'</summary><img loading="lazy" src="'+file(d)+'" alt="'+E(d.name)+' 리플렛 원본"></details><footer>'+T(L('제공된 제품별 리플렛의 기재값입니다. 시험기간은 전체 시험 진행 기간이며, 각 지표의 측정 시점과는 구분됩니다. 개인의 개선율을 예측하거나 보장하지 않습니다.','Values are transcribed from the supplied product leaflet. Study dates describe the study period, not each endpoint’s measurement timing. Individual results are not predicted or guaranteed.','数值来自提供的产品宣传页。试验期间与各指标的测量时点不同，不预测或保证个人改善率。','数値は提供された製品リーフレットに基づきます。試験期間と各指標の測定時点は異なります。個人の改善率を予測・保証しません。'))+'</footer>';
+  productDialog.querySelector('[data-ref-close]').onclick=()=>productDialog.close();productDialog.showModal();productDialog.scrollTop=0;
+ }
+ function imageCrop(item,square=false){
+  if(item.visual){const [w,h]=item.visual.size,cw=square?Math.min(w,h):Math.min(w,h*.6),ch=square?cw:h;return [(w-cw)/2,(h-ch)/2,cw,ch];}
+  const n=item.line==='NMN'?5:4,cw=6496/n;
+  return square?[item.column*cw+60,1350,cw-120,cw-120]:[item.column*cw+35,780,cw-70,2320];
+ }
+ function ingredientSource(item){return root+(item.visual?item.visual.file:item.line==='NMN'?'ingredients-nmn.jpg':'ingredients-relief.jpg');}
+ function ingredientImage(item,square=false){
+  const size=item.visual?item.visual.size:[6496,4490],label=item.name+' · '+(item.visual?item.visual.credit.ko:'브랜드 자료 이미지');
+  return '<svg class="ref-ingredient-photo" preserveAspectRatio="xMidYMid slice" viewBox="'+imageCrop(item,square).join(' ')+'" role="img" aria-label="'+E(label)+'"><image href="'+ingredientSource(item)+'" width="'+size[0]+'" height="'+size[1]+'"/></svg>';
+ }
+ const ingredientNames={nmn:L('NMN','NMN','NMN','NMN'),carnosine:L('카르노신','Carnosine','肌肽','カルノシン'),ala:L('알파리포산','Alpha lipoic acid','硫辛酸','αリポ酸'),pycnogenol:L('피크노제놀','Pycnogenol','碧萝芷','ピクノジェノール'),resveratrol:L('레스베라트롤','Resveratrol','白藜芦醇','レスベラトロール'),wheat:L('밀싹추출물','Wheat sprout extract','小麦芽提取物','小麦芽エキス'),centella:L('병풀추출물','Centella extract','积雪草提取物','ツボクサエキス'),peptides:L('펩타이드','Peptides','肽','ペプチド'),hyaluronic:L('히알루론산','Hyaluronic acid','透明质酸','ヒアルロン酸'),pdrn:L('PDRN','PDRN','PDRN','PDRN'),panthenol:L('판테놀','Panthenol','泛醇','パンテノール')};
+ function ingredientName(item){return T(ingredientNames[item.key]);}
+ function syncReferenceLabels(){
+  document.querySelectorAll('.reference-planet').forEach(node=>{
+   const item=data.ingredients[Number(node.dataset.index)],text=node.querySelector('.planet-name');
+   const name=ingredientNames[item.key][languageMode]||item.name;
+   text.replaceChildren();text.style.fontSize=languageMode==='ko'?(item.key==='nmn'||item.key==='pdrn'?'17px':'14.3px'):'11px';
+   if(languageMode==='ko'){text.setAttribute('y','38');text.textContent=item.name;return;}
+   const main=document.createElementNS(ns,'tspan');main.setAttribute('x','0');main.setAttribute('y','30');main.textContent=name;
+   if(name.length>14){main.setAttribute('textLength','82');main.setAttribute('lengthAdjust','spacingAndGlyphs');}
+   const ko=document.createElementNS(ns,'tspan');ko.setAttribute('x','0');ko.setAttribute('y','41');ko.setAttribute('font-size','8');ko.setAttribute('fill','#718591');ko.textContent=item.name;text.append(main,ko);
+  });
+ }
+ let syncSpotlightLanguage=()=>{};
+ const beforeReferenceLanguage=applyPageLanguage;
+ applyPageLanguage=function(){beforeReferenceLanguage();syncReferenceLabels();syncSpotlightLanguage();};
+ function lineLabel(item){return item.line==='EXTRA'?T(L('추가 원료','ADDITIONAL INGREDIENT','补充成分','追加成分')):item.line==='NMN'?'SIORÉ NMN LINE':'SIORÉ RELIEF / BALANCE LINE';}
+ function visualCredit(item){return item.visual?T(item.visual.credit)+' · <a href="'+E(item.visual.source)+'" target="_blank" rel="noopener noreferrer">'+E(item.visual.creator)+' ↗</a>':T(L('시오레 브랜드 소개 자료 이미지','Image from the SIORÉ brand presentation','图片来自SIORÉ品牌介绍资料','SIORÉブランド紹介資料の画像'));}
+ function renderIngredient(index){
+  activeIngredient=index;const item=data.ingredients[index];
+  ingredientDialog.innerHTML='<header class="ref-dialog-head"><div><small>SIORÉ INGREDIENT GUIDE</small><h2 id="ingredient-popup-title">'+T(L('시오레 주요 배합성분','SIORÉ key ingredients','SIORÉ主要配方成分','SIORÉの主な配合成分'))+'</h2></div><button type="button" data-ref-close aria-label="성분 안내 닫기">'+T(L('닫기 ×','Close ×','关闭 ×','閉じる ×'))+'</button></header><div class="ref-ingredient-detail"><div class="ref-ingredient-hero">'+ingredientImage(item)+'</div><section><small class="ref-line-tag">'+lineLabel(item)+'</small><h3>'+ingredientName(item)+'</h3><small class="ref-inci">'+E(item.en)+'</small><strong>'+T(item.role)+'</strong><p>'+T(item.text)+'</p><span class="ref-visual-credit">'+visualCredit(item)+'</span></section></div><nav class="ref-ingredient-list" aria-label="전체 성분 11종">'+data.ingredients.map((x,i)=>'<button type="button" data-ref-ingredient="'+i+'" aria-pressed="'+(i===index)+'">'+ingredientImage(x,true)+'<span>'+ingredientName(x)+'</span></button>').join('')+'</nav>'+(item.line==='EXTRA'?'':'<details class="ref-source-original"><summary>'+T(L('브랜드 자료 원본 보기','View the brand slide','查看品牌资料原图','ブランド資料原本を見る'))+'</summary><img loading="lazy" src="'+root+(item.line==='NMN'?'ingredients-nmn.jpg':'ingredients-relief.jpg')+'" alt="'+item.line+' 주요성분 브랜드 소개 슬라이드"></details>')+'<footer>'+T(L('원료의 일반적 특성에 대한 설명입니다. 원료 이미지와 연구 내용은 개별 완제품의 시험 결과를 뜻하지 않으며, 성분·함량은 제품별로 다릅니다.','Descriptions concern general ingredient properties. Ingredient imagery and research do not represent finished-product test results; ingredients and amounts vary by product.','内容为原料的一般特性。原料图片及研究不代表成品试验结果，成分及含量因产品而异。','原料の一般的な特性の説明です。画像や研究は各完成品の試験結果を示すものではなく、成分・配合量は製品により異なります。'))+'</footer>';
+  ingredientDialog.querySelector('[data-ref-close]').onclick=()=>ingredientDialog.close();
+  ingredientDialog.querySelectorAll('[data-ref-ingredient]').forEach(b=>b.onclick=()=>{renderIngredient(Number(b.dataset.refIngredient));ingredientDialog.querySelector('[data-ref-ingredient="'+activeIngredient+'"]').focus({preventScroll:true});});
+ }
+ function initIngredientOrbit(){
+  const art=document.querySelector('.orbit-research'),svg=art.querySelector('.orbital-system');
+  document.querySelector('#ingredient-guide-popup').remove();
+  ingredientDialog=document.createElement('dialog');ingredientDialog.id='ingredient-guide-popup';ingredientDialog.className='ref-dialog ref-ingredient-dialog';ingredientDialog.setAttribute('aria-labelledby','ingredient-popup-title');document.body.append(ingredientDialog);
+  const old=svg.querySelector('.orbit-planets'),connections=svg.querySelector('.orbital-connections');
+  const make=(tag,attrs,parent)=>{const el=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>el.setAttribute(k,v));parent.append(el);return el};
+  const planets=make('g',{class:'reference-planets'},svg),lines=make('g',{class:'reference-connections'},svg);svg.insertBefore(lines,svg.querySelector('.bio-core'));old.remove();connections.remove();
+  const defs=make('defs',{},svg),nodes=[];
+  data.ingredients.forEach((item,i)=>{
+   const color=item.line==='NMN'?'#c88c78':item.line==='RELIEF'?'#83bfd0':'#ae9bbb';
+   const clip=make('clipPath',{id:'reference-crop-'+i},defs);make('circle',{r:'42',cy:'-6'},clip);
+   const node=make('g',{class:'orbit-planet reference-planet',role:'button',tabindex:'0','aria-label':item.name+' 성분 설명','aria-haspopup':'dialog','aria-controls':'ingredient-guide-popup','aria-expanded':'false','data-index':i},planets);
+   make('circle',{r:'49',fill:'#fff',stroke:color,'stroke-width':'1.2'},node);
+   const portrait=make('g',{'clip-path':'url(#reference-crop-'+i+')','pointer-events':'none'},node);
+   const inner=make('svg',{x:'-43',y:'-49',width:'86',height:'86',viewBox:imageCrop(item,true).join(' '),preserveAspectRatio:'xMidYMid slice'},portrait);
+   const size=item.visual?item.visual.size:[6496,4490];
+   make('image',{href:ingredientSource(item),width:String(size[0]),height:String(size[1])},inner);
+   make('rect',{x:'-46',y:'21',width:'92',height:'25',rx:'11',fill:'#fffffff5'},node);
+   const text=make('text',{class:'planet-name',y:'38','text-anchor':'middle',fill:'#2c4654','font-size':i===0||item.key==='pdrn'?'17':'14.3','font-weight':'700'},node);text.textContent=item.name;
+   const line=make('line',{x1:'300',y1:'270',stroke:color,'stroke-width':'1','stroke-opacity':'.26'},lines);
+   function open(e){e.preventDefault();e.stopImmediatePropagation();lastIngredientOpener=node;nodes.forEach(x=>x.node.setAttribute('aria-expanded',String(x.node===node)));renderIngredient(i);ingredientDialog.showModal();ingredientDialog.scrollTop=0;}
+   node.addEventListener('click',open);node.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')open(e);});nodes.push({node,line,item});
+  });
+  const spotlight=document.createElement('aside');spotlight.className='ingredient-spotlight';
+  spotlight.setAttribute('aria-label','주요 원료 순환 소개');
+  spotlight.innerHTML='<div class="spotlight-eyebrow">SIORÉ / INGREDIENT FOCUS</div><button type="button" class="spotlight-photo" aria-haspopup="dialog" aria-controls="ingredient-guide-popup" aria-expanded="false"><span class="spotlight-photo-inner"></span></button><div class="spotlight-copy"></div><div class="spotlight-bottom"><span class="spotlight-counter"></span><div class="spotlight-progress" aria-hidden="true"><i></i></div><button type="button" class="spotlight-next" aria-label="다음 원료">→</button></div>';
+  art.before(spotlight);
+  const photoButton=spotlight.querySelector('.spotlight-photo'),photoInner=spotlight.querySelector('.spotlight-photo-inner'),progress=spotlight.querySelector('.spotlight-progress i');
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)');let time=0,last=0,spotlightIndex=-1;const cycleDuration=3.8;
+  function showSpotlight(index,refresh=false){
+   if(index===spotlightIndex&&!refresh)return;spotlightIndex=index;const item=data.ingredients[index];
+   spotlight.dataset.ingredient=item.key;spotlight.dataset.line=item.line;
+   photoInner.innerHTML=ingredientImage(item,true);
+   photoButton.setAttribute('aria-label',(ingredientNames[item.key][languageMode]||item.name)+' · '+({ko:'성분 자세히 보기',en:'Ingredient details',zh:'成分详情',ja:'成分の詳細'}[languageMode]));
+   spotlight.querySelector('.spotlight-copy').innerHTML='<h3>'+ingredientName(item)+'</h3><p>'+T(item.role)+'</p>';
+   spotlight.querySelector('.spotlight-counter').textContent=String(index+1).padStart(2,'0')+' / '+String(data.ingredients.length).padStart(2,'0');
+   spotlight.querySelector('.spotlight-next').setAttribute('aria-label',({ko:'다음 원료',en:'Next ingredient',zh:'下一成分',ja:'次の成分'}[languageMode]));
+   nodes.forEach((x,i)=>x.node.setAttribute('data-spotlight',String(i===index)));
+  }
+  syncSpotlightLanguage=()=>showSpotlight(Math.max(0,spotlightIndex),true);
+  photoButton.addEventListener('click',()=>{lastIngredientOpener=photoButton;photoButton.setAttribute('aria-expanded','true');renderIngredient(spotlightIndex);ingredientDialog.showModal();ingredientDialog.scrollTop=0;});
+  spotlight.querySelector('.spotlight-next').onclick=()=>{time=(Math.floor(time/cycleDuration)+1)*cycleDuration;showSpotlight(Math.floor(time/cycleDuration)%nodes.length);};
+  ingredientDialog.addEventListener('close',()=>{nodes.forEach(x=>x.node.setAttribute('aria-expanded','false'));photoButton.setAttribute('aria-expanded','false');lastIngredientOpener?.focus({preventScroll:true});});
+  showSpotlight(0);
+  function draw(now){
+   const stopped=document.hidden||ingredientDialog.open||productDialog?.open||document.querySelector('#reference-certification-dialog')?.open||document.querySelector('#focus-dialog').open;
+   if(last&&!stopped&&!reduced.matches)time+=Math.min(now-last,64)/1000;last=now;
+   const step=time%cycleDuration,index=Math.floor(time/cycleDuration)%nodes.length;
+   showSpotlight(index);
+   const ease=x=>x*x*(3-2*x),enter=reduced.matches?1:ease(Math.min(1,step/.6)),leave=reduced.matches?0:ease(Math.max(0,Math.min(1,(step-3.25)/.55)));
+   photoInner.style.opacity=String(enter*(1-leave));photoInner.style.transform='translateY('+(12*(1-enter)-8*leave)+'px) scale('+(.82+.18*enter-.08*leave+(reduced.matches?0:.018*Math.sin(Math.PI*step/cycleDuration)))+')';
+   spotlight.querySelector('.spotlight-copy').style.opacity=String(.45+.55*enter*(1-leave));
+   progress.style.transform='scaleX('+(reduced.matches?1:step/cycleDuration)+')';
+   nodes.forEach(({node,line,item},i)=>{const outer=i>=5,count=outer?6:5,j=outer?i-5:i;const angle=-Math.PI/2+j*Math.PI*2/count+(outer?.28:0)+time*(outer?.077:.105)+Math.sin(time*.3+i)*.025;const r=(outer?284:174)+Math.sin(time*.45+i*1.7)*6;const pulse=Math.floor(time/1.8)%nodes.length===i?Math.sin(Math.PI*(time%1.8)/1.8):0;const x=300+Math.cos(angle)*r,y=270+Math.sin(angle)*r*.91-pulse*8;const size=(outer?.81:(i===0?1.05:.95))*(1+pulse*.1);node.setAttribute('transform','translate('+x+' '+y+') scale('+size+')');line.setAttribute('x2',x);line.setAttribute('y2',y);});requestAnimationFrame(draw);
+  }requestAnimationFrame(draw);
+ }
+ function renderCatalog(){
+  const catalog=document.createElement('main');catalog.id='reference-catalog';catalog.innerHTML='<header><small>SIORÉ / UPDATED PRODUCT REFERENCES</small><h1>제품별 추천 정보 · 리플렛 반영</h1><p>NMN 5종 · 데일리 릴리프 4종 / 제품 사진과 수치는 제공 자료를 기준으로 연결했습니다.</p></header><div class="ref-catalog-grid">'+Object.entries(data.products).map(([key,d])=>'<article class="ref-catalog-card" data-ref-line="'+d.line+'"><div class="ref-catalog-photo">'+photo(d)+'</div><div><small class="ref-line-tag">'+d.line+' · '+d.capacity+'</small><h2>'+E(d.name)+'</h2><p>'+E(d.summary.ko)+'</p><strong class="ref-catalog-metric">'+d.metrics[0].value+'</strong><span>'+E(d.metrics[0].label.ko)+'</span><button class="ref-source-button" type="button" data-ref-product="'+key+'">제품·시험 자료 보기 ↗</button></div></article>').join('')+'</div>';document.body.append(catalog);document.querySelector('.focus-lobby').hidden=true;document.body.classList.add('reference-catalog-mode');
+ }
+ document.addEventListener('DOMContentLoaded',()=>{
+  initProductDialog();initIngredientOrbit();syncReferenceLabels();
+  document.addEventListener('click',e=>{const button=e.target.closest('[data-ref-product]');if(button){e.preventDefault();openProduct(button.dataset.refProduct,button);}});
+  if(new URLSearchParams(location.search).get('view')==='products')renderCatalog();
+ });
+})();
+</script><script>(() => {
+ const {L,products}=window.SIORE_REFERENCE,T=x=>bilingual(x),E=escaped;
+ const source='images/consultation/references/certification-source-slide09.png';
+ const items=[
+  {key:'dermatest',file:'dermatest-excellent-2025.png',title:L('더마테스트 Excellent','Dermatest Excellent','Dermatest Excellent认证','Dermatest Excellent'),badge:L('더마테스트 인증 자료 보기','View Dermatest certificate','查看Dermatest认证资料','Dermatest認証資料を見る'),metric:'EXCELLENT',lead:L('NMN 인텐시브 세럼 인증서','NMN Intensive Serum certificate','NMN密集精华认证证书','NMNインテンシブセラムの認証書'),text:L('첨부된 인증서에 기재된 제품과 시험 결과를 확인할 수 있습니다.','View the product and test result stated on the supplied certificate.','查看所提供证书中注明的产品及试验结果。','提供された認証書に記載の製品と試験結果を確認できます。'),crop:[2240,1600,1790,2360],facts:[
+   [L('발급기관','Issuer','颁发机构','発行機関'),L('Dermatest GmbH · 독일','Dermatest GmbH · Germany','Dermatest GmbH · 德国','Dermatest GmbH・ドイツ')],
+   [L('발급일','Issued','颁发日期','発行日'),L('2025.08.22','2025.08.22','2025.08.22','2025.08.22')],
+   [L('시험번호','Study number','试验编号','試験番号'),L('ST-ET-2025-00143','ST-ET-2025-00143','ST-ET-2025-00143','ST-ET-2025-00143')]
+  ],groups:[{label:L('인증서에 명시된 제품','Product named on the certificate','证书中注明的产品','認証書に記載された製品'),keys:['serum']}]},
+  {key:'irritation',file:'cert-irritation.png',title:L('피부 자극 시험','Skin irritation test','皮肤刺激试验','皮膚刺激試験'),badge:L('피부 자극 시험 자료 보기','View skin irritation test data','查看皮肤刺激试验资料','皮膚刺激試験資料を見る'),metric:'0.00',lead:L('평균 피부반응도 · 무자극 판정','Average skin reaction score · non-irritating','平均皮肤反应评分 · 无刺激判定','平均皮膚反応スコア・無刺激判定'),text:L('브랜드 소개 자료에 실린 8개 제품의 피부첩포시험 결과 표입니다.','The patch-test table for eight products shown in the brand presentation.','品牌介绍资料中所示8款产品的皮肤斑贴试验结果表。','ブランド紹介資料に掲載された8製品のパッチテスト結果表です。'),crop:[350,1600,1770,2360],facts:[
+   [L('관찰 시점','Observation times','观察时点','観察時点'),L('패치 제거 후 30분 · 24시간 · 48시간','30 minutes, 24 hours and 48 hours after patch removal','去除贴片后30分钟、24小时、48小时','パッチ除去後30分・24時間・48時間')]
+  ],groups:[{label:L('시험 결과 표에 명시된 제품','Products listed in the result table','结果表中注明的产品','結果表に記載された製品'),keys:['soothingCream','serum','richCream','soothingGel','comfortCream','essenceToner','bubbleToner','cleansing']}]},
+  {key:'noncomedo',file:'cert-noncomedo.png',title:L('논코메도제닉 시험','Non-comedogenic testing','非致粉刺试验','ノンコメドジェニック試験'),badge:L('논코메도제닉 시험 자료 보기','View non-comedogenic test data','查看非致粉刺试验资料','ノンコメドジェニック試験資料を見る'),metric:L('시험 완료','TEST COMPLETED','试验完成','試験済み'),lead:L('여드름성 피부 사용 적합 자료','Acne-prone skin suitability references','痘痘肌使用适合性资料','ニキビ肌への使用適合性資料'),text:L('브랜드 소개 자료의 관련 시험 결과와 제품별 리플렛을 함께 확인할 수 있습니다.','View the relevant test result in the brand presentation alongside the individual product leaflets.','可同时查看品牌介绍中的相关试验结果及各产品宣传页。','ブランド紹介資料の関連試験結果と各製品のリーフレットを確認できます。'),crop:[4210,1620,1810,2340],facts:[],groups:[
+   {label:L('브랜드 소개 자료에 명시된 제품','Products specified in the brand presentation','品牌介绍资料中注明的产品','ブランド紹介資料に記載された製品'),keys:['repairAmpoule','comfortCream']},
+   {label:L('제품 리플렛에서 추가 확인','Also stated in the product leaflets','产品宣传页中另有注明','製品リーフレットにも記載'),keys:['cleansing','soothingGel']}
+  ]}
+ ];
+ let dialog,opener,active=0;
+ const nameOf=key=>productName({...window.SIORE_PRODUCTS[key],short:products[key].name});
+ function render(index){
+  active=index;const item=items[index];dialog.dataset.zoom='false';
+  dialog.innerHTML='<header class="ref-dialog-head"><div><small>SIORÉ / SAFETY & TESTING</small><h2 id="ref-cert-title">'+T(item.title)+'</h2></div><button type="button" data-cert-close>'+T(L('닫기 ×','Close ×','关闭 ×','閉じる ×'))+'</button></header>'+
+   '<nav class="ref-cert-tabs" aria-label="시험·인증 자료 종류">'+items.map((x,i)=>'<button type="button" data-cert-tab="'+i+'" aria-pressed="'+(i===index)+'"><img src="images/cert/'+x.file+'" alt=""><span>'+T(x.title)+'</span></button>').join('')+'</nav>'+
+   '<div class="ref-cert-layout"><section class="ref-cert-summary"><strong class="ref-cert-result">'+(typeof item.metric==='string'?item.metric:T(item.metric))+'</strong><h3>'+T(item.lead)+'</h3><p>'+T(item.text)+'</p>'+
+   (item.facts.length?'<dl class="ref-study">'+item.facts.map(([k,v])=>'<div><dt>'+T(k)+'</dt><dd>'+T(v)+'</dd></div>').join('')+'</dl>':'')+
+   item.groups.map(group=>'<div class="ref-cert-products"><h4>'+T(group.label)+'</h4>'+group.keys.map(key=>'<button type="button" data-ref-product="'+key+'">'+nameOf(key)+' <span aria-hidden="true">↗</span></button>').join('')+'</div>').join('')+'</section>'+
+   '<section class="ref-cert-document"><div class="ref-cert-document-toolbar"><span>'+T(L('브랜드 소개 09 · 관련 자료 확대','Brand slide 09 · document detail','品牌介绍09 · 相关资料放大','ブランド紹介09・関連資料拡大'))+'</span><button type="button" data-cert-zoom aria-pressed="false">'+T(L('더 크게 보기 ⤢','Enlarge ⤢','放大查看 ⤢','拡大する ⤢'))+'</button></div><svg class="ref-cert-source" viewBox="'+item.crop.join(' ')+'" role="img" aria-label="'+E(item.title.ko)+' · 제공 자료"><defs><clipPath id="ref-cert-crop"><rect x="'+item.crop[0]+'" y="'+item.crop[1]+'" width="'+item.crop[2]+'" height="'+item.crop[3]+'"/></clipPath></defs><image href="'+source+'" width="6496" height="4490" clip-path="url(#ref-cert-crop)"/></svg></section></div>'+
+   '<details class="ref-source-original"><summary>'+T(L('브랜드 소개 자료 전체 원본 보기','View the full original brand slide','查看品牌介绍资料完整原图','ブランド紹介資料の原本全体を見る'))+'</summary><img src="'+source+'" loading="lazy" alt="시오레 브랜드 소개 9페이지 · 안전성 검증 원본"></details>'+
+   '<footer>'+T(L('제공하신 브랜드 소개 9페이지와 제품별 리플렛을 연결했습니다. 인증·시험 항목은 각 자료에 명시된 제품에 적용됩니다.','Linked to the supplied brand slide 9 and product leaflets. Certifications and test items apply to the products named in each document.','已连接所提供的品牌介绍第9页及各产品宣传页。认证及试验项目适用于各资料中注明的产品。','提供されたブランド紹介9ページと製品リーフレットを掲載しています。認証・試験項目は各資料に記載された製品に適用されます。'))+'</footer>';
+  dialog.querySelector('[data-cert-close]').onclick=()=>dialog.close();
+  dialog.querySelectorAll('[data-cert-tab]').forEach(b=>b.onclick=()=>{render(Number(b.dataset.certTab));dialog.querySelector('[data-cert-tab="'+active+'"]').focus({preventScroll:true});});
+  dialog.querySelector('[data-cert-zoom]').onclick=e=>{const zoom=dialog.dataset.zoom!=='true';dialog.dataset.zoom=String(zoom);e.currentTarget.setAttribute('aria-pressed',String(zoom));e.currentTarget.innerHTML=T(zoom?L('요약 함께 보기','Show summary','同时显示摘要','概要も表示'):L('더 크게 보기 ⤢','Enlarge ⤢','放大查看 ⤢','拡大する ⤢'));};
+ }
+ function refreshBadgeLabels(){document.querySelectorAll('[data-cert-badge]').forEach(button=>{const item=items[Number(button.dataset.certBadge)],label=item.badge[languageMode]||item.badge.ko;button.setAttribute('aria-label',label);button.title=label;});}
+ const previousLanguage=applyPageLanguage;applyPageLanguage=function(){previousLanguage();refreshBadgeLabels();};
+ document.addEventListener('DOMContentLoaded',()=>{
+  dialog=document.createElement('dialog');dialog.id='reference-certification-dialog';dialog.className='ref-dialog ref-cert-dialog';dialog.setAttribute('aria-labelledby','ref-cert-title');document.body.append(dialog);
+  dialog.addEventListener('close',()=>{opener?.setAttribute('aria-expanded','false');opener?.focus({preventScroll:true});});
+  document.querySelectorAll('.brand-proof img').forEach(img=>{
+   const index=items.findIndex(x=>img.getAttribute('src').endsWith(x.file));if(index<0)return;
+   const button=document.createElement('button');button.type='button';button.className='ref-cert-badge';button.dataset.certBadge=index;button.setAttribute('aria-haspopup','dialog');button.setAttribute('aria-controls',dialog.id);button.setAttribute('aria-expanded','false');img.replaceWith(button);button.append(img);
+   button.onclick=()=>{opener=button;button.setAttribute('aria-expanded','true');render(index);dialog.showModal();dialog.scrollTop=0;};
+  });refreshBadgeLabels();
+ });
+})();
+</script><script>(() => {
+  document.addEventListener('DOMContentLoaded', () => {
+    const lobby = document.querySelector('.focus-lobby');
+    const dialog = document.querySelector('#focus-dialog');
+    const labels = {ko:'시오레 · 처음 화면으로',en:'SIORÉ · Back to home',zh:'SIORÉ · 返回首页',ja:'SIORÉ · ホームへ戻る'};
+    const buttons = [];
+    let returningHome = false;
+
+    function finishHome() {
+      lobby.hidden = false;
+      document.body.style.overflow = '';
+      window.scrollTo({top:0, behavior:'instant'});
+      setLanguage(languageMode);
+      buttons[0]?.focus({preventScroll:true});
+    }
+    function returnHome() {
+      returningHome = true;
+      paperExample = false;
+      focusStarted = false;
+      resetAll();
+      if (dialog.open) closeFocus();
+      else { finishHome(); returningHome = false; }
+    }
+    dialog.addEventListener('close', () => {
+      if (!returningHome) return;
+      queueMicrotask(() => { finishHome(); returningHome = false; });
+    });
+
+    document.querySelectorAll('.lobby-top > img, .focus-toolbar > img').forEach(img => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'siore-home-logo';
+      // Display the official artwork without its transparent outer padding.
+      // The viewBox and image dimensions preserve the original glyph proportions.
+      button.innerHTML = '<svg viewBox="60 47 467 126" width="178" height="48" aria-hidden="true" focusable="false"><image href="'+img.getAttribute('src')+'" width="588" height="221" /></svg>';
+      img.replaceWith(button);
+      button.addEventListener('click', returnHome);
+      buttons.push(button);
+    });
+    const syncLabels = () => buttons.forEach(button => {
+      button.setAttribute('aria-label', labels[languageMode] || labels.ko);
+      button.title = labels[languageMode] || labels.ko;
+    });
+    const previousLanguage = setLanguage;
+    setLanguage = function(next) { previousLanguage(next); syncLabels(); };
+    syncLabels();
+    const slogan = lobby.querySelector('.glass-brand-slogan');
+    const syncHeight = () => {
+      const height = slogan.getBoundingClientRect().height;
+      if (height) buttons[0].style.setProperty('--siore-logo-height', Math.min(52, Math.max(44, height))+'px');
+    };
+    new ResizeObserver(syncHeight).observe(slogan);
+    document.fonts.ready.then(syncHeight);
+  });
+})();
+</script><!-- REFERENCE UPDATE END --></body>
 </html>
