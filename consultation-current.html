@@ -5590,6 +5590,94 @@ document.addEventListener('DOMContentLoaded',()=>{
 .habit-note-step>.priority-note{margin:10px 0 0!important}
 @keyframes habitAttention{0%,100%{box-shadow:0 0 0 0 #3f718700}50%{box-shadow:0 0 0 5px #3f718722}}
 @media(prefers-reduced-motion:reduce){.habit-guide-track i,.focus-dialog .habit-panel.habit-guided>fieldset,.habit-note-step{transition:none}.habit-step-current .habit-step-state{animation:none}}
+
+/* Compact consultation flow: keep the next required action visible in one viewport. */
+.focus-dialog{--consult-glow:#63a7bf;--consult-glow-soft:#83bfd02e}
+.focus-dialog .focus-toolbar{height:48px;min-height:48px}
+.focus-dialog .language-bar{top:48px;padding:3px 18px}
+.focus-dialog .language-option{min-height:34px;padding:5px 11px;font-size:12px}
+.focus-dialog .wrapper{max-width:1360px;padding:0 18px 14px}
+.focus-dialog .steps-nav{padding:7px 0!important;max-width:860px}
+.focus-dialog .step-num{width:24px;height:24px;flex-basis:24px}
+.focus-dialog #step1,.focus-dialog #step2{padding:14px 18px 16px!important}
+.focus-dialog .panel-header{margin:0 0 11px!important;padding:5px 0 10px!important}
+.focus-dialog .panel-header h2{font-size:clamp(21px,2vw,27px)!important;line-height:1.25;letter-spacing:.035em}
+.focus-dialog .panel-header>p:last-of-type{font-size:12px;line-height:1.45;margin-top:5px}
+.focus-dialog .panel-kicker{font-size:9px}
+.focus-dialog .profile-bar{margin-bottom:10px;padding:7px 10px;min-height:48px}
+.focus-dialog .profile-field{padding:0 7px!important;gap:7px}
+.focus-dialog .profile-field h3{font-size:12px;min-width:42px}
+.focus-dialog .profile-field button{min-height:34px;padding:4px 7px;font-size:11px}
+.focus-dialog .concern-layout{grid-template-columns:minmax(180px,.52fr) minmax(0,1.48fr);gap:10px}
+.focus-dialog .face-guide>img{height:238px;object-fit:cover;object-position:center 34%}
+.focus-dialog .face-guide figcaption{margin:6px 9px;font-size:10px;line-height:1.4}
+.focus-dialog .selected-chips{margin:5px;padding:0 6px;gap:4px}
+.focus-dialog .selected-chips>span{padding:4px 7px;font-size:10px}
+.focus-dialog .medical-question{padding:0 10px 10px!important}
+.focus-dialog .question-notice{margin:0 -10px 8px;padding:8px 10px;gap:8px}
+.focus-dialog .question-number{width:26px;height:26px;font-size:11px}
+.focus-dialog .question-notice strong{font-size:14px;line-height:1.3}
+.focus-dialog .question-notice p{font-size:10px;line-height:1.35;margin-top:2px}
+.focus-dialog .question-status{font-size:9px;padding:4px 7px}
+.focus-dialog .concern-grid{gap:6px}
+.focus-dialog .concern-card{min-height:82px!important;padding:7px 8px;grid-template-columns:26px 1fr;gap:2px 7px;box-shadow:none}
+.focus-dialog .concern-card img{width:24px;height:24px}
+.focus-dialog .concern-card>span[data-i18n]:not(.concern-help){font-size:14px!important}
+.focus-dialog .concern-card .concern-help{font-size:10px}
+.focus-dialog .priority-box{margin-top:7px;padding:7px}
+.focus-dialog .panel-actions{margin-top:10px;padding-top:9px}
+.focus-dialog .btn-primary,.focus-dialog .btn-ghost{min-height:42px;padding:9px 18px;font-size:13px}
+.focus-dialog #medical-progress{margin-top:7px;padding:6px 12px;font-size:10px}
+.focus-dialog .type-grid{gap:6px}
+.focus-dialog .type-card{min-height:76px!important;padding:7px;font-size:14px;gap:3px}
+.focus-dialog .type-card small{font-size:10px}
+.focus-dialog .skin-type-icon{width:32px;height:32px;font-size:19px!important}
+.focus-dialog .intake-grid.secondary{margin:9px 0;gap:8px}
+.focus-dialog .intake-card.medical-question{min-width:0}
+.focus-dialog #texture-options,.focus-dialog #sensitivity-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.focus-dialog #texture-options button,.focus-dialog #sensitivity-options button{min-height:38px;padding:5px;font-size:12px}
+.focus-dialog .habit-panel.habit-guided{margin-top:9px;padding:0 9px 9px;border-radius:7px}
+.focus-dialog .habit-panel.habit-guided>summary{margin:0 -9px;padding:9px 11px;font-size:13px}
+.focus-dialog .habit-panel.habit-guided>summary::before{width:19px;height:19px;font-size:10px;margin-right:6px}
+.focus-dialog .habit-guide-head{padding:6px 1px 0}
+.focus-dialog .habit-guide-copy{gap:8px}.focus-dialog .habit-guide-eyebrow,.focus-dialog .habit-guide-progress-label,.focus-dialog .habit-guide-status{font-size:10px!important}
+.focus-dialog .habit-guide-track{margin:6px 0;height:3px}
+.focus-dialog .habit-guide-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.focus-dialog .habit-guide-steps>fieldset,.focus-dialog .habit-guide-steps>.habit-note-step{position:relative;margin:0;padding:8px;min-width:0;min-height:104px;border:1px solid #d9e5ea;border-radius:7px;background:#fbfcfd;opacity:.72;transition:border-color .2s,box-shadow .2s,background .2s,opacity .2s,transform .2s}
+.focus-dialog .habit-panel.habit-guided>fieldset legend,.focus-dialog .habit-note-step>label{font-size:11px;margin:7px 0 6px}
+.focus-dialog .habit-step-meta{gap:5px}.focus-dialog .habit-step-name{font-size:9px}.focus-dialog .habit-step-state{min-height:19px;padding:2px 6px;font-size:8px}
+.focus-dialog .habit-options{gap:4px}.focus-dialog .habit-options button{min-height:28px;padding:4px 7px;font-size:10px}
+.focus-dialog .habit-note-step>#habit-note{padding:6px;font-size:11px}.focus-dialog .habit-note-step>.priority-note{font-size:9px!important;margin-top:5px!important}
+.focus-dialog .solution-sheet{padding:18px}.focus-dialog .solution-heading{padding-bottom:11px!important;margin-bottom:10px}
+.focus-dialog .solution-heading h2{font-size:23px}.focus-dialog .solution-heading p,.focus-dialog .medical-plan-note{font-size:10px;margin:5px 0 10px}
+.focus-dialog .solution-grid{gap:10px}.focus-dialog .product-stage{height:180px}.focus-dialog .solution-product{min-height:70px}
+.focus-dialog .clinical-evidence{margin:0 12px 8px;padding:10px}.focus-dialog .clinical-number{font-size:24px}
+.consult-step-notice{display:flex;align-items:center;gap:9px;min-height:34px;margin:0 0 9px;padding:7px 10px;border:1px solid #b8d4df;background:linear-gradient(90deg,#edf7fa,#fff);color:#315e72;font-size:11px;font-weight:700;line-height:1.35}
+.consult-step-notice::before{content:'✦';display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#397287;color:#fff;box-shadow:0 0 0 0 var(--consult-glow-soft);animation:consultNoticePulse 1.7s ease-in-out infinite}
+.consult-step-notice[data-state=done]::before{content:'✓';background:#4b806b;animation:none}
+.consult-step-notice small{margin-left:auto;color:#6f8792;font-size:9px;font-weight:600;white-space:nowrap}
+.consult-checkpoint-active{position:relative;z-index:1;box-shadow:0 0 0 3px var(--consult-glow-soft),0 7px 18px #315f7210!important;border-color:var(--consult-glow)!important}
+.consult-checkpoint-active::after{content:'✦';position:absolute;right:7px;top:7px;color:#5795ad;font-size:13px;pointer-events:none;animation:consultSparkle 1.5s ease-in-out infinite}
+.consult-checkpoint-done{border-color:#b8d6c9!important}
+@keyframes consultNoticePulse{0%,100%{box-shadow:0 0 0 0 #63a7bf00;transform:scale(1)}50%{box-shadow:0 0 0 7px #63a7bf22;transform:scale(1.06)}}
+@keyframes consultSparkle{0%,100%{opacity:.25;transform:scale(.75) rotate(0)}50%{opacity:1;transform:scale(1.25) rotate(28deg)}}
+@media(max-width:700px){
+ .focus-dialog .focus-toolbar{height:44px;min-height:44px}.focus-dialog .language-bar{top:44px;padding:2px 8px}.focus-dialog .language-option{min-height:31px;padding:4px;font-size:10px}
+ .focus-dialog .wrapper{padding:0 8px 10px}.focus-dialog .steps-nav{padding:5px 0!important}.focus-dialog .step-item{font-size:9px}.focus-dialog .step-num{width:20px;height:20px;flex-basis:20px;font-size:10px}
+ .focus-dialog #step1,.focus-dialog #step2{padding:9px!important}.focus-dialog .panel-header{padding:3px 0 7px!important;margin-bottom:7px!important}.focus-dialog .panel-header h2{font-size:19px!important;letter-spacing:0}.focus-dialog .panel-header>p:last-of-type{font-size:10px;line-height:1.35}
+ .focus-dialog .profile-bar{display:grid;gap:4px;padding:5px;margin-bottom:7px}.focus-dialog .profile-field{padding:0!important}.focus-dialog .profile-field h3{margin:8px 0 0;min-width:34px;font-size:10px}.focus-dialog .profile-field button{min-height:30px;padding:3px 5px;font-size:10px}
+ .focus-dialog .concern-layout{grid-template-columns:82px minmax(0,1fr);gap:6px}.focus-dialog .face-guide{display:block}.focus-dialog .face-guide>img{height:90px}.focus-dialog .face-guide figcaption{display:none}.focus-dialog .selected-chips{display:block;margin:4px;padding:0}.focus-dialog .selected-chips>span{display:block;margin-bottom:3px;text-align:center}
+ .focus-dialog .question-notice{padding:6px 7px;gap:5px}.focus-dialog .question-number{width:22px;height:22px}.focus-dialog .question-notice strong{font-size:12px}.focus-dialog .question-notice p{display:none}.focus-dialog .question-status{margin-left:auto;font-size:8px}
+ .focus-dialog .concern-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.focus-dialog .concern-card{min-height:61px!important;padding:5px;grid-template-columns:18px 1fr}.focus-dialog .concern-card img{width:17px;height:17px}.focus-dialog .concern-card>span[data-i18n]:not(.concern-help){font-size:11px!important}.focus-dialog .concern-card .concern-help{font-size:8px}
+ .focus-dialog .panel-actions{position:sticky;bottom:0;margin-top:7px;padding:7px;background:#fffffff5;backdrop-filter:blur(8px)}.focus-dialog .btn-primary,.focus-dialog .btn-ghost{min-height:38px;font-size:11px;padding:7px 10px}
+ .focus-dialog .type-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.focus-dialog .type-card{min-height:61px!important;font-size:10px;padding:4px}.focus-dialog .type-card small{display:none}.focus-dialog .skin-type-icon{width:25px;height:25px;font-size:15px!important}
+ .focus-dialog .intake-grid.secondary{grid-template-columns:1fr 1fr;gap:5px}.focus-dialog #texture-options,.focus-dialog #sensitivity-options{grid-template-columns:1fr!important}.focus-dialog #texture-options button,.focus-dialog #sensitivity-options button{min-height:29px;font-size:9px}
+ .focus-dialog .habit-guide-steps{grid-template-columns:1fr;gap:5px}.focus-dialog .habit-guide-steps>fieldset,.focus-dialog .habit-guide-steps>.habit-note-step{min-height:0;padding:7px}
+ .focus-dialog .habit-guide-steps>fieldset:not(.habit-step-current):not(.habit-step-complete),.focus-dialog .habit-guide-steps>.habit-note-step:not(.habit-step-current):not(.habit-step-complete){display:none}
+ .consult-step-notice{min-height:30px;margin-bottom:6px;padding:5px 7px;font-size:9px}.consult-step-notice::before{width:17px;height:17px}.consult-step-notice small{font-size:8px}
+ .focus-dialog .solution-sheet{padding:10px}.focus-dialog .solution-grid{grid-template-columns:1fr}.focus-dialog .product-stage{height:155px}
+}
+@media(prefers-reduced-motion:reduce){.consult-step-notice::before,.consult-checkpoint-active::after{animation:none}}
 </style><script>/* Product values transcribed from the user-provided 2026-06-11 leaflet.
    Percentages are preserved as printed; study dates are not exposure durations. */
 window.SIORE_REFERENCE = (()=>{
@@ -6020,6 +6108,10 @@ window.SIORE_REFERENCE = (()=>{
   noteStep.append(noteLabel,note,reference);
   steps=[...fieldsets,noteStep];
   steps.forEach(step=>step.insertAdjacentHTML('afterbegin','<div class="habit-step-meta"><span class="habit-step-name"></span><span class="habit-step-state"></span></div>'));
+  const stepGrid=document.createElement('div');
+  stepGrid.className='habit-guide-steps';
+  fieldsets[0].before(stepGrid);
+  steps.forEach(step=>stepGrid.append(step));
   panel.querySelectorAll('[data-habit]').forEach(button=>button.addEventListener('click',()=>queueMicrotask(sync)));
   note.addEventListener('input',sync);
   renderLabels();
@@ -6027,6 +6119,53 @@ window.SIORE_REFERENCE = (()=>{
   setLanguage=function(lang){priorLanguage(lang);renderLabels();};
   const priorReset=resetAll;
   resetAll=function(){priorReset();panel.open=true;sync();};
+ });
+})();
+</script><script>(()=>{
+ const copy={
+  concern:copy4('지금 체크 · 가장 신경 쓰이는 피부 고민을 선택하세요.','Check now · choose your main skin concern.','现在确认 · 请选择最在意的肌肤问题。','今チェック・最も気になる肌悩みを選択。'),
+  skin:copy4('다음 체크 · 평소 피부 타입을 선택하세요.','Next · choose your usual skin type.','下一步 · 请选择平时的肤质。','次の確認・普段の肌タイプを選択。'),
+  texture:copy4('다음 체크 · 편안한 사용감을 하나 선택하세요.','Next · choose one comfortable texture.','下一步 · 请选择喜欢的质地。','次の確認・好みの使用感を選択。'),
+  sensitivity:copy4('다음 체크 · 평소 민감도를 선택하세요.','Next · choose your usual sensitivity.','下一步 · 请选择敏感程度。','次の確認・敏感度を選択。'),
+  habits:copy4('선택 확인 · 현재 루틴과 불편 경험을 순서대로 체크하세요.','Review · check your routine and reactions in order.','选择确认 · 请依次确认当前护理与不适经历。','選択確認・現在の習慣と刺激経験を順番に確認。'),
+  result:copy4('추천 확인 · 제품별 선택 이유와 사용 순서를 확인하세요.','Review results · check each reason and usage order.','查看推荐 · 确认产品理由与使用顺序。','提案確認・製品ごとの理由と使用順を確認。'),
+  done:copy4('필수 선택 완료 · 다음 단계로 이동할 수 있어요.','Required choices complete · continue when ready.','必选项已完成 · 可以进入下一步。','必須項目完了・次へ進めます。'),
+  label:copy4('현재 안내','CURRENT','当前提示','現在の案内')
+ };
+ const text=value=>bilingual(value);
+ let notices={};
+ function activeStep(){return document.querySelector('.step-panel.active')?.id;}
+ function setNotice(step,key,done=false){const notice=notices[step];if(!notice)return;notice.dataset.state=done?'done':'current';notice.firstElementChild.innerHTML=text(done?copy.done:copy[key]);notice.querySelector('small').innerHTML=text(copy.label);}
+ function clearMarks(){document.querySelectorAll('.consult-checkpoint-active,.consult-checkpoint-done').forEach(el=>el.classList.remove('consult-checkpoint-active','consult-checkpoint-done'));}
+ function mark(el,state){if(el)el.classList.add(state==='active'?'consult-checkpoint-active':'consult-checkpoint-done');}
+ function sync(){
+  clearMarks();const step=activeStep();
+  if(step==='step1'){
+   const box=document.querySelector('[data-med-question="concern"]');
+   if(selectedConcerns.length){mark(box,'done');setNotice('step1','concern',true);mark(document.querySelector('#step1 .panel-actions'),'active');}
+   else{mark(box,'active');setNotice('step1','concern');}
+  }else if(step==='step2'){
+   const missing=!selectedSkinTypes.length?'skin':!reviewed.texture?'texture':!reviewed.sensitivity?'sensitivity':null;
+   document.querySelectorAll('#step2 .medical-question').forEach(el=>mark(el,el.dataset.medQuestion===missing?'active':'done'));
+   if(missing)setNotice('step2',missing);
+   else{
+    const habits=document.querySelector('.habit-panel');const productDone=Boolean(document.querySelector('[data-habit="products"][aria-pressed="true"]')),reactionDone=Boolean(document.querySelector('[data-habit="reactions"][aria-pressed="true"]'));
+    if(!productDone||!reactionDone){mark(habits,'active');setNotice('step2','habits');}
+    else{mark(habits,'done');setNotice('step2','habits',true);mark(document.querySelector('#step2 .panel-actions'),'active');}
+   }
+  }else if(step==='step3'){
+   const result=document.querySelector('.solution-sheet')||document.querySelector('#result-summary');mark(result,'active');setNotice('step3','result');
+  }
+ }
+ function renderLabels(){sync();}
+ document.addEventListener('DOMContentLoaded',()=>{
+  ['step1','step2','step3'].forEach(id=>{const panel=document.getElementById(id),head=panel?.querySelector('.panel-header,.result-tools');if(!panel||!head)return;const notice=document.createElement('div');notice.className='consult-step-notice';notice.setAttribute('role','status');notice.setAttribute('aria-live','polite');notice.innerHTML='<span></span><small></small>';head.insertAdjacentElement('afterend',notice);notices[id]=notice;});
+  document.addEventListener('click',event=>{if(event.target.closest('[data-concern],[data-type],[data-texture],[data-sensitivity],[data-habit],#btn-to-step2,#btn-to-step3,.btn-ghost'))queueMicrotask(sync);});
+  document.querySelector('#habit-note')?.addEventListener('input',sync);
+  const priorLanguage=setLanguage;setLanguage=function(lang){priorLanguage(lang);renderLabels();};
+  const priorGo=goToStep;goToStep=function(num){priorGo(num);queueMicrotask(sync);};
+  const priorResults=showResults;showResults=function(){priorResults();queueMicrotask(sync);};
+  sync();
  });
 })();
 </script><!-- REFERENCE UPDATE END --></body>
