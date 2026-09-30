@@ -5684,6 +5684,69 @@ document.addEventListener('DOMContentLoaded',()=>{
  .focus-dialog .solution-sheet{padding:10px}.focus-dialog .solution-grid{grid-template-columns:1fr}.focus-dialog .product-stage{height:155px}
 }
 @media(prefers-reduced-motion:reduce){.consult-step-notice::before,.consult-checkpoint-active::after{animation:none}}
+
+/* Sequential consultation navigator: the control itself carries the cue. */
+.focus-dialog{--navigator-color:#3d91ad;--navigator-soft:#72c0d833;--navigator-done:#5c9078}
+.consult-step-notice::before{animation:none;box-shadow:none}
+.consult-checkpoint-active{z-index:2!important;border-color:var(--navigator-color)!important;box-shadow:0 0 0 2px #fff,0 0 0 5px var(--navigator-soft),0 12px 28px #286d881f!important;background-image:linear-gradient(135deg,#f5fbfd 0,#fff 48%,#eaf7fa 100%)!important;animation:navigatorBoxGlow 1.8s ease-in-out infinite}
+.consult-checkpoint-active::before{content:'';position:absolute;inset:-3px;border:2px solid #63afc8;border-radius:inherit;pointer-events:none;opacity:.72}
+.consult-checkpoint-active::after{content:'NEXT';right:10px;top:-10px;padding:4px 9px;border-radius:999px;background:#2e7994;color:#fff;font-size:8px;font-weight:800;letter-spacing:.08em;line-height:1;box-shadow:0 4px 10px #275f7526;animation:navigatorBadge 1.8s ease-in-out infinite}
+.consult-checkpoint-done{border-color:#a9cabb!important;box-shadow:inset 3px 0 var(--navigator-done)!important}
+.consult-checkpoint-done::before{content:'✓';position:absolute;right:8px;top:7px;width:18px;height:18px;display:grid;place-items:center;border-radius:50%;background:#4c826b;color:#fff;font-size:10px;font-weight:900;z-index:3}
+@keyframes navigatorBoxGlow{0%,100%{box-shadow:0 0 0 2px #fff,0 0 0 4px #72c0d824,0 10px 24px #286d8814}50%{box-shadow:0 0 0 2px #fff,0 0 0 7px #72c0d842,0 14px 32px #286d882b}}
+@keyframes navigatorBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+/* Five compact skin-state questions, inspired by common oil/moisture, sensitivity,
+   pigmentation and firmness consultation dimensions. */
+.skin-assessment{position:relative;margin:9px 0;padding:11px;border:1px solid #cbdde4;border-radius:8px;background:#fff}
+.skin-assessment>header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:8px}
+.skin-assessment>header small{display:block;font-size:8px;letter-spacing:.14em;color:#708794}
+.skin-assessment>header h3{font-size:15px;margin:3px 0 0;color:#244a5b}
+.skin-assessment>header p{max-width:560px;margin:0;color:#6f838d;font-size:9px;line-height:1.45;text-align:right}
+.skin-assessment-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.skin-assessment-question{position:relative;min-width:0;margin:0;padding:8px;border:1px solid #d9e5ea;border-radius:7px;background:#fbfcfd}
+.skin-assessment-question legend{display:flex;align-items:flex-start;gap:6px;width:100%;min-height:35px;padding:0;color:#274958;font-size:10px;font-weight:700;line-height:1.35}
+.skin-assessment-question legend b{flex:0 0 18px;width:18px;height:18px;display:grid;place-items:center;border-radius:50%;background:#5d8899;color:#fff;font-size:8px}
+.skin-assessment-question>div{display:grid;gap:3px}
+.skin-assessment-question button{min-height:27px;padding:3px 5px;border:1px solid #d7e3e7;border-radius:4px;background:#fff;color:#405e6c;font-size:9px;line-height:1.25;cursor:pointer}
+.skin-assessment-question button[aria-pressed=true]{border-color:#3e829b;background:#e8f4f7;color:#1f5366;box-shadow:inset 3px 0 #3e829b;font-weight:700}
+.skin-assessment-note{margin:6px 0 0!important;color:#83939a!important;font-size:8px!important}
+
+/* Prescription-style results with an always-visible 3/5/1 composition matrix. */
+.focus-dialog .solution-sheet.prescription-layout{position:relative;border:1px solid #9fb5bf;border-top:5px solid #254f61;border-radius:2px;background:#fff;box-shadow:0 14px 38px #24485816;padding:22px}
+.prescription-layout .solution-heading{display:grid;grid-template-columns:1fr auto;align-items:end;border-bottom:2px solid #254f61!important}
+.prescription-layout .solution-heading::after{content:'CONSULTATION FORM';font-size:8px;letter-spacing:.16em;color:#67808b}
+.rx-overview{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr);gap:12px;margin:10px 0 12px}
+.rx-matrix,.rx-rationale{border:1px solid #cbd9df;background:#fff;padding:12px;min-width:0}
+.rx-matrix header,.rx-rationale header{padding-bottom:8px;border-bottom:1px solid #d7e2e6;margin-bottom:8px}
+.rx-matrix header small,.rx-rationale header small{font-size:7px;letter-spacing:.13em;color:#79909a}
+.rx-matrix h3,.rx-rationale h3{font-size:14px;margin:3px 0 0;color:#24495a}
+.rx-matrix-row{display:grid;grid-template-columns:92px minmax(0,1fr);gap:7px;padding:6px 0;border-bottom:1px solid #e1e8eb;align-items:stretch}
+.rx-matrix-row:last-child{border-bottom:0}
+.rx-matrix-row>b{display:flex;align-items:center;padding:5px 7px;background:#eef5f7;color:#305b6d;font-size:9px;line-height:1.25}
+.rx-matrix-row.premium>b{background:#f5ece9;color:#8a5a4b}.rx-matrix-row.one>b{background:#eef2ea;color:#547043}
+.rx-matrix-row>div{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+.rx-product-chip{min-width:0;min-height:44px;padding:5px;border:1px solid #d7e2e6;border-radius:3px;background:#fff;color:#2d5262;text-align:left;cursor:pointer}
+.rx-product-chip small{display:block;font-size:7px;color:#7c9099;margin-bottom:2px}.rx-product-chip strong{display:block;font-size:8px;line-height:1.3;overflow-wrap:anywhere}
+.rx-product-chip.is-extra{border-color:#c7907b;background:#fff8f5;box-shadow:inset 0 3px #c7907b}.rx-product-chip.is-extra::after{content:'+';float:right;color:#ad6e55;font-weight:900}
+.rx-rationale dl{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin:0 0 7px}
+.rx-rationale dl>div{padding:6px;background:#f5f8f9}.rx-rationale dt{font-size:7px;color:#7a909a}.rx-rationale dd{font-size:9px;font-weight:700;color:#2d5262;margin:2px 0 0}
+.rx-rationale details{border:1px solid #dce5e8;padding:6px;margin:0 0 7px}.rx-rationale summary{font-size:9px;font-weight:700;color:#426a7b;cursor:pointer}
+.rx-assessment-summary{list-style:none;padding:5px 0 0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.rx-assessment-summary li{display:flex;justify-content:space-between;gap:5px;padding:3px;background:#f7f9fa;font-size:7px}.rx-assessment-summary li b{font-weight:500}.rx-assessment-summary li span{font-weight:700;color:#315d70;text-align:right}
+.rx-additions>b{display:block;font-size:9px;color:#7b5347;margin-bottom:4px}.rx-additions ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}.rx-additions li{display:grid;grid-template-columns:minmax(90px,.42fr) 1fr;gap:6px;align-items:center;font-size:8px;line-height:1.4}.rx-additions button{border:0;background:#f5ece9;color:#7f5144;padding:5px;text-align:left;font:inherit;font-weight:700;cursor:pointer}.rx-additions span{color:#596e78}
+.customer-card-status{display:flex;justify-content:space-between;gap:10px;margin:8px 0;padding:7px 10px;border:1px solid #a9cebd;background:#f2faf6;color:#34654f;font-size:9px}.customer-card-status span{font-family:ui-monospace,monospace}
+.customer-name-field{display:flex;align-items:center;gap:7px;min-width:205px;padding-left:7px;border-left:1px solid #d5e1e5;color:#355666;font-size:10px;font-weight:700}.customer-name-field input{width:130px;min-height:34px;padding:5px 7px;border:1px solid #cbdbe1;border-radius:3px;font-size:10px;color:#294b5a;background:#fff}
+.records-open{border:1px solid #b9ced7;background:#fff;color:#315f72;border-radius:4px;padding:8px 12px;font-size:11px;font-weight:700;cursor:pointer}.lobby-records-open{margin-left:9px}.toolbar-records-open{margin-left:auto}
+.customer-records-dialog{width:min(780px,calc(100vw - 28px));max-height:84vh;border:1px solid #b7cbd4;border-radius:8px;padding:0;background:#fff;color:#254a5a;box-shadow:0 24px 70px #19384738}
+.customer-records-dialog::backdrop{background:#132d3b70;backdrop-filter:blur(3px)}
+.customer-records-dialog>header{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid #d5e1e6;background:#fff}.customer-records-dialog>header small{font-size:8px;letter-spacing:.13em;color:#78909a}.customer-records-dialog h2{font-size:20px;margin:3px 0 0}.customer-records-dialog>header button{border:0;background:transparent;color:#466978;cursor:pointer}
+.records-toolbar{display:flex;align-items:end;justify-content:space-between;gap:12px;padding:12px 18px;background:#f3f8fa}.records-toolbar label{font-size:9px;color:#6c838e;flex:1}.records-toolbar input{display:block;width:100%;margin-top:5px;padding:9px;border:1px solid #c7d9e1;border-radius:4px}.records-count{font-size:11px;font-weight:700;color:#426d80}
+.records-list{display:grid;gap:8px;padding:14px 18px 20px}.customer-record{position:relative;border:1px solid #d4e0e5;padding:12px;background:#fff}.customer-record>header{display:flex;justify-content:space-between;gap:10px}.customer-record>header strong{display:block;font-size:14px}.customer-record code{font-size:9px;color:#6c8692}.customer-record time{font-size:9px;color:#84969e}.customer-record-summary{display:flex;justify-content:space-between;gap:12px;margin:8px 80px 0 0;font-size:10px}.customer-record-summary b{color:#315f72}.customer-record details{margin-top:9px;padding-top:7px;border-top:1px solid #e0e8eb;font-size:9px}.customer-record details dl{display:grid;gap:4px}.customer-record details dl>div{display:grid;grid-template-columns:75px 1fr}.customer-record dd{margin:0}.record-delete{position:absolute;right:12px;bottom:9px;border:1px solid #e2c7c4;background:#fff;color:#a25750;padding:5px 8px;font-size:9px;cursor:pointer}.records-empty{text-align:center;padding:50px;color:#748993}
+@media(max-width:900px){.skin-assessment-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.rx-overview{grid-template-columns:1fr}.rx-matrix-row>div{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.skin-assessment{padding:7px}.skin-assessment>header{display:block}.skin-assessment>header p{display:none}.skin-assessment-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.skin-assessment-question legend{font-size:8px;min-height:29px}.skin-assessment-question button{font-size:8px;min-height:24px}.rx-overview{display:block}.rx-rationale{margin-top:7px}.rx-matrix-row{grid-template-columns:68px 1fr}.rx-matrix-row>div{grid-template-columns:repeat(3,minmax(0,1fr))}.customer-name-field{min-width:0;border:0;padding:4px 0}.customer-name-field input{width:120px}.customer-record-summary{display:grid}.consult-checkpoint-active::after{font-size:6px;top:-7px}}
+@media(prefers-reduced-motion:reduce){.consult-checkpoint-active,.consult-checkpoint-active::after{animation:none!important}}
+@media print{.care-tier-options,.care-tier-status,.records-open,#save-customer-card,.customer-card-status{display:none!important}.focus-dialog .solution-sheet.prescription-layout{box-shadow:none;border:1px solid #718793}}
 </style><script>/* Product values transcribed from the user-provided 2026-06-11 leaflet.
    Percentages are preserved as printed; study dates are not exposure durations. */
 window.SIORE_REFERENCE = (()=>{
@@ -6173,6 +6236,144 @@ window.SIORE_REFERENCE = (()=>{
   const priorResults=showResults;showResults=function(){priorResults();queueMicrotask(sync);};
   sync();
  });
+})();
+</script><script>(()=>{
+ const STORAGE_KEY='siore-consultation-cards-v1';
+ const assessmentAnswers={};
+ const C=(ko,en,zh,ja)=>copy4(ko,en,zh,ja);
+ const tx=value=>bilingual(value);
+ const questions=[
+  {key:'balance',title:C('세안 20분 뒤 피부는 어떤가요?','How does skin feel 20 minutes after cleansing?','洁面20分钟后肌肤感觉如何？','洗顔20分後の肌状態は？'),options:[['dry',C('당기고 건조함','Tight and dry','紧绷干燥','つっぱり・乾燥')],['balanced',C('편안함','Comfortable','舒适','快適')],['oily',C('금방 번들거림','Quickly shiny','很快出油','すぐにテカる')]]},
+  {key:'reactivity',title:C('새 제품이나 날씨 변화에 반응하나요?','Does skin react to new products or weather?','更换产品或天气变化时会反应吗？','新製品や天候変化に反応しますか？'),options:[['high',C('자주 따갑고 붉어짐','Often stings or reddens','经常刺痛泛红','よく刺激・赤み')],['medium',C('가끔 반응함','Sometimes reacts','偶尔反应','時々反応')],['low',C('거의 편안함','Rarely reacts','很少不适','ほぼ快適')]]},
+  {key:'tone',title:C('햇빛·트러블 뒤 흔적은 어떤가요?','What happens after sun or blemishes?','日晒或痘痘后会怎样？','日差し・肌荒れ後は？'),options:[['pigment',C('색소 흔적이 오래감','Marks linger','色素印记持久','色素跡が残る')],['dull',C('칙칙함이 남음','Dullness remains','暗沉残留','くすみが残る')],['clear',C('금방 회복됨','Recovers quickly','很快恢复','早く戻る')]]},
+  {key:'firmness',title:C('탄력·주름 변화가 느껴지나요?','Do you notice firmness or line changes?','是否感觉弹力或细纹变化？','ハリ・シワの変化は？'),options:[['high',C('뚜렷하게 고민','Clear concern','明显困扰','はっきり気になる')],['medium',C('조금 신경 쓰임','Some concern','有些在意','少し気になる')],['low',C('현재는 적음','Minimal now','目前较少','今は少ない')]]},
+  {key:'zone',title:C('오후 피부 상태는 어떤가요?','How does skin feel in the afternoon?','下午肌肤状态如何？','午後の肌状態は？'),options:[['combination',C('T존 유분·볼 건조','Oily T-zone, dry cheeks','T区油、两颊干','Tゾーン脂・頬乾燥')],['dry',C('전체적으로 건조','Dry overall','整体干燥','全体に乾燥')],['oily',C('전체적으로 유분','Oily overall','整体出油','全体に皮脂')]]}
+ ];
+ PAGE_I18N.step2Desc=C('기본 피부 상태와 5개 빠른 문항, 제형·민감도·현재 사용 습관을 순서대로 확인합니다.','Review your skin type, five quick questions, texture, sensitivity and current routine in order.','依次确认基础肤质、5项快速问题、质地、敏感度与当前护理习惯。','基本の肌状態、5つの簡易質問、使用感、敏感度、現在の習慣を順に確認します。');
+ const answerLabel=(q,value)=>q.options.find(x=>x[0]===value)?.[1];
+ const normalizeName=value=>String(value||'').trim().replace(/\s+/g,'').toLocaleLowerCase();
+ const readCards=()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch{return []}};
+ const writeCards=cards=>localStorage.setItem(STORAGE_KEY,JSON.stringify(cards));
+ const productLabel=p=>p?.name||p?.short||p?.key||'';
+ const formatDate=value=>new Intl.DateTimeFormat(languageMode==='ko'?'ko-KR':'en-US',{dateStyle:'medium',timeStyle:'short'}).format(new Date(value));
+ function renderAssessment(){
+  const host=document.querySelector('#skin-assessment');if(!host)return;
+  host.innerHTML=`<header><div><small>SKIN CONDITION CHECK · 5</small><h3>${tx(C('피부 상태 빠른 체크','Quick skin condition check','肌肤状态快速检查','肌状態クイックチェック'))}</h3></div><p>${tx(C('유·수분, 민감, 색소, 탄력 관점을 참고한 상담 문항입니다.','Consultation prompts covering oil/moisture, sensitivity, pigmentation and firmness.','参考油水平衡、敏感、色素与弹力维度的咨询问题。','油水分・敏感・色素・ハリの観点を参考にした質問です。'))}</p></header><div class="skin-assessment-grid">${questions.map((q,i)=>`<fieldset class="skin-assessment-question" data-assessment-question="${q.key}"><legend><b>${i+1}</b><span>${tx(q.title)}</span></legend><div>${q.options.map(([value,label])=>`<button type="button" data-skin-answer="${q.key}:${value}" aria-pressed="${assessmentAnswers[q.key]===value}">${tx(label)}</button>`).join('')}</div></fieldset>`).join('')}</div><p class="skin-assessment-note">${tx(C('간단한 화장품 상담 체크이며 의료 진단 또는 공식 바우만 피부 유형 검사가 아닙니다.','A brief skincare consultation check; not a medical diagnosis or an official Baumann Skin Type test.','这是简要护肤咨询检查，并非医疗诊断或正式Baumann肤质测试。','簡易的な化粧品相談チェックで、医療診断や正式なBaumann肌タイプ検査ではありません。'))}</p>`;
+ }
+ function assessmentDone(){return questions.every(q=>assessmentAnswers[q.key]);}
+ function habitsDone(){return habits.products.size>0&&habits.reactions.size>0;}
+ function flowItems(){return [document.querySelector('[data-med-question="skin"]'),...questions.map(q=>document.querySelector(`[data-assessment-question="${q.key}"]`)),document.querySelector('[data-med-question="texture"]'),document.querySelector('[data-med-question="sensitivity"]'),document.querySelector('.habit-panel')].filter(Boolean)}
+ function flowDone(el){
+  if(el.matches('[data-med-question="skin"]'))return selectedSkinTypes.length>0;
+  if(el.matches('[data-assessment-question]'))return Boolean(assessmentAnswers[el.dataset.assessmentQuestion]);
+  if(el.matches('[data-med-question="texture"]'))return reviewed.texture;
+  if(el.matches('[data-med-question="sensitivity"]'))return reviewed.sensitivity;
+  if(el.matches('.habit-panel'))return habitsDone();return false;
+ }
+ function syncNavigator(){
+  const active=document.querySelector('.step-panel.active')?.id;
+  document.querySelectorAll('.consult-checkpoint-active,.consult-checkpoint-done').forEach(el=>el.classList.remove('consult-checkpoint-active','consult-checkpoint-done'));
+  if(active==='step1'){
+   const box=document.querySelector('[data-med-question="concern"]');
+   (selectedConcerns.length?document.querySelector('#step1 .panel-actions'):box)?.classList.add('consult-checkpoint-active');
+   if(selectedConcerns.length)box?.classList.add('consult-checkpoint-done');
+  }
+  if(active==='step2'){
+   const items=flowItems();let found=false;
+   items.forEach(el=>{if(flowDone(el))el.classList.add('consult-checkpoint-done');else if(!found){el.classList.add('consult-checkpoint-active');found=true;}});
+   if(!found)document.querySelector('#step2 .panel-actions')?.classList.add('consult-checkpoint-active');
+   const button=document.querySelector('#btn-to-step3');if(button)button.disabled=!(selectedSkinTypes.length&&reviewed.texture&&reviewed.sensitivity&&assessmentDone()&&habitsDone());
+  }
+  if(active==='step3')document.querySelector('.rx-overview,.solution-sheet')?.classList.add('consult-checkpoint-active');
+ }
+ function assessmentAdjustment(product){
+  let score=0;
+  if(assessmentAnswers.balance==='dry'&&product.routineGroup==='moisturizer')score+=.45;
+  if(assessmentAnswers.balance==='oily'&&(product.key==='soothingGel'||product.routineGroup==='toner'))score+=.35;
+  if(assessmentAnswers.reactivity==='high'&&(product.name.includes('데일리 릴리프')||product.concerns.includes('민감')||product.concerns.includes('장벽회복')))score+=.5;
+  if(assessmentAnswers.tone==='pigment'&&['bubbleToner','serum','richCream'].includes(product.key))score+=.35;
+  if(assessmentAnswers.tone==='dull'&&['bubbleToner','serum'].includes(product.key))score+=.3;
+  if(assessmentAnswers.firmness==='high'&&['serum','richCream'].includes(product.key))score+=.55;
+  if(assessmentAnswers.zone==='combination'&&['essenceToner','repairAmpoule','soothingGel'].includes(product.key))score+=.3;
+  return score;
+ }
+ const previousRecommendations=getRecommendations;
+ getRecommendations=function(){return previousRecommendations().map(p=>({...p,score:p.score+assessmentAdjustment(p)})).sort((a,b)=>b.score-a.score||a.routineOrder-b.routineOrder||b.price-a.price);};
+ function recommendationSets(){
+  const ranked=getRecommendations(),core=buildSets(ranked).core3.slice().sort((a,b)=>a.routineOrder-b.routineOrder),premium=[...core];
+  for(const group of ['cleanser','treatment']){const p=ranked.find(x=>x.routineGroup===group&&!premium.some(y=>y.key===x.key));if(p)premium.push(p);}
+  for(const p of ranked){if(premium.length>=5)break;if(!premium.some(x=>x.key===p.key))premium.push(p);}
+  premium.sort((a,b)=>a.routineOrder-b.routineOrder);return {ranked,core,premium:premium.slice(0,5),one:ranked.filter(p=>premium.some(x=>x.key===p.key)).slice(0,1)};
+ }
+ function matchReason(product){
+  const concerns=selectedConcerns.filter(c=>product.concerns.includes(c)).map(c=>concernLabel(c).ko);
+  if(product.routineGroup==='cleanser')return habits.products.has('클렌저')?C('현재 세정 단계의 적합성과 세정력을 보완하기 위해 추가','Added to refine cleansing performance in the current routine','用于优化当前清洁步骤与清洁力','現在の洗浄ステップと洗浄力を補うため追加'):C('루틴의 첫 단계인 세정 준비를 보완하기 위해 추가','Added to complete the cleansing step','用于补充护理第一步的清洁准备','最初の洗浄ステップを補うため追加');
+  if(concerns.length)return C(`${concerns.join('·')} 고민을 한 단계 더 집중 관리하기 위해 추가`,'Added for more targeted care of your selected concerns','为进一步集中护理已选困扰而添加','選択した悩みをさらに集中ケアするため追加');
+  return C('피부 타입과 사용감에 맞춰 관리 선택의 폭을 넓히기 위해 추가','Added to broaden care options for your skin type and texture preference','根据肤质与质地偏好扩展护理选择','肌タイプと使用感に合わせて選択肢を広げるため追加');
+ }
+ function productChip(product,extra=false){return `<button type="button" class="rx-product-chip${extra?' is-extra':''}" data-ref-product="${escaped(product.key)}"><small>${termHTML(product.routine)}</small><strong>${escaped(productLabel(product))}</strong></button>`;}
+ function assessmentSummary(){return questions.map(q=>`<li><b>${tx(q.title)}</b><span>${tx(answerLabel(q,assessmentAnswers[q.key]))}</span></li>`).join('');}
+ function renderResultUpgrade(){
+  const sheet=document.querySelector('.solution-sheet');if(!sheet)return;
+  sheet.querySelector('.rx-overview')?.remove();sheet.querySelector('.customer-card-status')?.remove();
+  const {core,premium,one}=recommendationSets(),additions=premium.filter(p=>!core.some(c=>c.key===p.key));
+  const matrix=`<section class="rx-matrix"><header><small>CARE COMPOSITION</small><h3>${tx(C('추천 구성 한눈에 보기','Recommendation structure','推荐结构一览','おすすめ構成一覧'))}</h3></header><div class="rx-matrix-row"><b>${tx(C('코어 3','Core 3','核心3件','コア3'))}</b><div>${core.map(p=>productChip(p)).join('')}</div></div><div class="rx-matrix-row premium"><b>${tx(C('프리미엄 구성','Premium set','进阶组合','プレミアム構成'))}</b><div>${premium.map(p=>productChip(p,additions.some(x=>x.key===p.key))).join('')}</div></div><div class="rx-matrix-row one"><b>1PICK</b><div>${one.map(p=>productChip(p)).join('')}</div></div></section>`;
+  const additionReasons=additions.map(p=>`<li><button type="button" data-ref-product="${escaped(p.key)}">+ ${escaped(productLabel(p))}</button><span>${tx(matchReason(p))}</span></li>`).join('');
+  const textureLabel={light:C('가벼운 제형','Light texture','轻盈质地','軽い使用感'),balanced:C('균형 제형','Balanced texture','均衡质地','バランス質感'),rich:C('보습감 높은 제형','Rich texture','滋润质地','しっとり質感')}[selectedTexture];
+  const sensitivityLabel={low:C('민감도 낮음','Low sensitivity','低敏感度','敏感度低'),medium:C('민감도 보통','Medium sensitivity','中等敏感度','敏感度中'),high:C('민감도 높음','High sensitivity','高敏感度','敏感度高')}[selectedSensitivity];
+  const rationale=`<section class="rx-rationale"><header><small>PHARMACIST CONSULTATION LOGIC</small><h3>${tx(C('추천 이유와 추가 근거','Why these products','推荐理由与依据','おすすめ理由と根拠'))}</h3></header><dl><div><dt>${tx(C('우선 고민','Priority concern','优先困扰','最優先の悩み'))}</dt><dd>${selectedConcerns.map(c=>tx(concernLabel(c))).join(' · ')}</dd></div><div><dt>${tx(C('피부 프로필','Skin profile','肌肤档案','肌プロフィール'))}</dt><dd>${selectedSkinTypes.map(s=>translatedValue('skinTypes',s)).join(' · ')} · ${tx(textureLabel)} · ${tx(sensitivityLabel)}</dd></div></dl><details><summary>${tx(C('피부 상태 5문항 응답 보기','View 5-question skin check','查看5项肤况回答','5問の回答を見る'))}</summary><ul class="rx-assessment-summary">${assessmentSummary()}</ul></details><div class="rx-additions"><b>${tx(C('프리미엄 추가 품목과 이유','Why premium items were added','进阶新增产品及原因','プレミアム追加品と理由'))}</b><ul>${additionReasons||`<li><span>${tx(C('코어 구성만으로 현재 상담 목표를 충족합니다.','The core set meets the current consultation goal.','核心组合已满足当前咨询目标。','コア構成で現在の相談目標を満たします。'))}</span></li>`}</ul></div></section>`;
+  const target=sheet.querySelector('.solution-profile');target.insertAdjacentHTML('beforebegin',`<div class="rx-overview">${matrix}${rationale}</div>`);
+  sheet.classList.add('prescription-layout');
+  const actions=document.querySelector('#step3 .result-actions');
+  if(actions&&!document.querySelector('#save-customer-card'))actions.querySelector('#print-summary').insertAdjacentHTML('beforebegin',`<button type="button" class="btn-primary" id="save-customer-card">${tx(C('고객카드 저장','Save customer card','保存客户卡','顧客カード保存'))}</button>`);
+ }
+ const previousPaperRender=paperRender;
+ paperRender=function(){previousPaperRender();renderResultUpgrade();};
+ function newCode(cards){const date=new Date().toISOString().slice(2,10).replaceAll('-','');let code;do{code=`SIORE-${date}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;}while(cards.some(x=>x.code===code));return code;}
+ function collectRecord(existingCode){
+  const {core,premium,one}=recommendationSets(),name=document.querySelector('#customer-name')?.value.trim()||'';
+  return {code:existingCode||newCode(readCards()),name:name||tx(C('이름 미입력 고객','Unnamed customer','未填写姓名客户','氏名未入力のお客様')).replace(/<[^>]+>/g,''),nameKey:normalizeName(name),updatedAt:new Date().toISOString(),gender:selectedGender,age:selectedAge,concerns:[...selectedConcerns],skinTypes:[...selectedSkinTypes],texture:selectedTexture,sensitivity:selectedSensitivity,assessment:{...assessmentAnswers},habits:{products:[...habits.products],reactions:[...habits.reactions],note:document.querySelector('#habit-note')?.value.trim()||''},recommendations:{one:one.map(productLabel),core:core.map(productLabel),premium:premium.map(productLabel)}};
+ }
+ function saveRecord(){
+  const cards=readCards(),name=document.querySelector('#customer-name')?.value.trim()||'',key=normalizeName(name),found=key?cards.find(x=>x.nameKey===key):null,record=collectRecord(found?.code);
+  const next=found?cards.map(x=>x.code===found.code?record:x):[record,...cards];writeCards(next);showSaveStatus(record,Boolean(found));renderRecords();
+ }
+ function showSaveStatus(record,updated){
+  const sheet=document.querySelector('.solution-sheet');if(!sheet)return;sheet.querySelector('.customer-card-status')?.remove();sheet.querySelector('.solution-heading').insertAdjacentHTML('afterend',`<p class="customer-card-status" role="status"><b>${updated?tx(C('기존 고객카드 업데이트','Customer card updated','客户卡已更新','顧客カード更新')):tx(C('고객카드 저장 완료','Customer card saved','客户卡已保存','顧客カード保存完了'))}</b><span>${escaped(record.code)} · ${escaped(record.name)}</span></p>`);
+ }
+ let recordsDialog;
+ function renderRecords(filter=''){
+  if(!recordsDialog)return;const all=readCards(),needle=normalizeName(filter),cards=all.filter(x=>!needle||normalizeName(x.name).includes(needle)||x.code.toLowerCase().includes(String(filter).toLowerCase()));
+  recordsDialog.querySelector('.records-count').textContent=`${cards.length} / ${all.length}`;
+  recordsDialog.querySelector('.records-list').innerHTML=cards.length?cards.map(card=>`<article class="customer-record"><header><div><strong>${escaped(card.name)}</strong><code>${escaped(card.code)}</code></div><time>${formatDate(card.updatedAt)}</time></header><div class="customer-record-summary"><span>${card.concerns.map(c=>escaped(concernLabel(c)?.ko||c)).join(' · ')}</span><b>1PICK · ${escaped(card.recommendations.one[0]||'')}</b></div><details><summary>${tx(C('상담 기록 자세히','Consultation details','咨询记录详情','相談記録の詳細'))}</summary><dl><div><dt>${tx(C('피부 타입','Skin type','肤质','肌タイプ'))}</dt><dd>${card.skinTypes.map(escaped).join(' · ')}</dd></div><div><dt>${tx(C('코어 3','Core 3','核心3件','コア3'))}</dt><dd>${card.recommendations.core.map(escaped).join(' → ')}</dd></div><div><dt>${tx(C('프리미엄','Premium','进阶','プレミアム'))}</dt><dd>${card.recommendations.premium.map(escaped).join(' → ')}</dd></div></dl></details><button type="button" class="record-delete" data-record-delete="${escaped(card.code)}">${tx(C('삭제','Delete','删除','削除'))}</button></article>`).join(''):`<p class="records-empty">${tx(C('저장된 고객카드가 없습니다.','No saved customer cards.','暂无保存的客户卡。','保存された顧客カードはありません。'))}</p>`;
+ }
+ function openRecords(){renderRecords();recordsDialog.showModal();recordsDialog.querySelector('input').focus();}
+ function initRecords(){
+  recordsDialog=document.createElement('dialog');recordsDialog.id='customer-records-dialog';recordsDialog.className='customer-records-dialog';recordsDialog.innerHTML=`<header><div><small>SIORÉ CUSTOMER CARDS</small><h2>${tx(C('상담 저장 기록','Saved consultations','已保存咨询记录','保存した相談記録'))}</h2></div><button type="button" data-records-close>${tx(C('닫기 ×','Close ×','关闭 ×','閉じる ×'))}</button></header><div class="records-toolbar"><label>${tx(C('이름 또는 고유코드 검색','Search name or code','搜索姓名或代码','氏名・コード検索'))}<input type="search" autocomplete="off"></label><span class="records-count"></span></div><div class="records-list"></div>`;document.body.append(recordsDialog);
+  recordsDialog.querySelector('[data-records-close]').onclick=()=>recordsDialog.close();recordsDialog.querySelector('input').addEventListener('input',e=>renderRecords(e.target.value));recordsDialog.addEventListener('click',e=>{const b=e.target.closest('[data-record-delete]');if(!b)return;writeCards(readCards().filter(x=>x.code!==b.dataset.recordDelete));renderRecords(recordsDialog.querySelector('input').value);});
+  const lobbyButton=document.createElement('button');lobbyButton.type='button';lobbyButton.className='records-open lobby-records-open';lobbyButton.innerHTML=tx(C('저장 기록','Saved records','保存记录','保存記録'));document.querySelector('.compact-actions,.lobby-lead>div:first-child')?.append(lobbyButton);
+  const toolbarButton=document.createElement('button');toolbarButton.type='button';toolbarButton.className='records-open toolbar-records-open';toolbarButton.innerHTML=tx(C('저장 기록','Saved records','保存记录','保存記録'));document.querySelector('.focus-toolbar .focus-close')?.before(toolbarButton);
+  document.querySelectorAll('.records-open').forEach(b=>b.onclick=openRecords);renderRecords();
+ }
+ function initCustomerName(){const bar=document.querySelector('#step1 .profile-bar');if(!bar)return;bar.insertAdjacentHTML('beforeend',`<label class="customer-name-field"><span>${tx(C('고객명·이니셜','Name / initials','姓名／缩写','氏名・イニシャル'))}</span><input id="customer-name" type="text" maxlength="30" autocomplete="off" placeholder="${languageMode==='ko'?'저장 시 같은 이름은 한 카드로 관리':''}"></label>`);}
+ document.addEventListener('click',event=>{
+  const answer=event.target.closest('[data-skin-answer]');if(answer){const [key,value]=answer.dataset.skinAnswer.split(':');assessmentAnswers[key]=value;renderAssessment();setTimeout(syncNavigator,0);}
+  if(event.target.closest('#save-customer-card'))saveRecord();
+  if(event.target.closest('#btn-to-step3')&&!(assessmentDone()&&habitsDone())){event.preventDefault();event.stopImmediatePropagation();const target=flowItems().find(el=>!flowDone(el));target?.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});target?.classList.add('consult-checkpoint-active');target?.querySelector('button')?.focus({preventScroll:true});}
+  if(event.target.closest('[data-concern],[data-type],[data-texture],[data-sensitivity],[data-habit],#btn-to-step2,#btn-to-step3,.btn-ghost'))setTimeout(syncNavigator,0);
+ },true);
+ document.addEventListener('DOMContentLoaded',()=>{
+  initCustomerName();const secondary=document.querySelector('#step2 .intake-grid.secondary');if(secondary){const section=document.createElement('section');section.id='skin-assessment';section.className='skin-assessment';secondary.before(section);renderAssessment();}
+  initRecords();const print=document.querySelector('#print-summary');if(print)print.innerHTML=tx(C('인쇄·PDF','Print / PDF','打印／PDF','印刷・PDF'));setTimeout(syncNavigator,0);
+ });
+ const previousResetUpgrade=resetAll;
+ resetAll=function(){Object.keys(assessmentAnswers).forEach(k=>delete assessmentAnswers[k]);previousResetUpgrade();const name=document.querySelector('#customer-name');if(name)name.value='';renderAssessment();setTimeout(syncNavigator,0);};
+ const previousLanguageUpgrade=setLanguage;
+ setLanguage=function(lang){previousLanguageUpgrade(lang);renderAssessment();document.querySelectorAll('.records-open').forEach(b=>b.innerHTML=tx(C('저장 기록','Saved records','保存记录','保存記録')));renderRecords(document.querySelector('#customer-records-dialog input')?.value||'');setTimeout(syncNavigator,0);};
+ const previousGoUpgrade=goToStep;
+ goToStep=function(num){previousGoUpgrade(num);setTimeout(syncNavigator,0);};
+ const previousShowUpgrade=showResults;
+ showResults=function(){previousShowUpgrade();setTimeout(syncNavigator,0);};
 })();
 </script><!-- REFERENCE UPDATE END --></body>
 </html>
