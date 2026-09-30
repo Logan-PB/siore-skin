@@ -5625,6 +5625,11 @@ document.addEventListener('DOMContentLoaded',()=>{
 .focus-dialog .concern-card>span[data-i18n]:not(.concern-help){font-size:14px!important}
 .focus-dialog .concern-card .concern-help{font-size:10px}
 .focus-dialog .priority-box{margin-top:7px;padding:7px}
+.focus-dialog .priority-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.focus-dialog .priority-options .rank-line{display:grid;grid-template-columns:24px minmax(0,1fr) auto;align-items:center;gap:7px;min-width:0;padding:6px 7px;border:1px solid #cbdde5;border-radius:7px;background:#fff}
+.focus-dialog .priority-options .rank-line>span{min-width:0;font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.focus-dialog .priority-options .rank-line>button{min-height:30px;padding:4px 8px;border-radius:16px;font-size:9px;white-space:nowrap}
+.focus-dialog .priority-note{font-size:9px;margin:5px 0 0}
 .focus-dialog .panel-actions{margin-top:10px;padding-top:9px}
 .focus-dialog .btn-primary,.focus-dialog .btn-ghost{min-height:42px;padding:9px 18px;font-size:13px}
 .focus-dialog #medical-progress{margin-top:7px;padding:6px 12px;font-size:10px}
@@ -5669,6 +5674,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  .focus-dialog .concern-layout{grid-template-columns:82px minmax(0,1fr);gap:6px}.focus-dialog .face-guide{display:block}.focus-dialog .face-guide>img{height:90px}.focus-dialog .face-guide figcaption{display:none}.focus-dialog .selected-chips{display:block;margin:4px;padding:0}.focus-dialog .selected-chips>span{display:block;margin-bottom:3px;text-align:center}
  .focus-dialog .question-notice{padding:6px 7px;gap:5px}.focus-dialog .question-number{width:22px;height:22px}.focus-dialog .question-notice strong{font-size:12px}.focus-dialog .question-notice p{display:none}.focus-dialog .question-status{margin-left:auto;font-size:8px}
  .focus-dialog .concern-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.focus-dialog .concern-card{min-height:61px!important;padding:5px;grid-template-columns:18px 1fr}.focus-dialog .concern-card img{width:17px;height:17px}.focus-dialog .concern-card>span[data-i18n]:not(.concern-help){font-size:11px!important}.focus-dialog .concern-card .concern-help{font-size:8px}
+ .focus-dialog .priority-options{grid-template-columns:repeat(3,minmax(0,1fr))}.focus-dialog .priority-options .rank-line{grid-template-columns:19px minmax(0,1fr);padding:4px}.focus-dialog .priority-options .rank-line>b{width:19px;height:19px;font-size:9px}.focus-dialog .priority-options .rank-line>span{font-size:9px}.focus-dialog .priority-options .rank-line>button{grid-column:1/-1;width:100%;min-height:25px;font-size:8px}
  .focus-dialog .panel-actions{position:sticky;bottom:0;margin-top:7px;padding:7px;background:#fffffff5;backdrop-filter:blur(8px)}.focus-dialog .btn-primary,.focus-dialog .btn-ghost{min-height:38px;font-size:11px;padding:7px 10px}
  .focus-dialog .type-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.focus-dialog .type-card{min-height:61px!important;font-size:10px;padding:4px}.focus-dialog .type-card small{display:none}.focus-dialog .skin-type-icon{width:25px;height:25px;font-size:15px!important}
  .focus-dialog .intake-grid.secondary{grid-template-columns:1fr 1fr;gap:5px}.focus-dialog #texture-options,.focus-dialog #sensitivity-options{grid-template-columns:1fr!important}.focus-dialog #texture-options button,.focus-dialog #sensitivity-options button{min-height:29px;font-size:9px}
