@@ -3270,10 +3270,10 @@ body[data-mood=ivory]{--focus-bg:#ded8cb;--focus-paper:#fffdf5;--focus-soft:#f3e
 @media(max-width:1000px){.ingredient-popup-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media(max-width:750px){.ingredient-popup-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ingredient-popup-head h2{font-size:22px}}@media(max-width:500px){#ingredient-guide-popup{padding:16px;max-height:94dvh}.ingredient-popup-grid{grid-template-columns:1fr}.ingredient-popup-head{top:-16px;gap:8px}.ingredient-popup-head h2{font-size:21px}.ingredient-popup-close{padding:9px 12px}.ingredient-popup-card>p{font-size:14px}#ingredient-guide-popup footer{display:block}#ingredient-guide-popup footer span{display:block;margin-top:5px}}
 .focus-dialog .face-guide{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 50% 45%,#fffaf6 0,#f1e8e1 62%,#ede2d9 100%)!important;border-color:#e8ded6!important;box-shadow:inset 0 1px 0 #fff9,0 5px 22px #85664d0b;perspective:1100px}
 .focus-dialog .face-guide:before{content:'';position:absolute;inset:12% -10% 5%;z-index:-1;background-image:var(--model-atmosphere-image);background-size:cover;background-position:center;filter:blur(28px);opacity:.22;pointer-events:none}
-.focus-dialog .face-guide>img{background:transparent!important;border-radius:0;animation:model-gentle-pose 15s ease-in-out infinite!important;transform-origin:50% 54%;backface-visibility:hidden;mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 9%,#000 88%,transparent);mask-composite:intersect}
+.focus-dialog .face-guide>img{background:transparent!important;border-radius:0;animation:model-gentle-pose 11s ease-in-out infinite!important;transform-origin:50% 54%;backface-visibility:hidden;mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent),linear-gradient(to bottom,transparent,#000 9%,#000 88%,transparent);mask-composite:intersect}
 .focus-dialog .face-guide .model-speech{background:#fffdf9e8;border-color:#e6d9ce;box-shadow:0 4px 14px #8c6d5310;color:#4d514f}.focus-dialog .face-guide .model-speech:after{background:#fffdf9;border-color:#e6d9ce}
 .focus-dialog .face-guide figcaption,.focus-dialog .face-guide .model-motion{color:#776b63}.focus-dialog .face-guide.motion-paused>img{animation-play-state:paused!important}
-@keyframes model-gentle-pose{0%,100%{transform:scale(1.015) rotateX(0) rotateY(0) rotateZ(0)}20%{transform:scale(1.025) rotateX(1.5deg) rotateY(-3deg) rotateZ(-.5deg)}42%{transform:scale(1.02) rotateX(-1.5deg) rotateY(0) rotateZ(0)}65%{transform:scale(1.025) rotateX(.5deg) rotateY(3deg) rotateZ(.5deg)}82%{transform:scale(1.02) rotateX(1.5deg) rotateY(0) rotateZ(0)}}
+@keyframes model-gentle-pose{0%,100%{transform:translateX(0) scale(1.025) rotateY(0)}22%{transform:translateX(-5px) scale(1.045) rotateY(-7deg) rotateZ(-.35deg)}48%{transform:translateX(0) scale(1.035) rotateY(0)}72%{transform:translateX(5px) scale(1.045) rotateY(7deg) rotateZ(.35deg)}90%{transform:translateX(0) scale(1.035) rotateY(0)}}
 @media(prefers-reduced-motion:reduce){.focus-dialog .face-guide>img{animation:none!important;transform:none!important}}
 @media(max-width:700px){.focus-dialog .face-guide{background:#f3ebe5!important}.focus-dialog .face-guide:before{opacity:.13}.focus-dialog .face-guide>img{mask-image:linear-gradient(to right,transparent,#000 7%,#000 93%,transparent)}}
 </style><style>body[data-display-language]:not([data-display-language=ko]) .i18n-main{display:block;line-height:1.4;font-weight:650}
@@ -5686,15 +5686,15 @@ document.addEventListener('DOMContentLoaded',()=>{
 @media(prefers-reduced-motion:reduce){.consult-step-notice::before,.consult-checkpoint-active::after{animation:none}}
 
 /* Sequential consultation navigator: the control itself carries the cue. */
-.focus-dialog{--navigator-color:#3d91ad;--navigator-soft:#72c0d833;--navigator-done:#5c9078}
+.focus-dialog{--navigator-color:#df7189;--navigator-soft:#f4a7b933;--navigator-done:#c58a97}
 .consult-step-notice::before{animation:none;box-shadow:none}
-.consult-checkpoint-active{z-index:2!important;border:2px solid var(--navigator-color)!important;box-shadow:0 0 0 3px #fff,0 0 0 7px #64bfdc52,0 14px 32px #24718d2e!important;background-image:linear-gradient(135deg,#eefafe 0,#fff 48%,#e1f5fa 100%)!important;animation:navigatorBoxGlow 1.15s ease-in-out infinite}
-.consult-checkpoint-active::before{content:'';position:absolute;inset:-5px;border:3px solid #56b7d5;border-radius:inherit;pointer-events:none;opacity:.9;animation:navigatorOutlineFlash 1.15s ease-in-out infinite}
-.consult-checkpoint-active::after{content:'NEXT';right:10px;top:-10px;padding:4px 9px;border-radius:999px;background:#2e7994;color:#fff;font-size:8px;font-weight:800;letter-spacing:.08em;line-height:1;box-shadow:0 4px 10px #275f7526;animation:navigatorBadge 1.8s ease-in-out infinite}
+.consult-checkpoint-active{z-index:2!important;border:2px solid var(--navigator-color)!important;box-shadow:0 0 0 3px #fff,0 0 0 7px #ed91a752,0 14px 32px #b94e692e!important;background-image:linear-gradient(135deg,#fff1f5 0,#fff 48%,#fde7ed 100%)!important;animation:navigatorBoxGlow 1.15s ease-in-out infinite}
+.consult-checkpoint-active::before{content:'';position:absolute;inset:-5px;border:3px solid #e88399;border-radius:inherit;pointer-events:none;opacity:.9;animation:navigatorOutlineFlash 1.15s ease-in-out infinite}
+.consult-checkpoint-active::after{content:'NEXT';right:10px;top:-10px;padding:4px 9px;border-radius:999px;background:#d85f7a;color:#fff;font-size:8px;font-weight:800;letter-spacing:.08em;line-height:1;box-shadow:0 4px 10px #a73f5826;animation:navigatorBadge 1.8s ease-in-out infinite}
 .consult-checkpoint-done{border-color:#a9cabb!important;box-shadow:inset 3px 0 var(--navigator-done)!important}
 .consult-checkpoint-done::before{content:'✓';position:absolute;right:8px;top:7px;width:18px;height:18px;display:grid;place-items:center;border-radius:50%;background:#4c826b;color:#fff;font-size:10px;font-weight:900;z-index:3}
-@keyframes navigatorBoxGlow{0%,100%{box-shadow:0 0 0 3px #fff,0 0 0 6px #56b7d53d,0 12px 28px #24718d24}50%{box-shadow:0 0 0 3px #fff,0 0 0 11px #56b7d58c,0 17px 38px #24718d52}}
-@keyframes navigatorOutlineFlash{0%,100%{border-color:#6fc4dc;opacity:.62;filter:brightness(1)}50%{border-color:#1b8fb5;opacity:1;filter:brightness(1.28)}}
+@keyframes navigatorBoxGlow{0%,100%{box-shadow:0 0 0 3px #fff,0 0 0 6px #ed91a73d,0 12px 28px #b94e6924}50%{box-shadow:0 0 0 3px #fff,0 0 0 11px #ed91a78c,0 17px 38px #b94e6952}}
+@keyframes navigatorOutlineFlash{0%,100%{border-color:#efa0b1;opacity:.62;filter:brightness(1)}50%{border-color:#d95673;opacity:1;filter:brightness(1.18)}}
 @keyframes navigatorBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
 
 /* Five compact skin-state questions, inspired by common oil/moisture, sensitivity,
