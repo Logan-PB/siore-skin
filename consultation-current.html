@@ -5748,6 +5748,23 @@ document.addEventListener('DOMContentLoaded',()=>{
 @media(max-width:700px){.skin-assessment{padding:7px}.skin-assessment>header{display:block}.skin-assessment>header p{display:none}.skin-assessment-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.skin-assessment-question legend{font-size:8px;min-height:29px}.skin-assessment-question button{font-size:8px;min-height:24px}.rx-overview{display:block}.rx-rationale{margin-top:7px}.rx-matrix-row{grid-template-columns:68px 1fr}.rx-matrix-row>div{grid-template-columns:repeat(3,minmax(0,1fr))}.customer-name-field{min-width:0;border:0;padding:4px 0}.customer-name-field input{width:120px}.customer-record-summary{display:grid}.consult-checkpoint-active::after{font-size:6px;top:-7px}}
 @media(prefers-reduced-motion:reduce){.consult-checkpoint-active,.consult-checkpoint-active::before,.consult-checkpoint-active::after{animation:none!important}}
 @media print{.care-tier-options,.care-tier-status,.records-open,#save-customer-card,.customer-card-status{display:none!important}.focus-dialog .solution-sheet.prescription-layout{box-shadow:none;border:1px solid #718793}}
+
+/* Compact paper prescription: one-screen composition with image-led tier tabs. */
+.habit-note-hidden{display:none!important}
+.focus-dialog .solution-sheet.prescription-layout{padding:14px 18px 12px;border:1px solid #c8bea9;border-top:0;border-radius:3px;background-color:#fbf8ef;background-image:radial-gradient(circle at 16% 18%,#957f5d12 0 1px,transparent 1.4px),radial-gradient(circle at 72% 64%,#7d6a4f0d 0 1px,transparent 1.5px),repeating-linear-gradient(0deg,#ffffff00 0 5px,#88745808 6px);background-size:19px 21px,27px 25px,100% 7px;box-shadow:0 4px 0 #eee8d9,0 16px 42px #51462f1c}
+.prescription-layout>.solution-heading,.prescription-layout>.solution-profile,.prescription-layout>.solution-grid,.prescription-layout>.solution-footnote,.prescription-layout .care-tier-options,.prescription-layout .care-tier-status{display:none!important}
+.rx-prescription-head{display:grid;grid-template-columns:1fr auto;align-items:center;gap:22px;padding:2px 4px 10px;border-bottom:1px solid #9e927c}
+.rx-prescription-head small{font-size:7px;letter-spacing:.22em;color:#81745f}.rx-prescription-head h2{margin:4px 0 2px;font-family:"Segoe Print","Nanum Pen Script",cursive;font-size:23px;line-height:1.2;font-weight:700;color:#2f4e56;letter-spacing:-.04em}.rx-prescription-head p{margin:0;color:#756c5c;font-size:9px}
+.rx-handwriting{min-width:142px;display:grid;grid-template-columns:auto 1fr;align-items:end;padding:4px 11px 2px;border-left:1px solid #b8ad98;transform:rotate(-1.3deg);font-family:"Segoe Print","Nanum Pen Script",cursive;color:#315a62}.rx-handwriting span{grid-row:1/3;font-size:31px;line-height:1;margin-right:7px}.rx-handwriting b{font-size:12px;font-weight:600}.rx-handwriting i{font-size:10px;letter-spacing:.16em;text-align:right}
+.rx-overview{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(310px,.78fr);gap:10px;margin:10px 0 0}.rx-matrix,.rx-rationale{min-width:0;border:0;background:#ffffff72;padding:0}
+.rx-tier-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 7px}.rx-tier-tabs button{display:flex;align-items:center;justify-content:center;gap:7px;min-height:35px;padding:5px 12px;border:1px solid #bcb19e;border-radius:999px;background:#fffdf7;color:#5f6259;cursor:pointer;font-size:10px;font-weight:800}.rx-tier-tabs button b{display:grid;place-items:center;min-width:21px;height:21px;border-radius:50%;background:#eee8da;color:#5d645c;font-size:9px}.rx-tier-tabs button[aria-selected=true]{border-color:#315e69;background:#315e69;color:#fff;box-shadow:0 5px 12px #315e6928}.rx-tier-tabs button[aria-selected=true] b{background:#fff;color:#315e69}
+.rx-tier-panel[hidden]{display:none}.rx-products{display:grid;grid-template-columns:repeat(auto-fit,minmax(102px,1fr));gap:5px}.rx-product-tile{position:relative;display:grid;grid-template-rows:72px auto auto auto;align-content:start;min-width:0;min-height:143px;padding:5px 6px 6px;border:1px solid #d0c7b6;border-radius:13px;background:#fffdf9;color:#344f54;text-align:center;cursor:pointer}.rx-product-tile:hover{border-color:#62858b;transform:translateY(-1px)}.rx-product-tile.is-extra{border-color:#cb8f78;background:#fff8f3}.rx-product-tile>i{position:absolute;right:5px;top:5px;width:18px;height:18px;border-radius:50%;background:#bd795d;color:#fff;font-style:normal;font-weight:900}.rx-product-visual{display:flex;align-items:center;justify-content:center;overflow:hidden}.rx-product-visual img{display:block;max-width:76px;width:100%;height:68px;object-fit:contain;filter:drop-shadow(4px 6px 4px #5d4e3825)}.rx-product-tile>small{font-size:7px;color:#8a806f}.rx-product-tile>strong{font-size:8px;line-height:1.25;margin:2px 0}.rx-product-tile>em{font-style:normal;font-size:7px;line-height:1.3;color:#785f52}.rx-clinical-mini{display:none}
+.rx-evidence{margin-top:6px;border-top:1px solid #bdb29e;padding-top:6px}.rx-evidence>header{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:8px;color:#7c7261}.rx-evidence>header b{color:#315e69}.rx-evidence>article{display:grid;grid-template-columns:20px 1fr;gap:6px;padding:4px 0;border-top:1px dotted #c9bfad}.rx-evidence>article>b{display:grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#e7e0d2;color:#5e6158;font-size:7px}.rx-evidence>article>div{display:grid;grid-template-columns:minmax(105px,.72fr) 1.2fr .85fr;gap:7px;align-items:center}.rx-evidence strong{font-size:8px;color:#344f54}.rx-evidence p{margin:0;font-size:7px;line-height:1.3;color:#665e50}.rx-evidence small{font-size:7px;line-height:1.25;color:#9a5d49;font-weight:700}
+.rx-rationale{display:flex;flex-direction:column;gap:6px;border-left:1px solid #aaa08e;padding-left:10px}.rx-profile-line{display:grid;grid-template-columns:58px 1fr;gap:3px 6px;padding:7px;border-radius:8px;background:#f0ebdf;font-size:8px}.rx-profile-line b{color:#315e69}.rx-profile-line span{color:#645d50}.rx-pharmacist-note{display:grid;gap:3px;margin:0;padding:8px;border:1px solid #b6c7c6;border-radius:8px;background:#f5faf8;color:#4f625f}.rx-pharmacist-note b{font-size:7px;letter-spacing:.08em;color:#64807a}.rx-pharmacist-note strong{font-size:10px;color:#315d60}.rx-pharmacist-note span{font-size:8px;line-height:1.4}.rx-additions{padding:7px;border:1px solid #d5c8ba;border-radius:8px;background:#fffaf5}.rx-additions>b{font-size:8px}.rx-additions li{grid-template-columns:minmax(88px,.43fr) 1fr;font-size:7px}.rx-additions button{border-radius:5px;padding:4px}.rx-rationale details{margin:0;padding:6px;border-color:#d3c9b8;background:#fffdf8}.rx-rationale summary{font-size:8px}.rx-assessment-summary{grid-template-columns:1fr;gap:2px}.rx-assessment-summary li{font-size:6px;padding:2px}
+.prescription-layout.consult-checkpoint-active{animation:none!important;box-shadow:0 4px 0 #eee8d9,0 16px 42px #51462f1c!important;border-color:#c8bea9!important}.prescription-layout.consult-checkpoint-active::before,.prescription-layout.consult-checkpoint-active::after{display:none!important}
+#step3 .result-actions{margin-top:8px!important;padding-top:8px!important}.customer-card-status{margin:5px 0;padding:5px 8px}
+@media(max-width:700px){.focus-dialog .solution-sheet.prescription-layout{padding:9px}.rx-prescription-head{grid-template-columns:1fr;padding-bottom:7px}.rx-prescription-head h2{font-size:18px}.rx-prescription-head p{display:none}.rx-handwriting{display:none}.rx-overview{display:block}.rx-tier-tabs{position:sticky;top:0;z-index:3}.rx-tier-tabs button{padding:4px;min-height:32px;font-size:8px}.rx-products{grid-template-columns:repeat(3,minmax(0,1fr))}.rx-product-tile{grid-template-rows:58px auto auto auto;min-height:119px;padding:4px}.rx-product-visual img{height:54px}.rx-evidence>article>div{grid-template-columns:1fr}.rx-evidence p{display:none}.rx-rationale{margin-top:6px;padding:6px;border:1px solid #bdb29e;border-radius:8px}.rx-profile-line,.rx-additions{display:none}.rx-pharmacist-note{padding:6px}.rx-rationale details{display:none}}
+@media print{.rx-tier-tabs{display:none}.rx-tier-panel[hidden]{display:block}.rx-tier-panel{break-inside:avoid}.rx-prescription-head{padding-top:0}}
 </style><script>/* Product values transcribed from the user-provided 2026-06-11 leaflet.
    Percentages are preserved as printed; study dates are not exposure durations. */
 window.SIORE_REFERENCE = (()=>{
@@ -6113,10 +6130,8 @@ window.SIORE_REFERENCE = (()=>{
   optional:copy4('선택 입력','Optional','选填','任意入力'),
   products:copy4('1 · 현재 제품','1 · Current products','1 · 当前产品','1・現在の製品'),
   reactions:copy4('2 · 불편 경험','2 · Discomfort','2 · 不适体验','2・不快な経験'),
-  note:copy4('3 · 제품명·상황 메모','3 · Product or situation note','3 · 产品名或情况备注','3・製品名・状況メモ'),
   startStatus:copy4('1단계부터 확인해주세요.','Start with step 1.','请从第1步开始。','ステップ1から確認してください。'),
   reactionStatus:copy4('1단계 완료 · 다음은 불편 경험을 확인해주세요.','Step 1 complete · next, review any discomfort.','第1步完成 · 接下来确认不适体验。','ステップ1完了・次に不快な経験を確認してください。'),
-  noteStatus:copy4('기본 확인 완료 · 필요하면 제품명이나 상황을 적어주세요.','Basic review complete · add a product or situation if helpful.','基本确认完成 · 如有需要可填写产品名或情况。','基本確認完了・必要なら製品名や状況を入力してください。'),
   completeStatus:copy4('사용 습관 확인 완료','Routine review complete','使用习惯确认完成','使用習慣の確認完了')
  };
  const text=entry=>bilingual(entry);
@@ -6126,7 +6141,6 @@ window.SIORE_REFERENCE = (()=>{
   panel.querySelector('.habit-guide-eyebrow').innerHTML=text(guideCopy.eyebrow);
   panel.querySelector('[data-habit-guide="products"] .habit-step-name').innerHTML=text(guideCopy.products);
   panel.querySelector('[data-habit-guide="reactions"] .habit-step-name').innerHTML=text(guideCopy.reactions);
-  panel.querySelector('[data-habit-guide="note"] .habit-step-name').innerHTML=text(guideCopy.note);
   sync();
  }
  function stepLabel(step,state){
@@ -6138,11 +6152,10 @@ window.SIORE_REFERENCE = (()=>{
   if(!panel||!steps)return;
   const productDone=habits.products.size>0;
   const reactionDone=habits.reactions.size>0;
-  const noteDone=Boolean(document.querySelector('#habit-note')?.value.trim());
-  const current=!productDone?'products':!reactionDone?'reactions':'note';
+  const current=!productDone?'products':!reactionDone?'reactions':null;
   steps.forEach(step=>{
    const key=step.dataset.habitGuide;
-   const done=key==='products'?productDone:key==='reactions'?reactionDone:noteDone;
+   const done=key==='products'?productDone:reactionDone;
    const state=done?'done':key===current?'current':'upcoming';
    step.dataset.state=state;
    step.classList.toggle('habit-step-current',state==='current');
@@ -6152,7 +6165,7 @@ window.SIORE_REFERENCE = (()=>{
   const count=Number(productDone)+Number(reactionDone);
   progressLabel.innerHTML=text(guideCopy.progress).replace('{count}',count);
   panel.style.setProperty('--habit-progress',`${count/2*100}%`);
-  status.innerHTML=text(!productDone?guideCopy.startStatus:!reactionDone?guideCopy.reactionStatus:noteDone?guideCopy.completeStatus:guideCopy.noteStatus);
+  status.innerHTML=text(!productDone?guideCopy.startStatus:!reactionDone?guideCopy.reactionStatus:guideCopy.completeStatus);
  }
  document.addEventListener('DOMContentLoaded',()=>{
   panel=document.querySelector('.habit-panel');
@@ -6168,15 +6181,8 @@ window.SIORE_REFERENCE = (()=>{
   const fieldsets=[...panel.querySelectorAll(':scope>fieldset')];
   fieldsets[0].dataset.habitGuide='products';
   fieldsets[1].dataset.habitGuide='reactions';
-  const noteLabel=panel.querySelector('label[for="habit-note"]');
   const note=document.querySelector('#habit-note');
-  const reference=panel.querySelector('.priority-note');
-  const noteStep=document.createElement('div');
-  noteStep.className='habit-note-step';
-  noteStep.dataset.habitGuide='note';
-  noteLabel.before(noteStep);
-  noteStep.append(noteLabel,note,reference);
-  steps=[...fieldsets,noteStep];
+  steps=[...fieldsets];
   steps.forEach(step=>step.insertAdjacentHTML('afterbegin','<div class="habit-step-meta"><span class="habit-step-name"></span><span class="habit-step-state"></span></div>'));
   const stepGrid=document.createElement('div');
   stepGrid.className='habit-guide-steps';
@@ -6300,11 +6306,22 @@ window.SIORE_REFERENCE = (()=>{
  }
  const previousRecommendations=getRecommendations;
  getRecommendations=function(){return previousRecommendations().map(p=>({...p,score:p.score+assessmentAdjustment(p)})).sort((a,b)=>b.score-a.score||a.routineOrder-b.routineOrder||b.price-a.price);};
+ function pharmacistScenario(){
+  const has=value=>selectedConcerns.includes(value);
+  const focus=selectedConcerns.find(value=>['트러블','피지','열감홍조','민감','장벽회복','건조','안티에이징','광채톤업'].includes(value));
+  if(['트러블','피지'].includes(focus))return {key:'trouble',label:C('트러블·유수분 밸런스 루틴','Blemish & balance routine','痘痘与水油平衡护理','トラブル・水分油分バランス'),keys:['essenceToner','repairAmpoule','soothingCream'],note:C('진정 중심 데일리 릴리프 단계에 가벼운 수분 크림을 연결한 자문약사 조합 가이드를 반영했습니다.','Reflects the pharmacist-advised sequence of soothing Daily Relief steps followed by lightweight hydration.','参考药师建议，以舒缓型Daily Relief步骤搭配轻盈补水面霜。','鎮静中心のデイリーリリーフに軽い保湿クリームを合わせる薬剤師ガイドを反映しました。')};
+  if(['열감홍조','민감'].includes(focus))return {key:'heat',label:C('열감·홍조 진정 루틴','Heat & redness comfort routine','热感泛红舒缓护理','熱感・赤み鎮静ルーティン'),keys:['bubbleToner','soothingGel','comfortCream'],note:C('마찰을 줄인 수분 준비, 쿨링 젤, 장벽 보습 순서의 자문약사 조합 가이드를 반영했습니다.','Reflects the pharmacist-advised order of low-friction hydration, cooling gel and barrier moisturization.','参考药师建议，依次进行低摩擦补水、清凉凝胶与屏障保湿。','摩擦を抑えた水分準備、クーリングジェル、バリア保湿の薬剤師ガイドを反映しました。')};
+  if(['장벽회복','건조'].includes(focus))return {key:'barrier',label:C('장벽 회복·보호 루틴','Barrier recovery routine','屏障修护护理','バリア回復ルーティン'),keys:['soothingGel','repairAmpoule','richCream'],note:C('열감 진정, 집중 장벽 케어, 보습 보호막 순서의 자문약사 조합 가이드를 반영했습니다.','Reflects the pharmacist-advised sequence of comfort, concentrated barrier care and moisture sealing.','参考药师建议，依次进行舒缓、集中屏障护理与保湿封护。','鎮静、集中バリアケア、保湿保護の薬剤師ガイドを反映しました。')};
+  if(['안티에이징','광채톤업'].includes(focus))return {key:'aging',label:C('항노화·피부 활력 루틴','Slow-aging vitality routine','抗老焕活护理','スローエイジング活力ケア'),keys:['bubbleToner','serum','comfortCream'],note:C('수분·피부결 준비, NMN 집중 케어, 편안한 보습 마무리 순서의 자문약사 조합 가이드를 반영했습니다.','Reflects the pharmacist-advised order of hydration prep, concentrated NMN care and a comfortable moisture finish.','参考药师建议，依次进行补水理肤、NMN集中护理与舒适保湿。','水分・キメ準備、NMN集中ケア、快適な保湿仕上げの薬剤師ガイドを反映しました。')};
+  return null;
+ }
  function recommendationSets(){
-  const ranked=getRecommendations(),core=buildSets(ranked).core3.slice().sort((a,b)=>a.routineOrder-b.routineOrder),premium=[...core];
+  const ranked=getRecommendations(),scenario=pharmacistScenario();
+  const guided=scenario?.keys.map(key=>ranked.find(p=>p.key===key)||window.SIORE_PRODUCTS[key]).filter(Boolean);
+  const core=(guided?.length===3?guided:buildSets(ranked).core3).slice().sort((a,b)=>a.routineOrder-b.routineOrder),premium=[...core];
   for(const group of ['cleanser','treatment']){const p=ranked.find(x=>x.routineGroup===group&&!premium.some(y=>y.key===x.key));if(p)premium.push(p);}
   for(const p of ranked){if(premium.length>=5)break;if(!premium.some(x=>x.key===p.key))premium.push(p);}
-  premium.sort((a,b)=>a.routineOrder-b.routineOrder);return {ranked,core,premium:premium.slice(0,5),one:ranked.filter(p=>premium.some(x=>x.key===p.key)).slice(0,1)};
+  premium.sort((a,b)=>a.routineOrder-b.routineOrder);return {ranked,core,premium:premium.slice(0,5),one:[core.find(p=>p.routineGroup==='treatment')||core[0]],scenario};
  }
  function matchReason(product){
   const concerns=selectedConcerns.filter(c=>product.concerns.includes(c)).map(c=>concernLabel(c).ko);
@@ -6312,21 +6329,32 @@ window.SIORE_REFERENCE = (()=>{
   if(concerns.length)return C(`${concerns.join('·')} 고민을 한 단계 더 집중 관리하기 위해 추가`,'Added for more targeted care of your selected concerns','为进一步集中护理已选困扰而添加','選択した悩みをさらに集中ケアするため追加');
   return C('피부 타입과 사용감에 맞춰 관리 선택의 폭을 넓히기 위해 추가','Added to broaden care options for your skin type and texture preference','根据肤质与质地偏好扩展护理选择','肌タイプと使用感に合わせて選択肢を広げるため追加');
  }
- function productChip(product,extra=false){return `<button type="button" class="rx-product-chip${extra?' is-extra':''}" data-ref-product="${escaped(product.key)}"><small>${termHTML(product.routine)}</small><strong>${escaped(productLabel(product))}</strong></button>`;}
+ function productImage(product){const file=typeof solutionAssets!=='undefined'?solutionAssets[product.key]:'';return file?`product-guide/products/${file}.png`:product.image;}
+ function productAppeal(product){
+  const map={
+   cleansing:C('촉촉한 저자극 세정','Comfort cleansing','温和保湿清洁','うるおい洗浄'),bubbleToner:C('수분·피부결 준비','Hydration prep','补水理肤','水分・キメ準備'),essenceToner:C('민감 피부 수분 진정','Soothing hydration','敏感肌舒缓补水','敏感肌の鎮静保湿'),repairAmpoule:C('집중 진정·장벽 케어','Barrier-focused care','集中舒缓修护','集中鎮静・バリアケア'),serum:C('NMN 집중 탄력 케어','Concentrated NMN care','NMN集中弹力护理','NMN集中ハリケア'),soothingCream:C('가벼운 수분 마무리','Light moisture finish','轻盈补水收尾','軽い保湿仕上げ'),richCream:C('리치한 보습 보호막','Rich moisture seal','丰润保湿封护','濃密な保湿保護'),soothingGel:C('열감 쿨링·진정','Cooling comfort','清凉舒缓','クーリング鎮静'),comfortCream:C('편안한 장벽 보습','Barrier comfort','舒适屏障保湿','快適なバリア保湿')
+  };return map[product.key]||C(product.tag,product.tag,product.tag,product.tag);
+ }
+ function productTile(product,extra=false){const clinical=productClinical(product)[0]||product.usp||'';return `<button type="button" class="rx-product-tile${extra?' is-extra':''}" data-ref-product="${escaped(product.key)}"><span class="rx-product-visual"><img src="${escaped(productImage(product))}" alt="${escaped(productLabel(product))}"></span><small>${termHTML(product.routine)}</small><strong>${escaped(productLabel(product))}</strong><em>${tx(productAppeal(product))}</em>${extra?'<i>+</i>':''}<span class="rx-clinical-mini">${escaped(clinical)}</span></button>`;}
+ function evidenceRows(items){return items.map((p,i)=>{const clinical=productClinical(p)[0]||p.cert?.[0]||'',benefit=p.i18n?.[languageMode]?.benefit||p.benefit;return `<article><b>0${i+1}</b><div><strong>${escaped(productLabel(p))}</strong><p>${escaped(benefit)}</p><small>${escaped(clinical)}</small></div></article>`;}).join('');}
  function assessmentSummary(){return questions.map(q=>`<li><b>${tx(q.title)}</b><span>${tx(answerLabel(q,assessmentAnswers[q.key]))}</span></li>`).join('');}
  function renderResultUpgrade(){
   const sheet=document.querySelector('.solution-sheet');if(!sheet)return;
-  sheet.querySelector('.rx-overview')?.remove();sheet.querySelector('.customer-card-status')?.remove();
-  const {core,premium,one}=recommendationSets(),additions=premium.filter(p=>!core.some(c=>c.key===p.key));
-  const matrix=`<section class="rx-matrix"><header><small>CARE COMPOSITION</small><h3>${tx(C('추천 구성 한눈에 보기','Recommendation structure','推荐结构一览','おすすめ構成一覧'))}</h3></header><div class="rx-matrix-row"><b>${tx(C('코어 3','Core 3','核心3件','コア3'))}</b><div>${core.map(p=>productChip(p)).join('')}</div></div><div class="rx-matrix-row premium"><b>${tx(C('프리미엄 구성','Premium set','进阶组合','プレミアム構成'))}</b><div>${premium.map(p=>productChip(p,additions.some(x=>x.key===p.key))).join('')}</div></div><div class="rx-matrix-row one"><b>1PICK</b><div>${one.map(p=>productChip(p)).join('')}</div></div></section>`;
+  sheet.querySelector('.rx-overview')?.remove();sheet.querySelector('.rx-prescription-head')?.remove();sheet.querySelector('.customer-card-status')?.remove();
+  const {core,premium,one,scenario}=recommendationSets(),additions=premium.filter(p=>!core.some(c=>c.key===p.key));
+  const tierData=[['core',tx(C('코어 3','Core 3','核心3件','コア3')),core],['premium',tx(C('프리미엄','Premium','进阶','プレミアム')),premium],['one','1PICK',one]];
+  const tabs=`<nav class="rx-tier-tabs" aria-label="${tx(C('추천 구성 선택','Select recommendation tier','选择推荐组合','おすすめ構成を選択'))}">${tierData.map(([key,label,items],i)=>`<button type="button" data-rx-tier="${key}" aria-selected="${i===0}"><span>${label}</span><b>${items.length}</b></button>`).join('')}</nav>`;
+  const panels=tierData.map(([key,label,items],i)=>`<section class="rx-tier-panel" data-rx-panel="${key}" ${i?'hidden':''}><div class="rx-products">${items.map(p=>productTile(p,additions.some(x=>x.key===p.key))).join('')}</div><div class="rx-evidence"><header><b>${label}</b><span>${tx(C('제품별 추천 이유 · 근거','Reasons & evidence','产品推荐理由与依据','製品別の理由・根拠'))}</span></header>${evidenceRows(items)}</div></section>`).join('');
+  const matrix=`<section class="rx-matrix">${tabs}${panels}</section>`;
   const additionReasons=additions.map(p=>`<li><button type="button" data-ref-product="${escaped(p.key)}">+ ${escaped(productLabel(p))}</button><span>${tx(matchReason(p))}</span></li>`).join('');
   const textureLabel={light:C('가벼운 제형','Light texture','轻盈质地','軽い使用感'),balanced:C('균형 제형','Balanced texture','均衡质地','バランス質感'),rich:C('보습감 높은 제형','Rich texture','滋润质地','しっとり質感')}[selectedTexture];
   const sensitivityLabel={low:C('민감도 낮음','Low sensitivity','低敏感度','敏感度低'),medium:C('민감도 보통','Medium sensitivity','中等敏感度','敏感度中'),high:C('민감도 높음','High sensitivity','高敏感度','敏感度高')}[selectedSensitivity];
-  const rationale=`<section class="rx-rationale"><header><small>PHARMACIST CONSULTATION LOGIC</small><h3>${tx(C('추천 이유와 추가 근거','Why these products','推荐理由与依据','おすすめ理由と根拠'))}</h3></header><dl><div><dt>${tx(C('우선 고민','Priority concern','优先困扰','最優先の悩み'))}</dt><dd>${selectedConcerns.map(c=>tx(concernLabel(c))).join(' · ')}</dd></div><div><dt>${tx(C('피부 프로필','Skin profile','肌肤档案','肌プロフィール'))}</dt><dd>${selectedSkinTypes.map(s=>translatedValue('skinTypes',s)).join(' · ')} · ${tx(textureLabel)} · ${tx(sensitivityLabel)}</dd></div></dl><details><summary>${tx(C('피부 상태 5문항 응답 보기','View 5-question skin check','查看5项肤况回答','5問の回答を見る'))}</summary><ul class="rx-assessment-summary">${assessmentSummary()}</ul></details><div class="rx-additions"><b>${tx(C('프리미엄 추가 품목과 이유','Why premium items were added','进阶新增产品及原因','プレミアム追加品と理由'))}</b><ul>${additionReasons||`<li><span>${tx(C('코어 구성만으로 현재 상담 목표를 충족합니다.','The core set meets the current consultation goal.','核心组合已满足当前咨询目标。','コア構成で現在の相談目標を満たします。'))}</span></li>`}</ul></div></section>`;
-  const target=sheet.querySelector('.solution-profile');target.insertAdjacentHTML('beforebegin',`<div class="rx-overview">${matrix}${rationale}</div>`);
+  const rationale=`<section class="rx-rationale"><div class="rx-profile-line"><b>${tx(C('피부 고민','Skin concern','肌肤困扰','肌悩み'))}</b><span>${selectedConcerns.map(c=>tx(concernLabel(c))).join(' · ')}</span><b>${tx(C('피부 상태','Skin profile','肌肤状态','肌状態'))}</b><span>${selectedSkinTypes.map(s=>translatedValue('skinTypes',s)).join(' · ')} · ${tx(textureLabel)} · ${tx(sensitivityLabel)}</span></div>${scenario?`<p class="rx-pharmacist-note"><b>${tx(C('자문약사 조합 가이드','Pharmacist set guidance','药师组合指南','薬剤師セットガイド'))}</b><strong>${tx(scenario.label)}</strong><span>${tx(scenario.note)}</span></p>`:''}<div class="rx-additions"><b>${tx(C('프리미엄 추가 품목','Premium additions','进阶新增产品','プレミアム追加品'))}</b><ul>${additionReasons||`<li><span>${tx(C('코어 구성만으로 현재 상담 목표를 충족합니다.','The core set meets the current consultation goal.','核心组合已满足当前咨询目标。','コア構成で現在の相談目標を満たします。'))}</span></li>`}</ul></div><details><summary>${tx(C('피부 상태 5문항 기록','5-question skin record','5项肤况记录','5問の肌状態記録'))}</summary><ul class="rx-assessment-summary">${assessmentSummary()}</ul></details></section>`;
+  const head=`<header class="rx-prescription-head"><div><small>SIORÉ PERSONAL SKIN PRESCRIPTION</small><h2>${tx(C('시오레가 추천하는 내 피부 맞춤 솔루션','My SIORÉ personalized skin solution','SIORÉ为我推荐的肌肤方案','SIORÉが提案する私の肌別ソリューション'))}</h2><p>${tx(C('선택한 피부 상태와 제품 근거, 자문약사 조합 가이드를 함께 반영했습니다.','Built from your skin check, product evidence and pharmacist set guidance.','结合肤况选择、产品依据与药师组合指南。','肌状態、製品根拠、薬剤師セットガイドを反映しました。'))}</p></div><div class="rx-handwriting"><span>Rx.</span><b>for your skin</b><i>SIORÉ</i></div></header>`;
+  const target=sheet.querySelector('.solution-profile');target.insertAdjacentHTML('beforebegin',`${head}<div class="rx-overview">${matrix}${rationale}</div>`);
   sheet.classList.add('prescription-layout');
   const actions=document.querySelector('#step3 .result-actions');
-  if(actions&&!document.querySelector('#save-customer-card'))actions.querySelector('#print-summary').insertAdjacentHTML('beforebegin',`<button type="button" class="btn-primary" id="save-customer-card">${tx(C('고객카드 저장','Save customer card','保存客户卡','顧客カード保存'))}</button>`);
+  if(actions&&!document.querySelector('#save-customer-card'))actions.querySelector('#print-summary').insertAdjacentHTML('beforebegin',`<button type="button" class="btn-primary" id="save-customer-card">${tx(C('상담기록 저장','Save consultation','保存咨询记录','相談記録を保存'))}</button>`);
  }
  const previousPaperRender=paperRender;
  paperRender=function(){previousPaperRender();renderResultUpgrade();};
@@ -6340,7 +6368,7 @@ window.SIORE_REFERENCE = (()=>{
   const next=found?cards.map(x=>x.code===found.code?record:x):[record,...cards];writeCards(next);showSaveStatus(record,Boolean(found));renderRecords();
  }
  function showSaveStatus(record,updated){
-  const sheet=document.querySelector('.solution-sheet');if(!sheet)return;sheet.querySelector('.customer-card-status')?.remove();sheet.querySelector('.solution-heading').insertAdjacentHTML('afterend',`<p class="customer-card-status" role="status"><b>${updated?tx(C('기존 고객카드 업데이트','Customer card updated','客户卡已更新','顧客カード更新')):tx(C('고객카드 저장 완료','Customer card saved','客户卡已保存','顧客カード保存完了'))}</b><span>${escaped(record.code)} · ${escaped(record.name)}</span></p>`);
+  const sheet=document.querySelector('.solution-sheet');if(!sheet)return;sheet.querySelector('.customer-card-status')?.remove();(sheet.querySelector('.rx-prescription-head')||sheet.querySelector('.solution-heading')).insertAdjacentHTML('afterend',`<p class="customer-card-status" role="status"><b>${updated?tx(C('기존 상담기록 업데이트','Consultation updated','咨询记录已更新','相談記録を更新')):tx(C('상담기록 저장 완료','Consultation saved','咨询记录已保存','相談記録を保存'))}</b><span>${escaped(record.code)} · ${escaped(record.name)}</span></p>`);
  }
  let recordsDialog;
  function renderRecords(filter=''){
@@ -6350,27 +6378,29 @@ window.SIORE_REFERENCE = (()=>{
  }
  function openRecords(){renderRecords();recordsDialog.showModal();recordsDialog.querySelector('input').focus();}
  function initRecords(){
-  recordsDialog=document.createElement('dialog');recordsDialog.id='customer-records-dialog';recordsDialog.className='customer-records-dialog';recordsDialog.innerHTML=`<header><div><small>SIORÉ CUSTOMER CARDS</small><h2>${tx(C('상담 저장 기록','Saved consultations','已保存咨询记录','保存した相談記録'))}</h2></div><button type="button" data-records-close>${tx(C('닫기 ×','Close ×','关闭 ×','閉じる ×'))}</button></header><div class="records-toolbar"><label>${tx(C('이름 또는 고유코드 검색','Search name or code','搜索姓名或代码','氏名・コード検索'))}<input type="search" autocomplete="off"></label><span class="records-count"></span></div><div class="records-list"></div>`;document.body.append(recordsDialog);
+  recordsDialog=document.createElement('dialog');recordsDialog.id='customer-records-dialog';recordsDialog.className='customer-records-dialog';recordsDialog.innerHTML=`<header><div><small>SIORÉ CUSTOMER CARDS</small><h2>${tx(C('상담 기록','Consultation records','咨询记录','相談記録'))}</h2></div><button type="button" data-records-close>${tx(C('닫기 ×','Close ×','关闭 ×','閉じる ×'))}</button></header><div class="records-toolbar"><label>${tx(C('이름 또는 고유코드 검색','Search name or code','搜索姓名或代码','氏名・コード検索'))}<input type="search" autocomplete="off"></label><span class="records-count"></span></div><div class="records-list"></div>`;document.body.append(recordsDialog);
   recordsDialog.querySelector('[data-records-close]').onclick=()=>recordsDialog.close();recordsDialog.querySelector('input').addEventListener('input',e=>renderRecords(e.target.value));recordsDialog.addEventListener('click',e=>{const b=e.target.closest('[data-record-delete]');if(!b)return;writeCards(readCards().filter(x=>x.code!==b.dataset.recordDelete));renderRecords(recordsDialog.querySelector('input').value);});
-  const lobbyButton=document.createElement('button');lobbyButton.type='button';lobbyButton.className='records-open lobby-records-open';lobbyButton.innerHTML=tx(C('저장 기록','Saved records','保存记录','保存記録'));document.querySelector('.compact-actions,.lobby-lead>div:first-child')?.append(lobbyButton);
-  const toolbarButton=document.createElement('button');toolbarButton.type='button';toolbarButton.className='records-open toolbar-records-open';toolbarButton.innerHTML=tx(C('저장 기록','Saved records','保存记录','保存記録'));document.querySelector('.focus-toolbar .focus-close')?.before(toolbarButton);
+  const lobbyButton=document.createElement('button');lobbyButton.type='button';lobbyButton.className='records-open lobby-records-open';lobbyButton.innerHTML=tx(C('상담 기록','Consultation records','咨询记录','相談記録'));document.querySelector('.compact-actions,.lobby-lead>div:first-child')?.append(lobbyButton);
+  const toolbarButton=document.createElement('button');toolbarButton.type='button';toolbarButton.className='records-open toolbar-records-open';toolbarButton.innerHTML=tx(C('상담 기록','Consultation records','咨询记录','相談記録'));document.querySelector('.focus-toolbar .focus-close')?.before(toolbarButton);
   document.querySelectorAll('.records-open').forEach(b=>b.onclick=openRecords);renderRecords();
  }
  function initCustomerName(){const bar=document.querySelector('#step1 .profile-bar');if(!bar)return;bar.insertAdjacentHTML('beforeend',`<label class="customer-name-field"><span>${tx(C('고객명·이니셜','Name / initials','姓名／缩写','氏名・イニシャル'))}</span><input id="customer-name" type="text" maxlength="30" autocomplete="off" placeholder="${languageMode==='ko'?'저장 시 같은 이름은 한 카드로 관리':''}"></label>`);}
  document.addEventListener('click',event=>{
   const answer=event.target.closest('[data-skin-answer]');if(answer){const [key,value]=answer.dataset.skinAnswer.split(':');assessmentAnswers[key]=value;renderAssessment();setTimeout(syncNavigator,0);}
+  const tier=event.target.closest('[data-rx-tier]');if(tier){const sheet=tier.closest('.solution-sheet');sheet?.querySelectorAll('[data-rx-tier]').forEach(b=>b.setAttribute('aria-selected',String(b===tier)));sheet?.querySelectorAll('[data-rx-panel]').forEach(panel=>panel.hidden=panel.dataset.rxPanel!==tier.dataset.rxTier);}
   if(event.target.closest('#save-customer-card'))saveRecord();
   if(event.target.closest('#btn-to-step3')&&!(assessmentDone()&&habitsDone())){event.preventDefault();event.stopImmediatePropagation();const target=flowItems().find(el=>!flowDone(el));target?.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});target?.classList.add('consult-checkpoint-active');target?.querySelector('button')?.focus({preventScroll:true});}
   if(event.target.closest('[data-concern],[data-type],[data-texture],[data-sensitivity],[data-habit],#btn-to-step2,#btn-to-step3,.btn-ghost'))setTimeout(syncNavigator,0);
  },true);
  document.addEventListener('DOMContentLoaded',()=>{
   initCustomerName();const secondary=document.querySelector('#step2 .intake-grid.secondary');if(secondary){const section=document.createElement('section');section.id='skin-assessment';section.className='skin-assessment';secondary.before(section);renderAssessment();}
+  document.querySelector('label[for="habit-note"]')?.classList.add('habit-note-hidden');document.querySelector('#habit-note')?.classList.add('habit-note-hidden');document.querySelector('.habit-panel .priority-note')?.classList.add('habit-note-hidden');
   initRecords();const print=document.querySelector('#print-summary');if(print)print.innerHTML=tx(C('인쇄·PDF','Print / PDF','打印／PDF','印刷・PDF'));setTimeout(syncNavigator,0);
  });
  const previousResetUpgrade=resetAll;
  resetAll=function(){Object.keys(assessmentAnswers).forEach(k=>delete assessmentAnswers[k]);previousResetUpgrade();const name=document.querySelector('#customer-name');if(name)name.value='';renderAssessment();setTimeout(syncNavigator,0);};
  const previousLanguageUpgrade=setLanguage;
- setLanguage=function(lang){previousLanguageUpgrade(lang);renderAssessment();document.querySelectorAll('.records-open').forEach(b=>b.innerHTML=tx(C('저장 기록','Saved records','保存记录','保存記録')));renderRecords(document.querySelector('#customer-records-dialog input')?.value||'');setTimeout(syncNavigator,0);};
+ setLanguage=function(lang){previousLanguageUpgrade(lang);renderAssessment();document.querySelectorAll('.records-open').forEach(b=>b.innerHTML=tx(C('상담 기록','Consultation records','咨询记录','相談記録')));renderRecords(document.querySelector('#customer-records-dialog input')?.value||'');setTimeout(syncNavigator,0);};
  const previousGoUpgrade=goToStep;
  goToStep=function(num){previousGoUpgrade(num);setTimeout(syncNavigator,0);};
  const previousShowUpgrade=showResults;
