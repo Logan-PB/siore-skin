@@ -5699,19 +5699,27 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 /* Five compact skin-state questions, inspired by common oil/moisture, sensitivity,
    pigmentation and firmness consultation dimensions. */
-.skin-assessment{position:relative;margin:9px 0;padding:11px;border:1px solid #cbdde4;border-radius:8px;background:#fff}
-.skin-assessment>header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:8px}
-.skin-assessment>header small{display:block;font-size:8px;letter-spacing:.14em;color:#708794}
-.skin-assessment>header h3{font-size:15px;margin:3px 0 0;color:#244a5b}
-.skin-assessment>header p{max-width:560px;margin:0;color:#6f838d;font-size:9px;line-height:1.45;text-align:right}
-.skin-assessment-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
-.skin-assessment-question{position:relative;min-width:0;margin:0;padding:8px;border:1px solid #d9e5ea;border-radius:7px;background:#fbfcfd}
-.skin-assessment-question legend{display:flex;align-items:flex-start;gap:6px;width:100%;min-height:35px;padding:0;color:#274958;font-size:10px;font-weight:700;line-height:1.35}
-.skin-assessment-question legend b{flex:0 0 18px;width:18px;height:18px;display:grid;place-items:center;border-radius:50%;background:#5d8899;color:#fff;font-size:8px}
-.skin-assessment-question>div{display:grid;gap:3px}
-.skin-assessment-question button{min-height:27px;padding:3px 5px;border:1px solid #d7e3e7;border-radius:4px;background:#fff;color:#405e6c;font-size:9px;line-height:1.25;cursor:pointer}
-.skin-assessment-question button[aria-pressed=true]{border-color:#3e829b;background:#e8f4f7;color:#1f5366;box-shadow:inset 3px 0 #3e829b;font-weight:700}
-.skin-assessment-note{margin:6px 0 0!important;color:#83939a!important;font-size:8px!important}
+.skin-assessment{position:relative;margin:10px 0;padding:16px 18px 14px;border:1px solid #bdd5df;border-radius:14px;background:linear-gradient(145deg,#fff 0%,#f7fbfc 100%);box-shadow:0 12px 30px rgba(37,91,111,.08)}
+.skin-assessment>header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+.skin-assessment>header small{display:block;font-size:9px;letter-spacing:.14em;color:#588093;font-weight:800}
+.skin-assessment>header h3{font-size:18px;margin:3px 0 0;color:#183f51}
+.skin-assessment>header p{margin:0;color:#6f838d;font-size:10px;line-height:1.45;text-align:right}
+.skin-assessment-progress{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:0 0 13px}
+.skin-assessment-progress button{position:relative;height:30px;border:0;border-radius:999px;background:#e7eff2;color:#6b818a;font-size:10px;font-weight:800;cursor:pointer;transition:.2s ease}
+.skin-assessment-progress button::after{content:"";position:absolute;left:50%;bottom:-5px;width:0;height:2px;border-radius:2px;background:#d98573;transform:translateX(-50%);transition:.2s ease}
+.skin-assessment-progress button[data-state="done"]{background:#dcecef;color:#245c70}
+.skin-assessment-progress button[aria-current="step"]{background:#315f72;color:#fff;box-shadow:0 5px 14px rgba(49,95,114,.24)}
+.skin-assessment-progress button[aria-current="step"]::after{width:54%}
+.skin-assessment-grid{display:block}
+.skin-assessment-question{position:relative;min-width:0;margin:0;padding:17px 18px 18px;border:2px solid #7ba8b9;border-radius:13px;background:#fff;box-shadow:0 0 0 5px rgba(98,157,180,.09)}
+.skin-assessment-question legend{display:flex;align-items:center;gap:10px;width:100%;padding:0;color:#173f50;font-size:17px;font-weight:800;line-height:1.35}
+.skin-assessment-question legend b{flex:0 0 28px;width:28px;height:28px;display:grid;place-items:center;border-radius:50%;background:#315f72;color:#fff;font-size:12px}
+.skin-assessment-question>p{margin:7px 0 12px 38px;color:#748993;font-size:10px}
+.skin-assessment-question>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.skin-assessment-question button{min-height:48px;padding:8px 10px;border:1px solid #cbdde4;border-radius:10px;background:#fff;color:#355562;font-size:13px;font-weight:700;line-height:1.25;cursor:pointer;transition:.18s ease}
+.skin-assessment-question button:hover,.skin-assessment-question button:focus-visible{border-color:#4e8ba2;background:#f0f8fa;transform:translateY(-1px);outline:none}
+.skin-assessment-question button[aria-pressed=true]{border-color:#315f72;background:#315f72;color:#fff;box-shadow:0 6px 15px rgba(49,95,114,.22);font-weight:800}
+.skin-assessment-note{margin:9px 0 0!important;color:#83939a!important;font-size:8px!important;text-align:center}
 
 /* Prescription-style results with an always-visible 3/5/1 composition matrix. */
 .focus-dialog .solution-sheet.prescription-layout{position:relative;border:1px solid #9fb5bf;border-top:5px solid #254f61;border-radius:2px;background:#fff;box-shadow:0 14px 38px #24485816;padding:22px}
@@ -5744,8 +5752,8 @@ document.addEventListener('DOMContentLoaded',()=>{
 .customer-records-dialog>header{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid #d5e1e6;background:#fff}.customer-records-dialog>header small{font-size:8px;letter-spacing:.13em;color:#78909a}.customer-records-dialog h2{font-size:20px;margin:3px 0 0}.customer-records-dialog>header button{border:0;background:transparent;color:#466978;cursor:pointer}
 .records-toolbar{display:flex;align-items:end;justify-content:space-between;gap:12px;padding:12px 18px;background:#f3f8fa}.records-toolbar label{font-size:9px;color:#6c838e;flex:1}.records-toolbar input{display:block;width:100%;margin-top:5px;padding:9px;border:1px solid #c7d9e1;border-radius:4px}.records-count{font-size:11px;font-weight:700;color:#426d80}
 .records-list{display:grid;gap:8px;padding:14px 18px 20px}.customer-record{position:relative;border:1px solid #d4e0e5;padding:12px;background:#fff}.customer-record>header{display:flex;justify-content:space-between;gap:10px}.customer-record>header strong{display:block;font-size:14px}.customer-record code{font-size:9px;color:#6c8692}.customer-record time{font-size:9px;color:#84969e}.customer-record-summary{display:flex;justify-content:space-between;gap:12px;margin:8px 80px 0 0;font-size:10px}.customer-record-summary b{color:#315f72}.customer-record details{margin-top:9px;padding-top:7px;border-top:1px solid #e0e8eb;font-size:9px}.customer-record details dl{display:grid;gap:4px}.customer-record details dl>div{display:grid;grid-template-columns:75px 1fr}.customer-record dd{margin:0}.record-delete{position:absolute;right:12px;bottom:9px;border:1px solid #e2c7c4;background:#fff;color:#a25750;padding:5px 8px;font-size:9px;cursor:pointer}.records-empty{text-align:center;padding:50px;color:#748993}
-@media(max-width:900px){.skin-assessment-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.rx-overview{grid-template-columns:1fr}.rx-matrix-row>div{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:700px){.skin-assessment{padding:7px}.skin-assessment>header{display:block}.skin-assessment>header p{display:none}.skin-assessment-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.skin-assessment-question legend{font-size:8px;min-height:29px}.skin-assessment-question button{font-size:8px;min-height:24px}.rx-overview{display:block}.rx-rationale{margin-top:7px}.rx-matrix-row{grid-template-columns:68px 1fr}.rx-matrix-row>div{grid-template-columns:repeat(3,minmax(0,1fr))}.customer-name-field{min-width:0;border:0;padding:4px 0}.customer-name-field input{width:120px}.customer-record-summary{display:grid}.consult-checkpoint-active::after{font-size:6px;top:-7px}}
+@media(max-width:900px){.rx-overview{grid-template-columns:1fr}.rx-matrix-row>div{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.skin-assessment{padding:12px}.skin-assessment>header{display:block}.skin-assessment>header p{margin-top:4px;text-align:left}.skin-assessment-progress{gap:4px}.skin-assessment-progress button{height:27px}.skin-assessment-question{padding:14px 12px}.skin-assessment-question legend{font-size:15px}.skin-assessment-question>p{margin-left:38px}.skin-assessment-question>div{grid-template-columns:1fr}.skin-assessment-question button{font-size:12px;min-height:42px}.rx-overview{display:block}.rx-rationale{margin-top:7px}.rx-matrix-row{grid-template-columns:68px 1fr}.rx-matrix-row>div{grid-template-columns:repeat(3,minmax(0,1fr))}.customer-name-field{min-width:0;border:0;padding:4px 0}.customer-name-field input{width:120px}.customer-record-summary{display:grid}.consult-checkpoint-active::after{font-size:6px;top:-7px}}
 @media(prefers-reduced-motion:reduce){.consult-checkpoint-active,.consult-checkpoint-active::before,.consult-checkpoint-active::after{animation:none!important}}
 @media print{.care-tier-options,.care-tier-status,.records-open,#save-customer-card,.customer-card-status{display:none!important}.focus-dialog .solution-sheet.prescription-layout{box-shadow:none;border:1px solid #718793}}
 
@@ -6247,14 +6255,15 @@ window.SIORE_REFERENCE = (()=>{
 </script><script>(()=>{
  const STORAGE_KEY='siore-consultation-cards-v1';
  const assessmentAnswers={};
+ let assessmentIndex=0;
  const C=(ko,en,zh,ja)=>copy4(ko,en,zh,ja);
  const tx=value=>bilingual(value);
  const questions=[
-  {key:'balance',title:C('세안 20분 뒤 피부는 어떤가요?','How does skin feel 20 minutes after cleansing?','洁面20分钟后肌肤感觉如何？','洗顔20分後の肌状態は？'),options:[['dry',C('당기고 건조함','Tight and dry','紧绷干燥','つっぱり・乾燥')],['balanced',C('편안함','Comfortable','舒适','快適')],['oily',C('금방 번들거림','Quickly shiny','很快出油','すぐにテカる')]]},
-  {key:'reactivity',title:C('새 제품이나 날씨 변화에 반응하나요?','Does skin react to new products or weather?','更换产品或天气变化时会反应吗？','新製品や天候変化に反応しますか？'),options:[['high',C('자주 따갑고 붉어짐','Often stings or reddens','经常刺痛泛红','よく刺激・赤み')],['medium',C('가끔 반응함','Sometimes reacts','偶尔反应','時々反応')],['low',C('거의 편안함','Rarely reacts','很少不适','ほぼ快適')]]},
-  {key:'tone',title:C('햇빛·트러블 뒤 흔적은 어떤가요?','What happens after sun or blemishes?','日晒或痘痘后会怎样？','日差し・肌荒れ後は？'),options:[['pigment',C('색소 흔적이 오래감','Marks linger','色素印记持久','色素跡が残る')],['dull',C('칙칙함이 남음','Dullness remains','暗沉残留','くすみが残る')],['clear',C('금방 회복됨','Recovers quickly','很快恢复','早く戻る')]]},
-  {key:'firmness',title:C('탄력·주름 변화가 느껴지나요?','Do you notice firmness or line changes?','是否感觉弹力或细纹变化？','ハリ・シワの変化は？'),options:[['high',C('뚜렷하게 고민','Clear concern','明显困扰','はっきり気になる')],['medium',C('조금 신경 쓰임','Some concern','有些在意','少し気になる')],['low',C('현재는 적음','Minimal now','目前较少','今は少ない')]]},
-  {key:'zone',title:C('오후 피부 상태는 어떤가요?','How does skin feel in the afternoon?','下午肌肤状态如何？','午後の肌状態は？'),options:[['combination',C('T존 유분·볼 건조','Oily T-zone, dry cheeks','T区油、两颊干','Tゾーン脂・頬乾燥')],['dry',C('전체적으로 건조','Dry overall','整体干燥','全体に乾燥')],['oily',C('전체적으로 유분','Oily overall','整体出油','全体に皮脂')]]}
+  {key:'balance',title:C('세안 후 피부 느낌은?','How does skin feel after cleansing?','洁面后肌肤感觉如何？','洗顔後の肌状態は？'),options:[['dry',C('당겨요','Feels tight','紧绷','つっぱる')],['balanced',C('편안해요','Feels comfortable','舒适','快適')],['oily',C('금방 번들거려요','Gets shiny quickly','很快出油','すぐテカる')]]},
+  {key:'reactivity',title:C('피부가 쉽게 예민해지나요?','Does skin get sensitive easily?','肌肤容易敏感吗？','肌は敏感になりやすい？'),options:[['high',C('자주 그래요','Often','经常','よくある')],['medium',C('가끔 그래요','Sometimes','偶尔','時々')],['low',C('거의 안 그래요','Rarely','很少','ほとんどない')]]},
+  {key:'tone',title:C('자국이나 칙칙함이 오래가나요?','Do marks or dullness linger?','痘印或暗沉会持续吗？','跡やくすみが残りますか？'),options:[['pigment',C('자국이 오래가요','Marks linger','痘印持久','跡が残る')],['dull',C('칙칙해져요','Looks dull','容易暗沉','くすみやすい')],['clear',C('금방 돌아와요','Recovers quickly','很快恢复','すぐ戻る')]]},
+  {key:'firmness',title:C('탄력이나 주름이 신경 쓰이나요?','Concerned about firmness or lines?','在意弹力或细纹吗？','ハリやシワが気になる？'),options:[['high',C('많이 신경 써요','A lot','非常在意','かなり気になる')],['medium',C('조금 신경 써요','A little','有一点','少し気になる')],['low',C('아직 괜찮아요','Not yet','目前还好','まだ大丈夫')]]},
+  {key:'zone',title:C('오후에는 피부가 어떤가요?','How is skin in the afternoon?','下午肌肤如何？','午後の肌状態は？'),options:[['combination',C('코만 번들거려요','Only T-zone is shiny','只有T区出油','Tゾーンだけテカる')],['dry',C('전체가 건조해요','Dry all over','整体干燥','全体が乾燥')],['oily',C('전체가 번들거려요','Shiny all over','整体出油','全体がテカる')]]}
  ];
  PAGE_I18N.step2Desc=C('기본 피부 상태와 5개 빠른 문항, 제형·민감도·현재 사용 습관을 순서대로 확인합니다.','Review your skin type, five quick questions, texture, sensitivity and current routine in order.','依次确认基础肤质、5项快速问题、质地、敏感度与当前护理习惯。','基本の肌状態、5つの簡易質問、使用感、敏感度、現在の習慣を順に確認します。');
  const answerLabel=(q,value)=>q.options.find(x=>x[0]===value)?.[1];
@@ -6265,7 +6274,8 @@ window.SIORE_REFERENCE = (()=>{
  const formatDate=value=>new Intl.DateTimeFormat(languageMode==='ko'?'ko-KR':'en-US',{dateStyle:'medium',timeStyle:'short'}).format(new Date(value));
  function renderAssessment(){
   const host=document.querySelector('#skin-assessment');if(!host)return;
-  host.innerHTML=`<header><div><small>SKIN CONDITION CHECK · 5</small><h3>${tx(C('피부 상태 빠른 체크','Quick skin condition check','肌肤状态快速检查','肌状態クイックチェック'))}</h3></div><p>${tx(C('유·수분, 민감, 색소, 탄력 관점을 참고한 상담 문항입니다.','Consultation prompts covering oil/moisture, sensitivity, pigmentation and firmness.','参考油水平衡、敏感、色素与弹力维度的咨询问题。','油水分・敏感・色素・ハリの観点を参考にした質問です。'))}</p></header><div class="skin-assessment-grid">${questions.map((q,i)=>`<fieldset class="skin-assessment-question" data-assessment-question="${q.key}"><legend><b>${i+1}</b><span>${tx(q.title)}</span></legend><div>${q.options.map(([value,label])=>`<button type="button" data-skin-answer="${q.key}:${value}" aria-pressed="${assessmentAnswers[q.key]===value}">${tx(label)}</button>`).join('')}</div></fieldset>`).join('')}</div><p class="skin-assessment-note">${tx(C('간단한 화장품 상담 체크이며 의료 진단 또는 공식 바우만 피부 유형 검사가 아닙니다.','A brief skincare consultation check; not a medical diagnosis or an official Baumann Skin Type test.','这是简要护肤咨询检查，并非医疗诊断或正式Baumann肤质测试。','簡易的な化粧品相談チェックで、医療診断や正式なBaumann肌タイプ検査ではありません。'))}</p>`;
+  const q=questions[assessmentIndex];
+  host.innerHTML=`<header><div><small>QUICK SKIN CHECK · ${assessmentIndex+1}/5</small><h3>${tx(C('빠르게 고르는 피부 체크','Quick skin check','快速肤况选择','かんたん肌チェック'))}</h3></div><p>${tx(C('생각하지 말고 가장 가까운 답 하나를 눌러주세요.','Choose the answer that feels closest.','请选择最接近的一项。','最も近い答えを選んでください。'))}</p></header><nav class="skin-assessment-progress" aria-label="${tx(C('피부 질문 진행','Question progress','问题进度','質問の進捗'))}">${questions.map((item,i)=>`<button type="button" data-assessment-nav="${i}" data-state="${assessmentAnswers[item.key]?'done':'todo'}" aria-current="${i===assessmentIndex?'step':'false'}" aria-label="${i+1}${tx(C('번 질문',' question','题','番'))}">${assessmentAnswers[item.key]?'✓':i+1}</button>`).join('')}</nav><div class="skin-assessment-grid"><fieldset class="skin-assessment-question" data-assessment-question="${q.key}"><legend><b>${assessmentIndex+1}</b><span>${tx(q.title)}</span></legend><p>${tx(C('가장 가까운 답 하나를 선택하세요.','Choose one answer.','请选择一项。','1つ選んでください。'))}</p><div>${q.options.map(([value,label])=>`<button type="button" data-skin-answer="${q.key}:${value}" aria-pressed="${assessmentAnswers[q.key]===value}">${tx(label)}</button>`).join('')}</div></fieldset></div><p class="skin-assessment-note">${tx(C('간단한 화장품 상담 체크이며 의료 진단이 아닙니다.','A brief skincare consultation check, not a medical diagnosis.','这是简要护肤咨询，并非医疗诊断。','簡易的な化粧品相談で、医療診断ではありません。'))}</p>`;
  }
  function assessmentDone(){return questions.every(q=>assessmentAnswers[q.key]);}
  function habitsDone(){return habits.products.size>0&&habits.reactions.size>0;}
@@ -6386,7 +6396,8 @@ window.SIORE_REFERENCE = (()=>{
  }
  function initCustomerName(){const bar=document.querySelector('#step1 .profile-bar');if(!bar)return;bar.insertAdjacentHTML('beforeend',`<label class="customer-name-field"><span>${tx(C('고객명·이니셜','Name / initials','姓名／缩写','氏名・イニシャル'))}</span><input id="customer-name" type="text" maxlength="30" autocomplete="off" placeholder="${languageMode==='ko'?'저장 시 같은 이름은 한 카드로 관리':''}"></label>`);}
  document.addEventListener('click',event=>{
-  const answer=event.target.closest('[data-skin-answer]');if(answer){const [key,value]=answer.dataset.skinAnswer.split(':');assessmentAnswers[key]=value;renderAssessment();setTimeout(syncNavigator,0);}
+  const nav=event.target.closest('[data-assessment-nav]');if(nav){assessmentIndex=Number(nav.dataset.assessmentNav);renderAssessment();setTimeout(()=>document.querySelector('.skin-assessment-question button')?.focus(),0);}
+  const answer=event.target.closest('[data-skin-answer]');if(answer){const [key,value]=answer.dataset.skinAnswer.split(':');assessmentAnswers[key]=value;const current=questions.findIndex(q=>q.key===key);assessmentIndex=Math.min(current+1,questions.length-1);renderAssessment();setTimeout(()=>{syncNavigator();document.querySelector('.skin-assessment-question button')?.focus();},120);}
   const tier=event.target.closest('[data-rx-tier]');if(tier){const sheet=tier.closest('.solution-sheet');sheet?.querySelectorAll('[data-rx-tier]').forEach(b=>b.setAttribute('aria-selected',String(b===tier)));sheet?.querySelectorAll('[data-rx-panel]').forEach(panel=>panel.hidden=panel.dataset.rxPanel!==tier.dataset.rxTier);}
   if(event.target.closest('#save-customer-card'))saveRecord();
   if(event.target.closest('#btn-to-step3')&&!(assessmentDone()&&habitsDone())){event.preventDefault();event.stopImmediatePropagation();const target=flowItems().find(el=>!flowDone(el));target?.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});target?.classList.add('consult-checkpoint-active');target?.querySelector('button')?.focus({preventScroll:true});}
@@ -6398,7 +6409,7 @@ window.SIORE_REFERENCE = (()=>{
   initRecords();const print=document.querySelector('#print-summary');if(print)print.innerHTML=tx(C('인쇄·PDF','Print / PDF','打印／PDF','印刷・PDF'));setTimeout(syncNavigator,0);
  });
  const previousResetUpgrade=resetAll;
- resetAll=function(){Object.keys(assessmentAnswers).forEach(k=>delete assessmentAnswers[k]);previousResetUpgrade();const name=document.querySelector('#customer-name');if(name)name.value='';renderAssessment();setTimeout(syncNavigator,0);};
+ resetAll=function(){Object.keys(assessmentAnswers).forEach(k=>delete assessmentAnswers[k]);assessmentIndex=0;previousResetUpgrade();const name=document.querySelector('#customer-name');if(name)name.value='';renderAssessment();setTimeout(syncNavigator,0);};
  const previousLanguageUpgrade=setLanguage;
  setLanguage=function(lang){previousLanguageUpgrade(lang);renderAssessment();document.querySelectorAll('.records-open').forEach(b=>b.innerHTML=tx(C('상담 기록','Consultation records','咨询记录','相談記録')));renderRecords(document.querySelector('#customer-records-dialog input')?.value||'');setTimeout(syncNavigator,0);};
  const previousGoUpgrade=goToStep;
