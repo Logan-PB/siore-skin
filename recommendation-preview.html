@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SIORÉ 비주얼 업그레이드 시안</title>
+  <style>
+    @font-face{font-family:Pretendard;src:url("assets/clinical-popup/assets/Pretendard-Regular.ttf")}
+    @font-face{font-family:Pretendard;src:url("assets/clinical-popup/assets/Pretendard-Bold.ttf");font-weight:700}
+    :root{--ink:#172e38;--rose:#ca806e;--pink:#f36b92;--paper:#f7f3ec;--line:#d9d1c7;--silver:#e8ebeb;--blue:#6b9aaa}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#e9e7e2;color:var(--ink);font-family:Pretendard,Arial,sans-serif}
+    button{font:inherit}.shell{max-width:1500px;margin:auto;background:#fff;min-height:100vh;box-shadow:0 18px 70px #32302c22}
+    .top{height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 42px;border-bottom:1px solid #e7e4df;position:sticky;top:0;background:#ffffffed;backdrop-filter:blur(16px);z-index:20}
+    .logo{font-size:27px;font-weight:700;letter-spacing:.28em;color:#111}.logo em{font-style:normal;color:var(--rose)}
+    .tabs{display:flex;gap:8px}.tab{border:1px solid #ddd5cc;background:#fff;color:#544f49;border-radius:99px;padding:10px 16px;cursor:pointer}.tab.active{background:#183a46;color:#fff;border-color:#183a46}
+    .note{font-size:12px;color:#7a7772}.stage{display:none;min-height:calc(100vh - 74px)}.stage.active{display:block}
+    .eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--rose)}h1,h2,p{margin-top:0}
+    .hero{display:grid;grid-template-columns:43% 57%;min-height:calc(100vh - 74px);overflow:hidden}
+    .hero-copy{padding:8vh 5vw 5vh;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+    .consult-label{display:flex;align-items:center;gap:11px;width:max-content;margin-bottom:18px;color:#c87867;font-size:17px;font-weight:800;letter-spacing:.05em}.consult-label img{width:48px;height:48px;border-radius:50%;object-fit:cover;object-position:50% 58%;border:2px solid #e5a294;background:#eef1f1}
+    .hero h1{font-size:clamp(46px,4.4vw,70px);line-height:1.02;letter-spacing:-.06em;margin:28px 0}.hero h1 span{color:var(--rose)}.keep{white-space:nowrap}
+    .lead{font-size:19px;line-height:1.7;max-width:570px;color:#39505a}.cta{margin-top:25px;border:0;border-radius:999px;background:#111;color:#fff;padding:17px 25px;font-weight:700;width:max-content;box-shadow:0 14px 36px #1113}
+    .trust{display:flex;gap:20px;margin-top:35px;padding-top:25px;border-top:1px solid #ded8d0}.trust b{display:block;font-size:18px}.trust span{font-size:12px;color:#70818a}
+    .lab{position:relative;min-height:660px;background:radial-gradient(circle at 54% 40%,#fff 0 9%,#edf0ef 27%,#bfc5c5 54%,#818988 100%);overflow:hidden}
+    .lab:before{content:"";position:absolute;width:510px;height:510px;border:12px solid #fff9;border-radius:50%;left:50%;top:45%;transform:translate(-50%,-50%);box-shadow:0 0 50px #fff, inset 0 0 35px #fff}
+    .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:screen;opacity:.24;filter:saturate(.3)}
+    .orbit-core{position:absolute;left:50%;top:45%;width:245px;height:245px;transform:translate(-50%,-50%);border-radius:50%;overflow:hidden;border:8px solid #ffffffcc;box-shadow:0 20px 50px #34505b45;z-index:2}.orbit-core img{width:100%;height:100%;object-fit:cover;object-position:50% 44%}
+    .orbit-core:after{content:"피부 고민에서 시작된 성분 설계";position:absolute;left:12px;right:12px;bottom:12px;padding:9px 8px;border-radius:999px;background:#183a46de;color:#fff;text-align:center;font-size:11px}
+    .ingredient-node{position:absolute;z-index:4;width:94px;text-align:center;animation:nodeFloat 4.8s ease-in-out infinite}.ingredient-node img{width:66px;height:66px;object-fit:cover;border:4px solid #fff;border-radius:50%;box-shadow:0 8px 18px #27475130}.ingredient-node b{display:block;margin-top:4px;font-size:10px;color:#264b58}.n1{top:14%;left:42%}.n2{top:29%;right:8%;animation-delay:-1s}.n3{bottom:13%;right:15%;animation-delay:-2s}.n4{bottom:13%;left:10%;animation-delay:-3s}.n5{top:30%;left:7%;animation-delay:-4s}@keyframes nodeFloat{50%{transform:translateY(-9px)}}
+    .hero-single-product{display:none}
+    .products{position:absolute;left:12%;right:9%;bottom:4%;height:72%;display:flex;align-items:flex-end;justify-content:center;gap:1.3vw;filter:drop-shadow(0 24px 20px #18323d44)}
+    .products img{object-fit:contain;max-width:20%;max-height:82%;mix-blend-mode:multiply;animation:float 5s ease-in-out infinite}.products img:nth-child(2){max-height:96%;animation-delay:-1.5s}.products img:nth-child(3){animation-delay:-2.8s}.products img:nth-child(4){max-height:87%;animation-delay:-3.8s}
+    @keyframes float{50%{transform:translateY(-12px)}}.lab-caption{position:absolute;top:42px;right:42px;text-align:right;color:#36505a}.lab-caption b{font-size:24px;display:block}.lab-caption span{font-size:12px;letter-spacing:.14em}
+    .pharma-chip{position:absolute;bottom:28px;left:30px;background:#fffde;border-radius:18px;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 12px 40px #18323d24}.pharma-chip img{width:72px;height:52px;object-fit:cover;object-position:center 60%;border-radius:11px}.pharma-chip b{display:block;font-size:13px}.pharma-chip span{font-size:11px;color:#6f7c80}
+    .popup-wrap{min-height:calc(100vh - 74px);padding:42px;background:linear-gradient(135deg,#e5e9e9,#f7efec);display:grid;place-items:center}
+    .popup{width:min(1180px,100%);min-height:620px;background:#fff;border-radius:26px;box-shadow:0 35px 80px #18323d38;overflow:hidden;display:grid;grid-template-columns:48% 52%;position:relative}
+    .visual{background:linear-gradient(155deg,#e7e8e7,#f7f4ef);position:relative;overflow:hidden;display:grid;place-items:center}
+    .visual video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.48;filter:saturate(.55);mix-blend-mode:multiply}
+    .visual:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at center,transparent,#e4dfd6aa)}
+    .visual>img{height:74%;max-width:55%;object-fit:contain;mix-blend-mode:multiply;z-index:2;filter:drop-shadow(0 25px 22px #5c3c3055);animation:productTurn 6s ease-in-out infinite}
+    @keyframes productTurn{0%,100%{transform:perspective(900px) rotateY(-5deg) translateY(0)}50%{transform:perspective(900px) rotateY(6deg) translateY(-9px)}}
+    .product-info{padding:55px;display:flex;flex-direction:column;justify-content:center}.product-info h2{font-size:46px;letter-spacing:-.05em;line-height:1.1;margin:18px 0 10px}.claim{font-size:21px;color:#9c574a;margin-bottom:28px}
+    .metric{display:grid;grid-template-columns:160px 1fr;gap:22px;align-items:center;background:#fbf6f2;border:1px solid #eddad4;border-radius:18px;padding:15px}
+    .metric img{width:160px;height:126px;object-fit:cover;border-radius:12px}.metric strong{font-size:35px;color:#ad6757;display:block}.metric p{font-size:13px;line-height:1.6;color:#596970;margin:6px 0 0}
+    .reason{margin-top:20px;border-left:4px solid var(--rose);padding:4px 0 4px 16px}.reason b{display:block;margin-bottom:7px}.reason p{font-size:14px;line-height:1.65;color:#55666d;margin:0}.mini-proof{display:flex;gap:8px;margin-top:22px}.mini-proof span{font-size:12px;padding:8px 11px;border:1px solid #d8dfe0;border-radius:99px}
+    .rx-wrap{min-height:calc(100vh - 74px);padding:32px;background:#cbc6bd url("images/textures/serum-texture.jpg") center/cover fixed;position:relative}.rx-wrap:before{content:"";position:absolute;inset:0;background:#e6e1d7e8}
+    .rx{position:relative;max-width:1080px;margin:auto;background:var(--paper);min-height:720px;padding:38px 48px;border:1px solid #cfc6b8;box-shadow:0 22px 60px #3d393233;background-image:linear-gradient(#0000 31px,#d9d1c744 32px);background-size:100% 32px}
+    .rx-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #183a46;padding-bottom:18px}.rx-mark{font-family:"Segoe Script",cursive;color:#a86456;font-size:24px;transform:rotate(-2deg)}.rx h2{font-size:40px;margin:8px 0}.patient{font-size:13px;line-height:1.7;text-align:right;color:#53656c}
+    .diagnosis{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;margin:22px 0}.diag-main{background:#fff9;border-radius:16px;padding:20px}.diag-main strong{font-size:22px}.diag-main p{font-size:14px;line-height:1.65;margin:8px 0 0;color:#52636a}.score{border:1px solid #c9b8aa;border-radius:16px;padding:17px;text-align:center;background:#f4e8e1}.score b{font-size:36px;color:#a45f51}.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.plan{border:1px solid #d6cec4;border-radius:16px;background:#fffaf5;padding:15px;cursor:pointer;transition:.25s}.plan.active{border:2px solid #b97667;transform:translateY(-3px);box-shadow:0 10px 24px #aa77652a}.plan small{color:#9d6c60}.plan b{display:block;font-size:18px;margin:4px 0}.plan span{font-size:11px;color:#607078}
+    .rx-products{display:flex;gap:14px;align-items:end;margin-top:25px;min-height:190px;padding:15px 20px;border-top:1px solid #d5ccc0;border-bottom:1px solid #d5ccc0}.rx-item{width:150px;text-align:center}.rx-item img{height:125px;max-width:100%;object-fit:contain;filter:drop-shadow(0 8px 9px #3f312b30)}.rx-item b{display:block;font-size:12px;margin-top:5px}.rx-item p{font-size:11px;color:#607078;line-height:1.4;margin:5px 0}
+    .rx-foot{display:grid;grid-template-columns:1fr 260px;gap:24px;margin-top:20px;font-size:13px;line-height:1.7}.signature{text-align:center;border-left:1px solid #d5ccc0}.signature img{height:70px;max-width:220px;object-fit:cover;object-position:50% 4%}
+    .sales{min-height:calc(100vh - 74px);display:grid;grid-template-columns:54% 46%;background:#eef0ef}.sales-cover{position:relative;overflow:hidden;background:radial-gradient(circle at 60% 34%,#fff,#d9dddd 42%,#929998 100%);padding:48px}
+    .sales-cover:after{content:"";position:absolute;width:510px;height:510px;border:9px solid #fffc;border-radius:50%;right:4%;top:14%;box-shadow:0 0 45px #fff}.sales-logo{font-size:38px;letter-spacing:.3em;position:relative;z-index:3;color:#111}.sales-title{position:absolute;left:48px;bottom:55px;z-index:4}.sales-title h1{font-size:62px;line-height:1;letter-spacing:-.05em;margin:12px 0}.sales-title p{font-size:16px;max-width:460px;line-height:1.6}.sales-products{position:absolute;right:-4%;bottom:0;height:70%;z-index:3;display:flex;align-items:end;gap:0}.sales-products img{height:70%;width:150px;object-fit:contain;mix-blend-mode:multiply;filter:drop-shadow(0 22px 18px #1f363633)}.sales-products img:nth-child(2){height:90%}
+    .sales-pages{padding:40px;background:#fff;display:grid;gap:18px}.sales-pages>h2{font-size:32px;margin:0}.page-card{border:1px solid #d9dfe0;border-radius:18px;min-height:145px;overflow:hidden;display:grid;grid-template-columns:160px 1fr;background:#fbfbfa}.page-card img,.page-card video{width:160px;height:100%;object-fit:cover}.page-copy{padding:20px}.page-copy small{color:var(--rose);font-weight:700}.page-copy h3{margin:6px 0;font-size:21px}.page-copy p{font-size:13px;color:#607078;line-height:1.55;margin:0}
+    .preview-note{position:fixed;right:20px;bottom:18px;background:#183a46;color:#fff;padding:9px 13px;border-radius:99px;font-size:11px;z-index:30;box-shadow:0 7px 20px #172e3844}
+    @media(max-width:1200px) and (min-width:901px){.hero{grid-template-columns:46% 54%}.hero h1{font-size:40px}.hero-copy{padding-left:5vw;padding-right:3vw}}
+    @media(max-width:900px){.top{padding:0 16px;height:auto;min-height:68px;gap:10px}.note{display:none}.tabs{overflow:auto}.tab{white-space:nowrap;padding:8px 11px;font-size:12px}.hero{grid-template-columns:1fr}.hero-copy{padding:55px 25px}.hero h1{font-size:47px}.lab{min-height:610px}.popup-wrap{padding:16px}.popup{grid-template-columns:1fr}.visual{min-height:330px}.product-info{padding:28px}.product-info h2{font-size:35px}.metric{grid-template-columns:120px 1fr}.metric img{width:120px;height:100px}.rx-wrap{padding:12px}.rx{padding:24px 18px}.rx-head,.diagnosis,.rx-foot{display:block}.patient{text-align:left}.plans{grid-template-columns:1fr}.rx-products{overflow:auto}.sales{grid-template-columns:1fr}.sales-cover{min-height:650px}.sales-pages{padding:20px}}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <header class="top">
+    <div class="logo">SIOR<em>É</em></div>
+    <nav class="tabs" aria-label="시안 선택">
+      <button class="tab active" data-target="start">01 상담 첫 화면</button>
+      <button class="tab" data-target="product">02 제품 팝업</button>
+      <button class="tab" data-target="result">03 처방 결과지</button>
+      <button class="tab" data-target="sales">04 영업자료</button>
+    </nav>
+    <div class="note">추천 방향 적용 시안</div>
+  </header>
+
+  <section class="stage active" id="start">
+    <div class="hero">
+      <div class="hero-copy">
+        <div class="consult-label"><img src="images/consultation/brand-founders.png" alt=""><span>SIORÉ 피부상담 · 약사 설계 솔루션</span></div>
+        <span class="eyebrow">PHARMACIST-DESIGNED SKIN CONSULTATION</span>
+        <h1><span class="keep" style="color:inherit">피부 신호를 읽고,</span><br><span>맞춤 영양을 처방하다.</span></h1>
+        <p class="lead">빠른 질문으로 지금 피부가 보내는 신호를 확인하고, 약사가 설계한 시오레 루틴을 만나보세요.</p>
+        <button class="cta" type="button">나의 피부 상담 시작 →</button>
+        <div class="trust">
+          <div><b>34+</b><span>인체적용시험</span></div>
+          <div><b>0.00</b><span>피부 자극 지수</span></div>
+          <div><b>10,000 ppm</b><span>고순도 NMN</span></div>
+        </div>
+      </div>
+      <div class="lab">
+        <video class="hero-video" src="images/recommend-preview/texture-lab.mp4" autoplay muted loop playsinline></video>
+        <div class="lab-caption"><b>Topical Nutrition Lab</b><span>TEXTURE · SCIENCE · PRESCRIPTION</span></div>
+        <div class="orbit-core"><img src="images/skin-analysis-model.png" alt="시오레 피부 상담 대표 이미지"></div>
+        <div class="ingredient-node n1"><img src="images/hero/strength-nmn-v1.jpg" alt=""><b>NMN</b></div>
+        <div class="ingredient-node n2"><img src="images/consultation/references/pdrn-dna-unsplash.jpg" alt=""><b>PDRN</b></div>
+        <div class="ingredient-node n3"><img src="images/consultation/references/panthenol-gel-pexels.jpg" alt=""><b>판테놀</b></div>
+        <div class="ingredient-node n4"><img src="images/consultation/references/tannin-jeju-leaf-drop.png" alt=""><b>제주 감나무잎수</b></div>
+        <div class="ingredient-node n5"><img src="images/consultation/references/ingredients-relief.jpg" alt=""><b>병풀추출물</b></div>
+        <img class="hero-single-product" src="assets/clinical-popup/assets/product-2.png" alt="NMN 인텐시브 세럼">
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" id="product">
+    <div class="popup-wrap">
+      <article class="popup">
+        <div class="visual">
+          <video src="images/recommend-preview/product-intro.mp4" autoplay muted loop playsinline></video>
+          <img src="assets/clinical-popup/assets/product-2.png" alt="NMN 인텐시브 세럼">
+        </div>
+        <div class="product-info">
+          <span class="eyebrow">NMN 10,000 ppm · INTENSIVE SERUM</span>
+          <h2>탄력과 광채를 위한<br>집중 에너지 케어</h2>
+          <div class="claim">칙칙함과 탄력 저하가 함께 느껴질 때</div>
+          <div class="metric">
+            <img src="images/clinical/cards/serum-glow.png" alt="피부 광채 임상 전후">
+            <div><strong>+564.64%</strong><b>피부 광채 개선</b><p>단 1회 사용 직후 인체적용시험 결과입니다. 상세 수치와 시험 정보는 클릭해 확인합니다.</p></div>
+          </div>
+          <div class="reason"><b>왜 고객님께 추천하나요?</b><p>상담에서 ‘광채·톤’과 ‘탄력 저하’를 우선 고민으로 선택해, NMN과 항산화 성분을 담은 집중 세럼을 연결했습니다.</p></div>
+          <div class="mini-proof"><span>피부 탄력 +13.60%</span><span>평균 주름 +11.36%</span><span>Dermatologist Tested</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="stage" id="result">
+    <div class="rx-wrap">
+      <article class="rx">
+        <div class="rx-head"><div><span class="eyebrow">SIORÉ PERSONAL CARE FORM · 03</span><h2>나의 피부 맞춤 처방</h2><div class="rx-mark">Your skin needs nutrition.</div></div><div class="patient">고객코드 S-261008-027<br>상담일 2026.10.08<br>피부 고민 민감 · 장벽 · 광채</div></div>
+        <div class="diagnosis"><div class="diag-main"><strong>민감해진 피부에 장벽 회복과 광채가 함께 필요합니다.</strong><p>세안 후 당김과 외부 자극 반응이 확인되었습니다. 자극을 줄이는 기본 루틴 위에 집중 광채 케어를 단계적으로 더합니다.</p></div><div class="score"><span>현재 피부 밸런스</span><br><b>68</b><small>/100</small></div></div>
+        <div class="plans">
+          <div class="plan active"><small>RECOMMENDED</small><b>CORE 3</b><span>매일 지키는 기본 처방</span></div>
+          <div class="plan"><small>INTENSIVE</small><b>PREMIUM 5</b><span>광채·탄력 집중 구성</span></div>
+          <div class="plan"><small>ONE ESSENTIAL</small><b>1 PICK</b><span>하나만 고른다면</span></div>
+        </div>
+        <div class="rx-products">
+          <div class="rx-item"><img src="images/products/drive-latest/cleansing-drive.png" alt=""><b>클렌징 밀크</b><p>당김을 줄이는 첫 단계</p></div>
+          <div class="rx-item"><img src="images/products/drive-latest/ampoule-drive.png" alt=""><b>리페어 앰플</b><p>민감·장벽 집중 보완</p></div>
+          <div class="rx-item"><img src="images/products/drive-latest/comfort-cream-drive.png" alt=""><b>컴포트 크림</b><p>수분 보호막으로 마무리</p></div>
+        </div>
+        <div class="rx-foot"><div><b>사용 순서</b><br>AM · 클렌징 밀크 → 리페어 앰플 → 컴포트 크림 → 선케어<br>PM · 클렌징 밀크 → 리페어 앰플 → 컴포트 크림</div><div class="signature"><img src="images/consultation/brand-founders.png" alt=""><br><b>약사가 설계한 시오레 루틴</b></div></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="stage" id="sales">
+    <div class="sales">
+      <div class="sales-cover">
+        <div class="sales-logo">SIORÉ</div>
+        <div class="sales-title"><span class="eyebrow">TOPICAL NUTRITION FOR SKIN</span><h1>Skincare,<br>through a<br>pharmacist’s lens.</h1><p>피부 고민에서 출발해 성분과 인체적용시험 근거로 완성한 약사 설계 더마 스킨케어.</p></div>
+        <div class="sales-products"><img src="assets/clinical-popup/assets/product-1.png" alt=""><img src="assets/clinical-popup/assets/product-2.png" alt=""><img src="assets/clinical-popup/assets/product-7.png" alt=""></div>
+      </div>
+      <div class="sales-pages">
+        <span class="eyebrow">SALES DECK · PAGE SYSTEM</span><h2>한 장에 한 가지 근거만.</h2>
+        <article class="page-card"><video src="images/recommend-preview/texture-lab.mp4" autoplay muted loop playsinline></video><div class="page-copy"><small>01 · BRAND HOOK</small><h3>제형이 먼저 기억되는 시작</h3><p>혼합·거품·현미경 장면으로 제품이 가진 감각을 5초 안에 보여줍니다.</p></div></article>
+        <article class="page-card"><img src="images/consultation/brand-founders.png" alt=""><div class="page-copy"><small>02 · PHARMACIST TRUST</small><h3>약사가 설계한 바르는 피부 영양제</h3><p>대표약사 이미지와 상담에서 시작된 브랜드 서사를 한 페이지로 정리합니다.</p></div></article>
+        <article class="page-card"><img src="images/clinical/cards/serum-glow.png" alt=""><div class="page-copy"><small>03 · CLINICAL PROOF</small><h3>제품당 대표 임상 수치 하나</h3><p>광채 564.64%처럼 기억할 숫자를 크게 보여주고 시험 정보는 하단에 정돈합니다.</p></div></article>
+      </div>
+    </div>
+  </section>
+</main>
+<div class="preview-note">시안 · 실제 링크 미반영</div>
+<script>
+  const tabs=[...document.querySelectorAll('.tab')],stages=[...document.querySelectorAll('.stage')];
+  tabs.forEach(tab=>tab.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.toggle('active',x===tab));
+    stages.forEach(x=>x.classList.toggle('active',x.id===tab.dataset.target));
+    history.replaceState(null,'','#'+tab.dataset.target);
+  }));
+  document.querySelectorAll('.plan').forEach(plan=>plan.addEventListener('click',()=>{document.querySelectorAll('.plan').forEach(x=>x.classList.remove('active'));plan.classList.add('active')}));
+  const hash=location.hash.slice(1);if(hash){document.querySelector('[data-target="'+hash+'"]')?.click()}
+</script>
+</body>
+</html>
