@@ -23,3 +23,11 @@
 
 #siore-clinical-popup{font-family:Pretendard,sans-serif}#siore-clinical-popup *{box-sizing:border-box}#siore-clinical-popup button{font:inherit;cursor:pointer}#siore-clinical-popup .clinical-tabs{display:flex;gap:7px;padding:17px 65px 0 25px;background:#fff}#siore-clinical-popup .clinical-tabs button{padding:10px 13px;border:1px solid #e2d7d7;border-radius:30px;background:#fff;font-size:12px;white-space:nowrap}#siore-clinical-popup .clinical-tabs button[aria-pressed=true]{background:#6f3847;color:#fff;border-color:#6f3847}#siore-clinical-popup .banner h2{font-weight:700}#siore-clinical-launch{position:fixed;bottom:14px;left:14px;z-index:9998;border:1px solid #d3b4b7;background:#fff8f8;color:#794a57;border-radius:30px;padding:12px 16px;font:700 12px Pretendard,sans-serif;box-shadow:0 4px 16px #0001;cursor:pointer}@media(max-width:699px){#siore-clinical-popup .clinical-tabs{gap:5px;padding:17px 52px 0 12px}#siore-clinical-popup .clinical-tabs button{padding:9px 8px;font-size:10px}#siore-clinical-launch{bottom:9px;left:9px;padding:10px 12px;font-size:11px}}
 #siore-clinical-popup .metric span{word-break:keep-all}#siore-clinical-popup .cool .metric,#siore-clinical-popup .duo .metric{display:block}#siore-clinical-popup .cool .metric span,#siore-clinical-popup .duo .metric span{display:block;margin-top:8px}#siore-clinical-popup .close{font-size:26px}#siore-clinical-popup .metric strong{white-space:nowrap}
+
+/* Cleansing Milk clinical tab — renewed no-overcap pump package. */
+#siore-clinical-popup .banner.cleanse{--accent:#b56f5f;--soft:#f7ece7;--deep:#74453e}
+#siore-clinical-popup .cleanse .packshots img{will-change:transform;animation:sioreCleansingMilkFloat 5.8s ease-in-out -.4s infinite}
+@keyframes sioreCleansingMilkFloat{0%,100%{transform:translate3d(-2px,5px,0) rotate(-.8deg)}50%{transform:translate3d(3px,-9px,0) rotate(1deg)}}
+#siore-clinical-popup .clinical-tabs{overflow-x:auto;scrollbar-width:none}
+#siore-clinical-popup .clinical-tabs::-webkit-scrollbar{display:none}
+@media(prefers-reduced-motion:reduce){#siore-clinical-popup .cleanse .packshots img{animation:none!important}}
