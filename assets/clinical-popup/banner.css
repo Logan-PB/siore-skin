@@ -27,6 +27,7 @@
 /* Cleansing Milk clinical tab — renewed no-overcap pump package. */
 #siore-clinical-popup .banner.cleanse{--accent:#b56f5f;--soft:#f7ece7;--deep:#74453e}
 #siore-clinical-popup .cleanse .packshots img{will-change:transform;animation:sioreCleansingMilkFloat 5.8s ease-in-out -.4s infinite}
+#siore-clinical-popup .cleanse .evidence img{height:420px;object-fit:cover;object-position:center 58%}
 @keyframes sioreCleansingMilkFloat{0%,100%{transform:translate3d(-2px,5px,0) rotate(-.8deg)}50%{transform:translate3d(3px,-9px,0) rotate(1deg)}}
 #siore-clinical-popup .clinical-tabs{overflow-x:auto;scrollbar-width:none}
 #siore-clinical-popup .clinical-tabs::-webkit-scrollbar{display:none}
