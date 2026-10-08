@@ -21,13 +21,11 @@
     .hero h1{font-size:clamp(46px,4.4vw,70px);line-height:1.02;letter-spacing:-.06em;margin:28px 0}.hero h1 span{color:var(--rose)}.keep{white-space:nowrap}
     .lead{font-size:19px;line-height:1.7;max-width:570px;color:#39505a}.cta{margin-top:25px;border:0;border-radius:999px;background:#111;color:#fff;padding:17px 25px;font-weight:700;width:max-content;box-shadow:0 14px 36px #1113}
     .trust{display:flex;gap:20px;margin-top:35px;padding-top:25px;border-top:1px solid #ded8d0}.trust b{display:block;font-size:18px}.trust span{font-size:12px;color:#70818a}
-    .lab{position:relative;min-height:660px;background:radial-gradient(circle at 54% 40%,#fff 0 9%,#edf0ef 27%,#bfc5c5 54%,#818988 100%);overflow:hidden}
-    .lab:before{content:"";position:absolute;width:510px;height:510px;border:12px solid #fff9;border-radius:50%;left:50%;top:45%;transform:translate(-50%,-50%);box-shadow:0 0 50px #fff, inset 0 0 35px #fff}
-    .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:screen;opacity:.24;filter:saturate(.3)}
-    .orbit-core{position:absolute;left:50%;top:45%;width:245px;height:245px;transform:translate(-50%,-50%);border-radius:50%;overflow:hidden;border:8px solid #ffffffcc;box-shadow:0 20px 50px #34505b45;z-index:2}.orbit-core img{width:100%;height:100%;object-fit:cover;object-position:50% 44%}
-    .orbit-core:after{content:"피부 고민에서 시작된 성분 설계";position:absolute;left:12px;right:12px;bottom:12px;padding:9px 8px;border-radius:999px;background:#183a46de;color:#fff;text-align:center;font-size:11px}
-    .ingredient-node{position:absolute;z-index:4;width:94px;text-align:center;animation:nodeFloat 4.8s ease-in-out infinite}.ingredient-node img{width:66px;height:66px;object-fit:cover;border:4px solid #fff;border-radius:50%;box-shadow:0 8px 18px #27475130}.ingredient-node b{display:block;margin-top:4px;font-size:10px;color:#264b58}.n1{top:14%;left:42%}.n2{top:29%;right:8%;animation-delay:-1s}.n3{bottom:13%;right:15%;animation-delay:-2s}.n4{bottom:13%;left:10%;animation-delay:-3s}.n5{top:30%;left:7%;animation-delay:-4s}@keyframes nodeFloat{50%{transform:translateY(-9px)}}
-    .hero-single-product{display:none}
+    .lab{position:relative;min-height:660px;background:#e8e5df;overflow:hidden}
+    .consult-portrait{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.85) contrast(.96)}
+    .lab:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#182d3066 0,transparent 38%),linear-gradient(0deg,#142b30a8 0,transparent 44%)}
+    .consult-proof{position:absolute;top:38px;left:38px;z-index:3;display:flex;gap:7px;flex-wrap:wrap;max-width:430px}.consult-proof span{padding:9px 12px;border:1px solid #ffffff80;border-radius:999px;background:#ffffffd9;color:#284753;font-size:11px;font-weight:700;backdrop-filter:blur(9px)}
+    .consult-flow{position:absolute;left:36px;right:36px;bottom:35px;z-index:4;color:#fff}.consult-flow>small{font-size:10px;letter-spacing:.17em;font-weight:700;color:#f2b09f}.consult-flow h2{font-size:29px;line-height:1.25;margin:9px 0 18px}.consult-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.consult-steps div{position:relative;padding:15px 13px;border:1px solid #ffffff45;border-radius:14px;background:#173a43bd;backdrop-filter:blur(12px);animation:stepFocus 6s ease-in-out infinite}.consult-steps div:nth-child(2){animation-delay:2s}.consult-steps div:nth-child(3){animation-delay:4s}.consult-steps b{display:block;font-size:11px}.consult-steps span{display:block;font-size:9px;margin-top:5px;color:#d9e5e7}.consult-steps i{position:absolute;right:10px;top:9px;font-style:normal;color:#f1ab9b;font-size:10px}@keyframes stepFocus{0%,28%,100%{border-color:#ffffff45;box-shadow:none;transform:translateY(0)}8%,20%{border-color:#ffb0bc;box-shadow:0 0 0 3px #f58ba72c,0 12px 28px #102a3244;transform:translateY(-4px)}}
     .products{position:absolute;left:12%;right:9%;bottom:4%;height:72%;display:flex;align-items:flex-end;justify-content:center;gap:1.3vw;filter:drop-shadow(0 24px 20px #18323d44)}
     .products img{object-fit:contain;max-width:20%;max-height:82%;mix-blend-mode:multiply;animation:float 5s ease-in-out infinite}.products img:nth-child(2){max-height:96%;animation-delay:-1.5s}.products img:nth-child(3){animation-delay:-2.8s}.products img:nth-child(4){max-height:87%;animation-delay:-3.8s}
     @keyframes float{50%{transform:translateY(-12px)}}.lab-caption{position:absolute;top:42px;right:42px;text-align:right;color:#36505a}.lab-caption b{font-size:24px;display:block}.lab-caption span{font-size:12px;letter-spacing:.14em}
@@ -86,15 +84,9 @@
         </div>
       </div>
       <div class="lab">
-        <video class="hero-video" src="images/recommend-preview/texture-lab.mp4" autoplay muted loop playsinline></video>
-        <div class="lab-caption"><b>Topical Nutrition Lab</b><span>TEXTURE · SCIENCE · PRESCRIPTION</span></div>
-        <div class="orbit-core"><img src="images/skin-analysis-model.png" alt="시오레 피부 상담 대표 이미지"></div>
-        <div class="ingredient-node n1"><img src="images/hero/strength-nmn-v1.jpg" alt=""><b>NMN</b></div>
-        <div class="ingredient-node n2"><img src="images/consultation/references/pdrn-dna-unsplash.jpg" alt=""><b>PDRN</b></div>
-        <div class="ingredient-node n3"><img src="images/consultation/references/panthenol-gel-pexels.jpg" alt=""><b>판테놀</b></div>
-        <div class="ingredient-node n4"><img src="images/consultation/references/tannin-jeju-leaf-drop.png" alt=""><b>제주 감나무잎수</b></div>
-        <div class="ingredient-node n5"><img src="images/consultation/references/ingredients-relief.jpg" alt=""><b>병풀추출물</b></div>
-        <img class="hero-single-product" src="assets/clinical-popup/assets/product-2.png" alt="NMN 인텐시브 세럼">
+        <img class="consult-portrait" src="images/skin-analysis-model.png" alt="피부 상태를 확인하는 상담 이미지">
+        <div class="consult-proof"><span>약사 설계</span><span>제품별 임상 근거</span><span>다국어 상담</span></div>
+        <div class="consult-flow"><small>SIORÉ SKIN CONSULTATION</small><h2>질문은 빠르게,<br>추천 이유는 분명하게.</h2><div class="consult-steps"><div><i>01</i><b>피부 고민 선택</b><span>가장 신경 쓰이는 고민부터</span></div><div><i>02</i><b>피부 상태 확인</b><span>5개 질문으로 빠르게</span></div><div><i>03</i><b>맞춤 루틴 확인</b><span>3PICK · 프리미엄 · 1PICK</span></div></div></div>
       </div>
     </div>
   </section>
