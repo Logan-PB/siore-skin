@@ -6471,7 +6471,7 @@ window.SIORE_REFERENCE = (()=>{
 .set-dialog .set-card{overflow:visible}.set-card{position:relative;border:1px solid #e3eaee;border-radius:12px;padding:16px;background:#fff;display:flex;flex-direction:column;gap:10px}
 .set-card.is-match{border:2px solid #d0704f;background:#fffaf7}
 .set-match{position:absolute;top:-12px;right:12px;display:inline-block;background:#d0704f;color:#fff;font-size:11px;line-height:16px;height:auto;font-weight:800;padding:4px 10px;border-radius:999px;white-space:nowrap;overflow:visible}
-.set-card h3{margin:0;font-size:17px;display:flex;gap:8px;align-items:baseline}
+.set-who{display:flex;gap:12px;align-items:center}.set-persona{flex:none;width:76px;height:76px;border-radius:14px;object-fit:cover;background:#fffbf7;border:1px solid #f1e3da}.set-who h3{margin:0 0 4px}.set-card h3{margin:0;font-size:17px;display:flex;gap:8px;align-items:baseline}
 .set-card h3 span{font-size:12px;color:#8a3f2a;font-weight:800}
 .set-for{margin:0;font-size:13px;color:#4d6573;line-height:1.45}
 .set-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
@@ -6489,32 +6489,32 @@ window.SIORE_REFERENCE = (()=>{
  const C=(ko,en,zh,ja)=>copy4(ko,en,zh,ja);
  const tx=v=>bilingual(v);
  const SETS=[
-  {id:'firm',scenario:'aging',
+  {id:'firm',scenario:'aging',img:'images/concerns/firmness.webp',
    name:C('탄력·광채 세트','Firmness & Glow Set','弹力光泽组合','ハリ・ツヤセット'),
    who:C('피부가 느슨하고 칙칙해 보일 때','When skin looks less firm and dull','肌肤松弛、暗沉时','ハリ不足やくすみが気になるとき'),
    keys:['bubbleToner','serum','comfortCream'],
    tip:C('NMN 2단계로 집중 케어하고, 편안한 크림으로 마무리해요.','Two NMN steps for focused care, finished with a comforting cream.','两步NMN集中护理，再以舒缓面霜收尾。','NMNの2ステップで集中ケアし、やさしいクリームで仕上げます。')},
-  {id:'blemish',scenario:'trouble',
+  {id:'blemish',scenario:'trouble',img:'images/concerns/blemish.webp',
    name:C('트러블 피부 세트','Blemish-prone Skin Set','痘痘肌组合','ゆらぎ肌トラブルセット'),
    who:C('번들거림과 뾰루지가 반복될 때','When oiliness and breakouts keep coming back','反复出油、长痘时','皮脂やぶつぶつが繰り返すとき'),
    keys:['essenceToner','repairAmpoule','soothingCream'],
    tip:C('순한 토너·진정 앰플 후, 가벼운 수분 크림으로 끈적임 없이 마무리해요.','Gentle toner and soothing ampoule, then a light cream with no sticky finish.','温和爽肤水与舒缓安瓶后，用轻盈面霜清爽收尾。','やさしいトナーと鎮静アンプルの後、軽いクリームでべたつかず仕上げます。')},
-  {id:'heat',scenario:'heat',
+  {id:'heat',scenario:'heat',img:'images/concerns/redness.webp',
    name:C('열감·붉은기 진정 세트','Heat & Redness Calming Set','热感泛红舒缓组合','火照り・赤み鎮静セット'),
    who:C('피부가 쉽게 달아오르고 붉어질 때','When skin heats up and flushes easily','肌肤容易发热泛红时','肌が火照りやすく赤みが出やすいとき'),
    keys:['bubbleToner','soothingGel','comfortCream'],
    tip:C('마찰 적은 버블 토너 → 쿨링 젤 → 판테놀·알란토인 크림 순서예요.','Low-friction bubble toner → cooling gel → panthenol & allantoin cream.','低摩擦泡沫爽肤水 → 清凉凝胶 → 泛醇·尿囊素面霜。','摩擦の少ない泡トナー → クーリングジェル → パンテノール・アラントインクリーム。')},
-  {id:'after',scenario:'barrier',
+  {id:'after',scenario:'barrier',img:'images/sets/after-procedure.svg',
    name:C('시술 후 보습 세트','After-Procedure Moisture Set','术后保湿组合','施術後の保湿セット'),
    who:C('피부 시술 후 예민하고 건조할 때','When skin feels sensitive and dry after a procedure','皮肤项目后敏感干燥时','施術後に肌が敏感で乾燥するとき'),
    keys:['soothingGel','repairAmpoule','richCream'],
    tip:C('토너는 생략하고 수딩 젤부터. 젤은 냉장 보관 후 손바닥으로 지그시 눌러 흡수시키면 좋아요. 시술기관이 안내한 사용 시점을 먼저 따르세요.','Skip toner and start with the gel. Chilled gel, pressed in with the palms, feels best. Follow the timing your clinic advised first.','省略爽肤水，从舒缓凝胶开始。冷藏后用掌心轻压吸收更好。请优先遵循机构建议的使用时间。','トナーは省いてジェルから。冷蔵したジェルを手のひらで押さえてなじませます。施術機関の指示する使用時期を優先してください。')},
-  {id:'outdoor',scenario:'',
+  {id:'outdoor',scenario:'',img:'images/sets/running.svg',
    name:C('러닝·야외활동 세트','Running & Outdoor Set','跑步·户外组合','ランニング・アウトドアセット'),
    who:C('햇볕·바람·땀에 지친 피부일 때','When skin is tired from sun, wind and sweat','肌肤因日晒、风吹、出汗而疲惫时','日差し・風・汗で疲れた肌に'),
    keys:['bubbleToner','soothingGel','soothingCream'],
    tip:C('운동 후 빠르게 수분을 채우고 쿨링한 뒤, 가벼운 크림으로 산뜻하게 마무리해요.','After exercise, hydrate fast, cool down, then finish light and fresh.','运动后迅速补水降温，再以轻盈面霜清爽收尾。','運動後すばやく保湿・クールダウンし、軽いクリームでさっぱり仕上げます。')},
-  {id:'mom',scenario:'',
+  {id:'mom',scenario:'',img:'images/sets/pregnancy.svg',
    name:C('임신·출산 전후 세트','Pregnancy & Postpartum Set','孕期·产后组合','妊娠・産後セット'),
    who:C('컨디션 변화로 피부가 예민해졌을 때','When skin turns sensitive with body changes','身体变化导致肌肤敏感时','体調の変化で肌がゆらぐとき'),
    keys:['essenceToner','serum','comfortCream'],
@@ -6535,7 +6535,7 @@ window.SIORE_REFERENCE = (()=>{
  let dialog;
  function render(){
   const match=currentScenario();
-  const cards=SETS.map((s,i)=>`<article class="set-card${match&&s.scenario===match?' is-match':''}">${match&&s.scenario===match?`<span class="set-match">${escaped(C('지금 상담과 맞는 세트','Matches this consultation','与本次咨询匹配','今回の相談に合うセット')[languageMode]||'지금 상담과 맞는 세트')}</span>`:''}<h3><span>0${i+1}</span>${tx(s.name)}</h3><p class="set-for">${tx(s.who)}</p><ol class="set-steps">${s.keys.map((k,n)=>`<li><img src="${escaped(pimg(k))}" alt="" loading="lazy"><b>STEP ${n+1} · ${escaped(ROLE[k]?.[languageMode]||ROLE[k]?.ko||'')}</b>${escaped(pname(k)[languageMode]||pname(k).ko)}</li>`).join('')}</ol><p class="set-tip">${tx(s.tip)}</p></article>`).join('');
+  const cards=SETS.map((s,i)=>`<article class="set-card${match&&s.scenario===match?' is-match':''}">${match&&s.scenario===match?`<span class="set-match">${escaped(C('지금 상담과 맞는 세트','Matches this consultation','与本次咨询匹配','今回の相談に合うセット')[languageMode]||'지금 상담과 맞는 세트')}</span>`:''}<div class="set-who"><img class="set-persona" src="${s.img}" alt=""><div><h3><span>0${i+1}</span>${tx(s.name)}</h3><p class="set-for">${tx(s.who)}</p></div></div><ol class="set-steps">${s.keys.map((k,n)=>`<li><img src="${escaped(pimg(k))}" alt="" loading="lazy"><b>STEP ${n+1} · ${escaped(ROLE[k]?.[languageMode]||ROLE[k]?.ko||'')}</b>${escaped(pname(k)[languageMode]||pname(k).ko)}</li>`).join('')}</ol><p class="set-tip">${tx(s.tip)}</p></article>`).join('');
   dialog.innerHTML=`<header class="set-head"><div><small>PHARMACIST SET GUIDE</small><h2>${tx(C('상황별 3종 세트','3-step sets for every situation','按情况推荐的3件组合','シーン別3点セット'))}</h2><p>${tx(C('자문약사가 성분이 겹치지 않고 서로 보완되도록 구성한 조합이에요.','Combinations our advisory pharmacist built so ingredients complement rather than repeat.','顾问药师搭配，成分互补不重复。','顧問薬剤師が、成分が重ならず補い合うよう組んだセットです。'))}</p></div><button type="button" data-set-close>${tx(C('닫기 ×','Close ×','关闭 ×','閉じる ×'))}</button></header><div class="set-grid">${cards}</div><p class="set-foot">${tx(C('화장품 사용 제안이며 피부 상태에 따라 차이가 있을 수 있습니다. 질환이 있거나 치료 중이라면 전문가와 먼저 상담하세요.','These are cosmetic routine suggestions; results vary by skin. If you have a skin condition or are under treatment, consult a professional first.','以上为化妆品护理建议，效果因人而异。如有皮肤疾病或正在治疗，请先咨询专业人士。','化粧品の使用提案であり、肌状態により個人差があります。疾患や治療中の方は専門家に相談してください。'))}</p>`;
   dialog.querySelector('[data-set-close]').onclick=()=>dialog.close();
  }
