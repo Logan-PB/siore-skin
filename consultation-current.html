@@ -6398,32 +6398,64 @@ window.SIORE_REFERENCE = (()=>{
   sheet.classList.add('prescription-layout','rx-paper-approved');sheet.dataset.activeTier='core';
   const actions=document.querySelector('#step3 .result-actions');
   if(actions&&!document.querySelector('#save-customer-card'))actions.querySelector('#print-summary').insertAdjacentHTML('beforebegin',`<button type="button" class="btn-primary" id="save-customer-card">${tx(C('상담기록 저장','Save consultation','保存咨询记录','相談記録を保存'))}</button>`);
-  const saveButton=document.querySelector('#save-customer-card');if(saveButton)saveButton.onclick=saveRecord;
+  const saveButton=document.querySelector('#save-customer-card');if(saveButton)saveButton.onclick=openSaveDialog;
  }
  const previousPaperRender=paperRender;
  paperRender=function(){previousPaperRender();renderResultUpgrade();};
  function newCode(cards){const date=new Date().toISOString().slice(2,10).replaceAll('-','');let code;do{code=`SIORE-${date}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;}while(cards.some(x=>x.code===code));return code;}
  function collectRecord(existingCode){
   const {core,premium,one}=recommendationSets(),name=document.querySelector('#customer-name')?.value.trim()||'';
-  return {code:existingCode||newCode(readCards()),name:name||tx(C('이름 미입력 고객','Unnamed customer','未填写姓名客户','氏名未入力のお客様')).replace(/<[^>]+>/g,''),nameKey:normalizeName(name),updatedAt:new Date().toISOString(),gender:selectedGender,age:selectedAge,concerns:[...selectedConcerns],skinTypes:[...selectedSkinTypes],texture:selectedTexture,sensitivity:selectedSensitivity,assessment:{...assessmentAnswers},habits:{products:[...habits.products],reactions:[...habits.reactions],note:document.querySelector('#habit-note')?.value.trim()||''},recommendations:{one:one.map(productLabel),core:core.map(productLabel),premium:premium.map(productLabel)}};
+  return {code:existingCode||newCode(readCards()),name:name||tx(C('이름 미입력 고객','Unnamed customer','未填写姓名客户','氏名未入力のお客様')).replace(/<[^>]+>/g,''),nameKey:recordKey(name),phone4:saveExtra.phone4||'',nation:saveExtra.nation||'',memo:saveExtra.memo||'',updatedAt:new Date().toISOString(),gender:selectedGender,age:selectedAge,concerns:[...selectedConcerns],skinTypes:[...selectedSkinTypes],texture:selectedTexture,sensitivity:selectedSensitivity,assessment:{...assessmentAnswers},habits:{products:[...habits.products],reactions:[...habits.reactions],note:document.querySelector('#habit-note')?.value.trim()||''},recommendations:{one:one.map(productLabel),core:core.map(productLabel),premium:premium.map(productLabel)}};
  }
  function saveToast(message,error=false){let toast=document.querySelector('.consult-save-toast');if(!toast){toast=document.createElement('div');toast.className='consult-save-toast';toast.setAttribute('role','status');document.body.append(toast)}toast.classList.toggle('error',error);toast.textContent=message;requestAnimationFrame(()=>toast.classList.add('show'));clearTimeout(saveToast.timer);saveToast.timer=setTimeout(()=>toast.classList.remove('show'),2400);}
  function saveRecord(){
-  try{const cards=readCards(),name=document.querySelector('#customer-name')?.value.trim()||'',key=normalizeName(name),found=key?cards.find(x=>x.nameKey===key):null,record=collectRecord(found?.code),next=found?cards.map(x=>x.code===found.code?record:x):[record,...cards],persistent=writeCards(next);showSaveStatus(record,Boolean(found));renderRecords();const button=document.querySelector('#save-customer-card');if(button){const original=button.innerHTML;button.textContent='✓ '+tx(C('저장 완료','Saved','已保存','保存完了')).replace(/<[^>]+>/g,'');button.disabled=true;setTimeout(()=>{button.innerHTML=original;button.disabled=false},1800)}saveToast(persistent?tx(C('상담기록이 저장되었습니다.','Consultation saved.','咨询记录已保存。','相談記録を保存しました。')).replace(/<[^>]+>/g,''):tx(C('현재 탭에 임시 저장되었습니다.','Saved temporarily in this tab.','已临时保存在当前标签页。','このタブに一時保存しました。')).replace(/<[^>]+>/g,''));}
+  try{const cards=readCards(),name=document.querySelector('#customer-name')?.value.trim()||'',key=recordKey(name),found=key?cards.find(x=>x.nameKey===key):null,record=collectRecord(found?.code),next=found?cards.map(x=>x.code===found.code?record:x):[record,...cards],persistent=writeCards(next);showSaveStatus(record,Boolean(found));renderRecords();const button=document.querySelector('#save-customer-card');if(button){const original=button.innerHTML;button.textContent='✓ '+tx(C('저장 완료','Saved','已保存','保存完了')).replace(/<[^>]+>/g,'');button.disabled=true;setTimeout(()=>{button.innerHTML=original;button.disabled=false},1800)}saveToast(persistent?tx(C('상담기록이 저장되었습니다.','Consultation saved.','咨询记录已保存。','相談記録を保存しました。')).replace(/<[^>]+>/g,''):tx(C('현재 탭에 임시 저장되었습니다.','Saved temporarily in this tab.','已临时保存在当前标签页。','このタブに一時保存しました。')).replace(/<[^>]+>/g,''));}
   catch(error){saveToast(tx(C('저장하지 못했습니다. 다시 눌러주세요.','Could not save. Please try again.','保存失败，请重试。','保存できませんでした。もう一度お試しください。')).replace(/<[^>]+>/g,''),true)}
  }
  function showSaveStatus(record,updated){
   const sheet=document.querySelector('.solution-sheet');if(!sheet)return;sheet.querySelector('.customer-card-status')?.remove();(sheet.querySelector('.rx-prescription-head')||sheet.querySelector('.solution-heading')).insertAdjacentHTML('afterend',`<p class="customer-card-status" role="status"><b>${updated?tx(C('기존 상담기록 업데이트','Consultation updated','咨询记录已更新','相談記録を更新')):tx(C('상담기록 저장 완료','Consultation saved','咨询记录已保存','相談記録を保存'))}</b><span>${escaped(record.code)} · ${escaped(record.name)}</span></p>`);
  }
+ const saveExtra={phone4:'',nation:'',memo:''};
+ const recordKey=name=>{const n=normalizeName(name);return n?n+(saveExtra.phone4?'#'+saveExtra.phone4:''):'';};
+ let saveDialog;
+ const NATIONS=[['한국','Korea','韩国','韓国'],['중국','China','中国','中国'],['대만·홍콩','Taiwan / HK','台湾·香港','台湾・香港'],['일본','Japan','日本','日本'],['동남아','SE Asia','东南亚','東南アジア'],['영미권','English-speaking','英语国家','英語圏'],['기타','Other','其他','その他']];
+ function defaultNation(){return {ko:'한국',zh:'중국',ja:'일본',en:'영미권'}[languageMode]||'한국';}
+ function openSaveDialog(){
+  if(!saveDialog){saveDialog=document.createElement('dialog');saveDialog.className='save-record-dialog';document.body.append(saveDialog);saveDialog.addEventListener('click',e=>{if(e.target===saveDialog)saveDialog.close();});}
+  const nameNow=document.querySelector('#customer-name')?.value.trim()||'';
+  const concerns=selectedConcerns.map(c=>concernLabel(c)?.ko||c).join(' · ');
+  saveDialog.innerHTML=`<form method="dialog" class="save-record-form"><header><small>SAVE CONSULTATION</small><h2>${tx(C('상담기록 저장','Save consultation','保存咨询记录','相談記録を保存'))}</h2><p>${tx(C('다음 방문 때 이름이나 연락처 뒷자리로 바로 찾을 수 있어요.','Find this record next visit by name or last 4 digits.','下次来访可按姓名或手机尾号查找。','次回、氏名や電話番号下4桁で検索できます。'))}</p></header>
+  <label class="req">${tx(C('고객명 또는 이니셜','Name or initials','姓名或缩写','氏名またはイニシャル'))}<input name="name" required maxlength="30" autocomplete="off" value="${escaped(nameNow)}" placeholder="예) 김OO, KIM, 王小姐"></label>
+  <label>${tx(C('연락처 뒷자리 4자리 (선택)','Phone last 4 digits (optional)','手机尾号4位（选填）','電話番号下4桁（任意）'))}<input name="phone4" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="off" placeholder="1234"></label>
+  <label>${tx(C('국적·언어','Nationality / language','国籍·语言','国籍・言語'))}<select name="nation">${NATIONS.map(n=>`<option value="${n[0]}"${n[0]===defaultNation()?' selected':''}>${escaped(languageMode==='ko'?n[0]:n[{en:1,zh:2,ja:3}[languageMode]]+' · '+n[0])}</option>`).join('')}</select></label>
+  <label>${tx(C('메모 (선택)','Memo (optional)','备注（选填）','メモ（任意）'))}<input name="memo" maxlength="60" autocomplete="off" placeholder="${escaped(languageMode==='ko'?'예) 코어3 구매, 2주 후 재방문':'')}"></label>
+  <div class="save-record-summary"><b>${tx(C('함께 저장되는 내용','Also saved','同时保存','一緒に保存'))}</b><span>${escaped(concerns||'-')} · ${escaped(selectedSkinTypes.join(' · ')||'-')}${selectedGender?' · '+escaped({female:'여성',male:'남성'}[selectedGender]||''):''}${selectedAge?' · '+escaped(selectedAge):''}</span></div>
+  <p class="save-record-note">${tx(C('고객 동의 후 입력해 주세요. 기록은 이 기기(브라우저)에만 저장됩니다.','Enter with the customer\'s consent. Saved on this device only.','请在顾客同意后填写。记录仅保存在本设备。','お客様の同意を得て入力してください。この端末にのみ保存されます。'))}</p>
+  <footer><button type="button" class="btn-ghost" data-save-cancel>${tx(C('취소','Cancel','取消','キャンセル'))}</button><button type="submit" class="btn-primary">${tx(C('저장하기','Save','保存','保存する'))}</button></footer></form>`;
+  const form=saveDialog.querySelector('form');
+  saveDialog.querySelector('[data-save-cancel]').onclick=()=>saveDialog.close();
+  form.phone4.addEventListener('input',()=>{form.phone4.value=form.phone4.value.replace(/\D/g,'').slice(0,4);});
+  form.addEventListener('submit',e=>{
+   e.preventDefault();const name=form.name.value.trim();if(!name){form.name.focus();return;}
+   if(form.phone4.value&&form.phone4.value.length!==4){form.phone4.focus();return;}
+   saveExtra.phone4=form.phone4.value;saveExtra.nation=form.nation.value;saveExtra.memo=form.memo.value.trim();
+   const field=document.querySelector('#customer-name');if(field)field.value=name;
+   const before=readCards().length;saveRecord();const after=readCards();const rec=after.find(x=>x.nameKey===recordKey(name));
+   saveDialog.innerHTML=`<div class="save-record-done"><div class="save-check">✓</div><h2>${tx(C(after.length>before?'저장 완료':'기존 기록 업데이트 완료',after.length>before?'Saved':'Record updated',after.length>before?'已保存':'记录已更新',after.length>before?'保存しました':'記録を更新しました'))}</h2><p><strong>${escaped(rec?.name||name)}</strong>${rec?.phone4?' · '+escaped(rec.phone4):''}${rec?.nation?' · '+escaped(rec.nation):''}</p><code>${escaped(rec?.code||'')}</code><p class="save-record-note">${tx(C('상단 ‘상담 기록’에서 이름·뒷번호로 찾을 수 있어요.','Find it later under “Consultation records”.','可在上方“咨询记录”中查找。','上部の「相談記録」から検索できます。'))}</p><footer><button type="button" class="btn-ghost" data-save-records>${tx(C('상담 기록 보기','View records','查看记录','記録を見る'))}</button><button type="button" class="btn-primary" data-save-close>${tx(C('확인','OK','确定','OK'))}</button></footer></div>`;
+   saveDialog.querySelector('[data-save-close]').onclick=()=>saveDialog.close();
+   saveDialog.querySelector('[data-save-records]').onclick=()=>{saveDialog.close();openRecords();};
+  });
+  saveDialog.showModal();setTimeout(()=>(form.name.value?form.phone4:form.name).focus(),30);
+ }
  let recordsDialog;
  function renderRecords(filter=''){
-  if(!recordsDialog)return;const all=readCards(),needle=normalizeName(filter),cards=all.filter(x=>!needle||normalizeName(x.name).includes(needle)||x.code.toLowerCase().includes(String(filter).toLowerCase()));
+  if(!recordsDialog)return;const all=readCards(),needle=normalizeName(filter),cards=all.filter(x=>!needle||normalizeName(x.name).includes(needle)||x.code.toLowerCase().includes(String(filter).toLowerCase())||(x.phone4&&x.phone4.includes(String(filter).trim()))||normalizeName(x.memo).includes(needle));
   recordsDialog.querySelector('.records-count').textContent=`${cards.length} / ${all.length}`;
-  recordsDialog.querySelector('.records-list').innerHTML=cards.length?cards.map(card=>`<article class="customer-record"><header><div><strong>${escaped(card.name)}</strong><code>${escaped(card.code)}</code></div><time>${formatDate(card.updatedAt)}</time></header><div class="customer-record-summary"><span>${card.concerns.map(c=>escaped(concernLabel(c)?.ko||c)).join(' · ')}</span><b>1PICK · ${escaped(card.recommendations.one[0]||'')}</b></div><details><summary>${tx(C('상담 기록 자세히','Consultation details','咨询记录详情','相談記録の詳細'))}</summary><dl><div><dt>${tx(C('피부 타입','Skin type','肤质','肌タイプ'))}</dt><dd>${card.skinTypes.map(escaped).join(' · ')}</dd></div><div><dt>${tx(C('코어 3','Core 3','核心3件','コア3'))}</dt><dd>${card.recommendations.core.map(escaped).join(' → ')}</dd></div><div><dt>${tx(C('프리미엄','Premium','进阶','プレミアム'))}</dt><dd>${card.recommendations.premium.map(escaped).join(' → ')}</dd></div></dl></details><button type="button" class="record-delete" data-record-delete="${escaped(card.code)}">${tx(C('삭제','Delete','删除','削除'))}</button></article>`).join(''):`<p class="records-empty">${tx(C('저장된 고객카드가 없습니다.','No saved customer cards.','暂无保存的客户卡。','保存された顧客カードはありません。'))}</p>`;
+  recordsDialog.querySelector('.records-list').innerHTML=cards.length?cards.map(card=>`<article class="customer-record"><header><div><strong>${escaped(card.name)}${card.phone4?` <small class="record-phone">· ${escaped(card.phone4)}</small>`:''}${card.nation?` <small class="record-nation">${escaped(card.nation)}</small>`:''}</strong><code>${escaped(card.code)}</code>${card.memo?`<p class="record-memo">${escaped(card.memo)}</p>`:''}</div><time>${formatDate(card.updatedAt)}</time></header><div class="customer-record-summary"><span>${card.concerns.map(c=>escaped(concernLabel(c)?.ko||c)).join(' · ')}</span><b>1PICK · ${escaped(card.recommendations.one[0]||'')}</b></div><details><summary>${tx(C('상담 기록 자세히','Consultation details','咨询记录详情','相談記録の詳細'))}</summary><dl><div><dt>${tx(C('피부 타입','Skin type','肤质','肌タイプ'))}</dt><dd>${card.skinTypes.map(escaped).join(' · ')}</dd></div><div><dt>${tx(C('코어 3','Core 3','核心3件','コア3'))}</dt><dd>${card.recommendations.core.map(escaped).join(' → ')}</dd></div><div><dt>${tx(C('프리미엄','Premium','进阶','プレミアム'))}</dt><dd>${card.recommendations.premium.map(escaped).join(' → ')}</dd></div></dl></details><button type="button" class="record-delete" data-record-delete="${escaped(card.code)}">${tx(C('삭제','Delete','删除','削除'))}</button></article>`).join(''):`<p class="records-empty">${tx(C('저장된 고객카드가 없습니다.','No saved customer cards.','暂无保存的客户卡。','保存された顧客カードはありません。'))}</p>`;
  }
  function openRecords(){renderRecords();recordsDialog.showModal();recordsDialog.querySelector('input').focus();}
  function initRecords(){
-  recordsDialog=document.createElement('dialog');recordsDialog.id='customer-records-dialog';recordsDialog.className='customer-records-dialog';recordsDialog.innerHTML=`<header><div><small>SIORÉ CUSTOMER CARDS</small><h2>${tx(C('상담 기록','Consultation records','咨询记录','相談記録'))}</h2></div><button type="button" data-records-close>${tx(C('닫기 ×','Close ×','关闭 ×','閉じる ×'))}</button></header><div class="records-toolbar"><label>${tx(C('이름 또는 고유코드 검색','Search name or code','搜索姓名或代码','氏名・コード検索'))}<input type="search" autocomplete="off"></label><span class="records-count"></span></div><div class="records-list"></div>`;document.body.append(recordsDialog);
+  recordsDialog=document.createElement('dialog');recordsDialog.id='customer-records-dialog';recordsDialog.className='customer-records-dialog';recordsDialog.innerHTML=`<header><div><small>SIORÉ CUSTOMER CARDS</small><h2>${tx(C('상담 기록','Consultation records','咨询记录','相談記録'))}</h2></div><button type="button" data-records-close>${tx(C('닫기 ×','Close ×','关闭 ×','閉じる ×'))}</button></header><div class="records-toolbar"><label>${tx(C('이름·뒷번호 4자리·메모·코드 검색','Search name, last 4 digits, memo or code','搜索姓名、尾号、备注或代码','氏名・下4桁・メモ・コード検索'))}<input type="search" autocomplete="off"></label><span class="records-count"></span></div><div class="records-list"></div>`;document.body.append(recordsDialog);
   recordsDialog.querySelector('[data-records-close]').onclick=()=>recordsDialog.close();recordsDialog.querySelector('input').addEventListener('input',e=>renderRecords(e.target.value));recordsDialog.addEventListener('click',e=>{const b=e.target.closest('[data-record-delete]');if(!b)return;writeCards(readCards().filter(x=>x.code!==b.dataset.recordDelete));renderRecords(recordsDialog.querySelector('input').value);});
   const lobbyButton=document.createElement('button');lobbyButton.type='button';lobbyButton.className='records-open lobby-records-open';lobbyButton.innerHTML=tx(C('상담 기록','Consultation records','咨询记录','相談記録'));document.querySelector('.compact-actions,.lobby-lead>div:first-child')?.append(lobbyButton);
   const toolbarButton=document.createElement('button');toolbarButton.type='button';toolbarButton.className='records-open toolbar-records-open';toolbarButton.innerHTML=tx(C('상담 기록','Consultation records','咨询记录','相談記録'));document.querySelector('.focus-toolbar .focus-close')?.before(toolbarButton);
@@ -6443,7 +6475,7 @@ window.SIORE_REFERENCE = (()=>{
   initRecords();const print=document.querySelector('#print-summary');if(print)print.innerHTML=tx(C('인쇄·PDF','Print / PDF','打印／PDF','印刷・PDF'));setTimeout(syncNavigator,0);
  });
  const previousResetUpgrade=resetAll;
- resetAll=function(){Object.keys(assessmentAnswers).forEach(k=>delete assessmentAnswers[k]);assessmentIndex=0;previousResetUpgrade();const name=document.querySelector('#customer-name');if(name)name.value='';renderAssessment();setTimeout(syncNavigator,0);};
+ resetAll=function(){Object.keys(assessmentAnswers).forEach(k=>delete assessmentAnswers[k]);saveExtra.phone4='';saveExtra.nation='';saveExtra.memo='';assessmentIndex=0;previousResetUpgrade();const name=document.querySelector('#customer-name');if(name)name.value='';renderAssessment();setTimeout(syncNavigator,0);};
  const previousLanguageUpgrade=setLanguage;
  setLanguage=function(lang){previousLanguageUpgrade(lang);renderAssessment();document.querySelectorAll('.records-open').forEach(b=>b.innerHTML=tx(C('상담 기록','Consultation records','咨询记录','相談記録')));renderRecords(document.querySelector('#customer-records-dialog input')?.value||'');setTimeout(syncNavigator,0);};
  const previousGoUpgrade=goToStep;
@@ -6560,5 +6592,32 @@ window.SIORE_REFERENCE = (()=>{
  });
 })();
 </script>
-<!-- REFERENCE UPDATE END --></body>
+<style>
+.save-record-dialog{width:min(480px,92vw);border:0;border-radius:16px;padding:0;color:#1c3545;box-shadow:0 30px 80px rgba(0,0,0,.28)}
+.save-record-dialog::backdrop{background:rgba(20,35,45,.5)}
+.save-record-form,.save-record-done{display:grid;gap:12px;padding:22px 24px}
+.save-record-form header small,.save-record-done small{font-size:11px;letter-spacing:.14em;color:#35677a;font-weight:800}
+.save-record-form h2,.save-record-done h2{margin:2px 0 4px;font-size:21px}
+.save-record-form header p{margin:0;font-size:13px;color:#4d6573;line-height:1.5}
+.save-record-form label{display:grid;gap:6px;font-size:13px;font-weight:700;color:#315f72}
+.save-record-form label.req::after{content:''}
+.save-record-form input,.save-record-form select{font:inherit;font-size:16px;font-weight:500;padding:11px 12px;border:1px solid #b9ced7;border-radius:8px;background:#fff;color:#1c3545}
+.save-record-form input:focus,.save-record-form select:focus{outline:3px solid #8fc1d3;border-color:#35677a}
+.save-record-form input:invalid:not(:placeholder-shown){border-color:#c0596e}
+.save-record-summary{display:grid;gap:3px;padding:10px 12px;border-radius:8px;background:#edf6f9;font-size:12.5px;line-height:1.45}
+.save-record-summary b{color:#315f72}
+.save-record-note{margin:0;font-size:12px;color:#6b7f89;line-height:1.5}
+.save-record-form footer,.save-record-done footer{display:flex;gap:10px;justify-content:flex-end;margin-top:4px}
+.save-record-form footer button,.save-record-done footer button{min-width:110px;min-height:46px;font-size:15px;border-radius:8px;cursor:pointer}
+.save-record-done{text-align:center;justify-items:center}
+.save-check{width:58px;height:58px;border-radius:50%;background:#2f7a5c;color:#fff;font-size:30px;line-height:58px;font-weight:800}
+.save-record-done p{margin:0;font-size:15px}
+.save-record-done code{font-size:13px;background:#f1f5f7;padding:4px 10px;border-radius:6px}
+.save-record-done footer{justify-content:center;width:100%}
+.save-record-form .i18n-ko,.save-record-done .i18n-ko{display:block;font-size:.8em;font-weight:500;color:#7d8f99}
+.record-phone,.record-nation{font-size:.8em;font-weight:600;color:#5e7380}
+.record-nation{margin-left:4px;padding:1px 6px;border-radius:999px;background:#edf6f9}
+.record-memo{margin:4px 0 0;font-size:12px;color:#4d6573}
+@media(max-width:480px){.save-record-form,.save-record-done{padding:18px}.save-record-form footer button,.save-record-done footer button{flex:1;min-width:0}}
+</style><!-- REFERENCE UPDATE END --></body>
 </html>
