@@ -6451,5 +6451,114 @@ window.SIORE_REFERENCE = (()=>{
  const previousShowUpgrade=showResults;
  showResults=function(){previousShowUpgrade();setTimeout(syncNavigator,0);};
 })();
-</script><!-- REFERENCE UPDATE END --></body>
+</script><style>
+.set-open{border:1px solid #e3b7a7;background:#fff6f2;color:#8a3f2a;border-radius:4px;padding:8px 12px;font-size:12px;font-weight:800;cursor:pointer;margin-left:9px;font-family:inherit}
+.set-open:hover{background:#ffece4}
+.set-open .i18n-ko{display:none}
+.toolbar-set-open{margin-left:8px}
+.rx-set-strip{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:14px 0 4px;padding:12px 16px;border:1px dashed #e3b7a7;border-radius:10px;background:#fffaf7;color:#5c3326}
+.rx-set-strip p{margin:0;font-size:13px;line-height:1.5}
+.rx-set-strip b{color:#8a3f2a}
+.rx-set-strip .set-open{margin:0;flex:none;padding:9px 14px;font-size:13px}
+.set-dialog{width:min(1080px,94vw);max-height:90vh;border:0;border-radius:14px;padding:0;color:#1c3545;box-shadow:0 30px 80px rgba(0,0,0,.25)}
+.set-dialog::backdrop{background:rgba(20,35,45,.45)}
+.set-head{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px 24px 14px;background:#fff;border-bottom:1px solid #e7eef2}
+.set-head small{display:block;font-size:11px;letter-spacing:.14em;color:#8a3f2a;font-weight:800}
+.set-head h2{margin:4px 0 4px;font-size:22px}
+.set-head p{margin:0;font-size:13px;color:#4d6573}
+.set-head button{flex:none;border:1px solid #cbdde7;background:#fff;border-radius:6px;padding:8px 12px;font-weight:700;cursor:pointer;font-family:inherit}
+.set-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px 14px;padding:26px 24px 18px}
+.set-dialog .set-card{overflow:visible}.set-card{position:relative;border:1px solid #e3eaee;border-radius:12px;padding:16px;background:#fff;display:flex;flex-direction:column;gap:10px}
+.set-card.is-match{border:2px solid #d0704f;background:#fffaf7}
+.set-match{position:absolute;top:-12px;right:12px;display:inline-block;background:#d0704f;color:#fff;font-size:11px;line-height:16px;height:auto;font-weight:800;padding:4px 10px;border-radius:999px;white-space:nowrap;overflow:visible}
+.set-card h3{margin:0;font-size:17px;display:flex;gap:8px;align-items:baseline}
+.set-card h3 span{font-size:12px;color:#8a3f2a;font-weight:800}
+.set-for{margin:0;font-size:13px;color:#4d6573;line-height:1.45}
+.set-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.set-steps li{text-align:center;font-size:11.5px;line-height:1.35;color:#1c3545}
+.set-steps img{display:block;width:100%;height:74px;object-fit:contain;margin-bottom:5px}
+.set-steps b{display:block;font-size:10.5px;color:#8a3f2a;margin-bottom:2px}
+.set-tip{margin:auto 0 0;font-size:12px;line-height:1.45;color:#315f72;background:#edf6f9;border-radius:8px;padding:8px 10px}
+.set-card .i18n-ko,.set-head .i18n-ko{display:block;font-size:.82em;color:#7d8f99;font-weight:500;margin-top:2px}
+.set-foot{margin:0;padding:4px 24px 20px;font-size:12px;color:#5e7380;line-height:1.5}
+@media(max-width:860px){.set-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.set-grid{grid-template-columns:1fr;padding:14px}.set-head{padding:16px}.set-head h2{font-size:19px}.rx-set-strip{flex-direction:column;align-items:stretch}.set-foot{padding:4px 16px 18px}}
+@media print{.set-open,.rx-set-strip{display:none!important}}
+</style><script>(()=>{
+ /* 자문약사 상황별 3종 조합 (#pb_화장품자문, 이정화 약사님, 2026-10-12) — 고객용 문구는 화장품 표현으로 순화 */
+ const C=(ko,en,zh,ja)=>copy4(ko,en,zh,ja);
+ const tx=v=>bilingual(v);
+ const SETS=[
+  {id:'firm',scenario:'aging',
+   name:C('탄력·광채 세트','Firmness & Glow Set','弹力光泽组合','ハリ・ツヤセット'),
+   who:C('피부가 느슨하고 칙칙해 보일 때','When skin looks less firm and dull','肌肤松弛、暗沉时','ハリ不足やくすみが気になるとき'),
+   keys:['bubbleToner','serum','comfortCream'],
+   tip:C('NMN 2단계로 집중 케어하고, 편안한 크림으로 마무리해요.','Two NMN steps for focused care, finished with a comforting cream.','两步NMN集中护理，再以舒缓面霜收尾。','NMNの2ステップで集中ケアし、やさしいクリームで仕上げます。')},
+  {id:'blemish',scenario:'trouble',
+   name:C('트러블 피부 세트','Blemish-prone Skin Set','痘痘肌组合','ゆらぎ肌トラブルセット'),
+   who:C('번들거림과 뾰루지가 반복될 때','When oiliness and breakouts keep coming back','反复出油、长痘时','皮脂やぶつぶつが繰り返すとき'),
+   keys:['essenceToner','repairAmpoule','soothingCream'],
+   tip:C('순한 토너·진정 앰플 후, 가벼운 수분 크림으로 끈적임 없이 마무리해요.','Gentle toner and soothing ampoule, then a light cream with no sticky finish.','温和爽肤水与舒缓安瓶后，用轻盈面霜清爽收尾。','やさしいトナーと鎮静アンプルの後、軽いクリームでべたつかず仕上げます。')},
+  {id:'heat',scenario:'heat',
+   name:C('열감·붉은기 진정 세트','Heat & Redness Calming Set','热感泛红舒缓组合','火照り・赤み鎮静セット'),
+   who:C('피부가 쉽게 달아오르고 붉어질 때','When skin heats up and flushes easily','肌肤容易发热泛红时','肌が火照りやすく赤みが出やすいとき'),
+   keys:['bubbleToner','soothingGel','comfortCream'],
+   tip:C('마찰 적은 버블 토너 → 쿨링 젤 → 판테놀·알란토인 크림 순서예요.','Low-friction bubble toner → cooling gel → panthenol & allantoin cream.','低摩擦泡沫爽肤水 → 清凉凝胶 → 泛醇·尿囊素面霜。','摩擦の少ない泡トナー → クーリングジェル → パンテノール・アラントインクリーム。')},
+  {id:'after',scenario:'barrier',
+   name:C('시술 후 보습 세트','After-Procedure Moisture Set','术后保湿组合','施術後の保湿セット'),
+   who:C('피부 시술 후 예민하고 건조할 때','When skin feels sensitive and dry after a procedure','皮肤项目后敏感干燥时','施術後に肌が敏感で乾燥するとき'),
+   keys:['soothingGel','repairAmpoule','richCream'],
+   tip:C('토너는 생략하고 수딩 젤부터. 젤은 냉장 보관 후 손바닥으로 지그시 눌러 흡수시키면 좋아요. 시술기관이 안내한 사용 시점을 먼저 따르세요.','Skip toner and start with the gel. Chilled gel, pressed in with the palms, feels best. Follow the timing your clinic advised first.','省略爽肤水，从舒缓凝胶开始。冷藏后用掌心轻压吸收更好。请优先遵循机构建议的使用时间。','トナーは省いてジェルから。冷蔵したジェルを手のひらで押さえてなじませます。施術機関の指示する使用時期を優先してください。')},
+  {id:'outdoor',scenario:'',
+   name:C('러닝·야외활동 세트','Running & Outdoor Set','跑步·户外组合','ランニング・アウトドアセット'),
+   who:C('햇볕·바람·땀에 지친 피부일 때','When skin is tired from sun, wind and sweat','肌肤因日晒、风吹、出汗而疲惫时','日差し・風・汗で疲れた肌に'),
+   keys:['bubbleToner','soothingGel','soothingCream'],
+   tip:C('운동 후 빠르게 수분을 채우고 쿨링한 뒤, 가벼운 크림으로 산뜻하게 마무리해요.','After exercise, hydrate fast, cool down, then finish light and fresh.','运动后迅速补水降温，再以轻盈面霜清爽收尾。','運動後すばやく保湿・クールダウンし、軽いクリームでさっぱり仕上げます。')},
+  {id:'mom',scenario:'',
+   name:C('임신·출산 전후 세트','Pregnancy & Postpartum Set','孕期·产后组合','妊娠・産後セット'),
+   who:C('컨디션 변화로 피부가 예민해졌을 때','When skin turns sensitive with body changes','身体变化导致肌肤敏感时','体調の変化で肌がゆらぐとき'),
+   keys:['essenceToner','serum','comfortCream'],
+   tip:C('순한 토너와 NMN 세럼, 병풀·판테놀 크림으로 부드럽게 관리해요. 사용 전 패치 테스트를 권해요.','Gentle toner, NMN serum and a centella & panthenol cream. A patch test first is recommended.','温和爽肤水、NMN精华与积雪草·泛醇面霜温和护理。建议先做局部测试。','やさしいトナー、NMNセラム、ツボクサ・パンテノールクリームで穏やかにケア。使用前のパッチテストをおすすめします。')}
+ ];
+ const P=()=>window.SIORE_PRODUCTS||{};
+ const ROLE={bubbleToner:C('토너','Toner','爽肤水','トナー'),essenceToner:C('토너','Toner','爽肤水','トナー'),repairAmpoule:C('앰플','Ampoule','安瓶','アンプル'),serum:C('세럼','Serum','精华','セラム'),soothingCream:C('크림','Cream','面霜','クリーム'),richCream:C('크림','Cream','面霜','クリーム'),comfortCream:C('크림','Cream','面霜','クリーム'),soothingGel:C('수딩 젤','Gel','凝胶','ジェル')};
+ const pname=k=>{const p=P()[k]||{};return C(p.name||k,p.i18n?.en?.name||p.name||k,p.i18n?.zh?.name||p.name||k,p.i18n?.ja?.name||p.name||k);};
+ const pimg=k=>(typeof solutionAssets!=='undefined'&&solutionAssets[k])?`product-guide/products/${solutionAssets[k]}.png`:(P()[k]?.image||'');
+ const LABEL=C('약사 추천 3종 세트','Pharmacist 3-step sets','药师推荐3件组合','薬剤師おすすめ3点セット');
+ function currentScenario(){
+  if(!document.getElementById('step3')?.classList.contains('active'))return '';
+  const sc=typeof selectedConcerns!=='undefined'?selectedConcerns:[];
+  const f=sc.find(v=>['트러블','피지','열감홍조','민감','장벽회복','건조','안티에이징','광채톤업'].includes(v));
+  if(['트러블','피지'].includes(f))return 'trouble';if(['열감홍조','민감'].includes(f))return 'heat';
+  if(['장벽회복','건조'].includes(f))return 'barrier';if(['안티에이징','광채톤업'].includes(f))return 'aging';return '';
+ }
+ let dialog;
+ function render(){
+  const match=currentScenario();
+  const cards=SETS.map((s,i)=>`<article class="set-card${match&&s.scenario===match?' is-match':''}">${match&&s.scenario===match?`<span class="set-match">${escaped(C('지금 상담과 맞는 세트','Matches this consultation','与本次咨询匹配','今回の相談に合うセット')[languageMode]||'지금 상담과 맞는 세트')}</span>`:''}<h3><span>0${i+1}</span>${tx(s.name)}</h3><p class="set-for">${tx(s.who)}</p><ol class="set-steps">${s.keys.map((k,n)=>`<li><img src="${escaped(pimg(k))}" alt="" loading="lazy"><b>STEP ${n+1} · ${escaped(ROLE[k]?.[languageMode]||ROLE[k]?.ko||'')}</b>${escaped(pname(k)[languageMode]||pname(k).ko)}</li>`).join('')}</ol><p class="set-tip">${tx(s.tip)}</p></article>`).join('');
+  dialog.innerHTML=`<header class="set-head"><div><small>PHARMACIST SET GUIDE</small><h2>${tx(C('상황별 3종 세트','3-step sets for every situation','按情况推荐的3件组合','シーン別3点セット'))}</h2><p>${tx(C('자문약사가 성분이 겹치지 않고 서로 보완되도록 구성한 조합이에요.','Combinations our advisory pharmacist built so ingredients complement rather than repeat.','顾问药师搭配，成分互补不重复。','顧問薬剤師が、成分が重ならず補い合うよう組んだセットです。'))}</p></div><button type="button" data-set-close>${tx(C('닫기 ×','Close ×','关闭 ×','閉じる ×'))}</button></header><div class="set-grid">${cards}</div><p class="set-foot">${tx(C('화장품 사용 제안이며 피부 상태에 따라 차이가 있을 수 있습니다. 질환이 있거나 치료 중이라면 전문가와 먼저 상담하세요.','These are cosmetic routine suggestions; results vary by skin. If you have a skin condition or are under treatment, consult a professional first.','以上为化妆品护理建议，效果因人而异。如有皮肤疾病或正在治疗，请先咨询专业人士。','化粧品の使用提案であり、肌状態により個人差があります。疾患や治療中の方は専門家に相談してください。'))}</p>`;
+  dialog.querySelector('[data-set-close]').onclick=()=>dialog.close();
+ }
+ function open(){render();dialog.showModal();dialog.scrollTop=0;}
+ function btn(cls){const b=document.createElement('button');b.type='button';b.className='set-open '+cls;b.innerHTML=tx(LABEL);b.onclick=open;return b;}
+ function strip(){
+  const sheet=document.querySelector('.solution-sheet .rx-overview');if(!sheet||sheet.querySelector('.rx-set-strip'))return;
+  const el=document.createElement('div');el.className='rx-set-strip';
+  el.innerHTML=`<p><b>${tx(C('이런 구성도 있어요','Other sets to consider','还有这些组合','こんなセットもあります'))}</b> · ${tx(C('시술 후·러닝·임신·출산 전후 등 상황별 3종 세트 6가지','6 situational sets, incl. after-procedure, running and postpartum','术后、跑步、孕期产后等6种情境组合','施術後・ランニング・妊娠産後など6つのシーン別セット'))}</p>`;
+  el.append(btn('rx-set-open'));sheet.append(el);
+ }
+ function relabel(){document.querySelectorAll('.set-open').forEach(b=>b.innerHTML=tx(LABEL));}
+ document.addEventListener('DOMContentLoaded',()=>{
+  dialog=document.createElement('dialog');dialog.className='set-dialog';dialog.setAttribute('aria-label','약사 추천 3종 세트');document.body.append(dialog);
+  dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close();});
+  setTimeout(()=>{
+   document.querySelector('.lobby-records-open')?.after(btn('lobby-set-open'));
+   document.querySelector('.toolbar-records-open')?.after(btn('toolbar-set-open'));
+  },0);
+  if(typeof paperRender==='function'){const prev=paperRender;paperRender=function(){prev();strip();};}
+  const prevLang=setLanguage;setLanguage=function(l){prevLang(l);relabel();strip();if(dialog.open)render();};
+ });
+})();
+</script>
+<!-- REFERENCE UPDATE END --></body>
 </html>
