@@ -6619,5 +6619,73 @@ window.SIORE_REFERENCE = (()=>{
 .record-nation{margin-left:4px;padding:1px 6px;border-radius:999px;background:#edf6f9}
 .record-memo{margin:4px 0 0;font-size:12px;color:#4d6573}
 @media(max-width:480px){.save-record-form,.save-record-done{padding:18px}.save-record-form footer button,.save-record-done footer button{flex:1;min-width:0}}
+</style><style id="responsive-fit">
+.focus-lobby h1,.focus-lobby p,.lobby-lead h1{word-break:keep-all;overflow-wrap:break-word}
+@media (max-width:767px){
+ .focus-lobby .lobby-lead{display:grid!important;grid-template-columns:1fr!important;gap:22px!important;padding:20px 0 90px!important}
+ .focus-lobby .lobby-lead>*{grid-column:1/-1!important;width:100%!important;max-width:none!important;min-width:0!important}
+ .focus-lobby .research-title{display:flex!important;align-items:center;gap:14px}
+ .focus-lobby .research-title h1{flex:1;min-width:0;font-size:clamp(25px,7.4vw,32px)!important;line-height:1.25}
+ .focus-lobby .brand-method{flex-wrap:wrap;gap:6px}
+ .focus-lobby .lobby-start,.focus-lobby .lobby-records-open,.focus-lobby .lobby-set-open{display:block!important;width:100%!important;margin:10px 0 0!important;min-height:48px;font-size:15px!important}
+ .focus-lobby .ingredient-spotlight{display:none!important}
+ .focus-lobby .orbit-research{max-width:340px;margin:0 auto}
+}
+@media (max-width:1023px) and (max-height:500px) and (orientation:landscape){
+ .focus-lobby .ingredient-spotlight{display:none!important}
+ .focus-lobby .lobby-lead{grid-template-columns:1.2fr 1fr!important;padding-bottom:70px!important}
+}
+
+@media (max-width:1023px){
+ .focus-toolbar{gap:6px;flex-wrap:nowrap;overflow:hidden}
+ .focus-toolbar #mood-name{display:none!important}
+ .focus-toolbar .records-open,.focus-toolbar .set-open{white-space:nowrap;flex:none;height:auto;padding:7px 9px;font-size:11px;margin-left:0}
+ .focus-toolbar .records-open .i18n-ko,.focus-toolbar .set-open .i18n-ko{display:none}
+ .focus-toolbar .toolbar-records-open{margin-left:auto}
+ .focus-toolbar .language-option{min-width:0;padding-left:8px;padding-right:8px}
+}
+@media (max-width:767px){
+ .focus-toolbar .language-option span{display:none}
+ .focus-toolbar .language-option{width:40px;justify-content:center}
+ .focus-toolbar .set-open{font-size:0!important;padding:7px 9px}
+ .focus-toolbar .set-open::before{content:'3종 세트';font-size:11px}
+ html[lang=en] .focus-toolbar .set-open::before{content:'3-step sets'}
+ html[lang=zh-CN] .focus-toolbar .set-open::before{content:'3件组合'}
+ html[lang=ja] .focus-toolbar .set-open::before{content:'3点セット'}
+ .concern-layout{grid-template-columns:1fr!important}
+ .concern-layout>.face-guide{display:none!important}
+}
+
+@media (max-width:1023px){
+ .focus-toolbar{flex-wrap:wrap!important;height:auto!important;min-height:48px;row-gap:6px;padding-top:6px;padding-bottom:6px;overflow:visible!important}
+ .focus-toolbar .language-bar{order:10;flex:1 1 100%;justify-content:flex-start}
+ .focus-toolbar .language-switcher{width:100%;display:grid!important;grid-template-columns:repeat(4,1fr);gap:6px}
+ .focus-toolbar .language-option{width:auto!important;justify-content:center}
+ .focus-toolbar .language-option span{display:inline!important}
+ .focus-toolbar .records-open,.focus-toolbar .set-open,.focus-toolbar .focus-close{height:36px!important;min-height:0;display:inline-flex!important;align-items:center}
+}
+@media (max-width:767px){
+ .focus-toolbar .focus-fullscreen{display:none!important}
+ .focus-toolbar .records-open{font-size:0!important;padding:7px 9px}
+ .focus-toolbar .records-open::before{content:'상담 기록';font-size:11px}
+ html[lang=en] .focus-toolbar .records-open::before{content:'Records'}
+ html[lang=zh-CN] .focus-toolbar .records-open::before{content:'咨询记录'}
+ html[lang=ja] .focus-toolbar .records-open::before{content:'相談記録'}
+ .focus-toolbar .focus-close{font-size:0!important;width:36px;justify-content:center}
+ .focus-toolbar .focus-close::before{content:'×';font-size:20px;line-height:1}
+ .focus-toolbar .language-option{padding:6px 4px!important;font-size:12px}
+ .focus-toolbar .language-option img{width:16px}
+ .focus-toolbar .language-option span .i18n-ko{display:none}
+}
+
+@media (max-width:767px){
+ .focus-toolbar .records-open>*,.focus-toolbar .set-open>*,.focus-toolbar .focus-close>*{display:none!important}
+ .focus-toolbar .language-switcher{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+}
+
+@media (max-width:767px){
+ body .focus-toolbar button.records-open span.i18n-ko,body .focus-toolbar button.set-open span.i18n-ko,body .focus-toolbar button.focus-close span.i18n-ko,
+ body .focus-toolbar button.records-open span.i18n-main,body .focus-toolbar button.set-open span.i18n-main,body .focus-toolbar button.focus-close span.i18n-main{display:none!important}
+}
 </style><!-- REFERENCE UPDATE END --></body>
 </html>

@@ -33,3 +33,4 @@
 #siore-clinical-popup .clinical-tabs::-webkit-scrollbar{display:none}
 @media(prefers-reduced-motion:reduce){#siore-clinical-popup .cleanse .packshots img{animation:none!important}}
 #siore-clinical-popup h2{word-break:keep-all}
+@media(max-height:500px){#siore-clinical-launch{bottom:6px;left:6px;padding:7px 10px;font-size:10px}}
