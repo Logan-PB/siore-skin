@@ -1,0 +1,65 @@
+/* SIORÉ 결과화면 개편 (2026-11-02): 수분×유분 4분면 · 고민 레이더 · 처방전 상자 루틴 카드 */
+.rx-diagnosis.sm-one{grid-template-columns:1fr!important}
+.rx-diagnosis.sm-one .rx-diagnosis-main p{display:block}
+
+.sm-skinmap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 14px}
+.sm-card{background:#fff;border:1px solid #d9dee5;border-radius:14px;padding:12px 12px 10px;display:flex;flex-direction:column}
+.sm-head{display:flex;align-items:center;gap:7px;margin-bottom:4px}
+.sm-head b{font-size:13px;color:#1d2b36;letter-spacing:-.01em}
+.sm-no{display:inline-grid;place-items:center;min-width:24px;height:18px;padding:0 5px;border-radius:4px;background:#1f5ad6;color:#fff;font-size:10px;font-weight:700;letter-spacing:.04em}
+.sm-card svg{width:100%;max-width:220px;margin:2px auto 0;display:block}
+.sm-ax{font-size:6.2px;fill:#6a7785;font-weight:600}
+.sm-ax-o{font-size:5.4px;fill:#97a3af}
+.sm-rl{font-size:6.4px;fill:#55626f;font-weight:600}
+.sm-rl.is-focus{fill:#c63e4c;font-weight:800}
+.sm-result{margin:6px 0 0;text-align:center;font-size:13px;font-weight:700;color:#1f5ad6;line-height:1.35}
+.sm-result span{color:#c63e4c}
+.sm-result .i18n-main{color:inherit}
+.sm-result>.i18n-main{color:#1f5ad6}
+.sm-result .i18n-ko,.sm-head .i18n-ko,.bx-kicker .i18n-ko,.bx-foot .i18n-ko,.sm-note .i18n-ko{display:block;font-size:10px;font-weight:500;color:#7c8792;margin-top:1px}
+.sm-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#e0525f;margin-right:5px;vertical-align:1px}
+.sm-note{grid-column:1/-1;margin:0;font-size:10.5px;color:#7c8792;text-align:center;line-height:1.5}
+
+.bx-wrap{margin:18px 0 6px}
+.bx-kicker{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;margin:0 2px 8px;font-size:14px;font-weight:800;color:#1d2b36}
+.bx-kicker em{font-style:normal;font-size:11px;font-weight:700;color:#1f5ad6;border:1px solid #1f5ad6;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.bx-card{background:#fff;border:1.4px solid #2b2b2b;color:#1b1b1b;font-family:"Pretendard","Helvetica Neue",Arial,sans-serif;box-shadow:0 10px 26px rgba(20,30,50,.08)}
+.bx-top{display:grid;grid-template-columns:1fr 1.15fr 1.25fr;border-bottom:1.2px solid #2b2b2b}
+.bx-cell{padding:10px 11px 11px;min-width:0}
+.bx-cell+.bx-cell{border-left:1.2px solid #2b2b2b}
+.bx-cell small{display:block;font-size:10.5px;font-weight:500;color:#2b2b2b;margin-bottom:6px;letter-spacing:-.01em}
+.bx-brand img{display:block!important;width:100%!important;max-width:128px;height:auto!important;margin-top:6px;opacity:1!important;visibility:visible!important}
+.bx-profile ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.bx-profile li{display:flex;align-items:center;gap:6px;font-size:11px;color:#1f5ad6;letter-spacing:-.01em}
+.bx-profile li b{font-weight:700}
+.bx-by strong{display:block;font-size:13.5px;font-weight:800;letter-spacing:.01em;line-height:1.25;margin-top:6px}
+.bx-lines{display:grid;grid-template-columns:1fr 1fr}
+.bx-line{padding:0 0 12px;min-width:0}
+.bx-line+.bx-line{border-left:1.2px solid #2b2b2b}
+.bx-tab{display:inline-block;background:#1f5ad6;color:#fff;font-size:11px;font-weight:600;padding:5px 12px 5px 11px;margin:0 0 9px}
+.bx-list{list-style:none;margin:0;padding:0 11px;display:grid;gap:8px}
+.bx-list li{display:flex;align-items:flex-start;gap:7px;font-size:11.5px;line-height:1.25;color:#2b2b2b}
+.bx-list li b{font-weight:500;letter-spacing:-.015em}
+.bx-list li small{display:block;font-size:9.5px;color:#7c8792;margin-top:1px}
+.bx-list li.is-on b{font-weight:800;color:#1b1b1b}
+.bx-list li:not(.is-on){opacity:.55}
+.bx-box{flex:0 0 auto;display:inline-grid;place-items:center;width:13px;height:13px;border:1.2px solid #2b2b2b;background:#fff;margin-top:1px}
+.bx-profile .bx-box{border-color:#1f5ad6}
+.bx-box.is-on{background:#1f5ad6;border-color:#1f5ad6}
+.bx-box svg{width:11px;height:11px}
+.bx-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;border-top:1.2px solid #2b2b2b;padding:9px 11px;font-size:11.5px;font-weight:700;color:#1f5ad6}
+.bx-foot time{flex:0 0 auto;font-size:10.5px;font-weight:500;color:#6a7785;letter-spacing:.04em}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+@media (max-width:520px){
+  .bx-top{grid-template-columns:1fr 1fr}
+  .bx-profile{grid-column:1/-1;grid-row:2;border-left:0!important;border-top:1.2px solid #2b2b2b}
+  .bx-profile ul{grid-template-columns:1fr 1fr}
+  .bx-by strong{font-size:12px}
+  .bx-list{padding:0 9px}
+  .bx-list li{font-size:10.8px}
+  .sm-skinmap{gap:8px}
+  .sm-card{padding:10px 8px 9px}
+  .sm-result{font-size:12px}
+}
+@media print{.bx-card{box-shadow:none}.bx-box.is-on,.bx-tab,.sm-no{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
