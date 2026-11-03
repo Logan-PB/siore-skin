@@ -102,3 +102,18 @@
 .zp-real .zp-pin.active{background:rgba(59,38,32,.82);border-color:rgba(255,255,255,.5);color:#fff;text-shadow:none}
 .zp-real .zp-pin.active::before{background:#f0c0a8;box-shadow:0 0 0 3px rgba(240,192,168,.3)}
 @media (max-width:760px){.zp-real .zp-pin{height:24px;padding:0 9px 0 8px;font-size:11px}}
+
+/* 밤 = 블랙 계열 (2026-11-03): 낮(크림)과 밤(블랙)이 한눈에 대비되도록 */
+.dn-col.pm{background:linear-gradient(160deg,#1d1816 0%,#141110 100%);border:1px solid #2e2724;color:#f4ece6;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.dn-col.pm .dn-col-head b{color:#ffffff}
+.dn-col.pm .dn-col-head span:not(.dn-ico){color:#c9b8ae}
+.dn-col.pm .dn-col-head .i18n-ko{color:#a8968c}
+.pm .dn-ico{background:#2c2420;color:#e9c9a8}
+.dn-col.pm .dn-row{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08)}
+.dn-col.pm .dn-row.is-add{background:rgba(233,201,168,.08);border:2px dashed #b88f6e}
+.dn-col.pm .dn-row img{background:#f4ece6;border-radius:10px;padding:3px;box-sizing:border-box}
+.dn-col.pm .dn-row b{color:#ffffff}
+.dn-col.pm .dn-row div>span{color:#c9b8ae}
+.dn-row small.pm{color:#e9c9a8}
+.dn-col.pm .dn-row em{background:#e9c9a8;color:#1d1816}
+@media print{.dn-col.pm{background:#1d1816 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
