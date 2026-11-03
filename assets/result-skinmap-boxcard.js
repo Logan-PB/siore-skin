@@ -44,15 +44,23 @@
     else if(o>=0.3)label=Q('지성 경향','Oily-leaning','偏油性倾向','脂性肌傾向');
     else label=Q('산뜻한 균형 경향','Light & balanced','清爽平衡倾向','さっぱりバランス傾向');
     var x=60+o*24,y=56-h*22;
+    var qn=function(m){return P(m)};
     var svg='<svg viewBox="0 0 120 112" role="img" aria-label="'+P(Q('수분 유분 위치','Hydration and oil position','水油定位','水分・油分の位置'))+'">'
-      +'<rect x="12" y="12" width="48" height="44" fill="#e7f0fb"/><rect x="60" y="12" width="48" height="44" fill="#e3f4ef"/>'
-      +'<rect x="12" y="56" width="48" height="44" fill="#fbf1e2"/><rect x="60" y="56" width="48" height="44" fill="#f1efe8"/>'
-      +'<rect x="12" y="12" width="96" height="88" fill="none" stroke="#c9d3df" stroke-width=".6"/>'
-      +'<line x1="60" y1="12" x2="60" y2="100" stroke="#9fb1c6" stroke-width=".6"/><line x1="12" y1="56" x2="108" y2="56" stroke="#9fb1c6" stroke-width=".6"/>'
+      +'<defs><radialGradient id="smQf" cx="50%" cy="50%" r="70%"><stop offset="0" stop-color="#fffaf6"/><stop offset="1" stop-color="#f4e6dd"/></radialGradient>'
+      +'<radialGradient id="smDot"><stop offset="0" stop-color="#d79a86"/><stop offset="1" stop-color="#9c5a47"/></radialGradient></defs>'
+      +'<rect x="12" y="12" width="96" height="88" rx="6" fill="url(#smQf)" stroke="#d8c2b3" stroke-width=".5"/>'
+      +'<line x1="60" y1="16" x2="60" y2="96" stroke="#cfb3a1" stroke-width=".4" stroke-dasharray="1.2 1.6"/><line x1="16" y1="56" x2="104" y2="56" stroke="#cfb3a1" stroke-width=".4" stroke-dasharray="1.2 1.6"/>'
+      +'<text x="18" y="21" class="sm-qn">'+qn(Q('산뜻','Light','清爽','さっぱり'))+'</text>'
+      +'<text x="102" y="21" text-anchor="end" class="sm-qn">'+qn(Q('지성','Oily','油性','脂性'))+'</text>'
+      +'<text x="18" y="94" class="sm-qn">'+qn(Q('건성','Dry','干性','乾燥'))+'</text>'
+      +'<text x="102" y="94" text-anchor="end" class="sm-qn">'+qn(Q('수분부족 지성','Dehydrated oily','外油内干','インナードライ'))+'</text>'
       +'<text x="60" y="8" text-anchor="middle" class="sm-ax">'+P(Q('수분 충분','Hydrated','水分充足','うるおい十分'))+'</text>'
-      +'<text x="60" y="109" text-anchor="middle" class="sm-ax">'+P(Q('수분 부족','Dehydrated','水分不足','うるおい不足'))+'</text>'+'<text x="12" y="109" text-anchor="start" class="sm-ax sm-ax-o">'+P(Q('← 유분 적음','← Less oil','← 油少','← 油分少'))+'</text>'+'<text x="108" y="109" text-anchor="end" class="sm-ax sm-ax-o">'+P(Q('유분 많음 →','More oil →','油多 →','油分多 →'))+'</text>'
-      +'<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="9" fill="'+BLUE+'" fill-opacity=".16"/>'
-      +'<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="4.6" fill="'+BLUE+'" stroke="#fff" stroke-width="1.4"/>'
+      +'<text x="60" y="109" text-anchor="middle" class="sm-ax">'+P(Q('수분 부족','Dehydrated','水分不足','うるおい不足'))+'</text>'
+      +'<text x="12" y="109" text-anchor="start" class="sm-ax sm-ax-o">'+P(Q('← 유분 적음','← Less oil','← 油少','← 油分少'))+'</text>'
+      +'<text x="108" y="109" text-anchor="end" class="sm-ax sm-ax-o">'+P(Q('유분 많음 →','More oil →','油多 →','油分多 →'))+'</text>'
+      +'<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="11" fill="none" stroke="#b77a66" stroke-opacity=".22" stroke-width=".6"/>'
+      +'<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="7.5" fill="#c58a76" fill-opacity=".16"/>'
+      +'<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="4" fill="url(#smDot)" stroke="#fff" stroke-width="1.3"/>'
       +'</svg>';
     return {svg:svg,label:label};
   }
@@ -87,13 +95,14 @@
     var ring=function(r){return AXES.map(function(_,i){return pt(i,r).map(function(n){return n.toFixed(1)}).join(',')}).join(' ')};
     var shape=AXES.map(function(x,i){return pt(i,R*v[x.k]/5).map(function(n){return n.toFixed(1)}).join(',')}).join(' ');
     var svg='<svg viewBox="0 0 120 116" role="img" aria-label="'+P(Q('고민 프로필','Concern profile','肌肤困扰概况','お悩みプロフィール'))+'">'
-      +'<polygon points="'+ring(R)+'" fill="none" stroke="#c9d3df" stroke-width=".6"/>'
-      +'<polygon points="'+ring(R*0.6)+'" fill="none" stroke="#dde3ea" stroke-width=".5"/>'
-      +'<polygon points="'+ring(R*0.25)+'" fill="none" stroke="#e6eaef" stroke-width=".5"/>'
-      +AXES.map(function(_,i){var p=pt(i,R);return '<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0].toFixed(1)+'" y2="'+p[1].toFixed(1)+'" stroke="#e1e6ec" stroke-width=".5"/>'}).join('')
-      +'<polygon points="'+shape+'" fill="'+BLUE+'" fill-opacity=".14" stroke="'+BLUE+'" stroke-width="1.1" stroke-linejoin="round"/>'
+      +'<defs><linearGradient id="smRf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ecc4b5"/><stop offset="1" stop-color="#b9786a"/></linearGradient></defs>'
+      +'<polygon points="'+ring(R)+'" fill="#fbf3ee" stroke="#d8c2b3" stroke-width=".5"/>'
+      +'<polygon points="'+ring(R*0.66)+'" fill="none" stroke="#e4d3c7" stroke-width=".4"/>'
+      +'<polygon points="'+ring(R*0.33)+'" fill="none" stroke="#ecdfd6" stroke-width=".4"/>'
+      +AXES.map(function(_,i){var p=pt(i,R);return '<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0].toFixed(1)+'" y2="'+p[1].toFixed(1)+'" stroke="#e6d6cb" stroke-width=".35"/>'}).join('')
+      +'<polygon points="'+shape+'" fill="url(#smRf)" fill-opacity=".38" stroke="#a86a58" stroke-width=".9" stroke-linejoin="round"/>'
       +AXES.map(function(x,i){var p=pt(i,R*v[x.k]/5),lp=pt(i,R+9),f=focus.indexOf(x.k)>-1;
-        return (f?'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="3.2" fill="#e0525f" stroke="#fff" stroke-width="1"/>':'')
+        return (f?'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="2.8" fill="#a86a58" stroke="#fff" stroke-width="1.1"/>':'')
         +'<text x="'+lp[0].toFixed(1)+'" y="'+(lp[1]+2.5).toFixed(1)+'" text-anchor="middle" class="sm-rl'+(f?' is-focus':'')+'">'+P(x.n)+'</text>';}).join('')
       +'</svg>';
     return {svg:svg,focus:focus.map(function(k){return AXES.filter(function(x){return x.k===k})[0].n})};
@@ -103,10 +112,10 @@
     var s=st(),q=quadrant(s),r=radar(s);
     var focusTxt=r.focus.map(function(n){return P(n)}).join(' · ');
     return '<section class="sm-skinmap" aria-label="'+P(Q('피부 경향 요약','Skin tendency summary','肌肤倾向概要','肌傾向のまとめ'))+'">'
-      +'<div class="sm-card"><div class="sm-head"><span class="sm-no">01</span><b>'+T(Q('내 피부 위치','Where your skin sits','我的肌肤定位','わたしの肌ポジション'))+'</b></div>'+q.svg
-      +'<p class="sm-result">'+T(q.label)+'</p></div>'
-      +'<div class="sm-card"><div class="sm-head"><span class="sm-no">02</span><b>'+T(Q('고민 프로필','Concern profile','肌肤困扰概况','お悩みプロフィール'))+'</b></div>'+r.svg
-      +'<p class="sm-result"><i class="sm-dot"></i>'+focusTxt+' <span>'+T(Q('집중 케어','focus care','重点护理','集中ケア'))+'</span></p></div>'
+      +'<div class="sm-card"><div class="sm-head"><span class="sm-eye">01 · SKIN POSITION</span><b>'+T(Q('내 피부 위치','Where your skin sits','我的肌肤定位','わたしの肌ポジション'))+'</b></div>'+q.svg
+      +'<p class="sm-result"><span class="sm-tag">MY TYPE</span>'+T(q.label)+'</p></div>'
+      +'<div class="sm-card"><div class="sm-head"><span class="sm-eye">02 · CONCERN PROFILE</span><b>'+T(Q('고민 프로필','Concern profile','肌肤困扰概况','お悩みプロフィール'))+'</b></div>'+r.svg
+      +'<p class="sm-result"><span class="sm-tag">FOCUS CARE</span>'+focusTxt+'</p></div>'
       +'<p class="sm-note">'+T(Q('선택하신 답변을 바탕으로 한 경향이며, 측정·진단 결과가 아닙니다.','A tendency based on your answers, not a measurement or diagnosis.','基于您的回答得出的倾向，并非测量或诊断结果。','回答に基づく傾向であり、測定・診断結果ではありません。'))+'</p>'
       +'</section>';
   }
@@ -116,7 +125,8 @@
   var REL=[['essenceToner','Essence Toner'],['repairAmpoule','Repair Ampoule'],['comfortCream','Comfort Cream'],['soothingGel','Daily Balance Calming Soothing Gel']];
   function localName(key){
     try{var p=(Array.isArray(products)?products.filter(function(x){return x.key===key})[0]:products[key]);if(!p)return '';
-      var l=lang();return (l!=='en'&&l!=='ko'&&p.i18n&&p.i18n[l]&&p.i18n[l].name)||(l==='ko'?p.name:'')||'';}catch(e){return ''}
+      var l=lang(),n=(l!=='en'&&l!=='ko'&&p.i18n&&p.i18n[l]&&p.i18n[l].name)||(l==='ko'?p.name:'')||'';
+      return n.replace(/^(NMN\s*|데일리\s*릴리프\s*(\(밸런스\))?\s*|デイリーリリーフ\s*|每日舒缓\s*|日常舒缓\s*|Daily Relief\s*)/,'').trim();}catch(e){return ''}
   }
   function picked(){
     var panel=document.querySelector('.solution-sheet .rx-tier-panel:not([hidden])')||document.querySelector('.solution-sheet .rx-tier-panel');
@@ -139,13 +149,13 @@
         +'<div class="bx-top">'
           +'<div class="bx-cell bx-brand"><small>Prescription.</small><img src="'+logo+'" alt="SIORÉ"></div>'
           +'<div class="bx-cell bx-profile"><small>Skin Profile.</small><ul>'
-            +'<li class="'+(nmnOn?'is-on':'')+'">'+box(0,nmnOn)+'<b>ANTI-AGING LINE</b></li>'
-            +'<li class="'+(relOn?'is-on':'')+'">'+box(0,relOn)+'<b>BALANCE(RELIEF) LINE</b></li></ul></div>'
+            +'<li class="bx-nmn'+(nmnOn?' is-on':'')+'">'+box(0,nmnOn)+'<b>ANTI-AGING LINE</b></li>'
+            +'<li class="bx-rel'+(relOn?' is-on':'')+'">'+box(0,relOn)+'<b>BALANCE(RELIEF) LINE</b></li></ul></div>'
           +'<div class="bx-cell bx-by"><small>Prescribed by.</small><strong>SIORÉ PHARMACIST LAB.</strong></div>'
         +'</div>'
         +'<div class="bx-lines">'
-          +'<div class="bx-line"><div class="bx-tab">NMN Anti-Aging Line</div><ul class="bx-list">'+NMN.map(function(p){return item(p,keys)}).join('')+'</ul></div>'
-          +'<div class="bx-line"><div class="bx-tab">Balance(Relief) Line</div><ul class="bx-list">'+REL.map(function(p){return item(p,keys)}).join('')+'</ul></div>'
+          +'<div class="bx-line bx-nmn"><div class="bx-tab">NMN Anti-Aging Line</div><ul class="bx-list">'+NMN.map(function(p){return item(p,keys)}).join('')+'</ul></div>'
+          +'<div class="bx-line bx-rel"><div class="bx-tab">Balance(Relief) Line</div><ul class="bx-list">'+REL.map(function(p){return item(p,keys)}).join('')+'</ul></div>'
         +'</div>'
         +'<div class="bx-foot"><span>'+T(Q('이 카드를 약사·판매직원에게 보여주세요','Show this card to the pharmacy staff','请向药师或店员出示此卡','このカードを薬剤師・スタッフにお見せください'))+'</span><time>'+date+'</time></div>'
       +'</div></section>';
