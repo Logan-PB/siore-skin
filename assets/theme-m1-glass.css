@@ -1,0 +1,136 @@
+/* SIORÉ 상담링크 M1 리넨 누드 글래스 테마 (2026-11-03)
+   시안: mockups/siore_4axis_code_symptom.html · siore_color_mood_official.html (M1)
+   상담 다이얼로그(#focus-dialog) 전체에만 적용. 추천 로직·문항 구성은 그대로. */
+#focus-dialog{
+  --ink:#3b2620;--sub:#7b6157;--mute:#a89087;--eye:#a5684f;--hl:#a5684f;
+  --gl:linear-gradient(150deg,rgba(255,255,255,.86),rgba(255,252,248,.64));
+  --glb:rgba(255,255,255,.95);--gls:0 18px 36px -22px rgba(110,66,50,.45),inset 0 1px 0 #fff;
+  --grad:linear-gradient(90deg,#d4957b,#a86a55);--chip:rgba(255,255,255,.72);
+  --pink:#b9736a;--blue:#5877a8;
+  background:linear-gradient(165deg,#faf6f0 0%,#f3e9e1 55%,#eedfd5 100%) !important;
+  color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+#focus-dialog::before,#focus-dialog::after{content:"";position:fixed;border-radius:50%;filter:blur(48px);pointer-events:none;z-index:0}
+#focus-dialog::before{width:320px;height:320px;top:-110px;right:-110px;background:#f1c3ae;opacity:.6}
+#focus-dialog::after{width:300px;height:300px;bottom:-120px;left:-120px;background:#e8b9a3;opacity:.45}
+#focus-dialog>*{position:relative;z-index:1}
+
+/* 상단 툴바·언어 */
+#focus-dialog .focus-toolbar{background:rgba(255,250,246,.72) !important;backdrop-filter:blur(16px) saturate(140%);-webkit-backdrop-filter:blur(16px) saturate(140%);border-bottom:1px solid rgba(255,255,255,.9) !important;box-shadow:0 10px 24px -20px rgba(110,66,50,.5) !important}
+#focus-dialog .language-option{background:var(--chip) !important;border:1px solid rgba(165,104,79,.18) !important;color:var(--sub) !important;border-radius:999px !important;box-shadow:none !important}
+#focus-dialog .language-option.active{background:#3b2620 !important;border-color:#3b2620 !important;color:#fff !important}
+#focus-dialog .records-open,#focus-dialog .set-open,#focus-dialog .focus-close,#focus-dialog .focus-fullscreen{background:var(--chip) !important;border:1px solid rgba(165,104,79,.2) !important;color:var(--ink) !important;border-radius:12px !important;box-shadow:none !important}
+#focus-dialog .set-open{color:#8a5440 !important;background:rgba(244,220,208,.6) !important}
+
+/* 단계 표시 */
+#focus-dialog .steps-nav{background:transparent !important;border:0 !important}
+#focus-dialog .steps-nav *{color:var(--sub) !important;border-color:rgba(165,104,79,.25) !important}
+#focus-dialog .steps-nav .active,#focus-dialog .steps-nav [aria-current="step"],#focus-dialog .steps-nav .done{color:var(--ink) !important}
+#focus-dialog .steps-nav [class*="num"],#focus-dialog .steps-nav b,#focus-dialog .steps-nav i{background-color:transparent}
+#focus-dialog .steps-nav .active [class*="num"],#focus-dialog .steps-nav .active b{background:var(--grad) !important;color:#fff !important;border-color:transparent !important}
+
+/* 단계 패널 = 큰 유리 시트 */
+#focus-dialog .step-panel{background:transparent !important;border:0 !important;box-shadow:none !important}
+#focus-dialog .panel-header{text-align:center}
+#focus-dialog .panel-kicker{color:var(--eye) !important;letter-spacing:.3em !important;font-weight:600 !important;font-size:10px !important}
+#focus-dialog .panel-header h2{color:var(--ink) !important;font-weight:700 !important;letter-spacing:-.025em !important}
+#focus-dialog .panel-header p{color:var(--sub) !important}
+#focus-dialog .consult-step-notice,#focus-dialog .question-notice{background:var(--gl) !important;border:1px solid var(--glb) !important;border-radius:14px !important;color:var(--sub) !important;box-shadow:var(--gls) !important}
+#focus-dialog .consult-step-notice *,#focus-dialog .question-notice *{color:var(--sub) !important}
+#focus-dialog .consult-step-notice svg,#focus-dialog .consult-step-notice [class*="icon"]{color:var(--hl) !important;fill:currentColor}
+
+/* 카드형 블록 = 유리 패널 */
+#focus-dialog .profile-bar,#focus-dialog .choice-block,#focus-dialog .intake-card,#focus-dialog .skin-assessment,#focus-dialog .habit-panel,#focus-dialog .medical-question{
+  background:var(--gl) !important;border:1px solid var(--glb) !important;border-radius:22px !important;
+  box-shadow:var(--gls) !important;backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+#focus-dialog .consult-checkpoint-active{outline:0 !important;box-shadow:0 0 0 1.5px #c99582,var(--gls) !important}
+
+#focus-dialog h3,#focus-dialog legend,#focus-dialog .field-head h3{color:var(--ink) !important}
+#focus-dialog .field-head span,#focus-dialog small{color:var(--mute)}
+
+/* 선택 버튼(세그먼트·고민 카드·타입 카드·문진 답) */
+#focus-dialog .segmented-grid button,#focus-dialog .concern-card,#focus-dialog .type-card,#focus-dialog [data-skin-answer],#focus-dialog .habit-options button,#focus-dialog [data-texture],#focus-dialog [data-sensitivity]{
+  background:var(--chip) !important;border:1px solid rgba(165,104,79,.16) !important;border-radius:14px !important;color:var(--sub) !important;box-shadow:none !important;font-weight:600}
+#focus-dialog .segmented-grid button.selected,#focus-dialog .concern-card.selected,#focus-dialog .type-card.selected,#focus-dialog [data-skin-answer][aria-pressed="true"],#focus-dialog .habit-options button[aria-pressed="true"],#focus-dialog [data-texture].selected,#focus-dialog [data-sensitivity].selected{
+  background:var(--grad) !important;border-color:transparent !important;color:#fff !important;box-shadow:0 10px 20px -12px rgba(168,106,85,.8) !important}
+#focus-dialog .concern-card.selected *,#focus-dialog .type-card.selected *{color:#fff !important}
+#focus-dialog .concern-card *,#focus-dialog .type-card *{color:inherit}
+#focus-dialog input[type="text"],#focus-dialog input:not([type]){background:rgba(255,255,255,.8) !important;border:1px solid rgba(165,104,79,.2) !important;border-radius:12px !important;color:var(--ink) !important}
+
+/* 빠른 피부 체크 = 4축 문진 */
+#focus-dialog .skin-assessment header small{color:var(--eye) !important;letter-spacing:.24em !important}
+#focus-dialog .skin-assessment-progress button{background:rgba(165,104,79,.12) !important;color:var(--sub) !important;border:0 !important;border-radius:999px !important}
+#focus-dialog .skin-assessment-progress button[aria-current="step"]{background:#3b2620 !important;color:#fff !important}
+#focus-dialog .skin-assessment-progress button[data-state="done"]{background:var(--grad) !important;color:#fff !important}
+#focus-dialog .skin-assessment-question{background:rgba(255,255,255,.6) !important;border:1px solid var(--glb) !important;border-radius:18px !important;box-shadow:none !important}
+#focus-dialog .skin-assessment-question legend b{background:var(--grad) !important;color:#fff !important;border:0 !important}
+#focus-dialog .ax-tag{display:block;font-size:9px;font-weight:700;letter-spacing:.18em;color:var(--eye);margin:0 0 4px}
+
+/* 하단 버튼 */
+#focus-dialog .panel-actions{background:rgba(250,246,240,.86) !important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid rgba(255,255,255,.9) !important;box-shadow:0 -10px 24px -20px rgba(110,66,50,.5) !important}
+#focus-dialog .btn-primary{background:var(--grad) !important;color:#fff !important;border:0 !important;border-radius:16px !important;box-shadow:0 12px 26px -14px rgba(168,106,85,.85) !important;font-weight:700 !important}
+#focus-dialog .btn-primary:disabled,#focus-dialog .btn-primary[disabled]{background:rgba(165,104,79,.18) !important;color:rgba(59,38,32,.45) !important;box-shadow:none !important}
+#focus-dialog .btn-ghost{background:var(--chip) !important;color:var(--ink) !important;border:1px solid rgba(165,104,79,.22) !important;border-radius:16px !important;box-shadow:none !important}
+
+/* 3단계 결과 시트 = 유리 */
+#focus-dialog .solution-sheet.prescription-layout,#focus-dialog .solution-sheet.prescription-layout.rx-paper-approved{
+  background:rgba(255,252,248,.55) !important;background-image:none !important;border:1px solid var(--glb) !important;border-radius:26px !important;
+  box-shadow:var(--gls) !important;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+#focus-dialog .rx-prescription-head small{color:var(--eye) !important;letter-spacing:.3em !important}
+#focus-dialog .rx-prescription-head h2{color:var(--ink) !important}
+#focus-dialog .rx-prescription-head{border-bottom:1px solid rgba(165,104,79,.25) !important}
+#focus-dialog .rx-handwriting{display:none !important}
+#focus-dialog .rx-diagnosis-main{background:var(--gl) !important;border:1px solid var(--glb) !important;border-radius:20px !important;box-shadow:var(--gls) !important}
+#focus-dialog .rx-diagnosis-main small{color:var(--eye) !important}
+#focus-dialog .rx-diagnosis-main strong{color:var(--ink) !important}
+#focus-dialog .rx-tier-tabs button{background:var(--chip) !important;border:1px solid rgba(165,104,79,.2) !important;color:var(--sub) !important;border-radius:14px !important;box-shadow:none !important}
+#focus-dialog .rx-tier-tabs button[aria-selected="true"]{background:var(--grad) !important;color:#fff !important;border-color:transparent !important}
+#focus-dialog .rx-tier-tabs button b{background:rgba(255,255,255,.35) !important;color:inherit !important}
+#focus-dialog .rx-product-tile{background:var(--gl) !important;border:1px solid var(--glb) !important;border-radius:18px !important;box-shadow:var(--gls) !important}
+#focus-dialog .rx-product-tile strong{color:var(--ink) !important}
+#focus-dialog .rx-product-tile em{color:var(--eye) !important}
+#focus-dialog .rx-evidence summary,#focus-dialog .rx-rationale,#focus-dialog .rx-pharmacist-note,#focus-dialog .rx-additions{background:var(--chip) !important;border:1px solid rgba(165,104,79,.18) !important;border-radius:16px !important;color:var(--ink) !important}
+#focus-dialog .rx-rationale *{color:inherit}
+#focus-dialog [class*="sets-cta"],#focus-dialog .set-open-inline{border-color:rgba(165,104,79,.3) !important}
+
+/* 추천 이유 (WHY THIS ROUTINE) */
+.why-card{position:relative;margin:0 0 16px;padding:16px 16px 12px;border-radius:20px;background:linear-gradient(165deg,#fffdfa 0%,#fbf4ef 60%,#f6eae2 100%);border:1px solid rgba(168,112,92,.22);box-shadow:0 14px 32px -18px rgba(120,72,52,.35),inset 0 1px 0 #fff}
+.why-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.why-head .why-code{display:flex;gap:4px}
+.why-head .why-code span{width:30px;height:36px;border-radius:9px;display:grid;place-items:center;background:#fff;box-shadow:0 8px 16px -12px rgba(110,66,50,.6);font-size:15px;font-weight:300;color:#3b2620}
+.why-head b{display:block;font-size:13.5px;color:#3b2620}
+.why-head small{display:block;font-size:10.5px;color:#7b6157;margin-top:2px}
+.why-card h5{font-size:12.5px;font-weight:700;color:#3b2620;margin:10px 0 4px;letter-spacing:.01em}
+.why-card h5 em{font-style:normal;font-size:8.5px;letter-spacing:.22em;color:#a8705c;display:block;margin-bottom:3px}
+.why-card ul{list-style:none;margin:0;padding:0}
+.why-card li{display:grid;grid-template-columns:54px 1fr;gap:10px;align-items:center;padding:8px 0;border-top:1px solid rgba(165,104,79,.16)}
+.why-card li:first-child{border-top:0}
+.why-card li img{width:54px;height:54px;object-fit:contain;background:#fff;border-radius:12px}
+.why-card li small{display:block;font-size:8.5px;font-weight:800;letter-spacing:.14em}
+.why-card li small.nm{color:#b9736a}.why-card li small.bl{color:#5877a8}
+.why-card li b{display:block;font-size:12.5px;color:#3b2620;margin-top:1px}
+.why-card li span{display:block;font-size:11px;color:#7b6157;line-height:1.45;margin-top:2px}
+.why-card .i18n-ko{display:block;font-size:9.5px;font-weight:400;color:#a0918a}
+@media print{#focus-dialog::before,#focus-dialog::after{display:none}}
+#focus-dialog .consult-checkpoint-active::after{background:var(--grad) !important;color:#fff !important;border-color:transparent !important;box-shadow:0 6px 14px -8px rgba(168,106,85,.8) !important}
+/* 잔여 틸·핑크 정리 */
+#focus-dialog .step-panel,#focus-dialog .step-panel .panel-header,#focus-dialog .profile-bar,#focus-dialog .concern-layout,#focus-dialog .choice-block,#focus-dialog .intake-card,#focus-dialog .skin-assessment,#focus-dialog .habit-panel,#focus-dialog .panel-actions{color:#3b2620 !important}
+#focus-dialog .customer-name-field,#focus-dialog .customer-name-field span{color:#7b6157 !important}
+#focus-dialog .consult-checkpoint-active::before{border-color:#d3a593 !important}
+#focus-dialog .question-number{background:var(--grad) !important;color:#fff !important;border:0 !important}
+#focus-dialog .question-status{background:rgba(255,255,255,.8) !important;color:#8a5440 !important;border-color:rgba(165,104,79,.3) !important}
+#focus-dialog .panel-header>div,#focus-dialog .panel-header [class*="count"],#focus-dialog .panel-header [class*="status"]{background:rgba(255,255,255,.7) !important;color:#8a5440 !important;border-color:rgba(165,104,79,.3) !important}
+#focus-dialog .habit-guide-track i{background:var(--grad) !important}
+#focus-dialog .habit-guide-progress-label,#focus-dialog .habit-guide-status,#focus-dialog .habit-step-name{color:#7b6157 !important}
+#focus-dialog .habit-step-current{border-color:#d3a593 !important;background:rgba(255,255,255,.6) !important}
+#focus-dialog .habit-step-state{background:#a5684f !important;color:#fff !important;box-shadow:0 0 0 4px rgba(165,104,79,.15) !important}
+#focus-dialog .habit-panel summary{color:#3b2620 !important}
+#focus-dialog .habit-panel summary::marker{color:#a5684f}
+
+#focus-dialog .steps-nav [class*="step"]>span:first-child,#focus-dialog .steps-nav .step-num{border-color:rgba(165,104,79,.35) !important}
+#focus-dialog .panel-header{border-image:linear-gradient(90deg,#d4957b 50%,#ead2c5 50%) 1 !important}
+#focus-dialog .habit-panel summary{background:rgba(255,248,244,.8) !important;border-color:rgba(165,104,79,.18) !important}
+#focus-dialog .consult-step-notice::before{background:#a5684f !important;color:#fff !important}
+#focus-dialog .consult-step-notice span{background:transparent !important}
+#focus-dialog,#focus-dialog *{--siore-ribbon-pink:#d4957b;--siore-ribbon-blue:#ead2c5}
+#focus-dialog,#focus-dialog *{--siore-ribbon:linear-gradient(90deg,#d4957b 50%,#ead2c5 50%) !important}

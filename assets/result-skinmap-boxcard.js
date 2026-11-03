@@ -246,15 +246,68 @@
       +'</section>';
   }
 
+
+  /* ---------- 6. 4축 라벨 (빠른 피부 체크 문항) ---------- */
+  var AXQ={balance:Q('AXIS 1 · 수분·유분','AXIS 1 · MOISTURE·OIL','AXIS 1 · 水油','AXIS 1 · 水分・油分'),zone:Q('AXIS 1 · 수분·유분','AXIS 1 · MOISTURE·OIL','AXIS 1 · 水油','AXIS 1 · 水分・油分'),
+    reactivity:Q('AXIS 2 · 민감도','AXIS 2 · SENSITIVITY','AXIS 2 · 敏感度','AXIS 2 · 敏感度'),tone:Q('AXIS 3 · 톤','AXIS 3 · TONE','AXIS 3 · 肤色','AXIS 3 · トーン'),firmness:Q('AXIS 4 · 탄력','AXIS 4 · FIRMNESS','AXIS 4 · 弹润','AXIS 4 · ハリ')};
+  function tagAxes(){
+    document.querySelectorAll('#skin-assessment [data-assessment-question]').forEach(function(f){
+      var k=f.getAttribute('data-assessment-question'),m=AXQ[k];if(!m)return;
+      var lg=f.querySelector('legend');if(!lg)return;var t=lg.querySelector('.ax-tag');var txt=P(m);
+      if(t){if(t.textContent!==txt)t.textContent=txt;return}
+      lg.insertAdjacentHTML('afterbegin','<span class="ax-tag">'+txt+'</span>');
+    });
+  }
+  try{new MutationObserver(function(){tagAxes()}).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}
+
+  /* ---------- 7. 추천 이유 (WHY THIS ROUTINE) ---------- */
+  var WHY={
+    cleansing:Q('당김 없이 세안하는 첫 단계','A first step that cleanses without tightness','不紧绷的洁面第一步','つっぱらない洗顔の第一歩'),
+    bubbleToner:Q('거품으로 각질 정돈·수분 첫 단계','Foam toner that refines texture and hydrates','泡沫爽肤水，整理角质并补水','泡でキメを整え、うるおいを与える'),
+    essenceToner:Q('예민한 날 수분·진정 첫 단계','Hydrating, calming first step for sensitive days','敏感时的补水舒缓第一步','ゆらぎ肌の日の保湿・鎮静ステップ'),
+    repairAmpoule:Q('장벽 보습을 집중으로 채우는 단계','Focused barrier-moisture step','集中补充屏障保湿','バリア保湿を集中ケア'),
+    serum:Q('탄력·톤을 함께 챙기는 집중 단계','Focused step for firmness and tone','兼顾弹润与肤色的集中步骤','ハリ・トーンの集中ステップ'),
+    soothingCream:Q('수분을 잠그는 산뜻한 수딩 크림','Light soothing cream that locks in moisture','锁水的清爽舒缓面霜','うるおいを閉じ込める軽やかなクリーム'),
+    richCream:Q('리치한 보습막으로 마무리','Finish with a rich moisture layer','以丰润保湿膜收尾','リッチな保湿膜で仕上げ'),
+    soothingGel:Q('열감·붉은기를 산뜻하게 진정','Cools heat and visible redness','清爽舒缓热感与泛红','ほてり・赤みをすっきり鎮静'),
+    comfortCream:Q('장벽 보습막으로 편안하게 마무리','Finish comfortably with a barrier moisture layer','以屏障保湿膜舒适收尾','バリア保湿膜でやさしく仕上げ')
+  };
+  var NMNK=['cleansing','bubbleToner','serum','soothingCream','richCream'];
+  function whyCard(){
+    var panel=document.querySelector('.solution-sheet .rx-tier-panel:not([hidden])')||document.querySelector('.solution-sheet .rx-tier-panel');if(!panel)return '';
+    var tiles=[].slice.call(panel.querySelectorAll('[data-ref-product]'));if(!tiles.length)return '';
+    var s=st(),x=axisScores(s),O=x.o>.3,S=x.se>.3,TN=x.t>.3,F=x.f>.3,sg=x.sg;
+    var code=(O?'O':'D')+(S?'S':'C')+(TN?'T':'E')+(F?'F':'L');
+    var sigOn=function(k){return signals[k]>0};
+    var rows=tiles.map(function(t,i){
+      var k=t.getAttribute('data-ref-product'),img=t.querySelector('img'),nm=t.querySelector('strong');
+      var nmn=NMNK.indexOf(k)>-1,drv=[];
+      if(S&&!nmn)drv.push('S');
+      if(!O&&['richCream','soothingCream','comfortCream','repairAmpoule','essenceToner','cleansing'].indexOf(k)>-1)drv.push('D');
+      if(O&&['soothingGel','bubbleToner','soothingCream'].indexOf(k)>-1)drv.push('O');
+      if(F&&['serum','richCream'].indexOf(k)>-1)drv.push('F');
+      if(TN&&['serum','bubbleToner','soothingCream'].indexOf(k)>-1)drv.push('T');
+      var sigs=[];
+      if(['repairAmpoule','comfortCream','essenceToner'].indexOf(k)>-1){if(sigOn('sting'))sigs.push('sting');if(sigOn('tight'))sigs.push('tight')}
+      if(['soothingGel','soothingCream','essenceToner'].indexOf(k)>-1){if(sigOn('heat'))sigs.push('heat');if(sigOn('red'))sigs.push('red')}
+      var sigTxt=sigs.length?SIG.filter(function(z){return sigs.indexOf(z.k)>-1}).map(function(z){return P(z.n)}).join('·')+' '+P(Q('신호','signal','信号','サイン'))+' → ':'';
+      var lead=drv.length?drv.join('·')+' · ':'';
+      return '<li><img src="'+(img?esc(img.getAttribute('src')):'')+'" alt=""><div><small class="'+(nmn?'nm':'bl')+'">STEP '+(i+1)+' · '+(nmn?'NMN':'BALANCE')+'</small><b>'+(nm?esc(nm.textContent.trim()):'')+'</b><span>'+lead+sigTxt+P(WHY[k]||Q('','','',''))+'</span></div></li>';
+    }).join('');
+    return '<section class="why-card"><div class="why-head"><span class="why-code">'+code.split('').map(function(c){return '<span>'+c+'</span>'}).join('')+'</span><div><b>'+P(Q('이렇게 골랐어요','Why this routine','为什么推荐这套护理','このルーティンを選んだ理由'))+'</b><small>'+(sg.on.length?P(Q('최근 3일 예민 신호 '+sg.on.length+'가지 반영','Reflects '+sg.on.length+' recent sensitivity signals','已参考最近3天'+sg.on.length+'项敏感信号','直近3日の敏感サイン'+sg.on.length+'つを反映')):P(Q('피부 코드와 답변을 반영','Based on your skin code and answers','参考肌肤代码与回答','スキンコードと回答を反映')))+'</small></div></div>'
+      +'<h5><em>WHY THIS ROUTINE</em>'+P(Q('제품별 한 줄 이유','One-line reason per product','每款产品一句话理由','製品ごとのひとこと理由'))+'</h5><ul>'+rows+'</ul></section>';
+  }
+
   function apply(){
     var sheet=document.querySelector('.solution-sheet');if(!sheet)return;
     sheet.querySelectorAll('.rx-balance-score').forEach(function(n){n.remove()});
     var diag=sheet.querySelector('.rx-diagnosis');
     if(diag){diag.classList.add('sm-one');var old=sheet.querySelector('.sm-skinmap');if(old)old.remove();diag.insertAdjacentHTML('afterend',skinMap());var oc=sheet.querySelector('.cd-card');if(oc)oc.remove();var sm=sheet.querySelector('.sm-skinmap');if(sm)sm.insertAdjacentHTML('afterend',codeCard());}
+    var ow=sheet.querySelector('.why-card');if(ow)ow.remove();var mx=sheet.querySelector('.rx-matrix');if(mx)mx.insertAdjacentHTML('afterend',whyCard());
     var oldBox=sheet.querySelector('.bx-wrap');if(oldBox)oldBox.remove();
     sheet.insertAdjacentHTML('beforeend',boxCard());
   }
-  function syncBox(){var w=document.querySelector('.solution-sheet .bx-wrap');if(!w)return;w.outerHTML=boxCard();}
+  function syncBox(){var w=document.querySelector('.solution-sheet .bx-wrap');if(w)w.outerHTML=boxCard();var y=document.querySelector('.solution-sheet .why-card');if(y){var h=whyCard();if(h)y.outerHTML=h;}}
 
   if(typeof paperRender==='function'){
     var prev=paperRender;
