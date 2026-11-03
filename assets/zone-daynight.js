@@ -27,13 +27,41 @@
     barrier: { v: '장벽회복', l: Q('외부 자극에 불편', 'Easily irritated', '易受刺激', '刺激に弱い') }
   };
   var ZONES = [
-    { id: 'forehead', l: Q('이마', 'Forehead', '额头', 'おでこ'), pins: [[50, 27]], ring: [26, 18, 48, 18], chips: ['sebum', 'blemish', 'firm', 'texture'] },
-    { id: 'eyes', l: Q('눈가', 'Eye area', '眼周', '目元'), pins: [[50, 40]], ring: [24, 35, 52, 10], chips: ['firm', 'dry'] },
-    { id: 'nose', l: Q('코·T존', 'Nose · T-zone', '鼻子·T区', '鼻・Tゾーン'), pins: [[50, 51]], ring: [41, 41, 18, 20], chips: ['sebum', 'blemish', 'texture'] },
-    { id: 'cheek', l: Q('볼', 'Cheeks', '脸颊', '頬'), pins: [[27, 56], [69, 56]], ring: null, rings: [[16, 45, 25, 23], [56, 44, 25, 24]], chips: ['dry', 'red', 'dull', 'sens'] },
-    { id: 'mouth', l: Q('입가·턱', 'Mouth · jaw', '嘴角·下巴', '口元・あご'), pins: [[50, 71]], ring: [32, 62, 36, 18], chips: ['firm2', 'dry', 'blemish'] },
+    { id: 'forehead', l: Q('이마', 'Forehead', '额头', 'おでこ'), pins: [[50, 26]], ring: null, chips: ['sebum', 'blemish', 'firm', 'texture'] },
+    { id: 'eyes', l: Q('눈가', 'Eye area', '眼周', '目元'), pins: [[26, 38], [74, 38]], ring: null, chips: ['firm', 'dry'] },
+    { id: 'nose', l: Q('코·T존', 'Nose · T-zone', '鼻子·T区', '鼻・Tゾーン'), pins: [[50, 51]], ring: null, chips: ['sebum', 'blemish', 'texture'] },
+    { id: 'cheek', l: Q('볼', 'Cheeks', '脸颊', '頬'), pins: [[32, 58], [68, 58]], ring: null, chips: ['dry', 'red', 'dull', 'sens'] },
+    { id: 'mouth', l: Q('입가·턱', 'Mouth · jaw', '嘴角·下巴', '口元・あご'), pins: [[50, 76]], ring: null, chips: ['firm2', 'dry', 'blemish'] },
     { id: 'whole', l: Q('얼굴 전체', 'Whole face', '全脸', '顔全体'), pins: [], ring: null, chips: ['dull', 'sens', 'barrier', 'dry'] }
   ];
+
+  /* 얼굴 부위 안내 — 선 일러스트 (viewBox 300×400, 부위 영역을 실제 위치에 맞춤) */
+  function FACE_SVG(zcls) {
+    var Z = function (id, d) { return '<path class="' + zcls(id) + '" data-zone="' + id + '" d="' + d + '"/>'; };
+    return '<svg viewBox="0 0 300 400" aria-hidden="true">' +
+      '<defs><radialGradient id="zpBg" cx="50%" cy="42%" r="70%"><stop offset="0" stop-color="#fffaf6"/><stop offset=".65" stop-color="#f6ece5"/><stop offset="1" stop-color="#eee0d6"/></radialGradient>' +
+      '<linearGradient id="zpSkin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf3ec"/><stop offset="1" stop-color="#f6e4d9"/></linearGradient></defs>' +
+      '<rect width="300" height="400" fill="url(#zpBg)"/>' +
+      '<circle cx="150" cy="190" r="168" fill="none" stroke="#d9c2b3" stroke-width=".5" opacity=".55"/><circle cx="150" cy="190" r="150" fill="none" stroke="#d9c2b3" stroke-width=".4" stroke-dasharray="1 5" opacity=".7"/>' +
+      '<path d="M118 324 C119 346 112 362 74 376 C48 384 30 392 22 400 L278 400 C270 392 252 384 230 376 C188 362 181 346 182 324" fill="url(#zpSkin)" stroke="#c9a896" stroke-width="1"/>' +
+      '<path d="M50 172 C42 168 38 186 44 204 C48 216 54 220 58 214" fill="url(#zpSkin)" stroke="#c9a896" stroke-width="1"/><path d="M250 172 C258 168 262 186 256 204 C252 216 246 220 242 214" fill="url(#zpSkin)" stroke="#c9a896" stroke-width="1"/>' +
+      '<path d="M150 58 C215 58 250 108 250 172 C250 236 228 290 190 318 C174 330 162 336 150 336 C138 336 126 330 110 318 C72 290 50 236 50 172 C50 108 85 58 150 58 Z" fill="url(#zpSkin)" stroke="#b98f7b" stroke-width="1.2"/>' +
+      '<path d="M54 150 C50 74 104 30 150 30 C196 30 250 74 246 150 C240 104 206 70 150 66 C94 70 60 104 54 150 Z" fill="#4a332b" opacity=".82"/>' +
+      Z('forehead', 'M88 126 C86 96 114 80 150 80 C186 80 214 96 212 126 C186 134 114 134 88 126 Z') +
+      Z('eyes', 'M84 170 C92 154 136 152 142 168 C136 186 92 188 84 170 Z M158 168 C164 152 208 154 216 170 C208 188 164 186 158 168 Z') +
+      Z('nose', 'M139 144 L161 144 L166 230 C160 242 140 242 134 230 Z') +
+      Z('cheek', 'M70 192 C78 186 112 194 126 206 C132 226 128 250 112 262 C92 266 76 252 70 234 C66 220 66 202 70 192 Z M230 192 C222 186 188 194 174 206 C168 226 172 250 188 262 C208 266 224 252 230 234 C234 220 234 202 230 192 Z') +
+      Z('mouth', 'M110 256 C124 248 176 248 190 256 C196 282 180 314 150 324 C120 314 104 282 110 256 Z') +
+      '<g fill="none" stroke="#8c6555" stroke-width="1.5" stroke-linecap="round">' +
+        '<path d="M92 150 C104 140 124 140 136 148"/><path d="M164 148 C176 140 196 140 208 150"/>' +
+        '<path d="M96 172 C106 162 124 162 132 172 C124 178 106 178 96 172 Z"/><path d="M168 172 C176 162 194 162 204 172 C194 178 176 178 168 172 Z"/>' +
+        '<path d="M151 176 C149 196 146 214 142 224 C146 232 156 232 160 226" stroke-width="1.2"/>' +
+        '<path d="M126 268 C138 262 146 264 150 266 C154 264 162 262 174 268 C164 282 136 282 126 268 Z" stroke="#b4796b" stroke-width="1.3"/><path d="M128 268 C140 271 160 271 172 268" stroke="#b4796b" stroke-width="1"/>' +
+      '</g>' +
+      '<circle cx="114" cy="171" r="4.6" fill="#5a3d33"/><circle cx="186" cy="171" r="4.6" fill="#5a3d33"/><circle cx="115.5" cy="169.5" r="1.3" fill="#fff"/><circle cx="187.5" cy="169.5" r="1.3" fill="#fff"/>' +
+    '</svg>';
+  }
+
   var MODE_KEY = 'siore-concern-pick-mode';
   var mode = 'zone', activeZone = 'cheek', picker = null;
   try { mode = localStorage.getItem(MODE_KEY) || 'zone'; } catch (e) {}
@@ -68,11 +96,8 @@
     var s = selected();
     var z = ZONES.filter(function (x) { return x.id === activeZone; })[0] || ZONES[0];
     var ring = function (r, on) { return '<span class="zp-ring' + (on ? ' on' : '') + '" aria-hidden="true" style="left:' + r[0] + '%;top:' + r[1] + '%;width:' + r[2] + '%;height:' + r[3] + '%"></span>'; };
-    var photo = '<div class="zp-photo"><img src="images/consult/zone-face.jpg?v=1" alt="' + P(Q('얼굴 부위 안내 모델 사진', 'Face area guide', '面部区域示意', '顔の部位ガイド')) + '">';
-    ZONES.forEach(function (x) {
-      var on = x.id === activeZone;
-      (x.rings || (x.ring ? [x.ring] : [])).forEach(function (r) { if (on || zoneHasSelection(x)) photo += ring(r, on); });
-    });
+    var zcls = function (id) { var x = ZONES.filter(function (q) { return q.id === id; })[0]; return 'zp-z' + (activeZone === id || activeZone === 'whole' ? ' on' : '') + (x && zoneHasSelection(x) ? ' picked' : ''); };
+    var photo = '<div class="zp-photo zp-art" role="img" aria-label="' + P(Q('얼굴 부위 안내 일러스트', 'Face area guide', '面部区域示意', '顔の部位ガイド')) + '">' + FACE_SVG(zcls);
     ZONES.forEach(function (x) {
       x.pins.forEach(function (p) {
         var cls = 'zp-pin' + (x.id === activeZone ? ' active' : '') + (zoneHasSelection(x) ? ' picked' : '');
