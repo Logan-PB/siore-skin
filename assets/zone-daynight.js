@@ -27,11 +27,11 @@
     barrier: { v: '장벽회복', l: Q('외부 자극에 불편', 'Easily irritated', '易受刺激', '刺激に弱い') }
   };
   var ZONES = [
-    { id: 'forehead', l: Q('이마', 'Forehead', '额头', 'おでこ'), pins: [[50, 26]], ring: null, chips: ['sebum', 'blemish', 'firm', 'texture'] },
-    { id: 'eyes', l: Q('눈가', 'Eye area', '眼周', '目元'), pins: [[26, 38], [74, 38]], ring: null, chips: ['firm', 'dry'] },
-    { id: 'nose', l: Q('코·T존', 'Nose · T-zone', '鼻子·T区', '鼻・Tゾーン'), pins: [[50, 51]], ring: null, chips: ['sebum', 'blemish', 'texture'] },
-    { id: 'cheek', l: Q('볼', 'Cheeks', '脸颊', '頬'), pins: [[32, 58], [68, 58]], ring: null, chips: ['dry', 'red', 'dull', 'sens'] },
-    { id: 'mouth', l: Q('입가·턱', 'Mouth · jaw', '嘴角·下巴', '口元・あご'), pins: [[50, 76]], ring: null, chips: ['firm2', 'dry', 'blemish'] },
+    { id: 'forehead', l: Q('이마', 'Forehead', '额头', 'おでこ'), pins: [[49, 24]], ring: null, chips: ['sebum', 'blemish', 'firm', 'texture'] },
+    { id: 'eyes', l: Q('눈가', 'Eye area', '眼周', '目元'), pins: [[17.5, 40.5], [81.5, 40.5]], ring: null, chips: ['firm', 'dry'] },
+    { id: 'nose', l: Q('코·T존', 'Nose · T-zone', '鼻子·T区', '鼻・Tゾーン'), pins: [[48.5, 53]], ring: null, chips: ['sebum', 'blemish', 'texture'] },
+    { id: 'cheek', l: Q('볼', 'Cheeks', '脸颊', '頬'), pins: [[29, 58], [68.5, 58]], ring: null, chips: ['dry', 'red', 'dull', 'sens'] },
+    { id: 'mouth', l: Q('입가·턱', 'Mouth · jaw', '嘴角·下巴', '口元・あご'), pins: [[48.5, 75]], ring: null, chips: ['firm2', 'dry', 'blemish'] },
     { id: 'whole', l: Q('얼굴 전체', 'Whole face', '全脸', '顔全体'), pins: [], ring: null, chips: ['dull', 'sens', 'barrier', 'dry'] }
   ];
 
@@ -97,7 +97,7 @@
     var z = ZONES.filter(function (x) { return x.id === activeZone; })[0] || ZONES[0];
     var ring = function (r, on) { return '<span class="zp-ring' + (on ? ' on' : '') + '" aria-hidden="true" style="left:' + r[0] + '%;top:' + r[1] + '%;width:' + r[2] + '%;height:' + r[3] + '%"></span>'; };
     var zcls = function (id) { var x = ZONES.filter(function (q) { return q.id === id; })[0]; return 'zp-z' + (activeZone === id || activeZone === 'whole' ? ' on' : '') + (x && zoneHasSelection(x) ? ' picked' : ''); };
-    var photo = '<div class="zp-photo zp-art" role="img" aria-label="' + P(Q('얼굴 부위 안내 일러스트', 'Face area guide', '面部区域示意', '顔の部位ガイド')) + '">' + FACE_SVG(zcls);
+    var photo = '<div class="zp-photo zp-real"><img src="images/consult/zone-face.jpg?v=1" alt="' + P(Q('얼굴 부위 안내 모델 사진', 'Face area guide', '面部区域示意', '顔の部位ガイド')) + '">';
     ZONES.forEach(function (x) {
       x.pins.forEach(function (p) {
         var cls = 'zp-pin' + (x.id === activeZone ? ' active' : '') + (zoneHasSelection(x) ? ' picked' : '');
