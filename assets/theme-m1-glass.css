@@ -134,3 +134,26 @@
 #focus-dialog .consult-step-notice span{background:transparent !important}
 #focus-dialog,#focus-dialog *{--siore-ribbon-pink:#d4957b;--siore-ribbon-blue:#ead2c5}
 #focus-dialog,#focus-dialog *{--siore-ribbon:linear-gradient(90deg,#d4957b 50%,#ead2c5 50%) !important}
+/* 현재 사용 습관(선택 입력) 레이아웃 정리 */
+#focus-dialog .habit-guide-head{display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px 12px;padding:0 2px}
+#focus-dialog .habit-guide-copy{display:contents}
+#focus-dialog .habit-guide-eyebrow{grid-column:1;font-size:12px;font-weight:500;color:#7b6157 !important}
+#focus-dialog .habit-guide-progress-label{grid-column:2;font-size:12px;font-weight:700}
+#focus-dialog .habit-guide-track{grid-column:1/-1;height:3px;border-radius:3px;background:rgba(165,104,79,.14) !important;overflow:hidden}
+#focus-dialog .habit-guide-status{grid-column:1/-1;margin:2px 0 0;font-size:12px;font-weight:600}
+#focus-dialog .habit-guide-steps{display:grid !important;grid-template-columns:repeat(2,minmax(0,1fr)) !important;gap:12px !important;margin-top:12px;align-items:stretch}
+#focus-dialog .habit-guide-steps fieldset{display:flex !important;flex-direction:column;gap:10px;margin:0 !important;padding:14px 16px 16px !important;border-radius:18px !important;border:1px solid rgba(165,104,79,.16) !important;background:rgba(255,255,255,.62) !important;min-width:0;opacity:1 !important}
+#focus-dialog .habit-guide-steps fieldset.habit-step-current{border-color:#d3a593 !important;background:rgba(255,255,255,.82) !important;box-shadow:0 10px 22px -16px rgba(110,66,50,.5) !important}
+#focus-dialog .habit-guide-steps legend{float:left;width:100%;padding:0 !important;margin:0 !important;font-size:15px !important;font-weight:700 !important;line-height:1.4 !important;color:#3b2620 !important;word-break:keep-all}
+#focus-dialog .habit-guide-steps legend+*{clear:both}
+#focus-dialog .habit-step-meta{order:-1;display:flex;justify-content:space-between;align-items:center;gap:8px}
+#focus-dialog .habit-step-name{font-size:11px !important;font-weight:700 !important;letter-spacing:.06em}
+#focus-dialog .habit-step-state{font-size:10.5px !important;padding:4px 10px !important;border-radius:999px !important}
+#focus-dialog .habit-guide-steps fieldset:not(.habit-step-current) .habit-step-state{background:rgba(165,104,79,.12) !important;color:#8a5440 !important;box-shadow:none !important}
+#focus-dialog .habit-guide-steps .habit-options{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+#focus-dialog .habit-guide-steps .habit-options button{min-height:36px;padding:0 13px;font-size:12.5px}
+#focus-dialog .habit-panel>summary{display:flex;align-items:center;gap:10px;list-style:none}
+#focus-dialog .habit-panel>summary::-webkit-details-marker{display:none}
+#focus-dialog .habit-panel>summary::before,#focus-dialog .habit-panel>summary::after{background-color:#a5684f !important;border-color:#a5684f !important;color:#fff !important}
+#focus-dialog .habit-panel.consult-checkpoint-done>summary::after{background-color:#a5684f !important}
+@media (max-width:640px){#focus-dialog .habit-guide-steps{grid-template-columns:1fr !important}}

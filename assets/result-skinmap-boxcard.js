@@ -282,7 +282,16 @@
       lg.insertAdjacentHTML('afterbegin','<span class="ax-tag">'+txt+'</span>');
     });
   }
-  try{new MutationObserver(function(){tagAxes()}).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}
+  /* ---------- 9. 현재 사용 습관 = 선택 입력 안내 ---------- */
+  function optionalHabits(){
+    var panel=document.querySelector('#step2 .habit-panel');if(!panel)return;
+    var any=panel.querySelector('.habit-options button[aria-pressed="true"]');
+    var st=panel.querySelector('.habit-guide-status');
+    var msg=P(Q('선택 사항이에요 · 건너뛰어도 결과를 볼 수 있어요','Optional · you can skip this and still see results','可选填写 · 跳过也可查看结果','任意です・スキップしても結果を見られます'));
+    if(st&&!any&&st.textContent!==msg)st.textContent=msg;
+    panel.querySelectorAll('.habit-step-state').forEach(function(b){var t=P(Q('선택','Optional','可选','任意'));if(!any&&b.textContent!==t)b.textContent=t;});
+  }
+  try{new MutationObserver(function(){tagAxes();optionalHabits()}).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}
 
   /* ---------- 7. 추천 이유 (WHY THIS ROUTINE) ---------- */
   var WHY={

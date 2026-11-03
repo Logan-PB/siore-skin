@@ -6310,7 +6310,7 @@ window.SIORE_REFERENCE = (()=>{
   if(el.matches('[data-assessment-question]'))return Boolean(assessmentAnswers[el.dataset.assessmentQuestion]);
   if(el.matches('[data-med-question="texture"]'))return reviewed.texture;
   if(el.matches('[data-med-question="sensitivity"]'))return reviewed.sensitivity;
-  if(el.matches('.habit-panel'))return habitsDone();return false;
+  if(el.matches('.habit-panel'))return true;return false;
  }
  function syncNavigator(){
   const active=document.querySelector('.step-panel.active')?.id;
@@ -6324,7 +6324,7 @@ window.SIORE_REFERENCE = (()=>{
    const items=flowItems();let found=false;
    items.forEach(el=>{if(flowDone(el))el.classList.add('consult-checkpoint-done');else if(!found){el.classList.add('consult-checkpoint-active');found=true;}});
    if(!found)document.querySelector('#step2 .panel-actions')?.classList.add('consult-checkpoint-active');
-   const button=document.querySelector('#btn-to-step3');if(button)button.disabled=!(selectedSkinTypes.length&&reviewed.texture&&reviewed.sensitivity&&assessmentDone()&&habitsDone());
+   const button=document.querySelector('#btn-to-step3');if(button)button.disabled=!(selectedSkinTypes.length&&reviewed.texture&&reviewed.sensitivity&&assessmentDone());
   }
   if(active==='step3')document.querySelector('.rx-overview,.solution-sheet')?.classList.add('consult-checkpoint-active');
  }
@@ -6462,7 +6462,7 @@ window.SIORE_REFERENCE = (()=>{
   const nav=event.target.closest('[data-assessment-nav]');if(nav){assessmentIndex=Number(nav.dataset.assessmentNav);renderAssessment();setTimeout(()=>document.querySelector('.skin-assessment-question button')?.focus(),0);}
   const answer=event.target.closest('[data-skin-answer]');if(answer){const [key,value]=answer.dataset.skinAnswer.split(':');assessmentAnswers[key]=value;const current=questions.findIndex(q=>q.key===key);assessmentIndex=Math.min(current+1,questions.length-1);renderAssessment();setTimeout(()=>{syncNavigator();document.querySelector('.skin-assessment-question button')?.focus();},120);}
   const tier=event.target.closest('[data-rx-tier]');if(tier){const sheet=tier.closest('.solution-sheet');if(sheet)sheet.dataset.activeTier=tier.dataset.rxTier;sheet?.querySelectorAll('[data-rx-tier]').forEach(b=>b.setAttribute('aria-selected',String(b===tier)));sheet?.querySelectorAll('[data-rx-panel]').forEach(panel=>panel.hidden=panel.dataset.rxPanel!==tier.dataset.rxTier);}
-  if(event.target.closest('#btn-to-step3')&&!(assessmentDone()&&habitsDone())){event.preventDefault();event.stopImmediatePropagation();const target=flowItems().find(el=>!flowDone(el));target?.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});target?.classList.add('consult-checkpoint-active');target?.querySelector('button')?.focus({preventScroll:true});}
+  if(event.target.closest('#btn-to-step3')&&!assessmentDone()){event.preventDefault();event.stopImmediatePropagation();const target=flowItems().find(el=>!flowDone(el));target?.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});target?.classList.add('consult-checkpoint-active');target?.querySelector('button')?.focus({preventScroll:true});}
   if(event.target.closest('[data-concern],[data-type],[data-texture],[data-sensitivity],[data-habit],#btn-to-step2,#btn-to-step3,.btn-ghost'))setTimeout(syncNavigator,0);
  },true);
  document.addEventListener('DOMContentLoaded',()=>{
@@ -6684,7 +6684,7 @@ window.SIORE_REFERENCE = (()=>{
  body .focus-toolbar button.records-open span.i18n-main,body .focus-toolbar button.set-open span.i18n-main,body .focus-toolbar button.focus-close span.i18n-main{display:none!important}
 }
 </style><!-- REFERENCE UPDATE END --><link rel="stylesheet" href="assets/result-skinmap-boxcard.css?v=20261103g">
-<link rel="stylesheet" href="assets/theme-m1-glass.css?v=20261103e">
-<script src="assets/result-skinmap-boxcard.js?v=20261103f"></script><link rel="stylesheet" href="assets/zone-daynight.css?v=7"><script src="assets/zone-daynight.js?v=7"></script>
+<link rel="stylesheet" href="assets/theme-m1-glass.css?v=20261103h">
+<script src="assets/result-skinmap-boxcard.js?v=20261103h"></script><link rel="stylesheet" href="assets/zone-daynight.css?v=7"><script src="assets/zone-daynight.js?v=7"></script>
 </body>
 </html>
