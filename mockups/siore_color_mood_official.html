@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIORÉ 상담링크 — 공식 톤 컬러 무드 3안</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;background:#f3f0ee;color:#2a2024;padding:40px 32px 70px;-webkit-font-smoothing:antialiased}
+.page-h{max-width:1600px;margin:0 auto 26px}
+.page-h small{font-size:12px;letter-spacing:.24em;color:#b0707b;font-weight:600}
+.page-h h1{font-size:28px;font-weight:700;margin:6px 0 4px;letter-spacing:-.02em}
+.page-h p{font-size:14px;color:#6f6266}
+.group{max-width:1600px;margin:0 auto 50px}
+.group>h2{font-size:19px;font-weight:700;margin-bottom:4px}
+.group>p{font-size:13px;color:#7a6d71;margin-bottom:18px}
+.row{display:flex;gap:24px;flex-wrap:wrap}
+.opt{width:360px}
+.opt-h{display:flex;align-items:baseline;gap:8px;margin:0 2px 10px}
+.opt-h b{font-size:15px}.opt-h span{font-size:12px;color:#8a7d80}
+.phone{width:360px;height:760px;border-radius:38px;overflow:hidden;position:relative;box-shadow:0 30px 60px -30px rgba(60,30,40,.5),0 0 0 8px #1b1b1d,0 0 0 9px #3a3a3e}
+.scr{position:absolute;inset:0;overflow:hidden;padding:44px 18px 18px;background:var(--bg);color:var(--ink)}
+.scr>*:not(.blob){position:relative}
+.blob{position:absolute;border-radius:50%;filter:blur(42px);pointer-events:none}
+
+/* ---- 공식몰·공식컷 기준 무드 3종 ---- */
+.m1{--bg:linear-gradient(165deg,#faf6f0 0%,#f3e9e1 55%,#eedfd5 100%);--ink:#3b2620;--sub:#7b6157;--mute:#a89087;--eye:#a5684f;
+ --gl:linear-gradient(150deg,rgba(255,255,255,.86),rgba(255,252,248,.62));--glb:rgba(255,255,255,.95);--gls:0 18px 36px -22px rgba(110,66,50,.45),inset 0 1px 0 #fff;
+ --trk:rgba(165,104,79,.15);--grad:linear-gradient(90deg,#d4957b,#a86a55);--cta-ink:#fff;--hl:#a5684f;
+ --b1:#f1c3ae;--b2:#ead6c8;--b3:#e8b9a3;--pink:#b9736a;--blue:#5877a8;--chip:rgba(255,255,255,.72)}
+.m2{--bg:radial-gradient(120% 80% at 70% 0%,#3a241d 0%,#1a100f 55%,#120b0a 100%);--ink:#f8ece4;--sub:#d3b8ab;--mute:#a08a7f;--eye:#e3b49e;
+ --gl:linear-gradient(150deg,rgba(255,236,224,.15),rgba(255,236,224,.05));--glb:rgba(255,225,205,.2);--gls:inset 0 1px 0 rgba(255,235,222,.18),0 22px 40px -24px rgba(0,0,0,.9);
+ --trk:rgba(255,220,200,.14);--grad:linear-gradient(90deg,#f0c0a8,#c98d78);--cta-ink:#2a1712;--hl:#f0c0a8;
+ --b1:#a9654f;--b2:#6e3f31;--b3:#c98d78;--pink:#c8766c;--blue:#5877a8;--chip:rgba(255,230,215,.07)}
+.m3{--bg:linear-gradient(170deg,#fbf1ec 0%,#f6dfd6 50%,#f3ece8 100%);--ink:#432a2c;--sub:#86686a;--mute:#b0989a;--eye:#b0707b;
+ --gl:linear-gradient(150deg,rgba(255,255,255,.8),rgba(255,248,246,.55));--glb:rgba(255,255,255,.95);--gls:0 18px 36px -22px rgba(150,80,90,.4),inset 0 1px 0 #fff;
+ --trk:rgba(176,112,123,.15);--grad:linear-gradient(90deg,#d99189,#a85f6a);--cta-ink:#fff;--hl:#b0707b;
+ --b1:#f4c3b2;--b2:#efd3d6;--b3:#f0cfc3;--pink:#c4707c;--blue:#5a78b0;--chip:rgba(255,255,255,.7)}
+.m1 .b1,.m3 .b1{background:var(--b1);width:240px;height:240px;top:-90px;right:-90px;opacity:.75}
+.m1 .b2,.m3 .b2{background:var(--b2);width:230px;height:230px;top:320px;left:-120px;opacity:.7}
+.m1 .b3,.m3 .b3{background:var(--b3);width:220px;height:220px;bottom:-80px;right:-50px;opacity:.55}
+.m2 .b1{background:var(--b1);width:260px;height:260px;top:-100px;right:-90px;opacity:.5}
+.m2 .b2{background:var(--b2);width:240px;height:240px;top:300px;left:-130px;opacity:.5}
+.m2 .b3{background:var(--b3);width:200px;height:200px;bottom:-100px;right:0;opacity:.3}
+.g{background:var(--gl);border:1px solid var(--glb);box-shadow:var(--gls);border-radius:22px;backdrop-filter:blur(18px) saturate(140%);-webkit-backdrop-filter:blur(18px) saturate(140%)}
+.eye{font-size:9px;letter-spacing:.32em;color:var(--eye);font-weight:600}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+.top img{height:15px}.m2 .top img{filter:invert(1)}
+.top span{font-size:10px;padding:5px 10px;border-radius:99px;border:1px solid var(--glb);color:var(--sub);background:var(--chip)}
+h3{font-size:25px;font-weight:700;line-height:1.28;letter-spacing:-.025em;margin:8px 0 8px}
+h3 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.m1 h3 span{background:linear-gradient(90deg,#c0826a,#8e5a49);-webkit-background-clip:text;background-clip:text}.m3 h3 span{background:linear-gradient(90deg,#c97f88,#9a5a64);-webkit-background-clip:text;background-clip:text}
+.lead{font-size:12px;color:var(--sub);line-height:1.55}
+.orb{width:196px;height:196px;margin:24px auto 18px;border-radius:50%;display:grid;place-items:center;text-align:center;border:1px solid var(--glb)}
+.m1 .orb,.m3 .orb{background:radial-gradient(circle at 35% 28%,#fff,rgba(255,255,255,.35) 55%,rgba(240,210,195,.35));box-shadow:0 0 60px rgba(205,140,115,.4),inset 0 0 40px rgba(255,255,255,.6)}
+.m2 .orb{background:radial-gradient(circle at 35% 30%,rgba(255,235,240,.35),rgba(255,235,240,.05) 60%);box-shadow:0 0 70px rgba(230,160,130,.3),inset 0 0 40px rgba(255,255,255,.08)}
+.orb b{display:block;font-size:30px;font-weight:300;letter-spacing:-.02em}
+.orb small{font-size:11px;color:var(--sub);letter-spacing:.08em}
+.pills{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+.pills span{font-size:10.5px;padding:6px 11px;border-radius:99px;background:var(--chip);border:1px solid var(--glb);color:var(--sub)}
+.cta{margin-top:16px;height:50px;border-radius:16px;background:var(--grad);color:var(--cta-ink);display:grid;place-items:center;font-size:14px;font-weight:700;box-shadow:0 12px 26px -14px rgba(176,96,111,.7)}
+.steps{display:flex;gap:4px;margin-bottom:14px}.steps i{flex:1;height:3px;border-radius:3px;background:var(--trk)}.steps i.on{background:var(--grad)}
+.q{padding:16px}
+.q small{font-size:9.5px;color:var(--eye);letter-spacing:.16em;font-weight:600}
+.q h4{font-size:16.5px;font-weight:600;margin:6px 0 12px;letter-spacing:-.02em}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:11.5px;font-weight:600;padding:8px 12px;border-radius:12px;background:var(--chip);border:1px solid var(--glb);color:var(--sub)}
+.chips span.sp{background:rgba(200,112,126,.16);border-color:var(--pink);color:var(--ink)}
+.chips span.sb{background:rgba(79,114,201,.14);border-color:var(--blue);color:var(--ink)}
+.chips span.sel{background:var(--grad);border-color:transparent;color:var(--cta-ink)}
+.sl{height:6px;border-radius:6px;background:var(--trk);position:relative;margin:22px 4px 10px}
+.sl i{position:absolute;left:0;top:0;bottom:0;width:22%;border-radius:6px;background:var(--grad)}
+.sl b{position:absolute;left:22%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#fff;box-shadow:0 0 0 6px rgba(231,169,182,.3),0 4px 10px rgba(0,0,0,.15)}
+.sll{display:flex;justify-content:space-between;font-size:10px;color:var(--sub);margin:0 2px}
+.tg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.tg div{height:58px;border-radius:14px;background:var(--chip);border:1px solid var(--glb);display:grid;place-items:center;font-size:11px;color:var(--sub);text-align:center;line-height:1.35}
+.tg div.sel{background:var(--grad);border-color:transparent;color:var(--cta-ink);font-weight:700}
+.dash{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dash .g{padding:11px 10px;border-radius:18px}
+.dash small{font-size:7.5px;letter-spacing:.22em;color:var(--eye);font-weight:600}
+.dash b{display:block;font-size:16px;font-weight:700;margin-top:3px;color:var(--ink)}
+.dash svg{width:100%;height:112px;display:block;margin-top:4px}
+.dash .wide{grid-column:1/-1}
+.sumline{font-size:14px;font-weight:700;line-height:1.45;margin-top:4px;color:var(--ink)}
+.bars{display:grid;gap:7px;margin-top:8px}
+.bars div{display:grid;grid-template-columns:40px 1fr auto;align-items:center;gap:8px;font-size:11px;font-weight:600;color:var(--ink)}
+.bars i{height:5px;border-radius:5px;background:var(--trk);position:relative;overflow:hidden}
+.bars i::after{content:"";position:absolute;inset:0;width:var(--w);border-radius:5px;background:var(--grad)}
+.bars em{font-style:normal;font-size:8.5px;letter-spacing:.12em;color:var(--hl);font-weight:700;width:34px;text-align:right}
+.disc{font-size:9.5px;color:var(--mute);text-align:center;margin-top:10px}
+.mini-rt{margin-top:8px;padding:11px 10px}
+.mini-rt h5{font-size:11.5px;font-weight:600;margin-bottom:8px;display:flex;justify-content:space-between}
+.mini-rt h5 span{font-size:9.5px;color:var(--sub);font-weight:400}
+.prs{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.pr{border-radius:14px;padding:7px 6px;text-align:center;background:var(--chip);border:1px solid var(--glb)}
+.pr img{width:100%;height:58px;object-fit:contain;display:block}
+.pr small{display:block;font-size:7.5px;letter-spacing:.14em;margin-top:4px;font-weight:700}
+.pr b{display:block;font-size:9.5px;line-height:1.3;margin-top:2px}
+.nm{color:var(--pink)}.bl{color:var(--blue)}
+.m2 .nm{color:#f0b0a6}.m2 .bl{color:#a9bfe8}
+
+/* ---- B3 상자 루틴 카드 (유리 위 종이 카드) ---- */
+.card{background:#fffdfc;border:1px solid #2a2024;color:#211a1d;font-size:9.5px;box-shadow:0 22px 40px -22px rgba(0,0,0,.45)}
+.card .ct{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #2a2024}
+.card .ct>div{padding:9px 10px}.card .ct>div+div{border-left:1px solid #2a2024}
+.card small{display:block;font-size:8px;color:#555;margin-bottom:7px}
+.card .ct img{height:13px}
+.card .ct strong{font-size:9.5px;font-weight:800;letter-spacing:.02em}
+.card .pf{padding:8px 10px;border-bottom:1px solid #2a2024;display:flex;gap:14px;font-size:8.5px;font-weight:700}
+.card .pf span{display:flex;align-items:center;gap:5px}
+.card .pf .p{color:var(--pink)}.card .pf .b{color:var(--blue)}
+.card .ln{display:grid;grid-template-columns:1fr 1fr}.card .ln>div+div{border-left:1px solid #2a2024}
+.card .tab{color:#fff;font-size:8.5px;font-weight:600;padding:6px 10px;margin-bottom:8px}
+.card .nmn .tab{background:var(--pink)}.card .rel .tab{background:var(--blue)}
+.card ul{list-style:none;padding:0 10px 10px;display:grid;gap:6px}
+.card li{display:grid;grid-template-columns:10px 1fr;gap:6px;color:#a7a0a2;line-height:1.25}
+.card li.on{color:#1d1719;font-weight:700}
+.card li small{display:block;font-size:7.5px;margin:1px 0 0;font-weight:500}
+.card .nmn li.on small{color:var(--pink)}.card .rel li.on small{color:var(--blue)}
+.bx{width:10px;height:10px;border:1px solid #c9c2c4;border-radius:2px;display:inline-grid;place-items:center;margin-top:1px}
+.bx.on::after{content:"";width:5px;height:3px;border:solid #fff;border-width:0 0 1.4px 1.4px;transform:rotate(-45deg) translate(1px,-1px)}
+.nmn .bx.on,.pf .p .bx{background:var(--pink);border-color:var(--pink)}.rel .bx.on,.pf .b .bx{background:var(--blue);border-color:var(--blue)}
+.pf .bx::after{content:"";width:5px;height:3px;border:solid #fff;border-width:0 0 1.4px 1.4px;transform:rotate(-45deg) translate(1px,-1px)}
+.card .ft{border-top:1px solid #2a2024;padding:8px 10px;display:flex;justify-content:space-between;font-size:8.5px;font-weight:600}
+.card .ft time{color:#999;font-weight:500}
+.kick{display:flex;justify-content:space-between;align-items:center;margin:0 2px 8px}
+.kick b{font-size:13px}
+.kick em{font-style:normal;font-size:9px;padding:3px 9px;border-radius:99px;border:1px solid var(--glb);background:var(--chip);color:var(--sub)}
+.tiers{display:flex;gap:5px;margin-bottom:10px}
+.tiers span{flex:1;text-align:center;font-size:10.5px;font-weight:600;padding:8px 0;border-radius:12px;background:var(--chip);border:1px solid var(--glb);color:var(--sub)}
+.tiers span.on{background:var(--grad);border-color:transparent;color:var(--cta-ink)}
+.src{max-width:1600px;margin:0 auto 34px;display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.src figure{background:#fff;border:1px solid #eadfd8;border-radius:12px;overflow:hidden}
+.src img{width:100%;height:96px;object-fit:cover;display:block}
+.src figcaption{padding:8px 10px;font-size:11px;color:#6f6266;display:flex;align-items:center;gap:6px}
+.src figcaption i{width:14px;height:14px;border-radius:50%;flex:0 0 14px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
+.note{max-width:1600px;margin:-20px auto 0;font-size:12px;color:#8a7d80;line-height:1.6}
+.map{max-width:1600px;margin:0 auto 30px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.map div{background:#fff;border:1px solid #eadfe1;border-radius:14px;padding:14px 16px}
+.map b{display:block;font-size:13px;margin-bottom:4px}.map small{font-size:10px;letter-spacing:.2em;color:#b0707b;font-weight:700}
+.map p{font-size:12.5px;color:#6f6266;line-height:1.55}
+</style></head><body>
+<header class="page-h">
+  <small>SIORÉ CONSULTATION LINK · COLOR MOOD · 2026.11.03</small>
+  <h1>공식 브랜드 톤 기준 컬러 무드 3안</h1>
+  <p>공식 제품컷·연출컷에서 뽑은 실제 브랜드 색(아이보리 리넨 · 누드 피치 · 코퍼 로즈 · 코코아 브라운 · 에스프레소)을 기준으로, 상담 내용 가독성을 우선해 구성 (UI는 B2, 결과 구성은 B3 유지)</p>
+</header>
+<div id="src" class="src"></div>
+<section class="group"><h2>M1. 리넨 누드 — 공식 톤 그대로 (추천 · 기본 테마)</h2><p>아이보리 리넨 배경 + 누드 피치 유리 + 코코아 글자. 공식 상세페이지·제품컷과 가장 같은 느낌, 카운터 조명에서도 글자가 가장 또렷함</p><div class="row" id="m1"></div></section>
+<section class="group"><h2>M2. 에스프레소 코퍼 — 공식 메인 영상 톤 (다크 · 전환 옵션)</h2><p>NMN 시네마틱 컷의 에스프레소 다크 + 코퍼 빛. B2의 고급 다크 무드를 브랜드 색으로. 매대 QR·외국인 고객용</p><div class="row" id="m2"></div></section>
+<section class="group"><h2>M3. 실크 블러시 — 부드러운 핑크 강조</h2><p>블러시 피치 배경 + 모브 로즈 포인트. 공식 톤 안에서 핑크를 조금 더 살린 안, 내국인 여성 고객 상담용</p><div class="row" id="m3"></div></section>
+<p class="note">※ 고민 표시는 자가 문진 기반 경향이며 측정·진단 결과가 아닙니다(점수 숫자 비노출). 가격·공급조건은 고객 화면에 넣지 않았습니다. 사진은 현재 링크의 공식 제품컷입니다.</p>
+<script>
+const IMG={rich:'../images/products/rich-cream.png',amp:'../images/products/ampoule.png',gel:'../images/products/soothing-gel.png'};
+const LOGO='../images/brand/siore-logo-official-black.png';
+const C={m1:{f:'rgba(255,255,255,.7)',s:'#dcc3b5',t:'#8f746a',d:'#a5684f'},m2:{f:'rgba(255,236,224,.06)',s:'rgba(255,220,200,.28)',t:'#d3b8ab',d:'#f0c0a8'},m3:{f:'rgba(255,255,255,.65)',s:'#e6c9cb',t:'#9a7f81',d:'#b0707b'}};
+function quad(c){return `<svg viewBox="0 0 120 108"><rect x="10" y="10" width="100" height="84" rx="8" fill="${c.f}" stroke="${c.s}" stroke-width=".6"/><line x1="60" y1="14" x2="60" y2="90" stroke="${c.s}" stroke-width=".5" stroke-dasharray="1.4 1.8"/><line x1="14" y1="52" x2="106" y2="52" stroke="${c.s}" stroke-width=".5" stroke-dasharray="1.4 1.8"/>${[['산뜻',16,19,'start'],['지성',104,19,'end'],['건성',16,89,'start'],['수분부족 지성',104,89,'end']].map(([t,x,y,a])=>`<text x="${x}" y="${y}" font-size="5" fill="${c.t}" text-anchor="${a}">${t}</text>`).join('')}<text x="60" y="6" font-size="5.2" fill="${c.t}" text-anchor="middle">수분 충분</text><text x="60" y="104" font-size="5.2" fill="${c.t}" text-anchor="middle">수분 부족 · 유분 →</text><circle cx="34" cy="74" r="12" fill="${c.d}" fill-opacity=".14"/><circle cx="34" cy="74" r="7" fill="${c.d}" fill-opacity=".22"/><circle cx="34" cy="74" r="4" fill="${c.d}" stroke="#fff" stroke-width="1.3"/></svg>`}
+function radar(c){const ax=['수분','진정','장벽','탄력','톤·광채','결·피지'],v=[4.6,1.8,2.2,4.2,1.7,1.4],cx=60,cy=54,R=35;const p=(i,r)=>{const a=-Math.PI/2+i*Math.PI/3;return [cx+Math.cos(a)*r,cy+Math.sin(a)*r]};const ring=r=>ax.map((_,i)=>p(i,r).join(',')).join(' ');
+return `<svg viewBox="0 0 120 108"><polygon points="${ring(R)}" fill="${c.f}" stroke="${c.s}" stroke-width=".6"/><polygon points="${ring(R*.62)}" fill="none" stroke="${c.s}" stroke-width=".4"/><polygon points="${ax.map((_,i)=>p(i,R*v[i]/5).join(',')).join(' ')}" fill="${c.d}" fill-opacity=".28" stroke="${c.d}" stroke-width="1"/>${ax.map((a,i)=>{const q=p(i,R+8),f=i===0||i===3,pt=p(i,R*v[i]/5);return `${f?`<circle cx="${pt[0]}" cy="${pt[1]}" r="2.6" fill="${c.d}" stroke="#fff" stroke-width="1"/>`:''}<text x="${q[0]}" y="${q[1]+2}" font-size="5.6" text-anchor="middle" fill="${f?c.d:c.t}" font-weight="${f?700:500}">${a}</text>`}).join('')}</svg>`}
+function card(){const n=[['Hydro Capsule Cleansing Milk','',0],['Fresh Bubble Toner','',0],['Intensive Serum','',0],['Hydrating Soothing Cream','',0],['Deep Glow Rich Cream','딥 글로우 리치 크림',1]],r=[['Essence Toner','',0],['Repair Ampoule','리페어 앰플',1],['Comfort Cream','',0],['Calming Soothing Gel','카밍 수딩 젤',1]];
+const li=a=>a.map(([t,k,o])=>`<li class="${o?'on':''}"><i class="bx ${o?'on':''}"></i><span>${t}${o?`<small>${k}</small>`:''}</span></li>`).join('');
+return `<div class="card"><div class="ct"><div><small>Prescription.</small><img src="${LOGO}" alt="SIORÉ"></div><div><small>Prescribed by.</small><strong>SIORÉ PHARMACIST LAB.</strong></div></div><div class="pf"><span class="p"><i class="bx"></i>ANTI-AGING LINE</span><span class="b"><i class="bx"></i>BALANCE(RELIEF) LINE</span></div><div class="ln"><div class="nmn"><div class="tab">NMN Anti-Aging Line</div><ul>${li(n)}</ul></div><div class="rel"><div class="tab">Balance(Relief) Line</div><ul>${li(r)}</ul></div></div><div class="ft"><span>이 카드를 약사·판매직원에게 보여주세요</span><time>2026.11.03</time></div></div>`}
+const steps=n=>`<div class="steps">${[0,1,2].map(i=>`<i class="${i<n?'on':''}"></i>`).join('')}</div>`;
+const blobs='<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>';
+function screens(m){const c=C[m];return [
+['① 시작','빛나는 30초 시작 버튼',`${blobs}<div class="top"><img src="${LOGO}" alt=""><span>KR · EN · 中 · 日</span></div><div class="eye">PHARMACIST-DESIGNED SKIN CHECK</div><h3>30초 만에 찾는<br><span>나만의 시오레 루틴</span></h3><p class="lead">몇 가지 질문에 답하면 약사가 설계한 약국 전용 더마 루틴을 바로 보여드려요.</p><div class="orb"><div><b>30s</b><small>TAP TO START</small></div></div><div class="pills"><span>수분</span><span>탄력</span><span>진정</span><span>장벽</span><span>광채</span></div><div class="cta">스킨 체크 시작하기</div>`],
+['② 문진','고민 칩(라인 색) + 슬라이더 + 제형 타일',`${blobs}${steps(2)}<div class="eye" style="margin-bottom:10px">STEP 2 OF 3</div><div class="g q"><small>CONCERN · 최대 2개</small><h4>가장 신경 쓰이는 고민은?</h4><div class="chips"><span class="sp">탄력</span><span class="sb">건조</span><span>붉은기</span><span>장벽</span><span>칙칙함</span><span>피지</span><span>각질</span></div></div>
+<div class="g q" style="margin-top:9px"><small>HYDRATION</small><h4>세안 후 얼마나 당기나요?</h4><div class="sl"><i></i><b></b></div><div class="sll"><span>많이 당겨요</span><span>보통</span><span>번들거려요</span></div></div>
+<div class="g q" style="margin-top:9px"><small>TEXTURE</small><h4>좋아하는 사용감은?</h4><div class="tg"><div>가벼운<br>워터</div><div>균형<br>로션</div><div class="sel">리치<br>크림</div></div></div><div class="cta" style="margin-top:12px">결과 보기</div>`],
+['③ 결과 요약','피부 위치 + 집중 케어 대시보드',`${blobs}<div class="eye" style="margin-bottom:10px">YOUR SKIN REPORT</div><div class="dash"><div class="g wide"><small>SKIN CONSULTATION SUMMARY</small><p class="sumline">수분 부족 고민을 중심으로 장벽과 수분 균형을 함께 관리해요</p></div>
+<div class="g"><small>SKIN POSITION</small><b>건성 경향</b>${quad(c)}</div><div class="g"><small>FOCUS CARE</small><b>수분 · 탄력</b>${radar(c)}</div>
+<div class="g wide"><small>CARE PRIORITY</small><div class="bars">${[['수분',92,'FOCUS'],['탄력',82,'FOCUS'],['장벽',46,''],['진정',36,''],['광채',30,'']].map(([a,w,e])=>`<div>${a}<i style="--w:${w}%"></i><em>${e}</em></div>`).join('')}</div></div></div>
+<div class="g mini-rt"><h5>약사 추천 코어 3 <span>아래 루틴 카드에서 확인</span></h5><div class="prs">${[[IMG.amp,'BALANCE','bl','리페어 앰플'],[IMG.gel,'BALANCE','bl','카밍 수딩 젤'],[IMG.rich,'NMN','nm','딥 글로우 리치 크림']].map(([s,a,k,b])=>`<div class="pr"><img src="${s}" alt=""><small class="${k}">${a}</small><b>${b}</b></div>`).join('')}</div></div>`],
+['④ 루틴 카드','코어3·프리미엄·1PICK + 상자 디자인 카드',`${blobs}<div class="eye" style="margin-bottom:10px">MY SIORÉ ROUTINE</div><div class="tiers"><span class="on">코어 3</span><span>프리미엄 5</span><span>1PICK</span></div>
+<div class="g" style="padding:12px 12px 14px"><div class="kick"><b>나의 시오레 루틴 카드</b><em>2026.11.03</em></div>${card()}</div>
+<p class="disc">답변 기반 경향이며 측정·진단 결과가 아닙니다</p><div class="cta" style="margin-top:12px">약사님께 이 화면 보여주기</div>`]
+].map(([t,s,h])=>`<div class="opt"><div class="opt-h"><b>${t}</b><span>${s}</span></div><div class="phone"><div class="scr ${m}">${h}</div></div></div>`).join('')}
+['m1','m2','m3'].forEach(m=>{document.getElementById(m).innerHTML=screens(m)});
+document.getElementById('src').innerHTML=[['../images/official-scenes/rich-cream-application.webp','#eee5dc','아이보리 리넨'],['../images/official-scenes/serum-application.webp','#dda58e','누드 피치'],['../images/products/rich-cream.png','#bc8475','코퍼 로즈 (NMN)'],['../images/official-scenes/cleansing-application.webp','#54352c','코코아 브라운'],['../images/hero/siore-nmn-cinematic-v2.png','#1a100f','에스프레소 (메인 영상)'],['../images/official-scenes/repair-ampoule-application.webp','#e7e6e8','실버 화이트 (밸런스)']].map(([s,c,t])=>`<figure><img src="${s}" alt=""><figcaption><i style="background:${c}"></i>${t} ${c}</figcaption></figure>`).join('');
+</script></body></html>
