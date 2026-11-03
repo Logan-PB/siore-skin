@@ -138,6 +138,28 @@
   function box(i,on){return '<span class="bx-box'+(on?' is-on':'')+'" aria-hidden="true">'+(on?'<svg viewBox="0 0 12 12"><path d="M2.4 6.3 5 8.8 9.8 3.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>':'')+'</span>';}
   function item(pair,keys){var on=keys.indexOf(pair[0])>-1,ln=localName(pair[0]);
     return '<li class="'+(on?'is-on':'')+'">'+box(0,on)+'<span><b>'+esc(pair[1])+'</b>'+(ln?'<small>'+esc(ln)+'</small>':'')+'</span>'+(on?'<em class="sr">'+P(Q('추천','recommended','推荐','おすすめ'))+'</em>':'')+'</li>';}
+
+  function rxInfo(){
+    var ci=codeInfo(),sg=ci.sg,f=ci.focus.map(function(n){return P(n)}).join(' · ');
+    var sig=sg.on.length?P(Q(sg.on.length+'가지 · 자주 '+sg.often.length,sg.on.length+' · often '+sg.often.length,sg.on.length+'项 · 经常'+sg.often.length,sg.on.length+'つ・よく'+sg.often.length)):P(Q('없음','None','没有','なし'));
+    return '<div class="bx-info">'
+      +'<div class="bx-i bx-code"><small>Skin Code.</small><b>'+ci.code.split('').join(' ')+'</b><span>'+P(ci.name)+'</span></div>'
+      +'<div class="bx-i"><small>Skin Type.</small><b class="sm">'+P(ci.type)+'</b></div>'
+      +'<div class="bx-i"><small>Focus Care.</small><b class="sm">'+f+'</b></div>'
+      +'<div class="bx-i"><small>Last 3 Days.</small><b class="sm">'+sig+'</b></div>'
+      +'</div>';
+  }
+  function rxDirections(){
+    var items=whyItems(),ci=codeInfo(),sg=ci.sg;if(!items.length)return '';
+    var many=sg.often.length>=3;
+    var note=many?Q('최근 예민 신호가 많아요. 약사님과 먼저 상담한 뒤 순한 단계부터 시작해 주세요.','Many recent sensitivity signals. Talk to the pharmacist first, then start gently.','近期敏感信号较多，请先咨询药师，再从温和步骤开始。','最近の敏感サインが多めです。まず薬剤師に相談し、やさしいステップから始めてください。')
+      :ci.S?Q('첫 1주는 순한 단계 위주로, 크림은 소량부터 시작해 주세요.','For the first week, focus on gentle steps and start with a small amount of cream.','第一周以温和步骤为主，面霜从少量开始。','最初の1週間はやさしいステップ中心に、クリームは少量から。')
+      :Q('아침·저녁 같은 순서로 꾸준히 사용해 주세요.','Use in the same order morning and night.','早晚按相同顺序坚持使用。','朝晩同じ順番で続けてお使いください。');
+    return '<div class="bx-dir"><div class="bx-dir-h"><small>Directions.</small><span>'+P(Q('사용 순서와 이유','Order of use & reason','使用顺序与理由','使う順番と理由'))+'</span></div><ol>'
+      +items.map(function(w){return '<li class="'+(w.nmn?'nm':'bl')+'"><i>'+(w.i+1)+'</i><div><b>'+esc(w.name)+'</b><span>'+w.lead+w.sig+w.reason+'</span></div></li>'}).join('')+'</ol>'
+      +'<div class="bx-note"><small>Notes.</small><p>'+P(note)+'</p><p class="bx-disc">'+P(Q('자가 문진 기반 화장품 상담 결과이며, 측정·진단이 아닙니다.','Cosmetic consultation based on your answers — not a measurement or diagnosis.','基于自我问答的化妆品咨询结果，并非测量或诊断。','回答に基づく化粧品相談の結果であり、測定・診断ではありません。'))+'</p></div></div>';
+  }
+
   function boxCard(){
     var pk=picked(),keys=pk.keys;
     var nmnOn=NMN.some(function(p){return keys.indexOf(p[0])>-1}),relOn=REL.some(function(p){return keys.indexOf(p[0])>-1});
@@ -153,10 +175,12 @@
             +'<li class="bx-rel'+(relOn?' is-on':'')+'">'+box(0,relOn)+'<b>BALANCE(RELIEF) LINE</b></li></ul></div>'
           +'<div class="bx-cell bx-by"><small>Prescribed by.</small><strong>SIORÉ PHARMACIST LAB.</strong></div>'
         +'</div>'
+        +rxInfo()
         +'<div class="bx-lines">'
           +'<div class="bx-line bx-nmn"><div class="bx-tab">NMN Anti-Aging Line</div><ul class="bx-list">'+NMN.map(function(p){return item(p,keys)}).join('')+'</ul></div>'
           +'<div class="bx-line bx-rel"><div class="bx-tab">Balance(Relief) Line</div><ul class="bx-list">'+REL.map(function(p){return item(p,keys)}).join('')+'</ul></div>'
         +'</div>'
+        +rxDirections()
         +'<div class="bx-foot"><span>'+T(Q('이 카드를 약사·판매직원에게 보여주세요','Show this card to the pharmacy staff','请向药师或店员出示此卡','このカードを薬剤師・スタッフにお見せください'))+'</span><time>'+date+'</time></div>'
       +'</div></section>';
   }
@@ -274,28 +298,38 @@
   };
   var NMNK=['cleansing','bubbleToner','serum','soothingCream','richCream'];
   function whyCard(){
-    var panel=document.querySelector('.solution-sheet .rx-tier-panel:not([hidden])')||document.querySelector('.solution-sheet .rx-tier-panel');if(!panel)return '';
-    var tiles=[].slice.call(panel.querySelectorAll('[data-ref-product]'));if(!tiles.length)return '';
-    var s=st(),x=axisScores(s),O=x.o>.3,S=x.se>.3,TN=x.t>.3,F=x.f>.3,sg=x.sg;
+    var items=whyItems();if(!items.length)return '';var ci=codeInfo(),sg=ci.sg;
+    var rows=items.map(function(w){return '<li><img src="'+esc(w.img)+'" alt=""><div><small class="'+(w.nmn?'nm':'bl')+'">STEP '+(w.i+1)+' · '+(w.nmn?'NMN':'BALANCE')+'</small><b>'+esc(w.name)+'</b><span>'+w.lead+w.sig+w.reason+'</span></div></li>'}).join('');
+    return '<section class="why-card"><div class="why-head"><span class="why-code">'+ci.code.split('').map(function(c){return '<span>'+c+'</span>'}).join('')+'</span><div><b>'+P(Q('이렇게 골랐어요','Why this routine','为什么推荐这套护理','このルーティンを選んだ理由'))+'</b><small>'+(sg.on.length?P(Q('최근 3일 예민 신호 '+sg.on.length+'가지 반영','Reflects '+sg.on.length+' recent sensitivity signals','已参考最近3天'+sg.on.length+'项敏感信号','直近3日の敏感サイン'+sg.on.length+'つを反映')):P(Q('피부 코드와 답변을 반영','Based on your skin code and answers','参考肌肤代码与回答','スキンコードと回答を反映')))+'</small></div></div>'
+      +'<h5><em>WHY THIS ROUTINE</em>'+P(Q('제품별 한 줄 이유','One-line reason per product','每款产品一句话理由','製品ごとのひとこと理由'))+'</h5><ul>'+rows+'</ul></section>';
+  }
+
+
+  /* ---------- 8. 처방전 서식 요약용 데이터 ---------- */
+  function codeInfo(){
+    var s=st(),x=axisScores(s),O=x.o>.3,S=x.se>.3,TN=x.t>.3,F=x.f>.3;
     var code=(O?'O':'D')+(S?'S':'C')+(TN?'T':'E')+(F?'F':'L');
-    var sigOn=function(k){return signals[k]>0};
-    var rows=tiles.map(function(t,i){
-      var k=t.getAttribute('data-ref-product'),img=t.querySelector('img'),nm=t.querySelector('strong');
-      var nmn=NMNK.indexOf(k)>-1,drv=[];
+    var p1=O?Q('유분','Oily','油性','皮脂'):Q('건조','Dry','干燥','乾燥'),p2=S?Q('예민','Sensitive','敏感','敏感'):Q('편안','Calm','稳定','すこやか');
+    var focus=TN&&F?Q('톤·탄력 집중형','Tone & firmness focus','光泽·弹润重点型','トーン・ハリ集中タイプ'):TN?Q('톤 집중형','Tone focus','光泽重点型','トーン集中タイプ'):F?Q('탄력 집중형','Firmness focus','弹润重点型','ハリ集中タイプ'):Q('밸런스 유지형','Balance keeper','平衡维持型','バランスキープタイプ');
+    var nm={};['ko','en','zh','ja'].forEach(function(l){nm[l]=p1[l]+'·'+p2[l]+' · '+focus[l]});
+    return {code:code,name:nm,S:S,sg:x.sg,type:quadrant(s).label,focus:radar(s).focus};
+  }
+  function whyItems(){
+    var panel=document.querySelector('.solution-sheet .rx-tier-panel:not([hidden])')||document.querySelector('.solution-sheet .rx-tier-panel');if(!panel)return [];
+    var s=st(),x=axisScores(s),O=x.o>.3,S=x.se>.3,TN=x.t>.3,F=x.f>.3;var sigOn=function(k){return signals[k]>0};
+    return [].slice.call(panel.querySelectorAll('[data-ref-product]')).map(function(t,i){
+      var k=t.getAttribute('data-ref-product'),img=t.querySelector('img'),nm=t.querySelector('strong'),nmn=NMNK.indexOf(k)>-1,drv=[],sigs=[];
       if(S&&!nmn)drv.push('S');
       if(!O&&['richCream','soothingCream','comfortCream','repairAmpoule','essenceToner','cleansing'].indexOf(k)>-1)drv.push('D');
       if(O&&['soothingGel','bubbleToner','soothingCream'].indexOf(k)>-1)drv.push('O');
       if(F&&['serum','richCream'].indexOf(k)>-1)drv.push('F');
       if(TN&&['serum','bubbleToner','soothingCream'].indexOf(k)>-1)drv.push('T');
-      var sigs=[];
       if(['repairAmpoule','comfortCream','essenceToner'].indexOf(k)>-1){if(sigOn('sting'))sigs.push('sting');if(sigOn('tight'))sigs.push('tight')}
       if(['soothingGel','soothingCream','essenceToner'].indexOf(k)>-1){if(sigOn('heat'))sigs.push('heat');if(sigOn('red'))sigs.push('red')}
-      var sigTxt=sigs.length?SIG.filter(function(z){return sigs.indexOf(z.k)>-1}).map(function(z){return P(z.n)}).join('·')+' '+P(Q('신호','signal','信号','サイン'))+' → ':'';
-      var lead=drv.length?drv.join('·')+' · ':'';
-      return '<li><img src="'+(img?esc(img.getAttribute('src')):'')+'" alt=""><div><small class="'+(nmn?'nm':'bl')+'">STEP '+(i+1)+' · '+(nmn?'NMN':'BALANCE')+'</small><b>'+(nm?esc(nm.textContent.trim()):'')+'</b><span>'+lead+sigTxt+P(WHY[k]||Q('','','',''))+'</span></div></li>';
-    }).join('');
-    return '<section class="why-card"><div class="why-head"><span class="why-code">'+code.split('').map(function(c){return '<span>'+c+'</span>'}).join('')+'</span><div><b>'+P(Q('이렇게 골랐어요','Why this routine','为什么推荐这套护理','このルーティンを選んだ理由'))+'</b><small>'+(sg.on.length?P(Q('최근 3일 예민 신호 '+sg.on.length+'가지 반영','Reflects '+sg.on.length+' recent sensitivity signals','已参考最近3天'+sg.on.length+'项敏感信号','直近3日の敏感サイン'+sg.on.length+'つを反映')):P(Q('피부 코드와 답변을 반영','Based on your skin code and answers','参考肌肤代码与回答','スキンコードと回答を反映')))+'</small></div></div>'
-      +'<h5><em>WHY THIS ROUTINE</em>'+P(Q('제품별 한 줄 이유','One-line reason per product','每款产品一句话理由','製品ごとのひとこと理由'))+'</h5><ul>'+rows+'</ul></section>';
+      return {k:k,i:i,img:img?img.getAttribute('src'):'',name:nm?nm.textContent.trim():'',nmn:nmn,
+        lead:drv.length?drv.join('·')+' · ':'',sig:sigs.length?SIG.filter(function(z){return sigs.indexOf(z.k)>-1}).map(function(z){return P(z.n)}).join('·')+' '+P(Q('신호','signal','信号','サイン'))+' → ':'',
+        reason:P(WHY[k]||Q('','','',''))};
+    });
   }
 
   function apply(){
