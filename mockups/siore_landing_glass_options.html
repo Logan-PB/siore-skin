@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIORÉ 상담링크 첫 화면 — 글래스 시안 4</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#3b2620;--sub:#7b6157;--cu:#a5684f;--g1:#d4957b;--g2:#a86a55;--pink:#b9736a;--blue:#5877a8}
+body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;background:#e9ddd4;color:var(--ink);padding:34px 0 60px;-webkit-font-smoothing:antialiased}
+.page-h{width:1280px;margin:0 auto 18px;padding:0 4px}
+.page-h small{font-size:11px;letter-spacing:.26em;color:var(--cu);font-weight:600}
+.page-h h1{font-size:26px;margin:6px 0 4px;letter-spacing:-.02em}
+.page-h p{font-size:13.5px;color:var(--sub)}
+.opt-h{width:1280px;margin:34px auto 10px;display:flex;align-items:baseline;gap:10px;padding:0 4px}
+.opt-h b{font-size:19px}.opt-h span{font-size:13px;color:var(--sub)}
+.opt-h em{font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#fff;background:linear-gradient(90deg,var(--g1),var(--g2));padding:4px 10px;border-radius:99px}
+.note{width:1280px;margin:10px auto 0;font-size:12.5px;color:var(--sub);line-height:1.65;padding:0 4px}
+.note b{color:var(--ink)}
+.frame{position:relative;width:1280px;height:800px;margin:0 auto;border-radius:26px;overflow:hidden;background:linear-gradient(165deg,#faf6f0,#f3e9e1 55%,#eedfd5);box-shadow:0 30px 60px -30px rgba(90,52,38,.45)}
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.86),rgba(255,255,255,.62));border:1px solid rgba(255,255,255,.95);box-shadow:0 18px 40px -22px rgba(110,66,50,.45),inset 0 1px 0 #fff;backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2)}
+.logo{height:30px}
+.top{position:absolute;left:44px;right:44px;top:30px;display:flex;align-items:center;gap:18px;z-index:5}
+.tag{font-size:11px;font-weight:600;letter-spacing:.22em;color:var(--cu);line-height:1.5}
+.tag span{display:block;letter-spacing:.02em;font-weight:500;color:var(--sub);font-size:12px}
+.langs{margin-left:auto;display:flex;gap:6px;padding:5px;border-radius:99px}
+.langs i{font-style:normal;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:99px;color:var(--sub);display:flex;align-items:center;gap:6px}
+.langs i img{width:16px;height:11px;border-radius:2px}
+.langs i.on{background:linear-gradient(90deg,var(--g1),var(--g2));color:#fff;box-shadow:0 6px 14px -8px rgba(120,60,40,.7)}
+.certs{display:flex;gap:6px}
+.certs img{width:44px;height:44px;border-radius:50%;object-fit:contain;background:#fff;padding:3px;box-shadow:0 6px 14px -10px rgba(110,66,50,.6)}
+.eyebrow{font-size:11px;letter-spacing:.28em;font-weight:600;color:var(--cu)}
+.hl{font-size:52px;line-height:1.22;letter-spacing:-.045em;font-weight:700;margin:14px 0 16px}
+.hl em{font-style:normal;background:linear-gradient(90deg,#c9866c,#8f523f);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{font-size:15.5px;line-height:1.75;color:var(--sub)}
+.cta{display:inline-flex;align-items:center;gap:10px;padding:17px 30px;border-radius:99px;font-size:17px;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--g1),var(--g2));box-shadow:0 16px 30px -14px rgba(140,74,52,.75),inset 0 1px 0 rgba(255,255,255,.4)}
+.cta svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ghost{display:inline-flex;align-items:center;justify-content:center;padding:15px 20px;border-radius:99px;font-size:14px;font-weight:600;color:var(--ink)}
+.steps{display:flex;gap:8px;align-items:center}
+.steps span{font-size:12.5px;font-weight:600;padding:9px 14px;border-radius:99px;color:var(--ink)}
+.steps span b{color:var(--cu);margin-right:6px;font-weight:700}
+.steps i{width:14px;height:1px;background:rgba(165,104,79,.45)}
+.clin{position:absolute;left:22px;bottom:22px;font-size:12px;font-weight:600;padding:9px 14px;border-radius:99px;color:var(--ink);z-index:6}
+.founder{display:flex;align-items:center;gap:12px}
+.founder .ph{width:62px;height:62px;border-radius:50%;overflow:hidden;border:2px solid #fff;box-shadow:0 8px 18px -10px rgba(110,66,50,.6);background:#f1ebe6}
+.founder .ph{background:#f3f3f2 url(../images/consultation/brand-founders.png) 53% 44%/300% auto no-repeat}
+.founder small{font-size:11.5px;color:var(--sub);line-height:1.5}
+.founder small b{display:block;color:var(--ink);font-size:13px}
+
+/* ---------- L1 ---------- */
+.l1 .photo{position:absolute;right:0;top:0;bottom:0;width:58%;background:url(../images/brand/official-about-03.png) 62% 40%/cover}
+.l1 .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#f6ede6 0%,rgba(246,237,230,.6) 18%,rgba(246,237,230,0) 42%)}
+.l1 .panel{position:absolute;left:44px;top:128px;width:560px;padding:40px 40px 34px;border-radius:30px;z-index:4}
+.l1 .row{display:flex;gap:10px;align-items:center;margin-top:26px}
+.l1 .chip{position:absolute;z-index:4;padding:12px 16px;border-radius:18px;font-size:12.5px;line-height:1.45;color:var(--sub)}
+.l1 .chip b{display:block;color:var(--ink);font-size:14px}
+.l1 .chip img{width:34px;height:34px;float:left;margin-right:10px;border-radius:50%;background:#fff}
+
+/* ---------- L2 ---------- */
+.l2{background:radial-gradient(1200px 600px at 75% 20%,#fbefe7,transparent 60%),linear-gradient(165deg,#faf6f0,#f1e5dc)}
+.l2 .arch{position:absolute;right:70px;top:110px;width:470px;height:640px;border-radius:240px 240px 32px 32px;overflow:hidden;background:#f3eee9 url(../images/consultation/brand-founders.png) 50% 100%/262% auto no-repeat;box-shadow:0 30px 60px -30px rgba(90,52,38,.55)}
+.l2 .arch::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.8)}
+.l2 .sig{position:absolute;right:100px;bottom:80px;width:410px;padding:18px 22px;border-radius:22px;z-index:3;display:flex;justify-content:space-between;align-items:center}
+.l2 .sig b{font-size:14px}.l2 .sig small{display:block;font-size:11.5px;color:var(--sub);margin-top:3px}
+.l2 .left{position:absolute;left:64px;top:150px;width:600px}
+.l2 .card{margin-top:30px;padding:20px 22px;border-radius:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.l2 .card div{padding:6px 4px}
+.l2 .card b{display:block;font-size:22px;color:var(--cu);font-weight:700;letter-spacing:-.02em}
+.l2 .card span{display:block;font-size:13.5px;font-weight:700;margin-top:2px}
+.l2 .card small{display:block;font-size:11.5px;color:var(--sub);margin-top:3px;line-height:1.5}
+.l2 .acts{display:flex;gap:10px;margin-top:24px;align-items:center}
+
+/* ---------- L3 ---------- */
+.l3{background:radial-gradient(700px 520px at 50% 52%,#fdf3ec,transparent 70%),linear-gradient(165deg,#f8f1ea,#ecdcd1)}
+.l3 .center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:560px;height:560px}
+.l3 .orb{position:absolute;inset:90px;border-radius:50%;
+  background:radial-gradient(circle at 34% 26%,rgba(255,255,255,.98),rgba(255,247,241,.75) 40%,rgba(236,206,190,.55) 75%,rgba(201,150,128,.5));
+  border:1px solid rgba(255,255,255,.9);box-shadow:inset -20px -30px 60px rgba(165,104,79,.25),inset 14px 18px 40px rgba(255,255,255,.9),0 40px 70px -30px rgba(110,66,50,.55);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.l3 .orb img.logo{height:34px;margin-bottom:12px}
+.l3 .orb p{font-size:13px;color:var(--sub);line-height:1.6}
+.l3 .ring{position:absolute;inset:0;border-radius:50%;border:1px dashed rgba(165,104,79,.28)}
+.l3 .ring.r2{inset:44px;border-style:solid;border-color:rgba(165,104,79,.14)}
+.l3 .ing{white-space:nowrap;position:absolute;display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:99px;font-size:12.5px;font-weight:600;transform:translate(-50%,-50%)}
+.l3 .ing img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+.l3 .ing.main{font-size:14px;padding:8px 16px 8px 8px}
+.l3 .ing.main img{width:38px;height:38px}
+.l3 .left{position:absolute;left:56px;top:150px;width:330px}
+.l3 .left .hl{font-size:40px}
+.l3 .right{position:absolute;right:56px;top:190px;width:300px;display:flex;flex-direction:column;gap:12px}
+.l3 .right .ghost{justify-content:flex-start;padding:16px 20px;border-radius:20px;flex-direction:column;align-items:flex-start;gap:3px}
+.l3 .right .ghost small{font-size:11.5px;font-weight:500;color:var(--sub)}
+.l3 .right .cta{justify-content:center}
+
+/* ---------- L4 ---------- */
+.l4 .bgimg{position:absolute;inset:0;background:url(../images/official-scenes/serum-application.webp) 85% 30%/58% auto no-repeat}
+.l4 .bgimg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#f7efe8 38%,rgba(247,239,232,.0) 70%)}
+.l4 .left{position:absolute;left:56px;top:128px;width:560px;z-index:3}
+.l4 .left .hl{font-size:44px}
+.l4 .ask{margin-top:24px;padding:20px;border-radius:26px}
+.l4 .ask h4{font-size:15px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:baseline}
+.l4 .ask h4 small{font-size:11.5px;color:var(--sub);font-weight:500}
+.l4 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.l4 .grid span{display:flex;align-items:center;gap:8px;padding:11px 10px;border-radius:14px;background:rgba(255,255,255,.75);border:1px solid rgba(168,112,92,.16);font-size:13px;font-weight:600}
+.l4 .grid img{width:22px;height:22px}
+.l4 .grid span.on{border-color:var(--cu);background:#fbefe8;box-shadow:inset 0 0 0 1px var(--cu)}
+.l4 .bar{display:flex;gap:10px;align-items:center;margin-top:14px}
+.l4 .bar .cta{flex:1;justify-content:center}
+.l4 .qr{position:absolute;right:52px;bottom:52px;width:250px;padding:16px;border-radius:22px;display:flex;gap:12px;align-items:center;z-index:3}
+.l4 .qr .q{width:64px;height:64px;border-radius:10px;background:#fff url(../assets/skin-consultation-qr.svg) center/86% no-repeat;border:1px solid rgba(168,112,92,.2)}
+.l4 .qr small{font-size:11.5px;color:var(--sub);line-height:1.5}.l4 .qr b{display:block;font-size:13px;color:var(--ink)}
+.l4 .multi{position:absolute;right:52px;top:120px;display:flex;flex-direction:column;gap:6px;z-index:3;text-align:right}
+.l4 .multi span{font-size:13px;font-weight:600;padding:9px 14px;border-radius:14px}
+</style></head><body>
+<header class="page-h">
+  <small>SIORÉ CONSULTATION LINK · LANDING · GLASS OPTIONS</small>
+  <h1>상담링크 첫 화면 — 결과지 무드(리넨 누드 · 글래스) 맞춤 시안 4가지</h1>
+  <p>모든 안: 기존 문구·버튼(상담시작 / 상담 기록 / 약사 추천 3종 세트 / 임상 전후 보기)·4개 언어·인증 배지 그대로 유지. 수치·효능 문구는 새로 넣지 않았어요.</p>
+</header>
+
+<!-- ================= L1 ================= -->
+<div class="opt-h"><b>L1. 리넨 글래스 히어로</b><span>공식몰 라인업 컷 위에 유리 패널 한 장 — 가장 깔끔하고 브랜드다운 첫인상</span><em>추천</em></div>
+<section class="frame l1">
+  <div class="photo"></div>
+  <div class="top"><img class="logo" src="../images/brand/siore-logo-official-black.png" alt="SIORÉ"><div class="tag">PHARMACIST-DEVELOPED. DERMA-CERTIFIED.<span>Targeted Nutrition for Your Skin.</span></div>
+    <div class="langs glass"><i class="on"><img src="../images/flags/kr.svg">한국어</i><i><img src="../images/flags/us.svg">English</i><i><img src="../images/flags/cn.svg">中文</i><i><img src="../images/flags/jp.svg">日本語</i></div></div>
+  <div class="panel glass">
+    <div class="founder"><div class="ph"></div><small><b>약사가 직접 설계</b>브랜드 개발 대표약사 고상은 · 임별</small></div>
+    <h2 class="hl">약사가 설계한,<br><em>바르는 피부 영양제.</em></h2>
+    <p class="lead">약국에서 만난 피부 고민, 성분의 설계로 답하다.<br>제품별 근거로 제안하는 나만의 더마 루틴.</p>
+    <div class="steps" style="margin-top:22px"><span class="glass"><b>01</b>피부 고민</span><i></i><span class="glass"><b>02</b>제품별 근거</span><i></i><span class="glass"><b>03</b>나의 3PICK</span></div>
+    <div class="row"><span class="cta">상담 시작하기 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span><span class="ghost glass">상담 기록</span><span class="ghost glass">약사 추천 3종 세트</span></div>
+  </div>
+  <div class="chip glass" style="right:48px;top:118px"><div class="certs" style="gap:4px"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div></div>
+  <div class="chip glass" style="right:48px;bottom:46px;width:250px"><b>NMN LINE · BALANCE LINE</b>약국 전용 더마코스메틱 9종 라인업</div>
+  <span class="clin glass">임상 전후 보기 ↗</span>
+</section>
+<p class="note"><b>포인트</b> 사진 한 장 + 유리 패널 한 장이라 정보가 한눈에 들어와요. 결과지와 같은 카퍼 그라데이션 버튼으로 이어져서 첫 화면 → 결과까지 톤이 하나로 맞아요. <b>입점 제안</b> 때 태블릿으로 보여주기 좋은 안.</p>
+
+<!-- ================= L2 ================= -->
+<div class="opt-h"><b>L2. 약사 아치</b><span>대표약사 두 분을 아치 프레임에 크게 — '약사가 만든 브랜드' 신뢰 강조</span></div>
+<section class="frame l2">
+  <div class="top"><img class="logo" src="../images/brand/siore-logo-official-black.png" alt="SIORÉ"><div class="certs" style="margin-left:6px"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div>
+    <div class="langs glass"><i class="on"><img src="../images/flags/kr.svg">한국어</i><i><img src="../images/flags/us.svg">English</i><i><img src="../images/flags/cn.svg">中文</i><i><img src="../images/flags/jp.svg">日本語</i></div></div>
+  <div class="arch"></div>
+  <div class="sig glass"><div><b>고상은 · 임별</b><small>브랜드 개발 대표약사</small></div><span class="eyebrow" style="letter-spacing:.2em">FOUNDED BY PHARMACISTS</span></div>
+  <div class="left">
+    <span class="eyebrow">PHARMACIST-DEVELOPED. DERMA-CERTIFIED.</span>
+    <h2 class="hl">약사가 설계한,<br><em>바르는 피부 영양제.</em></h2>
+    <p class="lead">약국에서 만난 피부 고민, 성분의 설계로 답하다.<br>제품별 근거로 제안하는 나만의 더마 루틴.</p>
+    <div class="card glass">
+      <div><b>01</b><span>피부 고민</span><small>얼굴 부위로 고민을 골라요</small></div>
+      <div><b>02</b><span>제품별 근거</span><small>성분·시험 근거를 함께 봐요</small></div>
+      <div><b>03</b><span>나의 3PICK</span><small>아침·밤 루틴 카드로 저장</small></div>
+    </div>
+    <div class="acts"><span class="cta">상담 시작하기 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span><span class="ghost glass">상담 기록</span><span class="ghost glass">약사 추천 3종 세트</span></div>
+  </div>
+  <span class="clin glass">임상 전후 보기 ↗</span>
+</section>
+<p class="note"><b>포인트</b> 지금 첫 화면의 작은 원형 사진을 크게 키운 안이에요. 약사 응대 시 "약사님이 만든 브랜드"라는 한마디가 바로 보이고, 3단계 카드가 상담 흐름을 미리 알려줘요. <b>신규 약사 설득</b>에 가장 강해요.</p>
+
+<!-- ================= L3 ================= -->
+<div class="opt-h"><b>L3. 성분 글래스 오브</b><span>지금의 '주요 배합성분' 네트워크를 유리 구슬 + 떠 있는 성분 칩으로</span></div>
+<section class="frame l3">
+  <div class="top"><img class="logo" src="../images/brand/siore-logo-official-black.png" alt="SIORÉ"><div class="tag">PHARMACIST-DEVELOPED. DERMA-CERTIFIED.<span>Targeted Nutrition for Your Skin.</span></div>
+    <div class="langs glass"><i class="on"><img src="../images/flags/kr.svg">한국어</i><i><img src="../images/flags/us.svg">English</i><i><img src="../images/flags/cn.svg">中文</i><i><img src="../images/flags/jp.svg">日本語</i></div></div>
+  <div class="left">
+    <span class="eyebrow">SIORÉ / INGREDIENT FOCUS</span>
+    <h2 class="hl">약사가 설계한,<br><em>바르는<br>피부 영양제.</em></h2>
+    <p class="lead">약국에서 만난 피부 고민,<br>성분의 설계로 답하다.</p>
+    <div class="founder" style="margin-top:26px"><div class="ph"></div><small><b>고상은 · 임별</b>브랜드 개발 대표약사</small></div>
+  </div>
+  <div class="center">
+    <div class="ring"></div><div class="ring r2"></div>
+    <div class="orb"><img class="logo" src="../images/brand/siore-logo-official-black.png"><p>시오레 주요 배합성분</p></div>
+    <span class="ing glass main" style="left:50%;top:8%"><img src="../images/textures/serum-texture.jpg">NMN</span>
+    <span class="ing glass" style="left:86%;top:22%"><img src="../images/textures/ampoule-texture.jpg">판테놀</span>
+    <span class="ing glass" style="left:95%;top:52%"><img src="../images/textures/rich-cream-texture.jpg">카르노신</span>
+    <span class="ing glass" style="left:86%;top:82%"><img src="../images/textures/soothing-gel-texture.jpg">병풀추출물</span>
+    <span class="ing glass" style="left:50%;top:96%"><img src="../images/textures/essence-toner-texture.jpg">히알루론산</span>
+    <span class="ing glass" style="left:14%;top:82%"><img src="../images/textures/comfort-cream-texture.jpg">펩타이드</span>
+    <span class="ing glass" style="left:5%;top:52%"><img src="../images/textures/bubble-texture.jpg">PDRN</span>
+    <span class="ing glass" style="left:14%;top:22%"><img src="../images/textures/cleansing-texture.jpg">레스베라트롤</span>
+  </div>
+  <div class="right">
+    <span class="cta">상담 시작하기 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+    <span class="ghost glass"><b>01 → 02 → 03</b><small>피부 고민 · 제품별 근거 · 나의 3PICK</small></span>
+    <span class="ghost glass"><b>약사 추천 3종 세트</b><small>상황별 세트 바로 보기</small></span>
+    <span class="ghost glass"><b>상담 기록</b><small>지난 상담 불러오기</small></span>
+    <div class="certs" style="justify-content:flex-end;margin-top:6px"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div>
+  </div>
+  <span class="clin glass">임상 전후 보기 ↗</span>
+</section>
+<p class="note"><b>포인트</b> 카운터 태블릿에 띄워두면 시선을 가장 잘 끄는 안이에요(구슬·칩이 천천히 떠다니는 모션 가능). 단, 성분 칩 이미지는 실제 원료 사진이 아닌 제형 텍스처라 <b>성분 사진 교체 또는 아이콘화</b>가 필요해요.</p>
+
+<!-- ================= L4 ================= -->
+<div class="opt-h"><b>L4. 고민 바로 입구</b><span>첫 화면에서 바로 고민을 고르게 — 외국인 QR·카운터 셀프 상담용</span></div>
+<section class="frame l4">
+  <div class="bgimg"></div>
+  <div class="top"><img class="logo" src="../images/brand/siore-logo-official-black.png" alt="SIORÉ"><div class="tag">PHARMACIST-DEVELOPED. DERMA-CERTIFIED.<span>Targeted Nutrition for Your Skin.</span></div>
+    <div class="certs" style="margin-left:auto"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div></div>
+  <div class="multi"><span class="glass" style="background:linear-gradient(90deg,var(--g1),var(--g2));color:#fff">한국어</span><span class="glass">English</span><span class="glass">中文</span><span class="glass">日本語</span></div>
+  <div class="left">
+    <span class="eyebrow">약사가 설계한 바르는 피부 영양제</span>
+    <h2 class="hl">오늘, 가장 신경 쓰이는<br><em>피부 고민</em>은 무엇인가요?</h2>
+    <p class="lead">최대 3개까지 고르면, 약사가 설계한 루틴을 바로 보여드려요.</p>
+    <div class="ask glass">
+      <h4>피부 고민 선택 <small>2 / 3 선택됨</small></h4>
+      <div class="grid">
+        <span><img src="../images/concerns/dryness.svg">건조</span><span><img src="../images/concerns/sensitivity.svg">민감</span><span><img src="../images/concerns/redness.svg">열감·홍조</span>
+        <span class="on"><img src="../images/concerns/firmness.svg">안티에이징</span><span><img src="../images/concerns/radiance.svg">광채·톤업</span><span><img src="../images/concerns/blemish.svg">트러블</span>
+        <span class="on"><img src="../images/concerns/sebum.svg">피지</span><span><img src="../images/concerns/barrier.svg">장벽회복</span><span><img src="../images/concerns/texture.svg">각질</span>
+      </div>
+      <div class="bar"><span class="cta">이 고민으로 상담 시작 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span><span class="ghost glass">약사 추천 3종 세트</span></div>
+    </div>
+  </div>
+  <div class="qr glass"><div class="q"></div><small><b>휴대폰으로 이어보기</b>QR을 찍으면 내 폰에서 결과를 저장할 수 있어요</small></div>
+  <span class="clin glass">임상 전후 보기 ↗ · 상담 기록</span>
+</section>
+<p class="note"><b>포인트</b> 클릭 한 번을 줄여서 바로 고민 선택으로 들어가요. 외국인 고객이 QR로 들어와도 언어 → 고민 → 결과 저장까지 끊김이 없어요. <b>객단가·전환</b>에 가장 유리하지만, 브랜드 소개는 L1보다 짧아요.</p>
+</body></html>
