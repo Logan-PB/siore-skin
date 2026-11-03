@@ -86,7 +86,7 @@
     "routine": "토너",
     "routineOrder": 2,
     "i18n": {
-      "en": { "name": "Daily Relief Essence Toner", "benefit": "A calming essence toner for sensitive skin and inner dryness." },
+      "en": { "name": "Daily Balance Essence Toner", "benefit": "A calming essence toner for sensitive skin and inner dryness." },
       "zh": { "name": "每日舒缓精华爽肤水", "benefit": "适合敏感、深层干燥和表面紧绷的舒缓精华爽肤水。" },
       "ja": { "name": "デイリーリリーフ エッセンストナー", "benefit": "敏感肌やインナードライにうるおいを与える鎮静エッセンストナー。" }
     }
@@ -116,7 +116,7 @@
     "routine": "앰플",
     "routineOrder": 3,
     "i18n": {
-      "en": { "name": "Daily Relief Repair Ampoule", "benefit": "An intensive SOS ampoule for stressed skin and compromised barrier care." },
+      "en": { "name": "Daily Balance Care Ampoule", "benefit": "An intensive SOS ampoule for stressed skin and compromised barrier care." },
       "zh": { "name": "每日舒缓修护安瓶", "benefit": "适合屏障受损、敏感期和肌肤状态下降时的集中护理。" },
       "ja": { "name": "デイリーリリーフ リペアアンプル", "benefit": "バリアダメージや敏感な時期に使いやすい集中SOSアンプル。" }
     }
@@ -230,7 +230,6 @@
       "피부 온도 회복률 134.436% (무도포 48.090%, N=22, p<0.001)",
       "1회 사용 직후 피부 수분량 61.23% 증가 (N=22, p<0.001)",
       "24시간 후 피부 수분량 20.20% 증가 (N=22, p<0.001)",
-      "즉각적 겉수분 76.04% 개선 (N=22, p<0.001)",
       "피부 수분손실량 15.42% 개선 (N=22, p<0.001)",
       "피부 각질 42.18% 개선 (N=22, p<0.001)",
       "2주 사용 후 피지량 15.77% 개선 (N=23, p<0.05)"
@@ -248,7 +247,7 @@
     "routineOrder": 5,
     "i18n": {
       "en": {
-        "name": "Daily Relief Calming Soothing Gel",
+        "name": "Daily Balance Calming Soothing Gel",
         "benefit": "A refreshing gel for oily, combination, heat-stressed, or blemish-prone skin.",
         "clinical": [
           "Skin temperature decreased by 10.041°C immediately after one application following heat stimulation (N=22, p<0.001)",
@@ -256,7 +255,6 @@
           "Skin temperature recovery: 134.436% (untreated: 48.090%; N=22, p<0.001)",
           "Skin hydration increased by 61.23% immediately after one use (N=22, p<0.001)",
           "Skin hydration increased by 20.20% after 24 hours (N=22, p<0.001)",
-          "Immediate surface hydration improved by 76.04% (N=22, p<0.001)",
           "Transepidermal water loss improved by 15.42% (N=22, p<0.001)",
           "Skin flaking improved by 42.18% (N=22, p<0.001)",
           "Sebum level improved by 15.77% after 2 weeks (N=23, p<0.05)"
@@ -271,7 +269,6 @@
           "皮肤温度恢复率134.436%（未涂抹部位48.090%；N=22，p<0.001）",
           "单次使用后皮肤含水量即时提升61.23%（N=22，p<0.001）",
           "24小时后皮肤含水量提升20.20%（N=22，p<0.001）",
-          "即时表层水分改善76.04%（N=22，p<0.001）",
           "经皮水分流失改善15.42%（N=22，p<0.001）",
           "皮肤角质改善42.18%（N=22，p<0.001）",
           "使用2周后皮脂量改善15.77%（N=23，p<0.05）"
@@ -286,7 +283,6 @@
           "皮膚温度回復率134.436%（無塗布部位48.090%、N=22、p<0.001）",
           "1回使用直後の皮膚水分量が61.23%増加（N=22、p<0.001）",
           "24時間後の皮膚水分量が20.20%増加（N=22、p<0.001）",
-          "即時の表面水分量が76.04%改善（N=22、p<0.001）",
           "経皮水分蒸散量が15.42%改善（N=22、p<0.001）",
           "角質量が42.18%改善（N=22、p<0.001）",
           "2週間使用後の皮脂量が15.77%改善（N=23、p<0.05）"
@@ -320,7 +316,7 @@
     "routine": "크림",
     "routineOrder": 5,
     "i18n": {
-      "en": { "name": "Daily Relief Comfort Cream", "benefit": "A daily barrier moisturizer for inner dryness, sensitivity, and blemish-prone skin." },
+      "en": { "name": "Daily Balance Comfort Cream", "benefit": "A daily barrier moisturizer for inner dryness, sensitivity, and blemish-prone skin." },
       "zh": { "name": "每日舒缓舒适面霜", "benefit": "适合深层干燥、敏感和痘痘问题肌肤的日常屏障面霜。" },
       "ja": { "name": "デイリーリリーフ コンフォートクリーム", "benefit": "インナードライ・敏感・トラブル肌のバリアケアに向いたデイリークリーム。" }
     }
