@@ -154,3 +154,23 @@
   .bx-i b{font-size:22px}
 }
 #focus-dialog .bx-card small,#focus-dialog .bx-card .bx-i small,#focus-dialog .bx-dir-h small,#focus-dialog .bx-note small{color:#2b2b2b !important}
+/* A안 글래스 플레이트 · 입체 레이더 (2026-11-03) */
+.sm-card svg.sm3{max-width:250px;overflow:visible}
+.sm3-g{fill:none;stroke:rgba(165,104,79,.16);stroke-width:1}
+.sm3-a{fill:none;stroke:rgba(165,104,79,.5);stroke-width:1.2}
+.sm3-q{font-size:11px;font-weight:600;fill:#a48777;letter-spacing:.02em}
+.sm3-q.is-on{fill:#8a4f3c;font-weight:700}
+.sm3-ax{font-size:9.5px;font-weight:500;fill:#b3a197}
+.sm3-tag{font-size:11px;font-weight:700;fill:#3b2620}
+.sm3-rip,.sm3-rip.d2,.sm3-rip.d3,.sm3-ripc{fill:none;stroke:#a5684f;stroke-width:1.6;transform-box:fill-box;transform-origin:center;animation:sm3Rip 2.4s ease-out infinite}
+.sm3-ripc{stroke-width:.9}
+.sm3-rip.d2,.sm3-ripc.d2{animation-delay:.8s}.sm3-rip.d3{animation-delay:1.6s}
+.sm3-blink{animation:sm3Blink 1.6s ease-in-out infinite}
+.sm3-vp{transform-box:fill-box;transform-origin:center;animation:sm3Vp 1.6s ease-in-out infinite}
+.sm3-float{animation:sm3Float 3s ease-in-out infinite}
+@keyframes sm3Rip{0%{transform:scale(.4);opacity:.75}100%{transform:scale(2.6);opacity:0}}
+@keyframes sm3Blink{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes sm3Vp{0%,100%{transform:scale(1)}50%{transform:scale(1.45)}}
+@keyframes sm3Float{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){.sm3 *{animation:none!important}}
+@media print{.sm3-rip,.sm3-ripc{display:none}}

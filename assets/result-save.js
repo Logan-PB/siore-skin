@@ -25,6 +25,7 @@
       const c=sv.cloneNode(true);const a=[sv,...sv.querySelectorAll('*')],b=[c,...c.querySelectorAll('*')];
       a.forEach((n,j)=>{const m=b[j];if(!m||/^(defs|stop|linearGradient|radialGradient|clipPath|filter|feDropShadow|feGaussianBlur|style|title|mask|pattern)$/i.test(n.tagName))return;const cs=getComputedStyle(n);
         PROPS.forEach(k=>{const v=cs.getPropertyValue(k);if(v&&v!=='auto')m.style.setProperty(k,v)});m.style.setProperty('animation','none');m.style.setProperty('font-family','Pretendard,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif')});
+      c.querySelectorAll('.sm3-rip,.sm3-ripc').forEach(n=>n.remove());
       c.setAttribute('xmlns','http://www.w3.org/2000/svg');c.setAttribute('width',r.width);c.setAttribute('height',r.height);c.removeAttribute('class');c.style.cssText='';
       if(!c.getAttribute('viewBox')&&sv.viewBox&&sv.viewBox.baseVal&&sv.viewBox.baseVal.width){const v=sv.viewBox.baseVal;c.setAttribute('viewBox',`${v.x} ${v.y} ${v.width} ${v.height}`)}
       const src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(c));

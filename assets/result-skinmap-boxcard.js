@@ -43,24 +43,34 @@
     else if(h<0)label=Q('수분 부족 지성 경향','Oily but dehydrated','外油内干倾向','インナードライ傾向');
     else if(o>=0.3)label=Q('지성 경향','Oily-leaning','偏油性倾向','脂性肌傾向');
     else label=Q('산뜻한 균형 경향','Light & balanced','清爽平衡倾向','さっぱりバランス傾向');
-    var x=60+o*24,y=56-h*22;
-    var qn=function(m){return P(m)};
-    var svg='<svg viewBox="0 0 120 112" role="img" aria-label="'+P(Q('수분 유분 위치','Hydration and oil position','水油定位','水分・油分の位置'))+'">'
-      +'<defs><radialGradient id="smQf" cx="50%" cy="50%" r="70%"><stop offset="0" stop-color="#fffaf6"/><stop offset="1" stop-color="#f4e6dd"/></radialGradient>'
-      +'<radialGradient id="smDot"><stop offset="0" stop-color="#d79a86"/><stop offset="1" stop-color="#9c5a47"/></radialGradient></defs>'
-      +'<rect x="12" y="12" width="96" height="88" rx="6" fill="url(#smQf)" stroke="#d8c2b3" stroke-width=".5"/>'
-      +'<line x1="60" y1="16" x2="60" y2="96" stroke="#cfb3a1" stroke-width=".4" stroke-dasharray="1.2 1.6"/><line x1="16" y1="56" x2="104" y2="56" stroke="#cfb3a1" stroke-width=".4" stroke-dasharray="1.2 1.6"/>'
-      +'<text x="18" y="21" class="sm-qn">'+qn(Q('산뜻','Light','清爽','さっぱり'))+'</text>'
-      +'<text x="102" y="21" text-anchor="end" class="sm-qn">'+qn(Q('지성','Oily','油性','脂性'))+'</text>'
-      +'<text x="18" y="94" class="sm-qn">'+qn(Q('건성','Dry','干性','乾燥'))+'</text>'
-      +'<text x="102" y="94" text-anchor="end" class="sm-qn">'+qn(Q('수분부족 지성','Dehydrated oily','外油内干','インナードライ'))+'</text>'
-      +'<text x="60" y="8" text-anchor="middle" class="sm-ax">'+P(Q('수분 충분','Hydrated','水分充足','うるおい十分'))+'</text>'
-      +'<text x="60" y="109" text-anchor="middle" class="sm-ax">'+P(Q('수분 부족','Dehydrated','水分不足','うるおい不足'))+'</text>'
-      +'<text x="12" y="109" text-anchor="start" class="sm-ax sm-ax-o">'+P(Q('← 유분 적음','← Less oil','← 油少','← 油分少'))+'</text>'
-      +'<text x="108" y="109" text-anchor="end" class="sm-ax sm-ax-o">'+P(Q('유분 많음 →','More oil →','油多 →','油分多 →'))+'</text>'
-      +'<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="11" fill="none" stroke="#b77a66" stroke-opacity=".22" stroke-width=".6"/>'
-      +'<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="7.5" fill="#c58a76" fill-opacity=".16"/>'
-      +'<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="4" fill="url(#smDot)" stroke="#fff" stroke-width="1.3"/>'
+    /* A안 글래스 플레이트: 아이소메트릭 유리판 + 깜빡이는 현재 위치 핀 */
+    var iso=function(X,Y){return [(X-Y)*.86,(X+Y)*.5]};
+    var pl=function(pts){return pts.map(function(p){return iso(p[0],p[1]).map(function(n){return n.toFixed(1)}).join(',')}).join(' ')};
+    var px=clamp(o*32,-60,60),py=clamp(-h*32,-60,60),pt=iso(px,py);
+    var qx=px>=0?1:-1,qy=py>=0?1:-1;
+    var lab=function(X,Y,m,on){var p=iso(X,Y);return '<text x="'+p[0].toFixed(1)+'" y="'+(p[1]+4).toFixed(1)+'" text-anchor="middle" class="sm3-q'+(on?' is-on':'')+'">'+P(m)+'</text>'};
+    var axl=function(X,Y,m,anc){var p=iso(X,Y);return '<text x="'+p[0].toFixed(1)+'" y="'+(p[1]+3.5).toFixed(1)+'" text-anchor="'+anc+'" class="sm3-ax">'+P(m)+'</text>'};
+    var grid='';[-35,35].forEach(function(k){grid+='<polyline points="'+pl([[k,-70],[k,70]])+'" class="sm3-g"/><polyline points="'+pl([[-70,k],[70,k]])+'" class="sm3-g"/>'});
+    var ex=pt[0].toFixed(1),ey=pt[1].toFixed(1),hy=(pt[1]-50).toFixed(1);
+    var rip=function(d){return '<ellipse class="sm3-rip'+d+'" cx="'+ex+'" cy="'+ey+'" rx="11" ry="6"/>'};
+    var tagW=58,tx=(pt[0]+12).toFixed(1);
+    var svg='<svg class="sm3" viewBox="-132 -112 264 200" role="img" aria-label="'+P(Q('수분 유분 위치','Hydration and oil position','水油定位','水分・油分の位置'))+'">'
+      +'<defs><linearGradient id="sm3P" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#f3e2d8"/></linearGradient>'
+      +'<radialGradient id="sm3H" cx="35%" cy="30%"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#f0c0a8"/><stop offset="1" stop-color="#a5684f"/></radialGradient>'
+      +'<filter id="sm3S" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="12" stdDeviation="8" flood-color="#784834" flood-opacity=".28"/></filter></defs>'
+      +'<polygon points="'+pl([[-70,-70],[70,-70],[70,70],[-70,70]])+'" fill="#e9d3c6" transform="translate(0,7)"/>'
+      +'<polygon points="'+pl([[-70,-70],[70,-70],[70,70],[-70,70]])+'" fill="url(#sm3P)" stroke="#fff" stroke-width="1.5" filter="url(#sm3S)"/>'
+      +'<polygon points="'+pl([[0,0],[70*qx,0],[70*qx,70*qy],[0,70*qy]])+'" fill="rgba(212,149,123,.18)"/>'
+      +grid
+      +'<polyline points="'+pl([[0,-70],[0,70]])+'" class="sm3-a"/><polyline points="'+pl([[-70,0],[70,0]])+'" class="sm3-a"/>'
+      +lab(-36,-36,Q('산뜻','Light','清爽','さっぱり'),qx<0&&qy<0)+lab(36,-36,Q('지성','Oily','油性','脂性'),qx>0&&qy<0)
+      +lab(-36,36,Q('건성','Dry','干性','乾燥'),qx<0&&qy>0)+lab(36,36,Q('수분부족 지성','Dehydrated oily','外油内干','インナードライ'),qx>0&&qy>0)
+      +rip('')+rip(' d2')+rip(' d3')
+      +'<ellipse cx="'+ex+'" cy="'+ey+'" rx="4" ry="2.2" fill="#7a3f2c"/>'
+      +'<g class="sm3-float"><line x1="'+ex+'" y1="'+ey+'" x2="'+ex+'" y2="'+hy+'" stroke="#a5684f" stroke-width="2"/>'
+      +'<circle class="sm3-blink" cx="'+ex+'" cy="'+(pt[1]-56).toFixed(1)+'" r="9" fill="url(#sm3H)"/>'
+      +'<rect x="'+tx+'" y="'+(pt[1]-67).toFixed(1)+'" width="'+tagW+'" height="20" rx="10" fill="rgba(255,253,250,.96)" stroke="rgba(165,104,79,.3)"/>'
+      +'<text x="'+(pt[0]+12+tagW/2).toFixed(1)+'" y="'+(pt[1]-53).toFixed(1)+'" text-anchor="middle" class="sm3-tag">'+P(Q('지금 여기','You are here','您在这里','いまここ'))+'</text></g>'
       +'</svg>';
     return {svg:svg,label:label};
   }
@@ -94,16 +104,23 @@
     var cx=60,cy=58,R=40,pt=function(i,r){var ang=-Math.PI/2+i*Math.PI/3;return [cx+Math.cos(ang)*r,cy+Math.sin(ang)*r];};
     var ring=function(r){return AXES.map(function(_,i){return pt(i,r).map(function(n){return n.toFixed(1)}).join(',')}).join(' ')};
     var shape=AXES.map(function(x,i){return pt(i,R*v[x.k]/5).map(function(n){return n.toFixed(1)}).join(',')}).join(' ');
-    var svg='<svg viewBox="0 0 120 116" role="img" aria-label="'+P(Q('고민 프로필','Concern profile','肌肤困扰概况','お悩みプロフィール'))+'">'
-      +'<defs><linearGradient id="smRf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ecc4b5"/><stop offset="1" stop-color="#b9786a"/></linearGradient></defs>'
-      +'<polygon points="'+ring(R)+'" fill="#fbf3ee" stroke="#d8c2b3" stroke-width=".5"/>'
-      +'<polygon points="'+ring(R*0.66)+'" fill="none" stroke="#e4d3c7" stroke-width=".4"/>'
-      +'<polygon points="'+ring(R*0.33)+'" fill="none" stroke="#ecdfd6" stroke-width=".4"/>'
+    var shp=shape;
+    var svg='<svg class="sm3" viewBox="0 -4 120 124" role="img" aria-label="'+P(Q('고민 프로필','Concern profile','肌肤困扰概况','お悩みプロフィール'))+'">'
+      +'<defs><linearGradient id="smRf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0c0a8"/><stop offset="1" stop-color="#a86a55"/></linearGradient>'
+      +'<filter id="smRs" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="2.5" dy="4.5" stdDeviation="2.8" flood-color="#784834" flood-opacity=".35"/></filter></defs>'
+      +'<g transform="translate(0,'+(cy*.18).toFixed(1)+') translate('+cx+','+cy+') scale(1,.82) translate('+(-cx)+','+(-cy)+')">'
+      +'<polygon points="'+ring(R)+'" fill="rgba(255,250,246,.85)" stroke="#dcc6b8" stroke-width=".5"/>'
+      +'<polygon points="'+ring(R*0.66)+'" fill="none" stroke="#e4d3c7" stroke-width=".4" transform="translate(0,-1.6)"/>'
+      +'<polygon points="'+ring(R*0.33)+'" fill="none" stroke="#ecdfd6" stroke-width=".4" transform="translate(0,-3.2)"/>'
       +AXES.map(function(_,i){var p=pt(i,R);return '<line x1="'+cx+'" y1="'+cy+'" x2="'+p[0].toFixed(1)+'" y2="'+p[1].toFixed(1)+'" stroke="#e6d6cb" stroke-width=".35"/>'}).join('')
-      +'<polygon points="'+shape+'" fill="url(#smRf)" fill-opacity=".38" stroke="#a86a58" stroke-width=".9" stroke-linejoin="round"/>'
-      +AXES.map(function(x,i){var p=pt(i,R*v[x.k]/5),lp=pt(i,R+9),f=focus.indexOf(x.k)>-1;
-        return (f?'<circle cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="2.8" fill="#a86a58" stroke="#fff" stroke-width="1.1"/>':'')
-        +'<text x="'+lp[0].toFixed(1)+'" y="'+(lp[1]+2.5).toFixed(1)+'" text-anchor="middle" class="sm-rl'+(f?' is-focus':'')+'">'+P(x.n)+'</text>';}).join('')
+      +[3,2,1].map(function(k){return '<polygon points="'+shp+'" fill="#a86a55" opacity="'+(0.08*k).toFixed(2)+'" transform="translate('+(k*.8)+','+(k*2)+')"/>'}).join('')
+      +'<polygon points="'+shp+'" fill="url(#smRf)" fill-opacity=".55" stroke="#8a4f3c" stroke-width=".8" stroke-linejoin="round" filter="url(#smRs)"/>'
+      +'<polygon points="'+shp+'" fill="none" stroke="#fff" stroke-width=".45" opacity=".75" transform="translate(-.4,-.8)"/>'
+      +AXES.map(function(x,i){if(focus.indexOf(x.k)<0)return '';var p=pt(i,R*v[x.k]/5),X=p[0].toFixed(1),Y=p[1].toFixed(1);
+        return '<circle class="sm3-ripc" cx="'+X+'" cy="'+Y+'" r="2.6"/><circle class="sm3-ripc d2" cx="'+X+'" cy="'+Y+'" r="2.6"/><circle class="sm3-vp" cx="'+X+'" cy="'+Y+'" r="2.4" fill="#a5684f" stroke="#fff" stroke-width="1"/>'}).join('')
+      +'</g>'
+      +AXES.map(function(x,i){var lp=pt(i,R+9),f=focus.indexOf(x.k)>-1;var ly=cy*.18+cy+(lp[1]-cy)*.82;
+        return '<text x="'+lp[0].toFixed(1)+'" y="'+(ly+2.5).toFixed(1)+'" text-anchor="middle" class="sm-rl'+(f?' is-focus sm3-blink':'')+'">'+P(x.n)+'</text>';}).join('')
       +'</svg>';
     return {svg:svg,focus:focus.map(function(k){return AXES.filter(function(x){return x.k===k})[0].n})};
   }
