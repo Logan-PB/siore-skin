@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIORÉ 피부 위치·고민 프로필 — 입체 그래프 시안 3</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;background:linear-gradient(165deg,#faf6f0,#f3e9e1 55%,#eedfd5);color:#3b2620;padding:36px 28px 60px;-webkit-font-smoothing:antialiased}
+.page-h{max-width:1180px;margin:0 auto 26px}
+.page-h small{font-size:11px;letter-spacing:.26em;color:#a5684f;font-weight:600}
+.page-h h1{font-size:26px;font-weight:700;margin:6px 0 4px;letter-spacing:-.02em}
+.page-h p{font-size:13.5px;color:#7b6157}
+.opt{max-width:1180px;margin:0 auto 40px}
+.opt-h{display:flex;align-items:baseline;gap:10px;margin:0 2px 12px;flex-wrap:wrap}
+.opt-h b{font-size:18px}
+.opt-h span{font-size:13px;color:#7b6157}
+.opt-h em{font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#fff;background:linear-gradient(90deg,#d4957b,#a86a55);padding:4px 10px;border-radius:99px}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.card{position:relative;padding:16px 14px 14px;border-radius:22px;text-align:center;background:linear-gradient(165deg,#fffdfa 0%,#fbf4ef 60%,#f6eae2 100%);border:1px solid rgba(168,112,92,.22);box-shadow:0 14px 32px -18px rgba(120,72,52,.35),inset 0 1px 0 #fff;overflow:hidden}
+.card::after{content:"";position:absolute;inset:5px;border-radius:17px;border:.5px solid rgba(190,148,124,.25);pointer-events:none}
+.eye{font-size:9px;font-weight:600;letter-spacing:.26em;color:#a8705c}
+.card h3{font-size:16px;font-weight:600;margin:3px 0 4px}
+.stage{height:250px;display:grid;place-items:center;position:relative}
+.res{margin:6px 8px 0;padding-top:10px;border-top:.5px solid rgba(168,112,92,.3)}
+.res small{display:block;font-size:8.5px;letter-spacing:.24em;color:#a8705c;font-weight:600}
+.res b{font-size:15px}
+.note{font-size:12px;color:#7b6157;line-height:1.6;margin:10px 2px 0}
+.note b{color:#3b2620}
+svg{overflow:visible}
+text{font-family:"Pretendard Variable",Pretendard,sans-serif}
+
+/* 공통 깜빡임 */
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
+@keyframes ripple{0%{transform:scale(.4);opacity:.75}100%{transform:scale(2.6);opacity:0}}
+@keyframes beam{0%,100%{opacity:.55}50%{opacity:.15}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes vpulse{0%,100%{r:4.5}50%{r:7}}
+@keyframes glowv{0%,100%{opacity:.25}50%{opacity:.7}}
+.rip{transform-box:fill-box;transform-origin:center;animation:ripple 2.4s ease-out infinite}
+.rip.d2{animation-delay:.8s}.rip.d3{animation-delay:1.6s}
+.blink{animation:blink 1.6s ease-in-out infinite}
+.beam{animation:beam 1.6s ease-in-out infinite}
+.float{animation:float 3s ease-in-out infinite}
+.vp{animation:vpulse 1.6s ease-in-out infinite}
+.gv{animation:glowv 1.6s ease-in-out infinite}
+
+/* A. 유리 플레이트 */
+.plate-wrap{perspective:700px;width:230px;height:200px;position:relative}
+.plate{position:absolute;inset:18px 10px;transform:rotateX(58deg) rotateZ(-38deg);transform-style:preserve-3d;border-radius:18px;
+  background:linear-gradient(135deg,rgba(255,255,255,.9),rgba(246,230,220,.7));border:1px solid rgba(255,255,255,.95);
+  box-shadow:0 0 0 1px rgba(196,150,128,.35) inset,18px 22px 30px -6px rgba(120,72,52,.35)}
+.plate::before{content:"";position:absolute;inset:0;border-radius:18px;background:
+  linear-gradient(rgba(165,104,79,.18) 1px,transparent 1px) 0 0/25% 25%,linear-gradient(90deg,rgba(165,104,79,.18) 1px,transparent 1px) 0 0/25% 25%}
+.plate::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:1.5px;background:rgba(165,104,79,.5);box-shadow:0 0 0 0 transparent}
+.plate .hx{position:absolute;top:50%;left:0;right:0;height:1.5px;background:rgba(165,104,79,.5)}
+.plate .ql{position:absolute;font-size:10px;font-weight:600;color:#9c7a6b;letter-spacing:.04em;transform:rotateZ(38deg) rotateX(-58deg)}
+.plate .pt{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px}
+.plate .pt i{position:absolute;inset:0;border-radius:50%;border:2px solid #a5684f;animation:ripple 2.4s ease-out infinite}
+.plate .pt i:nth-child(2){animation-delay:.8s}.plate .pt i:nth-child(3){animation-delay:1.6s}
+.plate .pt b{position:absolute;inset:4px;border-radius:50%;background:#a5684f;box-shadow:0 0 10px 2px rgba(212,149,123,.9)}
+.pin{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none}
+.pin .stick{position:absolute;left:-1px;bottom:0;width:2px;height:58px;background:linear-gradient(#a5684f,rgba(165,104,79,0));border-radius:2px}
+.pin .head{position:absolute;left:-11px;bottom:52px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0,#f0c0a8 35%,#a5684f 80%);box-shadow:0 6px 14px -4px rgba(120,72,52,.6)}
+.pin .tag{position:absolute;left:14px;bottom:56px;white-space:nowrap;font-size:11px;font-weight:700;color:#3b2620;background:rgba(255,253,250,.92);border:1px solid rgba(165,104,79,.25);padding:3px 8px;border-radius:99px;box-shadow:0 4px 10px -6px rgba(110,66,50,.5)}
+
+/* B. 스킨 오브 */
+.orb{width:200px;height:200px;border-radius:50%;position:relative;
+  background:radial-gradient(circle at 34% 28%,#fff 0,#fbeee6 22%,#f0d2c2 58%,#d9a993 86%,#c08a75 100%);
+  box-shadow:inset -18px -24px 40px rgba(140,86,64,.35),inset 10px 12px 26px rgba(255,255,255,.7),0 26px 40px -18px rgba(120,72,52,.55)}
+.orb svg{position:absolute;inset:0}
+.shadow{width:150px;height:18px;border-radius:50%;background:radial-gradient(rgba(120,72,52,.35),transparent 70%);margin:-6px auto 0}
+
+/* C. 지형 맵 */
+.iso{transform:rotateX(55deg) rotateZ(-45deg);transform-style:preserve-3d}
+</style></head><body>
+<header class="page-h">
+  <small>SIORÉ RESULT · SKIN POSITION & CONCERN PROFILE · 3D OPTIONS</small>
+  <h1>피부 위치·고민 프로필 — 입체 그래프 시안 3가지</h1>
+  <p>예시 결과: <b>지성 경향(유분 많음·수분 보통)</b> / 집중 케어 <b>탄력 · 결·피지</b>. 현재 내 위치와 집중 케어 포인트가 깜빡여요. 숫자·점수는 표시하지 않아요.</p>
+</header>
+
+<!-- ============ A ============ -->
+<section class="opt">
+  <div class="opt-h"><b>A. 글래스 플레이트</b><span>기울어진 유리판 위에 핀이 꽂히고, 바닥에 물결이 퍼져요</span><em>추천</em></div>
+  <div class="pair">
+    <div class="card"><span class="eye">01 · SKIN POSITION</span><h3>내 피부 위치</h3>
+      <div class="stage"><svg width="250" height="230" viewBox="-125 -105 250 230" id="plateA"></svg></div>
+      <div class="res"><small>MY TYPE</small><b>지성 경향</b></div></div>
+    <div class="card"><span class="eye">02 · CONCERN PROFILE</span><h3>고민 프로필</h3>
+      <div class="stage"><svg width="240" height="230" viewBox="-120 -112 240 230" id="radarA"></svg></div>
+      <div class="res"><small>FOCUS CARE</small><b>탄력 · 결·피지</b></div></div>
+  </div>
+  <p class="note"><b>특징</b> 현재 링크 구조(4분면 + 레이더)를 그대로 두고 입체감만 더해서 바로 적용하기 가장 쉬워요. 레이더는 3겹 층으로 쌓아 두께감을 주고, 집중 케어 꼭짓점에서 빛이 깜빡여요.</p>
+</section>
+
+<!-- ============ B ============ -->
+<section class="opt">
+  <div class="opt-h"><b>B. 스킨 오브</b><span>피부를 상징하는 3D 구슬 위에 내 위치가 빛나요</span></div>
+  <div class="pair">
+    <div class="card"><span class="eye">01 · SKIN POSITION</span><h3>내 피부 위치</h3>
+      <div class="stage"><div><div class="orb"><svg viewBox="0 0 200 200">
+        <defs><clipPath id="oc"><circle cx="100" cy="100" r="100"/></clipPath></defs>
+        <g clip-path="url(#oc)" fill="none" stroke="rgba(140,86,64,.28)" stroke-width=".8">
+          <ellipse cx="100" cy="100" rx="100" ry="28"/><ellipse cx="100" cy="100" rx="100" ry="62"/><ellipse cx="100" cy="100" rx="28" ry="100"/><ellipse cx="100" cy="100" rx="62" ry="100"/>
+          <line x1="0" y1="100" x2="200" y2="100" stroke="rgba(140,86,64,.45)"/><line x1="100" y1="0" x2="100" y2="200" stroke="rgba(140,86,64,.45)"/>
+        </g>
+        <text x="100" y="22" text-anchor="middle" font-size="9" fill="#8a5d4b" font-weight="600">수분 충분</text>
+        <text x="100" y="186" text-anchor="middle" font-size="9" fill="#8a5d4b" font-weight="600">수분 부족</text>
+        <text x="14" y="104" font-size="9" fill="#8a5d4b" font-weight="600">유분↓</text><text x="186" y="104" text-anchor="end" font-size="9" fill="#8a5d4b" font-weight="600">유분↑</text>
+        <circle class="rip" cx="152" cy="98" r="8" fill="none" stroke="#fff" stroke-width="2"/><circle class="rip d2" cx="152" cy="98" r="8" fill="none" stroke="#fff" stroke-width="2"/><circle class="rip d3" cx="152" cy="98" r="8" fill="none" stroke="#fff" stroke-width="2"/>
+        <circle class="gv" cx="152" cy="98" r="16" fill="#fff"/>
+        <circle class="blink" cx="152" cy="98" r="6" fill="#7a3f2c" stroke="#fff" stroke-width="2.4"/>
+      </svg></div><div class="shadow"></div></div></div>
+      <div class="res"><small>MY TYPE</small><b>지성 경향</b></div></div>
+    <div class="card"><span class="eye">02 · CONCERN PROFILE</span><h3>고민 프로필</h3>
+      <div class="stage"><svg width="240" height="230" viewBox="-120 -112 240 230" id="radarB"></svg></div>
+      <div class="res"><small>FOCUS CARE</small><b>탄력 · 결·피지</b></div></div>
+  </div>
+  <p class="note"><b>특징</b> 카운터에서 시선을 가장 잘 끄는 안이에요. 위치는 구슬 표면의 빛나는 점으로, 고민 프로필은 6장의 꽃잎으로 보여주고 집중 케어 꽃잎만 숨 쉬듯 밝아져요. 글자를 덜 읽어도 돼서 외국인 고객에게 직관적이에요.</p>
+</section>
+
+<!-- ============ C ============ -->
+<section class="opt">
+  <div class="opt-h"><b>C. 스킨 터레인</b><span>등고선 지형도 위 내 위치에 빛 기둥이 서요</span></div>
+  <div class="pair">
+    <div class="card"><span class="eye">01 · SKIN POSITION</span><h3>내 피부 위치</h3>
+      <div class="stage"><svg width="250" height="230" viewBox="-125 -105 250 230" id="terrain"></svg></div>
+      <div class="res"><small>MY TYPE</small><b>지성 경향</b></div></div>
+    <div class="card"><span class="eye">02 · CONCERN PROFILE</span><h3>고민 프로필</h3>
+      <div class="stage"><svg width="250" height="230" viewBox="-125 -110 250 230" id="bars"></svg></div>
+      <div class="res"><small>FOCUS CARE</small><b>탄력 · 결·피지</b></div></div>
+  </div>
+  <p class="note"><b>특징</b> 가장 '분석 리포트'다운 고급스러움이 있어요. 위치는 등고선 지형도 위 빛 기둥으로, 고민 프로필은 원형으로 세운 6개 입체 막대로 보여줘요. 집중 케어 막대가 위아래로 은은하게 빛나요.</p>
+</section>
+
+<script>
+const AX=['수분','진정','장벽','탄력','톤·광채','결·피지'],V=[2.0,2.4,1.8,4.6,1.6,4.3],FOC=[3,5];
+const P=(i,r)=>{const a=-Math.PI/2+i*Math.PI/3;return [Math.cos(a)*r,Math.sin(a)*r]};
+const ring=r=>AX.map((_,i)=>P(i,r).map(n=>n.toFixed(1)).join(',')).join(' ');
+const R=72;
+/* A1: 글래스 플레이트 (isometric) */
+(function(){const s=document.getElementById('plateA');const iso=(x,y)=>[(x-y)*.86,(x+y)*.5];const pl=pts=>pts.map(p=>iso(...p).join(',')).join(' ');
+let h='<defs><linearGradient id="pgA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#f3e2d8"/></linearGradient><filter id="pshA" x="-30%" y="-30%" width="160%" height="170%"><feDropShadow dx="0" dy="14" stdDeviation="9" flood-color="#784834" flood-opacity=".3"/></filter></defs>';
+const sq=[[-70,-70],[70,-70],[70,70],[-70,70]];
+h+=`<polygon points="${pl(sq)}" fill="#e9d3c6" transform="translate(0,7)"/>`;
+h+=`<polygon points="${pl(sq)}" fill="url(#pgA)" stroke="#fff" stroke-width="1.5" filter="url(#pshA)"/>`;
+for(let k=-35;k<=35;k+=35){if(!k)continue;h+=`<polyline points="${pl([[k,-70],[k,70]])}" stroke="rgba(165,104,79,.16)" fill="none"/><polyline points="${pl([[-70,k],[70,k]])}" stroke="rgba(165,104,79,.16)" fill="none"/>`}
+h+=`<polyline points="${pl([[0,-70],[0,70]])}" stroke="rgba(165,104,79,.5)" stroke-width="1.2" fill="none"/><polyline points="${pl([[-70,0],[70,0]])}" stroke="rgba(165,104,79,.5)" stroke-width="1.2" fill="none"/>`;
+h+=`<polygon points="${pl([[0,-70],[70,-70],[70,0],[0,0]])}" fill="rgba(212,149,123,.16)"/>`;
+const L=(x,y,t,f)=>{const p=iso(x,y);return `<text x="${p[0]}" y="${p[1]+4}" text-anchor="middle" font-size="10.5" font-weight="${f?700:600}" fill="${f?'#8a4f3c':'#9c7a6b'}">${t}</text>`};
+h+=L(-36,-36,'산뜻')+L(36,-36,'지성',1)+L(-36,36,'건성')+L(36,36,'수분부족 지성');
+const pt=iso(46,-10);
+h+=`<ellipse class="rip" cx="${pt[0]}" cy="${pt[1]}" rx="10" ry="5.5" fill="none" stroke="#a5684f" stroke-width="1.6"/><ellipse class="rip d2" cx="${pt[0]}" cy="${pt[1]}" rx="10" ry="5.5" fill="none" stroke="#a5684f" stroke-width="1.6"/><ellipse class="rip d3" cx="${pt[0]}" cy="${pt[1]}" rx="10" ry="5.5" fill="none" stroke="#a5684f" stroke-width="1.6"/>`;
+h+=`<ellipse cx="${pt[0]}" cy="${pt[1]}" rx="4" ry="2.2" fill="#7a3f2c"/>`;
+h+=`<defs><radialGradient id="hd" cx="35%" cy="30%"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#f0c0a8"/><stop offset="1" stop-color="#a5684f"/></radialGradient></defs>`;
+h+=`<g class="float"><line x1="${pt[0]}" y1="${pt[1]}" x2="${pt[0]}" y2="${pt[1]-52}" stroke="#a5684f" stroke-width="2"/><circle class="blink" cx="${pt[0]}" cy="${pt[1]-58}" r="10" fill="url(#hd)"/>`+
+`<rect x="${pt[0]+14}" y="${pt[1]-70}" width="62" height="22" rx="11" fill="rgba(255,253,250,.95)" stroke="rgba(165,104,79,.3)"/><text x="${pt[0]+45}" y="${pt[1]-55}" text-anchor="middle" font-size="11" font-weight="700" fill="#3b2620">지금 여기</text></g>`;
+s.innerHTML=h;})();
+/* A: 층층이 쌓은 레이더 */
+(function(){const s=document.getElementById('radarA');let h='';
+ h+='<defs><linearGradient id="ga" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0c0a8"/><stop offset="1" stop-color="#a86a55"/></linearGradient><filter id="sh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="6" dy="10" stdDeviation="6" flood-color="#784834" flood-opacity=".35"/></filter></defs>';
+ h+='<g transform="scale(1,.82)">';
+ for(let k=0;k<3;k++)h+=`<polygon points="${ring(R-k*24)}" fill="${k?'none':'rgba(255,250,246,.8)'}" stroke="#dcc6b8" stroke-width=".8" transform="translate(0,${-k*4})"/>`;
+ AX.forEach((_,i)=>{const p=P(i,R);h+=`<line x1="0" y1="0" x2="${p[0]}" y2="${p[1]}" stroke="#e6d6cb" stroke-width=".6"/>`});
+ const shape=AX.map((_,i)=>P(i,R*V[i]/5).map(n=>n.toFixed(1)).join(',')).join(' ');
+ for(let k=3;k>=1;k--)h+=`<polygon points="${shape}" fill="#a86a55" opacity="${.08*k}" transform="translate(${k*2},${k*5})"/>`;
+ h+=`<polygon points="${shape}" fill="url(#ga)" fill-opacity=".55" stroke="#8a4f3c" stroke-width="1.4" stroke-linejoin="round" filter="url(#sh)"/>`;
+ h+=`<polygon points="${shape}" fill="none" stroke="#fff" stroke-width=".8" opacity=".7" transform="translate(-1,-2)"/>`;
+ FOC.forEach(i=>{const p=P(i,R*V[i]/5);h+=`<circle class="rip" cx="${p[0]}" cy="${p[1]}" r="6" fill="none" stroke="#a5684f" stroke-width="1.6"/><circle class="rip d2" cx="${p[0]}" cy="${p[1]}" r="6" fill="none" stroke="#a5684f" stroke-width="1.6"/><circle class="vp" cx="${p[0]}" cy="${p[1]}" r="5" fill="#a5684f" stroke="#fff" stroke-width="2"/>`});
+ h+='</g>';
+ AX.forEach((a,i)=>{const p=P(i,R+18),f=FOC.includes(i);h+=`<text x="${p[0]}" y="${p[1]*.82+4}" text-anchor="middle" font-size="11" font-weight="${f?700:500}" fill="${f?'#8a4f3c':'#8d7a6e'}" class="${f?'blink':''}">${a}</text>`});
+ s.innerHTML=h;})();
+/* B: 꽃잎 */
+(function(){const s=document.getElementById('radarB');let h='<defs><radialGradient id="pg" cx="30%" cy="20%" r="90%"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#f3cdbb"/><stop offset="1" stop-color="#b9786a"/></radialGradient><radialGradient id="pgf" cx="30%" cy="20%" r="90%"><stop offset="0" stop-color="#fff6f0"/><stop offset=".45" stop-color="#e3a68d"/><stop offset="1" stop-color="#8a4f3c"/></radialGradient><filter id="ps"><feDropShadow dx="3" dy="6" stdDeviation="4" flood-color="#784834" flood-opacity=".3"/></filter></defs>';
+ h+=`<circle r="${R+6}" fill="none" stroke="#e4d3c7" stroke-width=".7"/><circle r="${(R+6)*.5}" fill="none" stroke="#ecdfd6" stroke-width=".6" stroke-dasharray="2 3"/>`;
+ AX.forEach((a,i)=>{const len=18+V[i]/5*(R-14),ang=i*60,f=FOC.includes(i),w=10+V[i]*3.2;
+  h+=`<g transform="rotate(${ang})"><path d="M0 0 C ${w} ${-len*.35} ${w*.8} ${-len*.85} 0 ${-len} C ${-w*.8} ${-len*.85} ${-w} ${-len*.35} 0 0 Z" fill="url(#${f?'pgf':'pg'})" opacity="${f?.95:.7}" stroke="#fff" stroke-width="1" filter="url(#ps)" class="${f?'gvp':''}"/>${f?`<circle class="vp" cx="0" cy="${-len}" r="4.5" fill="#fff" stroke="#8a4f3c" stroke-width="2"/>`:''}</g>`});
+ h+=`<circle r="9" fill="#fff" stroke="#d9c2b3"/>`;
+ AX.forEach((a,i)=>{const p=P(i,R+22),f=FOC.includes(i);h+=`<text x="${p[0]}" y="${p[1]+4}" text-anchor="middle" font-size="11" font-weight="${f?700:500}" fill="${f?'#8a4f3c':'#8d7a6e'}" class="${f?'blink':''}">${a}</text>`});
+ s.innerHTML=h+'<style>.gvp{animation:petal 1.8s ease-in-out infinite}@keyframes petal{0%,100%{opacity:.75}50%{opacity:1}}</style>';})();
+/* C1: 등고선 지형 */
+(function(){const s=document.getElementById('terrain');const iso=(x,y)=>[(x-y)*.86,(x+y)*.5];let h='<defs><radialGradient id="tg"><stop offset="0" stop-color="#e9b9a3"/><stop offset="1" stop-color="#fbf1ea"/></radialGradient><linearGradient id="bm" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#a5684f" stop-opacity=".9"/><stop offset="1" stop-color="#f0c0a8" stop-opacity="0"/></linearGradient></defs>';
+ const sq=[[-70,-70],[70,-70],[70,70],[-70,70]].map(p=>iso(...p).join(',')).join(' ');
+ h+=`<polygon points="${sq}" fill="#fbf3ee" stroke="#d6bcac" stroke-width="1" transform="translate(4,8)" opacity=".5"/>`;
+ h+=`<polygon points="${sq}" fill="#fffaf6" stroke="#cfae9c" stroke-width="1"/>`;
+ const cx=46,cy=0;
+ for(let k=6;k>=1;k--){const pts=[];for(let t=0;t<=360;t+=10){const a=t*Math.PI/180;const rr=k*11*(1+.12*Math.sin(3*a+k));const x=Math.max(-70,Math.min(70,cx+Math.cos(a)*rr)),y=Math.max(-70,Math.min(70,cy+Math.sin(a)*rr*.9));pts.push(iso(x,y).join(','))}
+  h+=`<polygon points="${pts.join(' ')}" fill="rgba(212,149,123,${.05+.05*(7-k)})" stroke="rgba(165,104,79,${.25+.08*(7-k)})" stroke-width=".8"/>`}
+ const a1=iso(-70,0),a2=iso(70,0),b1=iso(0,-70),b2=iso(0,70);
+ h+=`<line x1="${a1[0]}" y1="${a1[1]}" x2="${a2[0]}" y2="${a2[1]}" stroke="rgba(165,104,79,.45)" stroke-dasharray="3 3"/><line x1="${b1[0]}" y1="${b1[1]}" x2="${b2[0]}" y2="${b2[1]}" stroke="rgba(165,104,79,.45)" stroke-dasharray="3 3"/>`;
+ const L=(x,y,t,anc)=>{const p=iso(x,y);return `<text x="${p[0]}" y="${p[1]}" font-size="10" font-weight="600" fill="#9c7a6b" text-anchor="${anc||'middle'}">${t}</text>`};
+ h+=L(0,-86,'수분 충분')+L(0,92,'수분 부족')+L(-92,0,'유분↓','end')+L(90,4,'유분↑','start');
+ const pt=iso(cx,cy);
+ h+=`<ellipse class="rip" cx="${pt[0]}" cy="${pt[1]}" rx="9" ry="5" fill="none" stroke="#a5684f" stroke-width="1.6"/><ellipse class="rip d2" cx="${pt[0]}" cy="${pt[1]}" rx="9" ry="5" fill="none" stroke="#a5684f" stroke-width="1.6"/>`;
+ h+=`<rect class="beam" x="${pt[0]-3}" y="${pt[1]-70}" width="6" height="70" rx="3" fill="url(#bm)"/>`;
+ h+=`<circle class="blink" cx="${pt[0]}" cy="${pt[1]}" r="5.5" fill="#7a3f2c" stroke="#fff" stroke-width="2"/>`;
+ h+=`<g class="float"><rect x="${pt[0]-30}" y="${pt[1]-96}" width="60" height="22" rx="11" fill="rgba(255,253,250,.95)" stroke="rgba(165,104,79,.3)"/><text x="${pt[0]}" y="${pt[1]-81}" text-anchor="middle" font-size="11" font-weight="700" fill="#3b2620">지금 여기</text></g>`;
+ s.innerHTML=h;})();
+/* C2: 원형 입체 막대 */
+(function(){const s=document.getElementById('bars');let h='<defs><linearGradient id="bt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6d6c8"/><stop offset="1" stop-color="#d9a993"/></linearGradient><linearGradient id="btf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0b89f"/><stop offset="1" stop-color="#8a4f3c"/></linearGradient></defs>';
+ const ry=.42,RR=70;
+ h+=`<ellipse cx="0" cy="40" rx="${RR+22}" ry="${(RR+22)*ry}" fill="#fbf1ea" stroke="#dcc6b8"/><ellipse cx="0" cy="40" rx="${RR*.55}" ry="${RR*.55*ry}" fill="none" stroke="#e8d8cd" stroke-dasharray="2 3"/>`;
+ const order=AX.map((a,i)=>{const ang=-Math.PI/2+i*Math.PI/3;return {a,i,x:Math.cos(ang)*RR,y:40+Math.sin(ang)*RR*ry}}).sort((p,q)=>p.y-q.y);
+ order.forEach(o=>{const hgt=14+V[o.i]/5*82,f=FOC.includes(o.i),w=16,d=7;
+  h+=`<g><ellipse cx="${o.x}" cy="${o.y}" rx="${w/2+3}" ry="4" fill="rgba(120,72,52,.18)"/>`+
+   `<rect x="${o.x-w/2}" y="${o.y-hgt}" width="${w}" height="${hgt}" fill="url(#${f?'btf':'bt'})" rx="2"/>`+
+   `<rect x="${o.x+w/2-4}" y="${o.y-hgt}" width="4" height="${hgt}" fill="rgba(120,72,52,.18)"/>`+
+   `<ellipse cx="${o.x}" cy="${o.y-hgt}" rx="${w/2}" ry="${d/2}" fill="${f?'#f6cbb7':'#fff6f0'}" stroke="${f?'#a5684f':'#e0cbbd'}" stroke-width=".8"/>`+
+   (f?`<ellipse class="rip" cx="${o.x}" cy="${o.y-hgt}" rx="${w/2}" ry="${d/2}" fill="none" stroke="#a5684f" stroke-width="1.4"/><ellipse class="gv" cx="${o.x}" cy="${o.y-hgt}" rx="${w/2+6}" ry="${d/2+4}" fill="#f0c0a8"/>`:'')+
+   '</g>'});
+ AX.forEach((a,i)=>{const ang=-Math.PI/2+i*Math.PI/3,f=FOC.includes(i),x=Math.cos(ang)*(RR+40),y=40+Math.sin(ang)*(RR+40)*ry+(i==0?-62:12);h+=`<text x="${x}" y="${y}" text-anchor="middle" font-size="10.5" font-weight="${f?700:500}" fill="${f?'#8a4f3c':'#8d7a6e'}" stroke="#fdf8f4" stroke-width="3" paint-order="stroke" class="${f?'blink':''}">${a}</text>`});
+ s.innerHTML=h;})();
+</script>
+</body></html>
