@@ -6392,7 +6392,7 @@ window.SIORE_REFERENCE = (()=>{
   const pc=selectedConcerns[0]?concernLabel(selectedConcerns[0]):C('피부 균형','Skin balance','肌肤平衡','肌バランス'),pcL=l=>pc[l]||pc.ko;
   const balanceScore=Math.max(52,Math.min(88,84-(selectedConcerns.length*4)-(selectedSensitivity==='high'?8:selectedSensitivity==='medium'?4:0)-(assessmentAnswers?.reactivity==='often'?5:0)));
   const diagnosisTitle=tx(C(`${pcL('ko')} 고민을 중심으로 피부 장벽과 수분 균형을 함께 관리합니다.`,`Care for ${pcL('en')} while supporting barrier and hydration balance.`,`围绕${pcL('zh')}，同时兼顾屏障与水分平衡。`,`${pcL('ja')}を中心に、バリアとうるおいのバランスを整えます。`));
-  const head=`<header class="rx-prescription-head"><div><small>SIORÉ PERSONAL CARE FORM · 03</small><h2>${tx(C('나의 피부 맞춤 처방','My personalized skin plan','我的专属肌肤方案','私の肌別ケアプラン'))}</h2><p>${tx(C('선택한 피부 상태와 제품 근거, 자문약사 조합 가이드를 함께 반영했습니다.','Built from your skin check, product evidence and pharmacist set guidance.','结合肤况选择、产品依据与药师组合指南。','肌状態、製品根拠、薬剤師セットガイドを反映しました。'))}</p></div><div class="rx-handwriting"><span>Rx.</span><b>Your skin needs nutrition.</b><i>SIORÉ</i></div></header>`;
+  const head=`<header class="rx-prescription-head"><div><small>SIORÉ PERSONAL CARE FORM · 03</small><h2>${tx(C('나의 피부 맞춤 솔루션','My personalized skin solution','我的专属肌肤方案','私の肌別ケアソリューション'))}</h2><p>${tx(C('선택한 피부 상태와 제품 근거, 자문약사 조합 가이드를 함께 반영했습니다.','Built from your skin check, product evidence and pharmacist set guidance.','结合肤况选择、产品依据与药师组合指南。','肌状態、製品根拠、薬剤師セットガイドを反映しました。'))}</p></div><div class="rx-handwriting"><span>Rx.</span><b>Your skin needs nutrition.</b><i>SIORÉ</i></div></header>`;
   const diagnosis=`<section class="rx-diagnosis"><div class="rx-diagnosis-main"><small>SKIN CONSULTATION SUMMARY</small><strong>${diagnosisTitle}</strong><p>${tx(C('자극을 줄이는 기본 루틴 위에 우선 고민을 위한 집중 케어를 단계적으로 더합니다.','Build a gentle base routine, then add targeted care for your priority concern.','先建立温和基础护理，再逐步加入重点护理。','刺激を抑えた基本ケアに、優先する悩みへの集中ケアを加えます。'))}</p></div><div class="rx-balance-score"><small>SKIN BALANCE</small><b>${balanceScore}</b><span>/ 100</span></div></section>`;
   const target=sheet.querySelector('.solution-profile');target.insertAdjacentHTML('beforebegin',`${head}${diagnosis}<div class="rx-overview">${matrix}${rationale}</div>`);
   sheet.classList.add('prescription-layout','rx-paper-approved');sheet.dataset.activeTier='core';
@@ -6687,7 +6687,7 @@ window.SIORE_REFERENCE = (()=>{
  body .focus-toolbar button.records-open span.i18n-ko,body .focus-toolbar button.set-open span.i18n-ko,body .focus-toolbar button.focus-close span.i18n-ko,
  body .focus-toolbar button.records-open span.i18n-main,body .focus-toolbar button.set-open span.i18n-main,body .focus-toolbar button.focus-close span.i18n-main{display:none!important}
 }
-</style><!-- REFERENCE UPDATE END --><link rel="stylesheet" href="assets/result-skinmap-boxcard.css?v=20261103">
-<script src="assets/result-skinmap-boxcard.js?v=20261103"></script>
+</style><!-- REFERENCE UPDATE END --><link rel="stylesheet" href="assets/result-skinmap-boxcard.css?v=20261103b">
+<script src="assets/result-skinmap-boxcard.js?v=20261103b"></script>
 </body>
 </html>

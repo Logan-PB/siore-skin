@@ -122,7 +122,7 @@
 
   /* ---------- 3. 처방전 컨셉 상자 → 루틴 카드 ---------- */
   var NMN=[['cleansing','Hydro Capsule Cleansing Milk'],['bubbleToner','Fresh Bubble Toner'],['serum','Intensive Serum'],['soothingCream','Hydrating Soothing Cream'],['richCream','Deep Glow Rich Cream']];
-  var REL=[['essenceToner','Essence Toner'],['repairAmpoule','Repair Ampoule'],['comfortCream','Comfort Cream'],['soothingGel','Daily Balance Calming Soothing Gel']];
+  var REL=[['essenceToner','Essence Toner'],['repairAmpoule','Care Ampoule'],['comfortCream','Comfort Cream'],['soothingGel','Daily Balance Calming Soothing Gel']];
   function localName(key){
     try{var p=(Array.isArray(products)?products.filter(function(x){return x.key===key})[0]:products[key]);if(!p)return '';
       var l=lang(),n=(l!=='en'&&l!=='ko'&&p.i18n&&p.i18n[l]&&p.i18n[l].name)||(l==='ko'?p.name:'')||'';
@@ -161,11 +161,96 @@
       +'</div></section>';
   }
 
+
+  /* ---------- 4. 최근 3일 민감 신호 (문진 2단계) ---------- */
+  var SIG=[
+    {k:'sting',n:Q('따가움','Stinging','刺痛','ヒリヒリ'),d:Q('세안·바를 때 콕콕','When cleansing or applying','洁面或涂抹时','洗顔・塗布時に')},
+    {k:'heat',n:Q('화끈거림','Heat','发热感','ほてり'),d:Q('열감이 올라와요','Feels warm','感觉发热','熱っぽい')},
+    {k:'tight',n:Q('당김','Tightness','紧绷','つっぱり'),d:Q('건조하게 땅겨요','Feels dry and tight','干燥紧绷','乾いてつっぱる')},
+    {k:'itch',n:Q('가려움','Itching','发痒','かゆみ'),d:Q('간지러워요','Feels itchy','觉得痒','かゆい')},
+    {k:'red',n:Q('붉어짐','Redness','泛红','赤み'),d:Q('붉은기가 보여요','Visible redness','可见泛红','赤みが見える')}
+  ];
+  var LV=[Q('없음','None','没有','なし'),Q('가끔','Sometimes','偶尔','ときどき'),Q('자주','Often','经常','よく')];
+  var signals={};SIG.forEach(function(x){signals[x.k]=0});
+  window.__sioreSignals=signals;
+  function signalHTML(){
+    return '<fieldset class="sg-field"><legend>'+P(Q('최근 3일, 이런 느낌이 있었나요?','In the last 3 days, did you feel any of these?','最近3天，是否有以下感觉？','この3日間、こんな感覚はありましたか？'))+'<small>'+P(Q('지금 컨디션에 맞춰 순한 단계부터 안내해 드려요','We will start with gentle steps for your current condition','将根据当前状态从温和步骤开始推荐','今の肌状態に合わせて、やさしいステップからご案内します'))+'</small></legend>'
+      +SIG.map(function(x){return '<div class="sg-row"><b>'+P(x.n)+'<small>'+P(x.d)+'</small></b><span class="sg-lv" role="radiogroup" aria-label="'+P(x.n)+'">'
+        +LV.map(function(l,i){return '<button type="button" role="radio" aria-checked="'+(signals[x.k]===i)+'" data-sig="'+x.k+'" data-lv="'+i+'">'+P(l)+'</button>'}).join('')+'</span></div>'}).join('')
+      +'<p class="sg-note">'+P(Q('증상이 계속되거나 심하면 약사님과 먼저 상담해 주세요','If symptoms persist or feel strong, please talk to the pharmacist first','如症状持续或较重，请先咨询药师','症状が続く・強い場合は、まず薬剤師にご相談ください'))+'</p></fieldset>';
+  }
+  function mountSignals(){
+    var panel=document.querySelector('#step2 .habit-panel');if(!panel)return;
+    var old=document.querySelector('#step2 .sg-card');
+    var html='<section class="intake-card sg-card">'+signalHTML()+'</section>';
+    if(old){old.outerHTML=html;return}
+    panel.insertAdjacentHTML('beforebegin',html);
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('[data-sig]');if(b){signals[b.getAttribute('data-sig')]=+b.getAttribute('data-lv');
+      b.parentNode.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-checked',String(x===b))});return}
+    if(e.target.closest&&e.target.closest('.language-option'))setTimeout(mountSignals,60);
+  });
+  function sigSummary(){
+    var on=SIG.filter(function(x){return signals[x.k]>0}),often=SIG.filter(function(x){return signals[x.k]===2});
+    return {on:on,often:often};
+  }
+
+  /* ---------- 5. 시오레 4축 피부 코드 ---------- */
+  function axisScores(s){
+    var a=s.a,sg=sigSummary(),o=0,se=0,t=0,f=0;
+    if(a.balance==='oily')o+=1;else if(a.balance==='dry')o-=1;
+    if(a.zone==='oily')o+=1;else if(a.zone==='combination')o+=.5;else if(a.zone==='dry')o-=1;
+    if(has(s.types,'지성'))o+=1;if(has(s.types,'복합성'))o+=.5;if(has(s.types,'트러블성'))o+=.3;if(has(s.types,'건성'))o-=1;
+    if(has(s.concerns,'피지'))o+=.7;if(has(s.concerns,'건조'))o-=.7;
+    if(a.reactivity==='high')se+=1.2;else if(a.reactivity==='medium')se+=.4;else if(a.reactivity==='low')se-=1;
+    if(s.sens==='high')se+=1;else if(s.sens==='low')se-=.7;
+    if(has(s.types,'민감성'))se+=.8;['민감','열감홍조','장벽회복'].forEach(function(c){if(has(s.concerns,c))se+=.6});
+    sg.on.forEach(function(x){se+=signals[x.k]===2?.5:.2});
+    if(a.tone==='pigment')t+=1.2;else if(a.tone==='dull')t+=.8;else if(a.tone==='clear')t-=1;
+    if(has(s.concerns,'광채톤업'))t+=.8;
+    if(a.firmness==='high')f+=1.2;else if(a.firmness==='medium')f+=.4;else if(a.firmness==='low')f-=1;
+    if(has(s.concerns,'안티에이징'))f+=.8;
+    if(/50|60|70/.test(s.age))f+=.8;else if(/40/.test(s.age))f+=.5;else if(/20/.test(s.age))f-=.4;
+    return {o:o,se:se,t:t,f:f,sg:sg};
+  }
+  function codeCard(){
+    var s=st(),x=axisScores(s);
+    var O=x.o>.3,S=x.se>.3,TN=x.t>.3,F=x.f>.3;
+    var L1=O?['O',Q('유분','Oily','油性','皮脂')]:['D',Q('건조','Dry','干燥','乾燥')];
+    var L2=S?['S',Q('예민','Sensitive','敏感','敏感')]:['C',Q('편안','Calm','稳定','すこやか')];
+    var L3=TN?['T',Q('톤 케어','Tone care','提亮护理','トーンケア')]:['E',Q('균일','Even','均匀','均一')];
+    var L4=F?['F',Q('탄력 케어','Firmness care','弹润护理','ハリケア')]:['L',Q('탄탄','Firm','紧致','ハリ十分')];
+    var focus=TN&&F?Q('톤·탄력 집중형','Tone & firmness focus','光泽·弹润重点型','トーン・ハリ集中タイプ'):TN?Q('톤 집중형','Tone focus','光泽重点型','トーン集中タイプ'):F?Q('탄력 집중형','Firmness focus','弹润重点型','ハリ集中タイプ'):Q('밸런스 유지형','Balance keeper','平衡维持型','バランスキープタイプ');
+    var nm={};['ko','en','zh','ja'].forEach(function(l){nm[l]=L1[1][l]+'·'+L2[1][l]+' · '+focus[l]});
+    var base=S?Q('자극을 줄인 진정·보습 루틴을 기본으로','A gentle soothing and moisturizing routine as your base','以温和舒缓保湿护理为基础','刺激を抑えた鎮静・保湿ケアをベースに'):O?Q('산뜻한 수분·밸런스 루틴을 기본으로','A light hydration and balance routine as your base','以清爽补水平衡护理为基础','さっぱりした水分・バランスケアをベースに'):Q('수분과 보습막을 채우는 루틴을 기본으로','A routine that replenishes moisture and a protective layer as your base','以补水和保湿屏障护理为基础','うるおいと保湿膜を満たすケアをベースに');
+    var add=TN&&F?Q('탄력·톤 케어를 더하면 좋은 타입이에요','adding firmness and tone care suits you','再加上弹润与提亮护理更合适','ハリ・トーンケアをプラスするのがおすすめです'):F?Q('탄력 케어를 더하면 좋은 타입이에요','adding firmness care suits you','再加上弹润护理更合适','ハリケアをプラスするのがおすすめです'):TN?Q('톤·광채 케어를 더하면 좋은 타입이에요','adding tone and radiance care suits you','再加上提亮光泽护理更合适','トーン・ツヤケアをプラスするのがおすすめです'):Q('지금 루틴을 꾸준히 유지하면 좋은 타입이에요','keeping your routine steady suits you','坚持当前护理即可','今のケアを続けるのがおすすめです');
+    var desc={};['ko','en','zh','ja'].forEach(function(l){desc[l]=base[l]+(l==='en'?'; ':l==='ko'?' ':l==='zh'?'，':'、')+add[l]});
+    var pos=function(v){return Math.round(50+clamp(v,-2.2,2.2)/2.2*42)};
+    var poles=[[Q('건조','Dry','干燥','乾燥'),Q('유분','Oily','油性','皮脂'),x.o],[Q('예민','Sensitive','敏感','敏感'),Q('편안','Calm','稳定','すこやか'),-x.se],[Q('톤 케어','Tone care','提亮护理','トーンケア'),Q('균일','Even','均匀','均一'),-x.t],[Q('탄력 케어','Firmness care','弹润护理','ハリケア'),Q('탄탄','Firm','紧致','ハリ十分'),-x.f]];
+    var sg=x.sg,sigBlock='';
+    if(sg.on.length){
+      var many=sg.often.length>=3;
+      sigBlock='<div class="cd-sig"><div class="cd-sig-top"><small>LAST 3 DAYS SIGNAL</small><span class="cd-dots">'+SIG.map(function(z){return '<i class="'+(signals[z.k]===2?'on2':signals[z.k]===1?'on1':'')+'"></i>'}).join('')+'</span></div>'
+        +'<b>'+T(Q('예민 신호 '+sg.on.length+'가지 · 그중 \'자주\' '+sg.often.length+'가지','Sensitivity signals: '+sg.on.length+' · often: '+sg.often.length,'敏感信号'+sg.on.length+'项 · 其中经常'+sg.often.length+'项','敏感サイン'+sg.on.length+'つ・うち「よく」'+sg.often.length+'つ'))+'</b>'
+        +'<p>'+T(many?Q('지금은 약사님과 먼저 상담한 뒤, 순한 단계부터 시작해 주세요.','Please talk to the pharmacist first, then start with gentle steps.','请先咨询药师，再从温和步骤开始。','まず薬剤師にご相談のうえ、やさしいステップから始めてください。'):Q('지금은 자극을 줄인 진정·보습 단계부터 시작하는 것이 좋아요.','Start with gentle soothing and moisturizing steps for now.','现在建议从温和的舒缓保湿步骤开始。','今は刺激を抑えた鎮静・保湿ステップから始めるのがおすすめです。'))+'</p>'
+        +'<div class="cd-tags">'+sg.on.map(function(z){return '<span>'+P(z.n)+' '+P(LV[signals[z.k]])+'</span>'}).join('')+'</div></div>';
+    }
+    return '<section class="cd-card" aria-label="'+P(Q('시오레 4축 피부 코드','SIORÉ 4-axis skin code','SIORÉ四轴肌肤代码','SIORÉ 4軸スキンコード'))+'">'
+      +'<div class="cd-head"><span class="sm-eye">03 · SIORÉ 4-AXIS SKIN CODE</span><b>'+T(Q('나의 피부 코드','My skin code','我的肌肤代码','わたしのスキンコード'))+'</b></div>'
+      +'<div class="cd-letters">'+[L1,L2,L3,L4].map(function(l){return '<span><b>'+l[0]+'</b><small>'+P(l[1])+'</small></span>'}).join('')+'</div>'
+      +'<h4 class="cd-name">'+T(nm)+'</h4><p class="cd-desc">'+T(desc)+'</p>'
+      +'<div class="cd-poles">'+poles.map(function(p){var v=pos(p[2]);return '<div><span class="'+(v<50?'on':'')+'">'+P(p[0])+'</span><i style="--x:'+v+'%"></i><span class="'+(v>=50?'on':'')+'">'+P(p[1])+'</span></div>'}).join('')+'</div>'
+      +sigBlock
+      +'<p class="cd-foot">'+T(Q('2주 뒤 다시 체크하면 코드 변화를 비교해 드려요','Check again in 2 weeks to compare your code','2周后再次检测可对比代码变化','2週間後にもう一度チェックすると変化を比べられます'))+'</p>'
+      +'</section>';
+  }
+
   function apply(){
     var sheet=document.querySelector('.solution-sheet');if(!sheet)return;
     sheet.querySelectorAll('.rx-balance-score').forEach(function(n){n.remove()});
     var diag=sheet.querySelector('.rx-diagnosis');
-    if(diag){diag.classList.add('sm-one');var old=sheet.querySelector('.sm-skinmap');if(old)old.remove();diag.insertAdjacentHTML('afterend',skinMap());}
+    if(diag){diag.classList.add('sm-one');var old=sheet.querySelector('.sm-skinmap');if(old)old.remove();diag.insertAdjacentHTML('afterend',skinMap());var oc=sheet.querySelector('.cd-card');if(oc)oc.remove();var sm=sheet.querySelector('.sm-skinmap');if(sm)sm.insertAdjacentHTML('afterend',codeCard());}
     var oldBox=sheet.querySelector('.bx-wrap');if(oldBox)oldBox.remove();
     sheet.insertAdjacentHTML('beforeend',boxCard());
   }
@@ -176,5 +261,6 @@
     paperRender=function(){var r=prev.apply(this,arguments);try{apply()}catch(e){console.warn('skinmap',e)}return r;};
   }
   document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('[data-rx-tier]'))setTimeout(syncBox,30);});
-  window.__sioreResultUpgrade={apply:apply};
+  window.__sioreResultUpgrade={apply:apply,mountSignals:mountSignals};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mountSignals);else mountSignals();
 })();
