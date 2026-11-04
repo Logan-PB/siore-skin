@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIORÉ 첫 화면 L4 보완 — 가독성 시안 3</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#3b2620;--sub:#6f564c;--mute:#9a8378;--cu:#a5684f;--g1:#d4957b;--g2:#a86a55;--line:rgba(168,112,92,.18)}
+body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;background:#e9ddd4;color:var(--ink);padding:34px 0 70px;-webkit-font-smoothing:antialiased}
+.page-h,.opt-h,.note{width:1280px;margin-left:auto;margin-right:auto;padding:0 4px}
+.page-h small{font-size:11px;letter-spacing:.26em;color:var(--cu);font-weight:600}
+.page-h h1{font-size:26px;margin:6px 0 4px;letter-spacing:-.02em}
+.page-h p{font-size:13.5px;color:var(--sub);line-height:1.6}
+.opt-h{margin-top:38px;margin-bottom:10px;display:flex;align-items:baseline;gap:10px}
+.opt-h b{font-size:19px}.opt-h span{font-size:13px;color:var(--sub)}
+.opt-h em{font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#fff;background:linear-gradient(90deg,var(--g1),var(--g2));padding:4px 10px;border-radius:99px}
+.note{margin-top:10px;font-size:12.5px;color:var(--sub);line-height:1.7}
+.note b{color:var(--ink)}
+.frame{position:relative;width:1280px;height:800px;margin:0 auto;border-radius:26px;overflow:hidden;background:linear-gradient(165deg,#faf6f0,#f3e9e1 55%,#eedfd5);box-shadow:0 30px 60px -30px rgba(90,52,38,.45)}
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.9),rgba(255,255,255,.7));border:1px solid rgba(255,255,255,.95);box-shadow:0 18px 40px -24px rgba(110,66,50,.5),inset 0 1px 0 #fff;backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2)}
+.logo{height:26px;display:block}
+.certs{display:flex;gap:6px}
+.certs img{width:40px;height:40px;border-radius:50%;object-fit:contain;background:#fff;padding:3px;box-shadow:0 6px 14px -10px rgba(110,66,50,.6)}
+.langs{display:flex;gap:4px;padding:4px;border-radius:99px}
+.langs i{font-style:normal;font-size:13.5px;font-weight:600;padding:9px 15px;border-radius:99px;color:var(--sub);display:flex;align-items:center;gap:7px}
+.langs i img{width:17px;height:12px;border-radius:2px}
+.langs i.on{background:linear-gradient(90deg,var(--g1),var(--g2));color:#fff;box-shadow:0 6px 14px -8px rgba(120,60,40,.7)}
+.eyebrow{font-size:11.5px;letter-spacing:.2em;font-weight:700;color:var(--cu)}
+.hl{font-weight:700;letter-spacing:-.04em;line-height:1.25}
+.hl em{font-style:normal;color:#9b5a43}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;border-radius:99px;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--g1),var(--g2));box-shadow:0 16px 30px -14px rgba(140,74,52,.75),inset 0 1px 0 rgba(255,255,255,.4)}
+.cta svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.cta small{font-weight:500;opacity:.85;font-size:.78em}
+.ghost{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:99px;font-weight:600;color:var(--ink);background:rgba(255,255,255,.82);border:1px solid var(--line)}
+/* 고민 타일 */
+.tile{position:relative;display:flex;align-items:center;gap:12px;border-radius:16px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+.tile .ic{flex:0 0 auto;border-radius:12px;background:#f8efe9;display:grid;place-items:center}
+.tile .ic img{width:62%;height:62%}
+.tile b{display:block;font-weight:700;letter-spacing:-.01em}
+.tile small{display:block;color:var(--mute);font-weight:500;margin-top:2px}
+.tile.on{border-color:var(--cu);background:#fcf3ee;box-shadow:inset 0 0 0 1px var(--cu)}
+.tile.on .ic{background:#fff}
+.tile.on::after{content:"";position:absolute;top:9px;right:9px;width:18px;height:18px;border-radius:50%;background:var(--cu) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.6 6.2 5 8.6 9.6 3.6' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat}
+.tile .num{position:absolute;top:8px;right:9px;font-size:11px;font-weight:700;color:#fff;background:var(--cu);width:19px;height:19px;border-radius:50%;display:grid;place-items:center}
+.tile.on .num~*{}
+.tile.on.n::after{display:none}
+.count{display:flex;gap:5px;align-items:center;font-size:12.5px;color:var(--sub);font-weight:600}
+.count i{width:9px;height:9px;border-radius:50%;background:#e8d8ce}.count i.on{background:var(--cu)}
+.qr .q{border-radius:10px;background:#fff url(../assets/skin-consultation-qr.svg) center/86% no-repeat;border:1px solid var(--line)}
+.foot{display:flex;gap:16px;align-items:center;font-size:12.5px;color:var(--sub);font-weight:600}
+.foot span{display:flex;align-items:center;gap:6px}
+.foot span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--cu);opacity:.6}
+/* phone */
+.phones{width:1280px;margin:14px auto 0;display:flex;justify-content:space-between}
+.phone{width:390px;height:844px;border-radius:40px;overflow:hidden;position:relative;background:linear-gradient(170deg,#faf6f0,#f1e5dc);box-shadow:0 30px 60px -30px rgba(90,52,38,.5),0 0 0 8px #2b211d}
+.phone .cap{position:absolute;left:0;right:0;bottom:-34px;text-align:center;font-size:13px;font-weight:700}
+
+/* ===== R1 정돈형 2단 ===== */
+.r1 .photo{position:absolute;right:0;top:0;bottom:0;width:44%;background:url(../images/official-scenes/serum-application.webp) 40% 30%/cover}
+.r1 .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#f5ece5 0%,rgba(245,236,229,0) 22%)}
+.r1 .top{position:absolute;left:52px;right:52px;top:28px;display:flex;align-items:center;gap:16px;z-index:3}
+.r1 .top .langs{margin-left:auto}
+.r1 .main{position:absolute;left:52px;top:96px;width:640px}
+.r1 .hl{font-size:40px;margin:10px 0 8px}
+.r1 .lead{font-size:16px;color:var(--sub)}
+.r1 .box{margin-top:22px;padding:22px;border-radius:26px}
+.r1 .bh{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.r1 .bh b{font-size:16px}
+.r1 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.r1 .tile{padding:12px}
+.r1 .tile .ic{width:40px;height:40px}
+.r1 .tile b{font-size:15.5px}.r1 .tile small{font-size:12px}
+.r1 .bar{display:flex;gap:10px;margin-top:16px}
+.r1 .bar .cta{flex:1;height:58px;font-size:17px}
+.r1 .bar .ghost{padding:0 20px;font-size:14px}
+.r1 .foot{position:absolute;left:52px;bottom:28px}
+.r1 .side{position:absolute;right:40px;bottom:40px;width:300px;display:flex;flex-direction:column;gap:10px;z-index:3}
+.r1 .side .c{padding:14px 16px;border-radius:20px;display:flex;gap:12px;align-items:center}
+.r1 .side .q{width:62px;height:62px}
+.r1 .side small{font-size:12px;color:var(--sub);line-height:1.5}.r1 .side b{display:block;font-size:14px;color:var(--ink)}
+
+/* ===== R2 센터 카드 ===== */
+.r2 .bg{position:absolute;inset:0;background:url(../images/brand/official-about-03.png) 50% 30%/cover;filter:saturate(.9)}
+.r2 .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(247,239,232,.55),rgba(247,239,232,.88) 60%)}
+.r2 .top{position:absolute;left:40px;right:40px;top:24px;display:flex;align-items:center;justify-content:space-between;z-index:3}
+.r2 .card{position:absolute;left:50%;top:92px;transform:translateX(-50%);width:820px;padding:30px 34px 26px;border-radius:32px;text-align:center;z-index:3}
+.r2 .hl{font-size:36px;margin:8px 0 6px}
+.r2 .lead{font-size:15.5px;color:var(--sub)}
+.r2 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;text-align:left}
+.r2 .tile{padding:13px 14px}
+.r2 .tile .ic{width:42px;height:42px}
+.r2 .tile b{font-size:16px}.r2 .tile small{font-size:12px}
+.r2 .bar{display:flex;align-items:center;gap:14px;margin-top:18px}
+.r2 .bar .cta{flex:1;height:60px;font-size:18px}
+.r2 .links{position:absolute;left:0;right:0;bottom:26px;display:flex;justify-content:center;gap:10px;z-index:3}
+.r2 .links .ghost{padding:11px 18px;font-size:13.5px}
+.r2 .qr{position:absolute;right:36px;bottom:22px;display:flex;align-items:center;gap:10px;padding:10px 14px 10px 10px;border-radius:18px;z-index:3}
+.r2 .qr .q{width:50px;height:50px}.r2 .qr small{font-size:11.5px;color:var(--sub);line-height:1.45}.r2 .qr b{display:block;color:var(--ink);font-size:12.5px}
+
+/* ===== R3 그룹형 가이드 ===== */
+.r3 .top{position:absolute;left:48px;right:48px;top:26px;display:flex;align-items:center;gap:16px;z-index:3}
+.r3 .top .langs{margin-left:auto}
+.r3 .rail{position:absolute;left:48px;top:104px;width:300px;bottom:40px;display:flex;flex-direction:column}
+.r3 .hl{font-size:34px;margin:10px 0 10px}
+.r3 .lead{font-size:15px;color:var(--sub);line-height:1.6}
+.r3 .guide{margin-top:24px;display:flex;flex-direction:column;gap:0}
+.r3 .guide div{display:flex;gap:12px;align-items:flex-start;padding:10px 0;position:relative}
+.r3 .guide div:not(:last-child)::after{content:"";position:absolute;left:14px;top:40px;bottom:-4px;width:1.5px;background:#e3cfc3}
+.r3 .guide i{font-style:normal;width:29px;height:29px;flex:0 0 29px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:700;background:#fff;color:var(--cu);border:1.5px solid #e3cfc3}
+.r3 .guide .now i{background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;border-color:transparent}
+.r3 .guide b{font-size:15px;display:block}.r3 .guide small{font-size:12.5px;color:var(--mute)}
+.r3 .guide .now b{color:#9b5a43}
+.r3 .photo{margin-top:auto;height:190px;border-radius:24px;background:url(../images/official-scenes/serum-application.webp) 50% 28%/cover;position:relative}
+.r3 .photo span{position:absolute;left:12px;bottom:12px;font-size:12px;font-weight:600;padding:7px 11px;border-radius:99px}
+.r3 .panel{position:absolute;left:384px;right:48px;top:100px;bottom:40px;padding:24px 26px;border-radius:30px;display:flex;flex-direction:column}
+.r3 .ph{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px}
+.r3 .ph b{font-size:20px}.r3 .ph small{font-size:13px;color:var(--sub);font-weight:500;margin-left:6px}
+.r3 .groups{display:flex;flex-direction:column;gap:14px;flex:1;justify-content:space-evenly}.r3 .tile{min-height:72px}
+.r3 .grp{display:grid;grid-template-columns:96px 1fr;align-items:center;gap:12px;padding-bottom:10px;border-bottom:1px dashed rgba(168,112,92,.18)}.r3 .grp:last-child{border-bottom:0;padding-bottom:0}.r3 .grp h5{font-size:13px;letter-spacing:.06em;color:var(--cu);font-weight:700}
+.r3 .grp .row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.r3 .grp.wide{grid-column:1/-1}.r3 .grp.wide .row{grid-template-columns:repeat(3,1fr)}
+.r3 .tile{padding:11px 12px}
+.r3 .tile .ic{width:38px;height:38px}
+.r3 .tile b{font-size:15.5px}.r3 .tile small{font-size:12px}
+.r3 .bar{display:flex;gap:10px;margin-top:auto;padding-top:14px;border-top:1px solid var(--line);align-items:center}
+.r3 .bar .sel{flex:1;font-size:13.5px;color:var(--sub)}
+.r3 .bar .sel b{color:var(--ink)}
+.r3 .bar .cta{height:56px;padding:0 30px;font-size:17px}
+.r3 .bar .ghost{height:56px;padding:0 18px;font-size:14px}
+
+/* phones */
+.m{position:absolute;inset:0;padding:22px 18px 18px;display:flex;flex-direction:column}
+.m .mt{display:flex;align-items:center;justify-content:space-between}
+.m .logo{height:20px}
+.m .certs img{width:30px;height:30px;padding:2px}
+.m .langs{margin-top:12px;justify-content:space-between}
+.m .langs i{flex:1;justify-content:center;padding:8px 0;font-size:12.5px}
+.m .hl{font-size:25px;margin:16px 0 4px}
+.m .lead{font-size:13.5px;color:var(--sub)}
+.m .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:14px}
+.m .tile{flex-direction:column;gap:6px;padding:11px 4px 10px;text-align:center;border-radius:14px}
+.m .tile .ic{width:36px;height:36px}
+.m .tile b{font-size:13.5px}.m .tile small{font-size:10.5px}
+.m .tile.on::after{top:6px;right:6px;width:15px;height:15px;background-size:10px}
+.m .cta{height:54px;font-size:16px;margin-top:auto}
+.m .lk{display:flex;gap:8px;margin-top:10px}
+.m .lk .ghost{flex:1;height:42px;font-size:12.5px}
+</style></head><body>
+<header class="page-h">
+  <small>SIORÉ CONSULTATION LINK · LANDING · L4 REFINE</small>
+  <h1>L4 '고민 바로 입구' — 가독성 보완 시안 3가지</h1>
+  <p>공통 보완: ① 글자 키움(고민 이름 15~16px, 버튼 17~18px) ② 고민마다 한 줄 설명 추가 ③ 선택 개수를 점 3개로 표시 ④ 언어 버튼을 가로 한 줄로 ⑤ 보조 버튼(상담 기록·약사 추천 3종 세트·임상 전후)은 아래로 모아 시선 분산 줄임. 고민 9종·최대 3개 선택·추천 로직은 그대로예요.</p>
+</header>
+
+<!-- ============ R1 ============ -->
+<div class="opt-h"><b>R1. 정돈형 2단</b><span>왼쪽 글래스 패널에 정보를 모으고, 사진은 오른쪽으로 물러나게</span><em>추천</em></div>
+<section class="frame r1">
+  <div class="photo"></div>
+  <div class="top"><img class="logo" src="../images/brand/siore-logo-official-black.png" alt="SIORÉ"><div class="certs"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div>
+    <div class="langs glass"><i class="on"><img src="../images/flags/kr.svg">한국어</i><i><img src="../images/flags/us.svg">English</i><i><img src="../images/flags/cn.svg">中文</i><i><img src="../images/flags/jp.svg">日本語</i></div></div>
+  <div class="main">
+    <span class="eyebrow">약사가 설계한 바르는 피부 영양제</span>
+    <h2 class="hl">오늘 가장 신경 쓰이는<br><em>피부 고민</em>을 골라 주세요</h2>
+    <p class="lead">최대 3개까지 · 고른 순서대로 우선 케어해요</p>
+    <div class="box glass">
+      <div class="bh"><b>피부 고민</b><span class="count"><i class="on"></i><i class="on"></i><i></i>&nbsp;2 / 3</span></div>
+      <div class="grid">
+        <span class="tile"><span class="ic"><img src="../images/concerns/dryness.svg"></span><span><b>건조</b><small>당김·푸석함</small></span></span>
+        <span class="tile"><span class="ic"><img src="../images/concerns/sensitivity.svg"></span><span><b>민감</b><small>쉽게 예민해짐</small></span></span>
+        <span class="tile"><span class="ic"><img src="../images/concerns/redness.svg"></span><span><b>열감·홍조</b><small>화끈·붉어짐</small></span></span>
+        <span class="tile on"><span class="ic"><img src="../images/concerns/firmness.svg"></span><span><b>안티에이징</b><small>탄력 고민</small></span></span>
+        <span class="tile"><span class="ic"><img src="../images/concerns/radiance.svg"></span><span><b>광채·톤업</b><small>칙칙한 톤</small></span></span>
+        <span class="tile"><span class="ic"><img src="../images/concerns/blemish.svg"></span><span><b>트러블</b><small>트러블 고민</small></span></span>
+        <span class="tile on"><span class="ic"><img src="../images/concerns/sebum.svg"></span><span><b>피지</b><small>번들거림</small></span></span>
+        <span class="tile"><span class="ic"><img src="../images/concerns/barrier.svg"></span><span><b>장벽회복</b><small>건조·예민 반복</small></span></span>
+        <span class="tile"><span class="ic"><img src="../images/concerns/texture.svg"></span><span><b>각질</b><small>거친 결</small></span></span>
+      </div>
+      <div class="bar"><span class="cta">이 고민으로 상담 시작 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span><span class="ghost">약사 추천 3종 세트</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>상담 기록</span><span>임상 전후 보기 ↗</span><span>얼굴 부위로 고르기</span></div>
+  <div class="side">
+    <div class="c glass"><div class="qr"><div class="q" style="width:62px;height:62px"></div></div><small><b>휴대폰으로 이어보기</b>QR을 찍으면 내 폰에서<br>결과를 저장할 수 있어요</small></div>
+  </div>
+</section>
+<p class="note"><b>포인트</b> 지금 L4와 구성이 같아서 바로 적용하기 쉬워요. 사진 폭을 줄이고 패널을 키워 <b>고민 이름이 1.3배 커졌고</b>, 한 줄 설명 덕분에 외국인·처음 온 고객도 고르기 쉬워요.</p>
+
+<!-- ============ R2 ============ -->
+<div class="opt-h"><b>R2. 센터 카드</b><span>라인업 사진을 은은한 배경으로, 가운데 큰 카드 하나만 — 시선이 한 곳에</span></div>
+<section class="frame r2">
+  <div class="bg"></div>
+  <div class="top"><img class="logo" src="../images/brand/siore-logo-official-black.png" alt="SIORÉ">
+    <div class="langs glass"><i class="on"><img src="../images/flags/kr.svg">한국어</i><i><img src="../images/flags/us.svg">English</i><i><img src="../images/flags/cn.svg">中文</i><i><img src="../images/flags/jp.svg">日本語</i></div>
+    <div class="certs"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div></div>
+  <div class="card glass">
+    <span class="eyebrow">PHARMACIST-DEVELOPED · 약사가 설계한 바르는 피부 영양제</span>
+    <h2 class="hl">오늘 가장 신경 쓰이는 <em>피부 고민</em>은?</h2>
+    <p class="lead">최대 3개까지 고르면, 약사가 설계한 루틴을 바로 보여드려요</p>
+    <div class="grid">
+      <span class="tile"><span class="ic"><img src="../images/concerns/dryness.svg"></span><span><b>건조</b><small>당김·푸석함</small></span></span>
+      <span class="tile"><span class="ic"><img src="../images/concerns/sensitivity.svg"></span><span><b>민감</b><small>쉽게 예민해짐</small></span></span>
+      <span class="tile"><span class="ic"><img src="../images/concerns/redness.svg"></span><span><b>열감·홍조</b><small>화끈·붉어짐</small></span></span>
+      <span class="tile on n"><span class="num">1</span><span class="ic"><img src="../images/concerns/firmness.svg"></span><span><b>안티에이징</b><small>탄력 고민</small></span></span>
+      <span class="tile"><span class="ic"><img src="../images/concerns/radiance.svg"></span><span><b>광채·톤업</b><small>칙칙한 톤</small></span></span>
+      <span class="tile"><span class="ic"><img src="../images/concerns/blemish.svg"></span><span><b>트러블</b><small>트러블 고민</small></span></span>
+      <span class="tile on n"><span class="num">2</span><span class="ic"><img src="../images/concerns/sebum.svg"></span><span><b>피지</b><small>번들거림</small></span></span>
+      <span class="tile"><span class="ic"><img src="../images/concerns/barrier.svg"></span><span><b>장벽회복</b><small>건조·예민 반복</small></span></span>
+      <span class="tile"><span class="ic"><img src="../images/concerns/texture.svg"></span><span><b>각질</b><small>거친 결</small></span></span>
+    </div>
+    <div class="bar"><span class="count"><i class="on"></i><i class="on"></i><i></i>&nbsp;2 / 3</span><span class="cta">이 고민으로 상담 시작 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></div>
+  </div>
+  <div class="links"><span class="ghost glass">상담 기록</span><span class="ghost glass">약사 추천 3종 세트</span><span class="ghost glass">임상 전후 보기 ↗</span></div>
+  <div class="qr glass"><div class="q"></div><small><b>휴대폰으로 이어보기</b>QR로 결과 저장</small></div>
+</section>
+<p class="note"><b>포인트</b> 화면 가운데 카드 하나만 보면 돼서 <b>가장 읽기 쉬워요</b>. 고른 고민에 1·2·3 순서 번호가 붙어 "먼저 고른 고민부터 케어"가 바로 이해돼요. 카운터 태블릿·QR 모두 같은 구조라 교육도 쉬워요.</p>
+
+<!-- ============ R3 ============ -->
+<div class="opt-h"><b>R3. 그룹형 가이드</b><span>고민 9개를 4묶음으로 나누고, 왼쪽에 1-2-3 진행 안내</span></div>
+<section class="frame r3">
+  <div class="top"><img class="logo" src="../images/brand/siore-logo-official-black.png" alt="SIORÉ"><div class="certs"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div>
+    <div class="langs glass"><i class="on"><img src="../images/flags/kr.svg">한국어</i><i><img src="../images/flags/us.svg">English</i><i><img src="../images/flags/cn.svg">中文</i><i><img src="../images/flags/jp.svg">日本語</i></div></div>
+  <div class="rail">
+    <span class="eyebrow">약사가 설계한 바르는 피부 영양제</span>
+    <h2 class="hl">1분이면 끝나는<br><em>약사 피부 상담</em></h2>
+    <p class="lead">고민을 고르면 내 피부에 맞는<br>아침·밤 루틴을 바로 알려드려요.</p>
+    <div class="guide">
+      <div class="now"><i>1</i><span><b>피부 고민 고르기</b><small>지금 단계 · 최대 3개</small></span></div>
+      <div><i>2</i><span><b>피부 상태 체크</b><small>5문항 · 선택 입력 포함</small></span></div>
+      <div><i>3</i><span><b>나의 맞춤 솔루션</b><small>이미지·PDF로 저장</small></span></div>
+    </div>
+    <div class="photo"><span class="glass">임상 전후 보기 ↗</span></div>
+  </div>
+  <div class="panel glass">
+    <div class="ph"><b>어떤 고민이 있으세요?<small>여러 묶음에서 골라도 돼요</small></b><span class="count"><i class="on"></i><i class="on"></i><i></i>&nbsp;2 / 3</span></div>
+    <div class="groups">
+      <div class="grp"><h5>수분 · 장벽</h5><div class="row"><span class="tile"><span class="ic"><img src="../images/concerns/dryness.svg"></span><span><b>건조</b><small>당김·푸석함</small></span></span><span class="tile"><span class="ic"><img src="../images/concerns/barrier.svg"></span><span><b>장벽회복</b><small>건조·예민 반복</small></span></span></div></div>
+      <div class="grp"><h5>진정</h5><div class="row"><span class="tile"><span class="ic"><img src="../images/concerns/sensitivity.svg"></span><span><b>민감</b><small>쉽게 예민해짐</small></span></span><span class="tile"><span class="ic"><img src="../images/concerns/redness.svg"></span><span><b>열감·홍조</b><small>화끈·붉어짐</small></span></span></div></div>
+      <div class="grp"><h5>탄력 · 광채</h5><div class="row"><span class="tile on"><span class="ic"><img src="../images/concerns/firmness.svg"></span><span><b>안티에이징</b><small>탄력 고민</small></span></span><span class="tile"><span class="ic"><img src="../images/concerns/radiance.svg"></span><span><b>광채·톤업</b><small>칙칙한 톤</small></span></span></div></div>
+      <div class="grp"><h5>피지 · 결</h5><div class="row"><span class="tile on"><span class="ic"><img src="../images/concerns/sebum.svg"></span><span><b>피지</b><small>번들거림</small></span></span><span class="tile"><span class="ic"><img src="../images/concerns/blemish.svg"></span><span><b>트러블</b><small>트러블 고민</small></span></span><span class="tile"><span class="ic"><img src="../images/concerns/texture.svg"></span><span><b>각질</b><small>거친 결</small></span></span></div></div>
+    </div>
+    <div class="bar"><span class="sel">선택: <b>안티에이징 → 피지</b></span><span class="ghost">상담 기록</span><span class="ghost">약사 추천 3종 세트</span><span class="cta">상담 시작 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></div>
+  </div>
+</section>
+<p class="note"><b>포인트</b> 고민을 묶음으로 보여줘서 <b>찾는 시간이 짧아요</b>. 왼쪽 1-2-3 안내로 "얼마나 걸리는지"가 보여 상담 시작 부담이 줄어요. 대신 정보량이 가장 많아 태블릿(가로) 전용에 더 맞아요.</p>
+
+<!-- ============ phones ============ -->
+<div class="opt-h"><b>휴대폰(QR) 화면 비교</b><span>외국인 고객이 매대 QR로 들어왔을 때 — 세 안 모두 한 화면 안에 고민 9개 + 시작 버튼</span></div>
+<div class="phones">
+  <div class="phone"><div class="m">
+    <div class="mt"><img class="logo" src="../images/brand/siore-logo-official-black.png"><div class="certs"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div></div>
+    <div class="langs glass"><i class="on">KR</i><i>EN</i><i>中文</i><i>日本語</i></div>
+    <h2 class="hl">오늘 가장 신경 쓰이는<br><em>피부 고민</em>은?</h2>
+    <p class="lead">최대 3개 · 고른 순서대로 케어 <span class="count" style="display:inline-flex;margin-left:6px"><i class="on"></i><i class="on"></i><i></i></span></p>
+    <div class="grid">
+      <span class="tile"><span class="ic"><img src="../images/concerns/dryness.svg"></span><b>건조</b><small>당김·푸석함</small></span>
+      <span class="tile"><span class="ic"><img src="../images/concerns/sensitivity.svg"></span><b>민감</b><small>쉽게 예민</small></span>
+      <span class="tile"><span class="ic"><img src="../images/concerns/redness.svg"></span><b>열감·홍조</b><small>화끈·붉어짐</small></span>
+      <span class="tile on"><span class="ic"><img src="../images/concerns/firmness.svg"></span><b>안티에이징</b><small>탄력 고민</small></span>
+      <span class="tile"><span class="ic"><img src="../images/concerns/radiance.svg"></span><b>광채·톤업</b><small>칙칙한 톤</small></span>
+      <span class="tile"><span class="ic"><img src="../images/concerns/blemish.svg"></span><b>트러블</b><small>트러블 고민</small></span>
+      <span class="tile on"><span class="ic"><img src="../images/concerns/sebum.svg"></span><b>피지</b><small>번들거림</small></span>
+      <span class="tile"><span class="ic"><img src="../images/concerns/barrier.svg"></span><b>장벽회복</b><small>건조·예민 반복</small></span>
+      <span class="tile"><span class="ic"><img src="../images/concerns/texture.svg"></span><b>각질</b><small>거친 결</small></span>
+    </div>
+    <span class="cta">이 고민으로 상담 시작 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+    <div class="lk"><span class="ghost">약사 추천 3종 세트</span><span class="ghost">임상 전후 ↗</span></div>
+  </div><span class="cap">R1</span></div>
+
+  <div class="phone" style="background:linear-gradient(180deg,rgba(247,239,232,.6),#f5ece5 45%),url(../images/brand/official-about-03.png) 50% 0/auto 300px no-repeat"><div class="m">
+    <div class="mt"><img class="logo" src="../images/brand/siore-logo-official-black.png"><div class="certs"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div></div>
+    <div class="langs glass"><i class="on">KR</i><i>EN</i><i>中文</i><i>日本語</i></div>
+    <div class="glass" style="margin-top:72px;border-radius:26px;padding:16px 12px 14px;text-align:center">
+      <h2 class="hl" style="margin:0 0 4px;font-size:23px">오늘 가장 신경 쓰이는<br><em>피부 고민</em>은?</h2>
+      <p class="lead">최대 3개까지 골라 주세요</p>
+      <div class="grid" style="text-align:center">
+        <span class="tile"><span class="ic"><img src="../images/concerns/dryness.svg"></span><b>건조</b></span>
+        <span class="tile"><span class="ic"><img src="../images/concerns/sensitivity.svg"></span><b>민감</b></span>
+        <span class="tile"><span class="ic"><img src="../images/concerns/redness.svg"></span><b>열감·홍조</b></span>
+        <span class="tile on n"><span class="num">1</span><span class="ic"><img src="../images/concerns/firmness.svg"></span><b>안티에이징</b></span>
+        <span class="tile"><span class="ic"><img src="../images/concerns/radiance.svg"></span><b>광채·톤업</b></span>
+        <span class="tile"><span class="ic"><img src="../images/concerns/blemish.svg"></span><b>트러블</b></span>
+        <span class="tile on n"><span class="num">2</span><span class="ic"><img src="../images/concerns/sebum.svg"></span><b>피지</b></span>
+        <span class="tile"><span class="ic"><img src="../images/concerns/barrier.svg"></span><b>장벽회복</b></span>
+        <span class="tile"><span class="ic"><img src="../images/concerns/texture.svg"></span><b>각질</b></span>
+      </div>
+    </div>
+    <span class="cta">상담 시작 · 2 / 3 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+    <div class="lk"><span class="ghost">상담 기록</span><span class="ghost">약사 추천 3종</span><span class="ghost">임상 ↗</span></div>
+  </div><span class="cap">R2</span></div>
+
+  <div class="phone"><div class="m">
+    <div class="mt"><img class="logo" src="../images/brand/siore-logo-official-black.png"><div class="certs"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div></div>
+    <div class="langs glass"><i class="on">KR</i><i>EN</i><i>中文</i><i>日本語</i></div>
+    <div style="display:flex;gap:6px;margin-top:14px;font-size:11.5px;font-weight:700"><span style="flex:1;padding:7px 0;text-align:center;border-radius:99px;background:linear-gradient(90deg,#d4957b,#a86a55);color:#fff">1 고민</span><span style="flex:1;padding:7px 0;text-align:center;border-radius:99px;background:#fff;color:#9a8378">2 피부 체크</span><span style="flex:1;padding:7px 0;text-align:center;border-radius:99px;background:#fff;color:#9a8378">3 솔루션</span></div>
+    <h2 class="hl" style="font-size:22px;margin:14px 0 2px">어떤 고민이 있으세요?</h2>
+    <p class="lead">최대 3개 · 2 / 3 선택</p>
+    <div style="margin-top:10px;display:flex;flex-direction:column;gap:9px">
+      <div><div class="eyebrow" style="font-size:10.5px;margin:0 0 5px 2px">수분 · 장벽 / 진정</div><div class="grid" style="grid-template-columns:repeat(4,1fr);margin:0">
+        <span class="tile"><span class="ic"><img src="../images/concerns/dryness.svg"></span><b>건조</b></span><span class="tile"><span class="ic"><img src="../images/concerns/barrier.svg"></span><b>장벽회복</b></span><span class="tile"><span class="ic"><img src="../images/concerns/sensitivity.svg"></span><b>민감</b></span><span class="tile"><span class="ic"><img src="../images/concerns/redness.svg"></span><b>열감·홍조</b></span></div></div>
+      <div><div class="eyebrow" style="font-size:10.5px;margin:0 0 5px 2px">탄력 · 광채</div><div class="grid" style="grid-template-columns:repeat(4,1fr);margin:0">
+        <span class="tile on"><span class="ic"><img src="../images/concerns/firmness.svg"></span><b>안티에이징</b></span><span class="tile"><span class="ic"><img src="../images/concerns/radiance.svg"></span><b>광채·톤업</b></span><span></span><span></span></div></div>
+      <div><div class="eyebrow" style="font-size:10.5px;margin:0 0 5px 2px">피지 · 결</div><div class="grid" style="grid-template-columns:repeat(4,1fr);margin:0">
+        <span class="tile on"><span class="ic"><img src="../images/concerns/sebum.svg"></span><b>피지</b></span><span class="tile"><span class="ic"><img src="../images/concerns/blemish.svg"></span><b>트러블</b></span><span class="tile"><span class="ic"><img src="../images/concerns/texture.svg"></span><b>각질</b></span><span></span></div></div>
+    </div>
+    <span class="cta">상담 시작 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+    <div class="lk"><span class="ghost">약사 추천 3종 세트</span><span class="ghost">임상 전후 ↗</span></div>
+  </div><span class="cap">R3</span></div>
+</div>
+</body></html>
