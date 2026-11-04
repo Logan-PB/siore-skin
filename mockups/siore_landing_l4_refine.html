@@ -67,6 +67,7 @@ body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;backgroun
 .r1 .bh b{font-size:16px}
 .r1 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .r1 .tile{padding:12px}
+.r1g .tile{padding:11px}.r1g .tile .ic{width:38px;height:38px}.r1g .tile b{font-size:15px}.r1g .tile small{font-size:11.5px}
 .r1 .tile .ic{width:40px;height:40px}
 .r1 .tile b{font-size:15.5px}.r1 .tile small{font-size:12px}
 .r1 .bar{display:flex;gap:10px;margin-top:16px}
@@ -144,6 +145,10 @@ body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;backgroun
 .m .cta{height:54px;font-size:16px;margin-top:auto}
 .m .lk{display:flex;gap:8px;margin-top:10px}
 .m .lk .ghost{flex:1;height:42px;font-size:12.5px}
+.mphoto{position:relative;flex:1;min-height:150px;margin:12px 0 0;border-radius:22px;background:url(../images/official-scenes/serum-application.webp) 50% 26%/cover;box-shadow:0 14px 28px -18px rgba(110,66,50,.55)}
+.mphoto span{position:absolute;left:10px;bottom:10px;font-size:11.5px;font-weight:600;padding:6px 10px;border-radius:99px;color:var(--ink)}
+.m .mphoto+.cta{margin-top:12px}
+.m .lk .ghost:last-child:nth-child(2){}
 </style></head><body>
 <header class="page-h">
   <small>SIORÉ CONSULTATION LINK · LANDING · L4 REFINE</small>
@@ -245,7 +250,7 @@ body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;backgroun
 <!-- ============ phones ============ -->
 <div class="opt-h"><b>휴대폰(QR) 화면 비교</b><span>외국인 고객이 매대 QR로 들어왔을 때 — 세 안 모두 한 화면 안에 고민 9개 + 시작 버튼</span></div>
 <div class="phones">
-  <div class="phone" style="background:linear-gradient(90deg,#f5ece5 38%,rgba(245,236,229,.55) 58%,rgba(245,236,229,0) 80%),linear-gradient(180deg,rgba(245,236,229,0) 120px,#f5ece5 235px),url(../images/official-scenes/serum-application.webp) 135% 12px/auto 250px no-repeat,#f5ece5"><div class="m">
+  <div class="phone" style="background:linear-gradient(170deg,#faf6f0,#f1e5dc)"><div class="m">
     <div class="mt"><img class="logo" src="../images/brand/siore-logo-official-black.png"><div class="certs"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div></div>
     <div class="langs glass"><i class="on">KR</i><i>EN</i><i>中文</i><i>日本語</i></div>
     <h2 class="hl">오늘 가장 신경 쓰이는<br><em>피부 고민</em>은?</h2>
@@ -261,14 +266,15 @@ body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;backgroun
       <span class="tile"><span class="ic"><img src="../images/concerns/barrier.svg"></span><b>장벽회복</b><small>건조·예민 반복</small></span>
       <span class="tile"><span class="ic"><img src="../images/concerns/texture.svg"></span><b>각질</b><small>거친 결</small></span>
     </div>
+    <div class="mphoto"><span class="glass">임상 전후 보기 ↗</span></div>
     <span class="cta">이 고민으로 상담 시작 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
-    <div class="lk"><span class="ghost">약사 추천 3종 세트</span><span class="ghost">임상 전후 ↗</span></div>
+    <div class="lk"><span class="ghost">약사 추천 3종 세트</span><span class="ghost">상담 기록</span></div>
   </div><span class="cap">R1</span></div>
 
-  <div class="phone" style="background:linear-gradient(180deg,rgba(247,239,232,.6),#f5ece5 45%),url(../images/brand/official-about-03.png) 50% 0/auto 300px no-repeat"><div class="m">
+  <div class="phone"><div class="m">
     <div class="mt"><img class="logo" src="../images/brand/siore-logo-official-black.png"><div class="certs"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div></div>
     <div class="langs glass"><i class="on">KR</i><i>EN</i><i>中文</i><i>日本語</i></div>
-    <div class="glass" style="margin-top:72px;border-radius:26px;padding:16px 12px 14px;text-align:center">
+    <div class="glass" style="margin-top:14px;border-radius:26px;padding:14px 12px 12px;text-align:center">
       <h2 class="hl" style="margin:0 0 4px;font-size:23px">오늘 가장 신경 쓰이는<br><em>피부 고민</em>은?</h2>
       <p class="lead">최대 3개까지 골라 주세요</p>
       <div class="grid" style="text-align:center">
@@ -283,11 +289,12 @@ body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;backgroun
         <span class="tile"><span class="ic"><img src="../images/concerns/texture.svg"></span><b>각질</b></span>
       </div>
     </div>
+    <div class="mphoto"><span class="glass">임상 전후 보기 ↗</span></div>
     <span class="cta">상담 시작 · 2 / 3 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
-    <div class="lk"><span class="ghost">상담 기록</span><span class="ghost">약사 추천 3종</span><span class="ghost">임상 ↗</span></div>
+    <div class="lk"><span class="ghost">상담 기록</span><span class="ghost">약사 추천 3종 세트</span></div>
   </div><span class="cap">R2</span></div>
 
-  <div class="phone" style="background:linear-gradient(90deg,#f5ece5 38%,rgba(245,236,229,.55) 58%,rgba(245,236,229,0) 80%),linear-gradient(180deg,rgba(245,236,229,0) 120px,#f5ece5 235px),url(../images/official-scenes/serum-application.webp) 135% 12px/auto 250px no-repeat,#f5ece5"><div class="m">
+  <div class="phone" style="background:linear-gradient(170deg,#faf6f0,#f1e5dc)"><div class="m">
     <div class="mt"><img class="logo" src="../images/brand/siore-logo-official-black.png"><div class="certs"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div></div>
     <div class="langs glass"><i class="on">KR</i><i>EN</i><i>中文</i><i>日本語</i></div>
     <div style="display:flex;gap:6px;margin-top:14px;font-size:11.5px;font-weight:700"><span style="flex:1;padding:7px 0;text-align:center;border-radius:99px;background:linear-gradient(90deg,#d4957b,#a86a55);color:#fff">1 고민</span><span style="flex:1;padding:7px 0;text-align:center;border-radius:99px;background:#fff;color:#9a8378">2 피부 체크</span><span style="flex:1;padding:7px 0;text-align:center;border-radius:99px;background:#fff;color:#9a8378">3 솔루션</span></div>
@@ -301,8 +308,35 @@ body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;backgroun
       <div><div class="eyebrow" style="font-size:10.5px;margin:0 0 5px 2px">피지 · 결</div><div class="grid" style="grid-template-columns:repeat(4,1fr);margin:0">
         <span class="tile on"><span class="ic"><img src="../images/concerns/sebum.svg"></span><b>피지</b></span><span class="tile"><span class="ic"><img src="../images/concerns/blemish.svg"></span><b>트러블</b></span><span class="tile"><span class="ic"><img src="../images/concerns/texture.svg"></span><b>각질</b></span><span></span></div></div>
     </div>
+    <div class="mphoto"><span class="glass">임상 전후 보기 ↗</span></div>
     <span class="cta">상담 시작 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
-    <div class="lk"><span class="ghost">약사 추천 3종 세트</span><span class="ghost">임상 전후 ↗</span></div>
+    <div class="lk"><span class="ghost">약사 추천 3종 세트</span><span class="ghost">상담 기록</span></div>
   </div><span class="cap">R3</span></div>
+</div>
+
+<div class="opt-h" style="margin-top:70px"><b>태블릿 세로(768px) 예시 — R1 기준</b><span>2단이 1단으로 바뀌면 사진은 고민 선택 아래로 내려가고, 숨기지 않아요</span></div>
+<div style="width:1280px;margin:0 auto;display:flex;gap:30px;align-items:flex-start">
+ <div class="tab" style="width:768px;height:1024px;border-radius:34px;overflow:hidden;position:relative;background:linear-gradient(170deg,#faf6f0,#f1e5dc);box-shadow:0 30px 60px -30px rgba(90,52,38,.5),0 0 0 10px #2b211d;flex:0 0 auto">
+  <div style="position:absolute;inset:0;padding:30px 34px;display:flex;flex-direction:column">
+   <div style="display:flex;align-items:center;gap:12px"><img class="logo" src="../images/brand/siore-logo-official-black.png"><div class="certs"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div>
+    <div class="langs glass" style="margin-left:auto"><i class="on">한국어</i><i>English</i><i>中文</i><i>日本語</i></div></div>
+   <span class="eyebrow" style="margin-top:26px">약사가 설계한 바르는 피부 영양제</span>
+   <h2 class="hl" style="font-size:34px;margin:8px 0 6px">오늘 가장 신경 쓰이는 <em>피부 고민</em>을 골라 주세요</h2>
+   <p style="font-size:15px;color:var(--sub)">최대 3개까지 · 고른 순서대로 우선 케어해요</p>
+   <div class="glass" style="margin-top:18px;padding:18px;border-radius:24px">
+    <div style="display:flex;justify-content:space-between;margin-bottom:12px"><b style="font-size:16px">피부 고민</b><span class="count"><i class="on"></i><i class="on"></i><i></i>&nbsp;2 / 3</span></div>
+    <div class="r1g" style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px"><span class="tile"><span class="ic"><img src="../images/concerns/dryness.svg"></span><span><b>건조</b><small>당김·푸석함</small></span></span><span class="tile"><span class="ic"><img src="../images/concerns/sensitivity.svg"></span><span><b>민감</b><small>쉽게 예민해짐</small></span></span><span class="tile"><span class="ic"><img src="../images/concerns/redness.svg"></span><span><b>열감·홍조</b><small>화끈·붉어짐</small></span></span><span class="tile on"><span class="ic"><img src="../images/concerns/firmness.svg"></span><span><b>안티에이징</b><small>탄력 고민</small></span></span><span class="tile"><span class="ic"><img src="../images/concerns/radiance.svg"></span><span><b>광채·톤업</b><small>칙칙한 톤</small></span></span><span class="tile"><span class="ic"><img src="../images/concerns/blemish.svg"></span><span><b>트러블</b><small>트러블 고민</small></span></span><span class="tile on"><span class="ic"><img src="../images/concerns/sebum.svg"></span><span><b>피지</b><small>번들거림</small></span></span><span class="tile"><span class="ic"><img src="../images/concerns/barrier.svg"></span><span><b>장벽회복</b><small>건조·예민 반복</small></span></span><span class="tile"><span class="ic"><img src="../images/concerns/texture.svg"></span><span><b>각질</b><small>거친 결</small></span></span></div>
+   </div>
+   <div class="mphoto" style="min-height:220px;margin-top:16px;background-position:50% 24%"><span class="glass">임상 전후 보기 ↗</span></div>
+   <span class="cta" style="height:60px;font-size:18px;margin-top:16px">이 고민으로 상담 시작 <svg viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span>
+   <div style="display:flex;gap:10px;margin-top:10px"><span class="ghost" style="flex:1;height:46px;font-size:14px">상담 기록</span><span class="ghost" style="flex:1;height:46px;font-size:14px">약사 추천 3종 세트</span></div>
+  </div></div>
+ <div class="note" style="width:auto;margin:0;padding-top:6px;font-size:13.5px">
+  <b style="font-size:16px">화면 크기별 배치 규칙</b><br><br>
+  <b>PC·태블릿 가로 (1024px 이상)</b><br>고민 선택은 왼쪽, 모델 사진은 오른쪽에 크게 (위 R1~R3 그대로)<br><br>
+  <b>태블릿 세로 (768~1023px)</b><br>한 줄 배치로 바뀌고, 사진은 <b>고민 선택 바로 아래</b> 넓은 카드로<br><br>
+  <b>휴대폰 (767px 이하)</b><br>고민 9개 → <b>사진 카드</b> → 상담 시작 버튼 순서. 사진은 남는 공간만큼 늘어나고, 화면이 아주 작아도 최소 높이를 지켜서 <b>항상 보여요</b><br><br>
+  <b>사진 위치 잡기</b><br>어느 크기에서도 얼굴(눈·볼·손)이 잘리지 않게 사진 기준점을 얼굴에 고정해요.<br>사진 카드의 '임상 전후 보기'를 누르면 기존 임상 팝업이 열려요.
+ </div>
 </div>
 </body></html>
