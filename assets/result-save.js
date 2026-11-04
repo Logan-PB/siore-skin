@@ -46,6 +46,7 @@
         const dst=[...(doc.querySelector('#step3 .bx-wrap')||doc.querySelector('#step3 .paper-pair')||doc.querySelector('#step3')).querySelectorAll('svg')];
         dst.forEach((dv,i)=>{const u=urls[i];if(!u)return;const im=doc.createElement('img');im.src=u.src;im.width=u.w;im.height=u.h;im.style.cssText=`width:${u.w}px;height:${u.h}px;display:${u.disp};margin:${u.mg};vertical-align:middle;max-width:none`;dv.replaceWith(im)});
         doc.querySelectorAll('.bx-rx>i').forEach(n=>{n.style.cssText+=';display:block!important;width:22px!important;height:22px!important;line-height:22px!important;padding:0!important;margin:0!important;text-align:center!important;font-size:11px!important'});
+        doc.querySelectorAll('.bx-staff-line').forEach(n=>{n.style.display='block'});
         doc.querySelectorAll('.bx-use .n small').forEach(n=>{n.style.color='#f0c3a8'});
         const fd=doc.querySelector('#focus-dialog');if(fd)Object.assign(fd.style,{position:'static',overflow:'visible',height:'auto',maxHeight:'none'});
         const st=doc.createElement('style');

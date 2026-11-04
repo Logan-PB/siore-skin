@@ -159,11 +159,11 @@
   function rxInfo(){
     var ci=codeInfo(),sg=ci.sg,f=ci.focus.map(function(n){return P(n)}).join(' · ');
     var sig=sg.on.length?P(Q(sg.on.length+'가지 · 자주 '+sg.often.length,sg.on.length+' · often '+sg.often.length,sg.on.length+'项 · 经常'+sg.often.length,sg.on.length+'つ・よく'+sg.often.length)):P(Q('없음','None','没有','なし'));
-    return '<div class="bx-info">'
+    return '<div class="bx-info'+(sg.on.length?'':' n3')+'">'
       +'<div class="bx-i bx-code"><small>Skin Code.</small><b>'+ci.code.split('').join(' ')+'</b><span>'+P(ci.name)+'</span></div>'
       +'<div class="bx-i"><small>Skin Type.</small><b class="sm">'+P(ci.type)+'</b></div>'
       +'<div class="bx-i"><small>Focus Care.</small><b class="sm">'+f+'</b></div>'
-      +'<div class="bx-i"><small>Last 3 Days.</small><b class="sm">'+sig+'</b></div>'
+      +(sg.on.length?'<div class="bx-i"><small>Last 3 Days.</small><b class="sm">'+sig+'</b></div>':'')
       +'</div>';
   }
   /* ---------- 통합 처방전 (2026-11-04): 내 피부 → 추천·이유·근거 → 사용법 → 직원 확인용 ---------- */
@@ -212,15 +212,31 @@
       +'<div class="bx-use"><div class="d"><small>☀ '+P(Q('아침','Morning','早上','朝'))+'</small><b>'+u.am+'</b></div><div class="n"><small>☾ '+P(Q('저녁','Night','晚上','夜'))+'</small><b>'+u.pm+'</b></div>'+add+'</div>';
   }
   function staffBlock(){
-    var items=whyItems();if(!items.length)return '';var s=st();
+    var items=whyItems();if(!items.length)return '';
+    var names=items.map(function(w){return (w.i+1)+'. '+esc(prod(w.k).name||w.name)}).join('  ');
+    return '<div class="bx-staff"><div class="bx-cut"><span>✂ 직원 확인용</span></div>'
+      +'<p class="bx-staff-line"><b>이 제품 '+items.length+'개 주세요</b> '+names+'</p>'
+      +'<button type="button" class="bx-staff-btn" data-staff-open data-save-ignore><span>🧾</span><b>'+P(Q('직원에게 보여주기','Show to staff','出示给店员','スタッフに見せる'))+'</b><small>'+P(Q('제품 사진 + 한국어 이름을 크게 보여줘요','Shows product photos and Korean names, large','大图显示产品照片与韩文名称','製品写真と韓国語名を大きく表示'))+'</small><i>›</i></button></div>';
+  }
+  function staffOverlay(){
+    var items=whyItems();if(!items.length)return;var s=st();
     var cs=s.concerns.map(function(c){return CN[c]?CN[c].ko:c}).join(' → ');
     var langName={ko:'한국어',en:'English',zh:'中文',ja:'日本語'}[lang()]||'한국어';
-    var cap=lang()==='ko'?'직원 확인용':P(Q('','Show to staff','请出示给店员','スタッフにお見せください'))+' · 직원 확인용';
-    return '<div class="bx-staff"><div class="bx-cut"><span>✂ '+cap+'</span></div>'
-      +'<div class="bx-staff-h"><b>이 제품 '+items.length+'개 주세요</b><span>고객 언어: '+langName+(cs?' · 고민: '+esc(cs):'')+'</span></div>'
-      +'<ul>'+items.map(function(w){var c=prod(w.k).capacity||'';return '<li>'+(w.img?'<img src="'+esc(w.img)+'" alt="">':'')+'<span><b>'+(w.i+1)+'. '+esc(prod(w.k).name||w.name)+'</b><small>'+esc(c)+' · '+(w.nmn?'NMN 라인':'밸런스 라인')+'</small></span></li>'}).join('')+'</ul>'
-      +'<p>응대 팁: 밤 클렌징 밀크를 함께 권하면 아침·저녁 루틴이 완성돼요. 다른 구성은 아래 \'더 보기\'에서 확인.</p></div>';
+    var host=document.querySelector('#focus-dialog')||document.body,old=document.querySelector('.bx-staff-full');if(old)old.remove();
+    var el=document.createElement('div');el.className='bx-staff-full';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');
+    el.innerHTML='<div class="bsf-in"><div class="bsf-top"><img src="images/brand/siore-logo-official-black.png" alt="SIORÉ"><button type="button" data-staff-close aria-label="닫기">✕</button></div>'
+      +'<small class="bsf-eye">FOR STAFF · 직원 확인용</small><h2>이 제품 '+items.length+'개 주세요</h2>'
+      +'<p class="bsf-info">고객 언어: '+langName+(cs?'<br>고민: '+esc(cs):'')+'</p>'
+      +items.map(function(w){var c=prod(w.k).capacity||'';return '<div class="bsf-it"><span class="n">'+(w.i+1)+'</span>'+(w.img?'<img src="'+esc(w.img)+'" alt="">':'')+'<span><b>'+esc(prod(w.k).name||w.name)+'</b><small>'+esc(c)+' · '+(w.nmn?'NMN 라인':'밸런스 라인')+'</small></span></div>'}).join('')
+      +'<p class="bsf-tip">응대 팁: 밤 클렌징 밀크를 함께 권하면 아침·저녁 루틴이 완성돼요.</p></div>';
+    host.appendChild(el);
   }
+  document.addEventListener('click',function(e){
+    if(!e.target.closest)return;
+    if(e.target.closest('[data-staff-open]')){staffOverlay();return}
+    if(e.target.closest('[data-staff-close]')||e.target.classList.contains('bx-staff-full')){var o=document.querySelector('.bx-staff-full');if(o)o.remove()}
+  });
+
 
   function boxCard(){
     var pk=picked(),keys=pk.keys;
@@ -238,12 +254,8 @@
           +'<div class="bx-cell bx-by"><small>Prescribed by.</small><strong>SIORÉ PHARMACIST LAB.</strong></div>'
         +'</div>'
         +rxInfo()
-        +'<div class="bx-lines">'
-          +'<div class="bx-line bx-nmn"><div class="bx-tab">NMN Anti-Aging Line</div><ul class="bx-list">'+NMN.map(function(p){return item(p,keys)}).join('')+'</ul></div>'
-          +'<div class="bx-line bx-rel"><div class="bx-tab">Balance(Relief) Line</div><ul class="bx-list">'+REL.map(function(p){return item(p,keys)}).join('')+'</ul></div>'
-        +'</div>'
         +rxDirections()
-        +'<div class="bx-foot"><span class="bx-disc2">'+P(Q('자가 문진 기반 화장품 상담 결과이며 측정·진단이 아니에요. 수치는 표기된 시험 또는 시오레 공식 제품 자료 기준이며 개인차가 있어요. 가격은 약국마다 달라요.','Cosmetic consultation based on your answers — not a diagnosis. Figures are from the stated tests or SIORÉ official product materials; results vary. Prices vary by pharmacy.','基于您回答的化妆品咨询，并非诊断。数据来自所标注的测试或SIORÉ官方产品资料，因人而异。价格因药店而异。','回答に基づく化粧品カウンセリングであり、診断ではありません。数値は記載の試験またはSIORÉ公式製品資料によるもので、個人差があります。価格は薬局により異なります。'))+'</span><time>'+date+'</time></div>'
+        +'<div class="bx-foot"><span class="bx-disc2">'+P(Q('화장품 상담 결과이며 진단이 아니에요 · 수치는 표기 자료 기준, 개인차 있음 · 가격은 약국별 상이','Cosmetic consultation, not a diagnosis · figures per stated source; results vary · prices vary by pharmacy','化妆品咨询，并非诊断 · 数据以标注资料为准，因人而异 · 价格因药店而异','化粧品カウンセリングであり診断ではありません・数値は記載資料による/個人差あり・価格は薬局により異なります'))+'</span><time>'+date+'</time></div>'
         +staffBlock()
       +'</div></section>';
   }
