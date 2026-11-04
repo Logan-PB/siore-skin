@@ -57,7 +57,7 @@
       '<div class="rl-photo" style="background-image:url('+IMG+')"><button type="button" class="rl-chip rl-clin" data-rl-act="clin">'+t(TX.clin)+'</button>'
         +'<div class="rl-qr"><span class="rl-qrimg"></span><small><b>'+t(TX.qrT)+'</b>'+t(TX.qrS)+'</small></div></div>'
       +'<header class="rl-top"><img class="rl-logo" src="images/brand/siore-logo-official-black.png" alt="SIORÉ">'
-        +'<div class="rl-certs">'+[0,1,2].map(function(i){var src=['dermatest-excellent-2025','cert-irritation','cert-noncomedo'][i];return '<button type="button" data-rl-cert="'+i+'"><img src="images/cert/'+src+'.png" alt=""></button>'}).join('')+'</div>'
+        +'<div class="rl-certs">'+[0,1,2].map(function(i){var src=['dermatest-excellent-2025','cert-irritation','cert-noncomedo'][i];return '<button type="button" data-rl-cert="'+i+'"><img src="images/cert/'+src+'.png?v=2" alt=""></button>'}).join('')+'</div>'
         +'<nav class="rl-langs" aria-label="Language">'+langBtns+'</nav></header>'
       +'<div class="rl-main"><span class="rl-eyebrow">'+t(TX.eyebrow)+'</span><h1 class="rl-h1">'+t(TX.h1)+'</h1><p class="rl-lead">'+t(TX.lead)+'</p>'
         +'<div class="rl-box"><div class="rl-bh"><b>'+t(TX.box)+'</b>'+dots()+'</div><div class="rl-grid">'+tiles()+'</div>'
