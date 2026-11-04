@@ -136,3 +136,6 @@ body[data-display-language=en] .rl-h1,body[data-display-language=en] .rl-lead{wo
 .rl .rl-certs button{width:auto!important;height:44px!important;padding:0!important;background:none!important;border-radius:0!important;box-shadow:none!important}
 .rl .rl-certs img{height:100%!important;width:auto!important;object-fit:contain;filter:drop-shadow(0 3px 6px rgba(110,66,50,.18))}
 @media (max-width:767px){.rl .rl-certs button{height:34px!important}.rl .rl-certs{gap:6px}}
+/* 첫 화면 로고 크고 굵게 (트림·볼드 버전) */
+.rl .rl-logo{aspect-ratio:934/254;height:30px!important;width:auto!important;max-width:none!important}
+@media (max-width:767px){.rl .rl-logo{height:24px!important}}
