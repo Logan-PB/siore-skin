@@ -79,10 +79,10 @@ body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;backgroun
 .r1 .side small{font-size:12px;color:var(--sub);line-height:1.5}.r1 .side b{display:block;font-size:14px;color:var(--ink)}
 
 /* ===== R2 센터 카드 ===== */
-.r2 .bg{position:absolute;inset:0;background:url(../images/brand/official-about-03.png) 50% 30%/cover;filter:saturate(.9)}
-.r2 .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(247,239,232,.55),rgba(247,239,232,.88) 60%)}
+.r2 .bg{position:absolute;top:0;right:0;bottom:0;width:52%;background:url(../images/official-scenes/serum-application.webp) 30% 30%/cover}
+.r2 .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#f6ede6 0%,rgba(246,237,230,0) 35%)}
 .r2 .top{position:absolute;left:40px;right:40px;top:24px;display:flex;align-items:center;justify-content:space-between;z-index:3}
-.r2 .card{position:absolute;left:50%;top:92px;transform:translateX(-50%);width:820px;padding:30px 34px 26px;border-radius:32px;text-align:center;z-index:3}
+.r2 .card{position:absolute;left:40px;top:92px;width:780px;padding:30px 34px 26px;border-radius:32px;text-align:center;z-index:3}
 .r2 .hl{font-size:36px;margin:8px 0 6px}
 .r2 .lead{font-size:15.5px;color:var(--sub)}
 .r2 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px;text-align:left}
@@ -91,7 +91,7 @@ body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;backgroun
 .r2 .tile b{font-size:16px}.r2 .tile small{font-size:12px}
 .r2 .bar{display:flex;align-items:center;gap:14px;margin-top:18px}
 .r2 .bar .cta{flex:1;height:60px;font-size:18px}
-.r2 .links{position:absolute;left:0;right:0;bottom:26px;display:flex;justify-content:center;gap:10px;z-index:3}
+.r2 .links{position:absolute;left:40px;bottom:26px;display:flex;gap:10px;z-index:3}
 .r2 .links .ghost{padding:11px 18px;font-size:13.5px}
 .r2 .qr{position:absolute;right:36px;bottom:22px;display:flex;align-items:center;gap:10px;padding:10px 14px 10px 10px;border-radius:18px;z-index:3}
 .r2 .qr .q{width:50px;height:50px}.r2 .qr small{font-size:11.5px;color:var(--sub);line-height:1.45}.r2 .qr b{display:block;color:var(--ink);font-size:12.5px}
@@ -109,7 +109,7 @@ body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;backgroun
 .r3 .guide .now i{background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff;border-color:transparent}
 .r3 .guide b{font-size:15px;display:block}.r3 .guide small{font-size:12.5px;color:var(--mute)}
 .r3 .guide .now b{color:#9b5a43}
-.r3 .photo{margin-top:auto;height:190px;border-radius:24px;background:url(../images/official-scenes/serum-application.webp) 50% 28%/cover;position:relative}
+.r3 .photo{margin-top:22px;flex:1;min-height:200px;border-radius:24px;background:url(../images/official-scenes/serum-application.webp) 45% 22%/cover;position:relative}
 .r3 .photo span{position:absolute;left:12px;bottom:12px;font-size:12px;font-weight:600;padding:7px 11px;border-radius:99px}
 .r3 .panel{position:absolute;left:384px;right:48px;top:100px;bottom:40px;padding:24px 26px;border-radius:30px;display:flex;flex-direction:column}
 .r3 .ph{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:12px}
@@ -245,7 +245,7 @@ body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;backgroun
 <!-- ============ phones ============ -->
 <div class="opt-h"><b>휴대폰(QR) 화면 비교</b><span>외국인 고객이 매대 QR로 들어왔을 때 — 세 안 모두 한 화면 안에 고민 9개 + 시작 버튼</span></div>
 <div class="phones">
-  <div class="phone"><div class="m">
+  <div class="phone" style="background:linear-gradient(90deg,#f5ece5 38%,rgba(245,236,229,.55) 58%,rgba(245,236,229,0) 80%),linear-gradient(180deg,rgba(245,236,229,0) 120px,#f5ece5 235px),url(../images/official-scenes/serum-application.webp) 135% 12px/auto 250px no-repeat,#f5ece5"><div class="m">
     <div class="mt"><img class="logo" src="../images/brand/siore-logo-official-black.png"><div class="certs"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div></div>
     <div class="langs glass"><i class="on">KR</i><i>EN</i><i>中文</i><i>日本語</i></div>
     <h2 class="hl">오늘 가장 신경 쓰이는<br><em>피부 고민</em>은?</h2>
@@ -287,7 +287,7 @@ body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;backgroun
     <div class="lk"><span class="ghost">상담 기록</span><span class="ghost">약사 추천 3종</span><span class="ghost">임상 ↗</span></div>
   </div><span class="cap">R2</span></div>
 
-  <div class="phone"><div class="m">
+  <div class="phone" style="background:linear-gradient(90deg,#f5ece5 38%,rgba(245,236,229,.55) 58%,rgba(245,236,229,0) 80%),linear-gradient(180deg,rgba(245,236,229,0) 120px,#f5ece5 235px),url(../images/official-scenes/serum-application.webp) 135% 12px/auto 250px no-repeat,#f5ece5"><div class="m">
     <div class="mt"><img class="logo" src="../images/brand/siore-logo-official-black.png"><div class="certs"><img src="../images/cert/dermatest-excellent-2025.png"><img src="../images/cert/cert-irritation.png"><img src="../images/cert/cert-noncomedo.png"></div></div>
     <div class="langs glass"><i class="on">KR</i><i>EN</i><i>中文</i><i>日本語</i></div>
     <div style="display:flex;gap:6px;margin-top:14px;font-size:11.5px;font-weight:700"><span style="flex:1;padding:7px 0;text-align:center;border-radius:99px;background:linear-gradient(90deg,#d4957b,#a86a55);color:#fff">1 고민</span><span style="flex:1;padding:7px 0;text-align:center;border-radius:99px;background:#fff;color:#9a8378">2 피부 체크</span><span style="flex:1;padding:7px 0;text-align:center;border-radius:99px;background:#fff;color:#9a8378">3 솔루션</span></div>
