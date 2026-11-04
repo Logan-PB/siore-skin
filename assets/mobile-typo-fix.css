@@ -1,0 +1,69 @@
+/* SIORÉ 모바일 글자·줄바꿈 정리 (2026-11-04)
+   - 한국어: 단어 단위 줄바꿈(keep-all) / 중·일: 엄격 줄바꿈(strict) / 영어: 단어 중간 끊김 방지
+   - 제목은 줄 길이 균형(balance), 본문은 한 글자만 남는 줄 방지(pretty) */
+#focus-dialog,.rl{word-break:keep-all;overflow-wrap:break-word;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+#focus-dialog *,.rl *{word-break:keep-all!important;overflow-wrap:break-word!important;hyphens:manual}
+body[data-display-language=zh] #focus-dialog *:not([lang=ko]),body[data-display-language=ja] #focus-dialog *:not([lang=ko]),
+body[data-display-language=zh] .rl *,body[data-display-language=ja] .rl *{word-break:normal!important;line-break:strict}
+#focus-dialog [lang=ko],#focus-dialog [lang=ko] *{word-break:keep-all!important}
+#focus-dialog :is(h1,h2,h3,h4,legend,summary,strong,b,.btn-primary,.btn-ghost),.rl :is(h1,b,.rl-cta){text-wrap:balance}
+#focus-dialog :is(p,small,li,em,.i18n-ko,.i18n-main),.rl :is(p,small){text-wrap:pretty}
+
+@media (max-width:767px){
+  /* 공통: 보조 한국어 줄은 작게, 본문과 간격 */
+  #focus-dialog .i18n-ko{line-height:1.4}
+  #focus-dialog .i18n-main+.i18n-ko{margin-top:2px}
+
+  /* 1단계: 고객명 입력칸 */
+  #focus-dialog .customer-name-field{display:flex!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;gap:6px}
+  #focus-dialog .customer-name-field>span{width:auto!important}
+  #focus-dialog .customer-name-field input{width:100%!important;min-width:0}
+
+  /* 2단계: 피부 타입 5칸 → 3칸 2줄 */
+  #focus-dialog .type-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important}
+  #focus-dialog .type-card{min-height:112px!important;padding:12px 6px 10px!important;gap:5px!important;justify-content:flex-start!important}
+  #focus-dialog .type-card .skin-type-icon{width:40px!important;height:40px!important;font-size:22px!important;flex:0 0 auto}
+  #focus-dialog .type-card>span:not(.skin-type-icon){font-size:14px!important;line-height:1.25!important;font-weight:700}
+  #focus-dialog .type-card small{font-size:11px!important;line-height:1.35!important}
+  #focus-dialog .type-card small .i18n-ko{display:none}
+
+  /* 빠른 피부 체크: 질문 제목·축 태그 */
+  #focus-dialog .skin-assessment-question legend{display:flex!important;flex-wrap:wrap!important;align-items:flex-start!important;gap:6px 10px!important;width:100%}
+  #focus-dialog .skin-assessment-question legend .ax-tag{flex:0 0 100%!important;width:auto!important;max-width:none!important;writing-mode:horizontal-tb!important;white-space:normal!important;font-size:10.5px!important;letter-spacing:.12em!important;position:static!important;transform:none!important;margin:0!important}
+  #focus-dialog .skin-assessment-question legend>span:last-child{flex:1 1 0;min-width:0;font-size:17px;line-height:1.35}
+  #focus-dialog .skin-assessment-progress{gap:6px!important}
+  #focus-dialog .skin-assessment-progress button{min-width:0!important;font-size:13px!important}
+  #focus-dialog .question-notice{gap:10px}
+  #focus-dialog .question-notice strong{font-size:14px!important;line-height:1.35!important}
+
+  /* 2단계 2·3번 질문(사용감·민감도) 2칸 → 1칸 */
+  #focus-dialog .intake-grid.secondary{grid-template-columns:1fr!important;gap:10px!important}
+
+  /* 결과: 추천 단계 탭 */
+  #focus-dialog .rx-tier-tabs{gap:6px!important}
+  #focus-dialog .rx-tier-tabs button{min-width:0!important;padding:9px 8px!important;font-size:13px!important;gap:6px!important;justify-content:center!important}
+  #focus-dialog .rx-tier-tabs button .i18n-ko{display:none!important}
+  #focus-dialog .rx-tier-tabs button>span{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* 결과: 추천 제품 3칸 → 한 줄씩 (사진 왼쪽, 글 오른쪽) */
+  #focus-dialog .rx-products{grid-template-columns:1fr!important;gap:8px!important}
+  #focus-dialog .rx-product-tile{display:block!important;position:relative!important;text-align:left!important;padding:12px 12px 12px 92px!important;min-height:94px!important;height:auto!important}
+  #focus-dialog .rx-product-tile .rx-product-visual{position:absolute!important;left:12px!important;top:12px!important;width:68px!important;height:68px!important;padding:0!important;margin:0!important;aspect-ratio:auto!important;border-radius:12px;overflow:hidden}
+  #focus-dialog .rx-product-tile .rx-product-visual img{width:100%!important;height:100%!important;object-fit:contain!important;margin:0!important;position:static!important;transform:none!important}
+  #focus-dialog .rx-product-tile>*:not(.rx-product-visual){display:block!important;margin:0 0 2px!important;text-align:left!important;min-height:0!important;height:auto!important;position:static!important}
+  #focus-dialog .rx-product-tile strong{font-size:15px!important;line-height:1.3!important}
+  #focus-dialog .rx-product-tile small,#focus-dialog .rx-product-tile em{font-size:12px!important}
+  #focus-dialog .rx-product-tile .rx-product-reason{font-size:12px!important;line-height:1.45!important;margin-top:6px!important;padding-top:6px;border-top:1px dashed rgba(168,112,92,.2)}
+  #focus-dialog .rx-product-tile .rx-clinical-mini{font-size:11.5px!important}
+
+  /* 결과: 피부 코드 글자칸 */
+  #focus-dialog .cd-letters{gap:6px!important}
+  #focus-dialog .cd-letters>*{min-width:0!important}
+
+  /* 결과 하단 버튼: 보조 한국어 줄 숨김 */
+  #focus-dialog .result-actions .i18n-ko{display:none}
+}
+@media (max-width:374px){
+  #focus-dialog .type-card small{display:none}
+  #focus-dialog .type-card{min-height:92px!important}
+}

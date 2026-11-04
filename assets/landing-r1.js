@@ -10,7 +10,7 @@
     ['건조','dryness',C('건조','Dryness','干燥','乾燥'),C('당김·푸석함','Tight, rough','紧绷·粗糙','つっぱり・カサつき')],
     ['민감','sensitivity',C('민감','Sensitivity','敏感','敏感'),C('쉽게 예민해짐','Easily irritated','容易敏感','ゆらぎやすい')],
     ['열감홍조','redness',C('열감·홍조','Heat / redness','热感 / 泛红','ほてり / 赤み'),C('화끈·붉어짐','Warm, flushed','发热·泛红','ほてり・赤み')],
-    ['안티에이징','firmness',C('안티에이징','Firmness','弹力 / 熟龄护理','ハリ / エイジングケア'),C('탄력 고민','Firmness care','弹力护理','ハリ不足')],
+    ['안티에이징','firmness',C('안티에이징','Firmness','弹力 / 熟龄护理','エイジングケア'),C('탄력 고민','Firmness care','弹力护理','ハリ不足')],
     ['광채톤업','radiance',C('광채·톤업','Radiance / tone','光泽 / 肤色','ツヤ / トーン'),C('칙칙한 톤','Dull tone','肤色暗沉','くすみ')],
     ['트러블','blemish',C('트러블','Blemishes','痘痘困扰','肌荒れ'),C('트러블 고민','Breakout-prone','容易长痘','肌荒れしやすい')],
     ['피지','sebum',C('피지','Sebum','油脂','皮脂'),C('번들거림','Shiny, oily','油光','テカリ')],
