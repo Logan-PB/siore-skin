@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIORÉ 결과지 A4 한 장 — 관광객 시뮬레이션 반영 시안 4</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#2f211c;--sub:#6f564c;--mute:#9a8378;--cu:#a5684f;--g1:#d4957b;--g2:#a86a55;--pink:#b9736a;--blue:#3f6fb5;--line:#e6d7cd;--paper:#fffdfa}
+body{font-family:"Pretendard Variable",Pretendard,"PingFang TC","Microsoft JhengHei","Noto Sans TC","Noto Sans SC","Noto Sans CJK SC",system-ui,sans-serif;background:#e7dbd2;color:var(--ink);padding:34px 0 80px;-webkit-font-smoothing:antialiased;word-break:keep-all}
+.wrap{width:1300px;margin:0 auto}
+.page-h small{font-size:11px;letter-spacing:.26em;color:var(--cu);font-weight:700}
+.page-h h1{font-size:26px;margin:6px 0 6px;letter-spacing:-.02em}
+.page-h p{font-size:13.5px;color:var(--sub);line-height:1.7}
+/* 시뮬레이션 표 */
+.sim{margin:22px 0 10px;background:#fffaf6;border-radius:20px;padding:22px 24px;box-shadow:0 20px 40px -30px rgba(90,52,38,.5)}
+.sim h2{font-size:18px;margin-bottom:4px}.sim>p{font-size:12.5px;color:var(--sub);margin-bottom:14px}
+.kpi{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px}
+.kpi div{background:#f6ece5;border-radius:14px;padding:12px 14px}.kpi b{display:block;font-size:22px;color:#8a4f3c}.kpi span{font-size:12px;color:var(--sub)}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:left;vertical-align:top;line-height:1.55}
+th{font-size:11.5px;color:var(--cu);letter-spacing:.06em;background:#f8efe9}
+td .tag{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 7px;border-radius:99px;margin-right:4px;color:#fff}
+.t-us{background:#3f6fb5}.t-tw{background:#2e8a6e}.t-cn{background:#c0504d}.t-all{background:#8a6a5c}
+td.p{white-space:nowrap;font-weight:700}
+.p1{color:#c0392b}.p2{color:#b9770e}.p3{color:#7f8c8d}
+/* 시안 */
+.opt-h{margin:44px 0 12px;display:flex;align-items:baseline;gap:10px}
+.opt-h b{font-size:20px}.opt-h span{font-size:13px;color:var(--sub)}
+.opt-h em{font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#fff;background:linear-gradient(90deg,var(--g1),var(--g2));padding:4px 10px;border-radius:99px}
+.opt-h i{font-style:normal;font-size:11px;font-weight:700;padding:4px 10px;border-radius:99px;background:#fff;color:var(--sub)}
+.row{display:flex;gap:28px;align-items:flex-start}
+.note{flex:1;font-size:13px;line-height:1.75;color:var(--sub);background:#fffaf6;border-radius:18px;padding:18px 20px}
+.note b{color:var(--ink)}.note ul{padding-left:18px;margin-top:6px}
+/* A4 */
+.a4{width:794px;height:1123px;flex:0 0 794px;background:var(--paper);position:relative;overflow:hidden;box-shadow:0 30px 60px -30px rgba(60,35,25,.55);color:var(--ink)}
+.a4 .pad{position:absolute;inset:44px 46px 40px}
+.mono{font-size:9.5px;letter-spacing:.22em;font-weight:700;color:var(--cu)}
+.logo{height:22px}
+.hr{height:1px;background:var(--ink);opacity:.85}
+.hr2{height:1px;background:var(--line)}
+.ph{width:64px;height:64px;border-radius:12px;background:#f5eee9 center/86% no-repeat;flex:0 0 auto}
+.step{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;color:#fff;font-size:11px;font-weight:800;flex:0 0 auto}
+.nmn{background:var(--pink)}.rel{background:var(--blue)}
+.fact{font-size:11px;color:var(--sub);line-height:1.5}
+.fact b{color:#8a4f3c;font-size:15px;margin-right:4px}
+.fact small{display:block;color:var(--mute);font-size:9.5px;margin-top:1px}
+.pill{display:inline-block;font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:99px;background:#f4e8e0;color:#7d4734}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:6px;border:1px solid var(--line);color:var(--sub)}
+.badge.ok{border-color:#9cc3a7;color:#3c7a52;background:#f1f8f3}.badge.no{border-color:#e6b9a4;color:#9b5a43;background:#fdf3ee}
+.qr{width:64px;height:64px;background:#fff url(../assets/skin-consultation-qr.svg) center/90% no-repeat;border:1px solid var(--line);border-radius:8px}
+.dis{font-size:9px;color:var(--mute);line-height:1.5}
+.ko{font-size:10.5px;color:var(--mute)}
+.addon{display:flex;gap:12px;align-items:center;border:1px dashed #d9bfb1;border-radius:12px;padding:10px 12px;background:#fffaf6}
+.addon .ph{width:48px;height:48px}
+.addon b{font-size:12.5px}.addon p{font-size:11px;color:var(--sub);margin-top:2px;line-height:1.45}
+.addon .lbl{font-size:9.5px;font-weight:800;letter-spacing:.14em;color:var(--cu)}
+
+/* ---- R1 처방전 ---- */
+.r1 .hd{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:12px}
+.r1 .hd h3{font-size:26px;letter-spacing:-.02em;margin-top:6px}
+.r1 .meta{text-align:right;font-size:10.5px;color:var(--sub);line-height:1.6}
+.r1 .sec{padding:18px 0 16px;border-bottom:1px solid var(--line)}
+.r1 .sec>.mono{display:block;margin-bottom:8px}
+.r1 .me{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:16px;align-items:center}
+.r1 .code{display:flex;gap:6px}.r1 .code span{width:38px;height:44px;border:1px solid var(--ink);display:grid;place-items:center;font-size:22px;font-weight:300}
+.r1 .code-n{font-size:15px;font-weight:700;margin-top:6px}
+.r1 .kv b{display:block;font-size:10px;color:var(--mute);font-weight:600;letter-spacing:.06em}
+.r1 .kv span{font-size:15px;font-weight:700}
+.r1 .rx{display:grid;grid-template-columns:30px 76px 1fr 214px;gap:14px;align-items:center;padding:16px 0;border-bottom:1px dashed var(--line)}
+.r1 .rx:last-child{border-bottom:0}
+.r1 .rx h4{font-size:17px;letter-spacing:-.01em}
+.r1 .rx .why{font-size:12.5px;color:var(--sub);margin-top:3px;line-height:1.45}
+.r1 .rx .use{font-size:10.5px;color:var(--mute);margin-top:4px}
+.r1 .am{display:flex;gap:10px;margin-top:2px}
+.r1 .am div{flex:1;border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-size:12.5px;line-height:1.55}
+.r1 .am b{display:block;font-size:10px;letter-spacing:.14em;color:var(--cu);margin-bottom:2px}
+.r1 .staff{display:flex;gap:14px;align-items:center;background:#f8f1ec;border-radius:12px;padding:12px 14px;margin-top:12px}
+.r1 .staff ol{flex:1;padding-left:16px;font-size:12px;line-height:1.7;font-weight:700}
+.r1 .staff .t{font-size:10px;color:var(--cu);font-weight:800;letter-spacing:.1em;margin-bottom:2px}
+
+/* ---- R2 리포트형 (繁中) ---- */
+.r2 .top{display:flex;justify-content:space-between;align-items:center}
+.r2 .hero{margin-top:16px;border-radius:18px;background:linear-gradient(150deg,#fbf1ea,#f1e1d6);padding:20px 22px;display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:center}
+.r2 .hero h3{font-size:24px;letter-spacing:-.02em;line-height:1.3}
+.r2 .hero p{font-size:12px;color:var(--sub);margin-top:6px;line-height:1.6}
+.r2 .chips{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.r2 .stat{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.r2 .stat div{border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.r2 .stat b{display:block;font-size:24px;color:#8a4f3c;letter-spacing:-.02em}
+.r2 .stat span{font-size:11.5px;font-weight:700}
+.r2 .stat small{display:block;font-size:9.5px;color:var(--mute);margin-top:3px;line-height:1.45}
+.r2 .list{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+.r2 .it{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;border-radius:14px;background:#fff;border:1px solid var(--line);padding:12px 14px}
+.r2 .it h4{font-size:15px}.r2 .it p{font-size:11.5px;color:var(--sub);margin-top:2px;line-height:1.45}
+.r2 .foot{position:absolute;left:0;right:0;bottom:0;display:flex;gap:14px;align-items:center;border-top:1px solid var(--line);padding-top:12px}
+
+/* ---- R3 2분할: 고객용 + 직원용 절취 ---- */
+.r3 .cust{height:770px}
+.r3 .hd h3{font-size:24px;letter-spacing:-.02em;margin:6px 0 2px}
+.r3 .why3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.r3 .card{border:1px solid var(--line);border-radius:14px;padding:12px;background:#fff}
+.r3 .card .ph{width:100%;height:118px;border-radius:10px;margin-bottom:8px}
+.r3 .card h4{font-size:15px;display:flex;gap:6px;align-items:center}
+.r3 .card p{font-size:12px;color:var(--sub);margin:4px 0 6px;line-height:1.45}
+.r3 .cut{position:absolute;left:-46px;right:-46px;top:790px;border-top:1.5px dashed #c9b3a6}
+.r3 .cut span{position:absolute;left:50%;top:-10px;transform:translateX(-50%);background:var(--paper);padding:0 10px;font-size:10px;color:var(--mute);letter-spacing:.1em}
+.r3 .staff{position:absolute;left:0;right:0;top:812px;bottom:0}
+.r3 .staff h4{font-size:18px}
+.r3 .sl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.r3 .sl div{display:flex;gap:10px;align-items:center;border:1.5px solid var(--ink);border-radius:12px;padding:8px}
+.r3 .sl .ph{width:54px;height:54px}
+.r3 .sl b{font-size:12.5px;display:block;line-height:1.35}.r3 .sl small{font-size:10px;color:var(--mute)}
+
+/* ---- R4 아침·밤 타임라인 (日) ---- */
+.r4 .hd h3{font-size:27px;margin:8px 0 6px}
+.r4 .me{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.r4 .tl{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.r4 .col{border-radius:18px;padding:22px 20px 24px}
+.r4 .am{background:#fbf3ec}.r4 .pm{background:#2b211d;color:#f6ede6}
+.r4 .col>b{font-size:12px;letter-spacing:.14em}
+.r4 .pm .fact,.r4 .pm p{color:#d9cbc2}.r4 .pm .fact b{color:#f0c3a8}.r4 .pm .fact small{color:#a8968b}
+.r4 .s{display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:center;margin-top:20px;padding-top:20px;border-top:1px solid rgba(168,112,92,.25)}
+.r4 .s .ph{width:72px;height:72px}
+.r4 .s h4{font-size:16px}.r4 .s p{font-size:12.5px;margin-top:2px;line-height:1.4}
+</style></head><body><div class="wrap">
+<header class="page-h">
+  <small>SIORÉ RESULT · A4 ONE-PAGE · TOURIST SIMULATION</small>
+  <h1>상담 결과지 A4 한 장 — 미국·대만·중국 관광객 시뮬레이션 반영 시안 4가지</h1>
+  <p>목표: 결과지 한 장에 <b>① 내 피부 고민·상태 → ② 시오레 추천 → ③ 추천 이유(임상·팩트)</b>만 남기고, 나머지(상세 근거·세트 비교·설명 문단)는 '더 보기'로 접어요. 예시 고객: 복합성·민감성 / 고민 안티에이징·피지 / 피부 코드 O·C·E·F / 코어 3종(버블 토너·인텐시브 세럼·컴포트 크림).</p>
+</header>
+
+<section class="sim">
+  <h2>1. 관광객으로 실제 써본 시뮬레이션 — 지금 결과 페이지 측정값</h2>
+  <p>휴대폰(390px)에서 고민 2개 선택 → 결과까지 진행. 영어·중국어(간체) 화면 기준.</p>
+  <div class="kpi">
+    <div><b>약 6화면</b><span>결과를 끝까지 보려면 넘겨야 하는 화면 수</span></div>
+    <div><b>39개</b><span>결과 화면 버튼 수 (탭·세트·더보기 등)</span></div>
+    <div><b>17% / 29%</b><span>영어 / 중국어 화면에 섞인 한국어 비율</span></div>
+    <div><b>한국어만</b><span>추천 제품명 표기 (영문·중문 제품명 없음)</span></div>
+    <div><b>조건 없음</b><span>403%·11.36%·110.79% 옆에 시험 조건 미표기</span></div>
+  </div>
+  <table>
+    <tr><th style="width:48px">우선</th><th style="width:150px">누가 겪나</th><th>실제로 막히는 장면</th><th style="width:380px">개선·추가 (시안 반영)</th></tr>
+    <tr><td class="p p1">1</td><td><span class="tag t-all">전체</span></td><td>결과가 6화면이라 "그래서 뭘 사야 해?"가 바로 안 보여요. 코어3·프리미엄5·1PICK·세트 6종이 동시에 나와 고르다 지쳐요.</td><td>첫 화면 = A4 한 장 결과지. 추천은 <b>3개 하나의 세트만</b>, 나머지는 '다른 구성 보기'로 접기</td></tr>
+    <tr><td class="p p1">1</td><td><span class="tag t-all">전체</span></td><td>매대에서 직원에게 보여주려 해도 제품명이 고객 언어로 없고, 직원은 외국어를 못 읽어요.</td><td>제품마다 <b>고객 언어 이름 + 한국어 이름 + 제품 사진</b>. 하단에 "직원에게 보여주세요" 한국어 목록</td></tr>
+    <tr><td class="p p1">1</td><td><span class="tag t-us">미국</span></td><td>"403%"만 크게 보이면 과장 광고처럼 느껴 신뢰가 떨어져요. 누구에게, 언제 시험했는지 궁금해요.</td><td>수치 바로 아래 <b>시험 조건 한 줄</b>(기관·대상·시점). 조건이 확인 안 된 수치는 '공식 제품 가이드 기재'로 출처만</td></tr>
+    <tr><td class="p p1">1</td><td><span class="tag t-tw">대만</span></td><td>중국어가 <b>간체</b>뿐이라 대만·홍콩 고객에겐 낯설고 본토용 같아요.</td><td>언어에 <b>繁體中文</b> 추가 (간체와 별도 선택)</td></tr>
+    <tr><td class="p p1">1</td><td><span class="tag t-cn">중국</span></td><td>위챗으로 QR을 찍으면 위챗 안 브라우저에서 열려 <b>'이미지·PDF 저장' 다운로드가 막혀요</b>.</td><td>위챗·인앱 브라우저 감지 → 결과 이미지를 크게 띄우고 <b>"길게 눌러 저장(长按保存图片)"</b> 안내</td></tr>
+    <tr><td class="p p2">2</td><td><span class="tag t-all">전체</span></td><td>비행기 탈 때 토너(145mL)·에센스 토너(150mL)·클렌징 밀크(150mL)는 기내 반입(100mL) 불가인데 안내가 없어요.</td><td>제품마다 <b>용량 + 기내 반입 가능/위탁 수하물</b> 배지</td></tr>
+    <tr><td class="p p2">2</td><td><span class="tag t-us">미국</span><span class="tag t-tw">대만</span></td><td>영어 아래 한국어 줄이 계속 붙어 글이 두 배로 길어요.</td><td>고객 화면은 <b>고객 언어 한 가지</b>로, 한국어는 제품명·직원용 영역에만</td></tr>
+    <tr><td class="p p2">2</td><td><span class="tag t-all">전체</span></td><td>아침·밤 루틴, 피부 코드, 그래프 2개, 세트 비교가 흩어져 있어 핵심이 분산돼요.</td><td>A4 안에 <b>3블록 고정</b>: 내 피부 / 추천 3종(사용 순서) / 추천 이유. 아침·밤은 한 줄 요약</td></tr>
+    <tr><td class="p p2">2</td><td><span class="tag t-cn">중국</span><span class="tag t-tw">대만</span></td><td>결과를 샤오훙슈·라인·위챗에 올리고 싶은데, 긴 화면 저장본은 잘려요.</td><td>A4 비율 한 장 이미지 = 그대로 공유용. 하단 QR로 다시 열기</td></tr>
+    <tr><td class="p p3">3</td><td><span class="tag t-us">미국</span></td><td>전성분·향료 여부를 확인하고 싶어요.</td><td>'전성분은 박스 뒷면 확인' 안내 (전성분 데이터는 <b>확인 필요</b>, 확보 시 링크 추가)</td></tr>
+    <tr><td class="p p3">3</td><td><span class="tag t-cn">중국</span></td><td>중국 유심 로밍으로 접속하면 github.io가 느리거나 안 열릴 수 있어요.</td><td>매장 와이파이 안내 또는 장기적으로 국내 도메인 이전 검토 (기술 검토 항목)</td></tr>
+    <tr><td class="p p3">3</td><td><span class="tag t-all">전체</span></td><td>가격을 묻지만 약국마다 판매가가 달라요.</td><td>가격은 표기하지 않고 "가격은 직원에게 문의" 한 줄 (내부 조건 비노출 원칙 유지)</td></tr>
+  </table>
+</section>
+
+<!-- ================= R1 ================= -->
+<div class="opt-h"><b>R1. 클래식 처방전형</b><span>종이 처방전처럼 위→아래 3블록. 가장 읽기 쉽고 인쇄·저장에 최적</span><em>추천</em><i>영어 · 미국 고객 예시</i></div>
+<div class="row">
+<div class="a4 r1"><div class="pad">
+  <div class="hd"><div><img class="logo" src="../images/brand/siore-logo-official-black.png"><h3>My Skin Solution</h3><span class="ko">나의 피부 맞춤 솔루션</span></div>
+    <div class="meta">Nov 4, 2026 · Myeongdong<br>Pharmacist-designed skincare<br><span class="pill">Core 3</span></div></div>
+  <div class="hr"></div>
+  <div class="sec"><span class="mono">01 · MY SKIN</span>
+    <div class="me">
+      <div><div class="code"><span>O</span><span>C</span><span>E</span><span>F</span></div><div class="code-n">Oily · Calm · Firmness focus</div></div>
+      <div class="kv"><b>SKIN TYPE</b><span>Combination · Sensitive</span><b style="margin-top:8px">TOP CONCERNS</b><span>① Firmness ② Sebum</span></div>
+      <div class="kv"><b>WHAT THIS MEANS</b><span style="font-size:12px;font-weight:500;color:var(--sub);line-height:1.55;display:block">Your skin gets shiny but stays calm. Focus on lightweight hydration plus firmness care.</span></div>
+    </div></div>
+  <div class="sec"><span class="mono">02 · SIORÉ RECOMMENDS · USE IN THIS ORDER</span>
+    <div class="rx"><span class="step nmn">1</span><span class="ph" style="width:76px;height:76px;background-image:url(../images/products/bubble-toner.png)"></span>
+      <div><h4>NMN Fresh Bubble Toner</h4><span class="ko">NMN 프레쉬 버블 토너 · 145 mL</span><div class="why">For: <b>Sebum</b> — foam toner that refines texture and hydrates.</div><div class="use">Pump foam onto palms, press gently · AM / PM <span class="badge no">✈ Checked bag</span></div></div>
+      <div class="fact"><b>+403%</b>skin radiance<small>Right after one use · Korea dermatology research institute · 22 women aged 39–63 · Jun–Jul 2025</small></div></div>
+    <div class="rx"><span class="step nmn">2</span><span class="ph" style="width:76px;height:76px;background-image:url(../images/products/serum.png)"></span>
+      <div><h4>NMN Intensive Serum</h4><span class="ko">NMN 인텐시브 세럼 · 50 mL</span><div class="why">For: <b>Firmness</b> — NMN 10,000 ppm concentrated care.</div><div class="use">2–3 drops on focus areas · PM <span class="badge ok">✈ Carry-on OK</span></div></div>
+      <div class="fact"><b>13.60%</b>skin firmness<small>SIORÉ official product guide</small></div></div>
+    <div class="rx"><span class="step rel">3</span><span class="ph" style="width:76px;height:76px;background-image:url(../images/products/comfort-cream.png)"></span>
+      <div><h4>Daily Balance Comfort Cream</h4><span class="ko">데일리 릴리프(밸런스) 컴포트 크림 · 50 mL</span><div class="why">For: <b>Sensitive skin</b> — a barrier moisture layer to finish.</div><div class="use">Apply a generous layer last · AM / PM <span class="badge ok">✈ Carry-on OK</span></div></div>
+      <div class="fact"><b>+110.79%</b>skin hydration<small>Right after one use · SIORÉ official product data</small></div></div>
+  </div>
+  <div class="sec" style="border:0;padding-bottom:0"><span class="mono">03 · HOW TO USE</span>
+    <div class="am"><div><b>☀ MORNING</b>Toner → Cream, then sunscreen & makeup</div><div><b>☾ NIGHT</b>Toner → Serum → Cream</div></div>
+    <div class="addon" style="margin-top:10px"><span class="ph" style="background-image:url(../images/products/cleansing.png)"></span><div style="flex:1"><span class="lbl">OPTIONAL · NIGHT ADD-ON</span><br><b>NMN Hydro Capsule Cleansing Milk</b> <span class="ko">NMN 하이드로 캡슐 클렌징 밀크 · 150 mL</span><p>Gently removes makeup and sunscreen before your night routine.</p></div><span class="badge no">✈ Checked bag</span></div>
+    <div class="staff"><div class="qr"></div><div style="flex:1"><div class="t">직원에게 보여주세요 · SHOW TO STAFF</div><ol><li>NMN 프레쉬 버블 토너</li><li>NMN 인텐시브 세럼</li><li>데일리 릴리프(밸런스) 컴포트 크림</li></ol></div><div class="dis" style="width:170px">Price varies by pharmacy — ask staff.<br>Scan to reopen this result.</div></div>
+    <p class="dis" style="margin-top:10px">Cosmetic consultation based on your answers — not a medical diagnosis. Test figures are from the stated studies or SIORÉ official product materials; results may vary.</p>
+  </div>
+</div></div>
+<div class="note"><b>왜 추천?</b> 위에서 아래로 한 번 읽으면 끝나요: <b>내 피부 → 살 것 3개(순서대로) → 쓰는 법 → 직원용 목록</b>.
+<ul><li>추천 이유는 제품마다 <b>"For: 고객이 고른 고민"</b> + 대표 수치 1개 + 시험 조건 한 줄</li>
+<li>고객 언어로 쓰고, 한국어는 제품명 아래와 직원용 상자에만</li>
+<li>기내 반입 배지(✈)로 출국 전 관광객 실용성 ↑</li>
+<li>지금 하단 '루틴 카드'를 키워서 맨 위로 올리는 방식이라 적용이 가장 빨라요</li></ul></div>
+</div>
+
+<!-- ================= R2 ================= -->
+<div class="opt-h"><b>R2. 리포트 + 수치 강조형</b><span>위쪽에 피부 요약과 근거 수치 3개를 크게, 아래에 추천 리스트</span><i>繁體中文 · 대만 고객 예시</i></div>
+<div class="row">
+<div class="a4 r2"><div class="pad">
+  <div class="top"><img class="logo" src="../images/brand/siore-logo-official-black.png"><span class="mono">MY SKIN REPORT · 2026.11.04</span></div>
+  <div class="hero">
+    <div><span class="mono">01 · 我的肌膚</span><h3>油性 · 穩定 ·<br>緊緻集中型</h3><div class="chips"><span class="pill">混合肌</span><span class="pill">敏感肌</span></div></div>
+    <div><p style="font-size:13px;color:var(--ink);font-weight:600">您在意的是 ① 緊緻 ② 皮脂</p><p>肌膚容易出油但狀態穩定。建議以清爽保濕為基礎，再加強緊緻保養。</p>
+      <svg viewBox="0 0 300 70" style="width:100%;margin-top:8px"><rect x="0" y="30" width="300" height="8" rx="4" fill="#ead9cf"/><circle cx="222" cy="34" r="9" fill="#a5684f" stroke="#fff" stroke-width="3"/><text x="0" y="62" font-size="11" fill="#9a8378">乾性</text><text x="300" y="62" font-size="11" fill="#9a8378" text-anchor="end">油性</text><text x="222" y="18" font-size="11" fill="#7d4734" text-anchor="middle" font-weight="700">目前位置</text></svg></div>
+  </div>
+  <span class="mono" style="display:block;margin-top:18px">02 · 推薦理由 · 臨床數據</span>
+  <div class="stat">
+    <div><b>+403%</b><span>肌膚光澤</span><small>使用1次後立即 · 韓國皮膚科學研究院 · 39–63歲女性22名 · 2025.06–07</small></div>
+    <div><b>13.60%</b><span>肌膚彈力</span><small>SIORÉ 官方產品指南</small></div>
+    <div><b>+110.79%</b><span>肌膚水分</span><small>使用1次後立即 · SIORÉ 官方產品資料</small></div>
+  </div>
+  <span class="mono" style="display:block;margin-top:18px">03 · SIORÉ 推薦 · 依序使用</span>
+  <div class="list">
+    <div class="it"><span class="ph" style="background-image:url(../images/products/bubble-toner.png)"></span><div><h4><span class="step nmn" style="margin-right:6px">1</span>NMN 清新泡泡化妝水</h4><p>針對 <b>皮脂</b> · 泡沫質地，整理膚質並補水</p><span class="ko">NMN 프레쉬 버블 토너 · 145 mL</span></div><span class="badge no">✈ 託運</span></div>
+    <div class="it"><span class="ph" style="background-image:url(../images/products/serum.png)"></span><div><h4><span class="step nmn" style="margin-right:6px">2</span>NMN 密集精華</h4><p>針對 <b>緊緻</b> · NMN 10,000 ppm 集中保養</p><span class="ko">NMN 인텐시브 세럼 · 50 mL</span></div><span class="badge ok">✈ 可隨身</span></div>
+    <div class="it"><span class="ph" style="background-image:url(../images/products/comfort-cream.png)"></span><div><h4><span class="step rel" style="margin-right:6px">3</span>每日平衡舒緩霜</h4><p>針對 <b>敏感</b> · 以保濕屏障溫和收尾</p><span class="ko">데일리 릴리프(밸런스) 컴포트 크림 · 50 mL</span></div><span class="badge ok">✈ 可隨身</span></div>
+  </div>
+  <div style="display:flex;gap:10px;margin-top:14px;font-size:12.5px"><div style="flex:1;background:#fbf3ec;border-radius:12px;padding:12px 14px"><b style="color:var(--cu)">☀ 早上</b>　化妝水 → 乳霜 → 防曬</div><div style="flex:1;background:#2b211d;color:#f6ede6;border-radius:12px;padding:12px 14px"><b style="color:#f0c3a8">☾ 晚上</b>　化妝水 → 精華 → 乳霜</div></div>
+  <div class="addon" style="margin-top:12px"><span class="ph" style="background-image:url(../images/products/cleansing.png)"></span><div style="flex:1"><span class="lbl">晚間加購 · 可選</span><br><b>NMN 水潤膠囊卸妝乳</b> <span class="ko">NMN 하이드로 캡슐 클렌징 밀크 · 150 mL</span><p>晚間保養前溫和卸除彩妝與防曬。</p></div><span class="badge no">✈ 託運</span></div>
+  <div class="foot"><div class="qr"></div><div style="flex:1"><b style="font-size:12px">店員確認用 · 직원에게 보여주세요：NMN 프레쉬 버블 토너 · NMN 인텐시브 세럼 · 데일리 릴리프(밸런스) 컴포트 크림</b><p class="dis" style="margin-top:4px">價格依藥局而異，請洽店員。本結果為依您的回答提供的化妝品諮詢，並非醫療診斷。</p></div></div>
+</div></div>
+<div class="note"><b>특징</b> 근거 수치 3개를 맨 위에 크게 둬서 <b>"왜 이 제품인지"가 가장 먼저 보여요</b>. 수치를 중시하는 대만·중국 고객에게 설득력이 커요.
+<ul><li>피부 위치는 막대 하나로 단순화(4분면보다 이해 빠름)</li><li>대만용 <b>번체</b> 예시. 제품 중문명은 예시 번역이라 <b>공식 중문 제품명 확인 필요</b></li><li>단점: 수치가 눈에 먼저 들어와 표현 수위 관리(조건 표기)가 꼭 필요</li></ul></div>
+</div>
+
+<!-- ================= R3 ================= -->
+<div class="opt-h"><b>R3. 고객용 + 직원용 절취형</b><span>위 70%는 고객 언어, 아래 30%는 직원이 바로 꺼내는 한국어 픽업 목록</span><i>简体中文 · 중국 고객 예시</i></div>
+<div class="row">
+<div class="a4 r3"><div class="pad">
+  <div class="cust">
+    <div class="hd" style="display:flex;justify-content:space-between;align-items:flex-start"><div><img class="logo" src="../images/brand/siore-logo-official-black.png"><h3>我的专属肌肤方案</h3><span class="ko">나의 피부 맞춤 솔루션 · 2026.11.04</span></div><div class="qr"></div></div>
+    <div class="hr" style="margin:12px 0"></div>
+    <span class="mono">01 · 我的肌肤</span>
+    <div style="display:flex;gap:18px;align-items:center;margin-top:8px">
+      <div style="font-size:30px;font-weight:300;letter-spacing:.3em">OCEF</div>
+      <div><b style="font-size:16px">油性 · 稳定 · 紧致集中型</b><p style="font-size:12px;color:var(--sub);margin-top:3px">混合肌 · 敏感肌 ｜ 关注：① 紧致 ② 油脂</p></div></div>
+    <span class="mono" style="display:block;margin-top:16px">02 · SIORÉ 推荐 & 推荐理由</span>
+    <div class="why3">
+      <div class="card"><div class="ph" style="background-image:url(../images/products/bubble-toner.png)"></div><h4><span class="step nmn">1</span>NMN 清爽泡沫爽肤水</h4><p>针对油脂：泡沫质地，整理肤质并补水</p><div class="fact"><b>+403%</b>光泽<small>使用1次后 · 韩国皮肤科学研究院 · 39–63岁女性22名</small></div><div style="margin-top:6px"><span class="badge no">✈ 托运</span></div></div>
+      <div class="card"><div class="ph" style="background-image:url(../images/products/serum.png)"></div><h4><span class="step nmn">2</span>NMN 密集精华</h4><p>针对紧致：NMN 10,000 ppm 集中护理</p><div class="fact"><b>13.60%</b>弹力<small>SIORÉ 官方产品指南</small></div><div style="margin-top:6px"><span class="badge ok">✈ 可随身</span></div></div>
+      <div class="card"><div class="ph" style="background-image:url(../images/products/comfort-cream.png)"></div><h4><span class="step rel">3</span>每日平衡舒缓霜</h4><p>针对敏感：保湿屏障温和收尾</p><div class="fact"><b>+110.79%</b>水分<small>使用1次后 · SIORÉ 官方产品资料</small></div><div style="margin-top:6px"><span class="badge ok">✈ 可随身</span></div></div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:14px;font-size:12px"><div style="flex:1;background:#fbf3ec;border-radius:10px;padding:10px 12px"><b style="color:var(--cu)">☀ 早上</b>　爽肤水 → 面霜 → 防晒</div><div style="flex:1;background:#2b211d;color:#f6ede6;border-radius:10px;padding:10px 12px"><b style="color:#f0c3a8">☾ 晚上</b>　爽肤水 → 精华 → 面霜</div></div>
+    <div class="addon" style="margin-top:12px"><span class="ph" style="background-image:url(../images/products/cleansing.png)"></span><div style="flex:1"><span class="lbl">晚间可加购</span><br><b>NMN 水润胶囊卸妆乳</b> <span class="ko">NMN 하이드로 캡슐 클렌징 밀크 · 150 mL</span><p>晚间护肤前温和卸除彩妆与防晒。</p></div><span class="badge no">✈ 托运</span></div>
+    <p class="dis" style="margin-top:10px">微信内打开时：长按图片即可保存到相册。价格因药店而异，请咨询店员。本结果为基于您回答的化妆品咨询，并非医学诊断。</p>
+  </div>
+  <div class="cut"><span>✂ 직원 확인용 · FOR STAFF</span></div>
+  <div class="staff">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><h4>이 제품 3개 주세요</h4><span class="ko">고객 언어: 简体中文 · 고민: 안티에이징 → 피지 · 피부: 복합성·민감성</span></div>
+    <div class="sl">
+      <div><span class="ph" style="background-image:url(../images/products/bubble-toner.png)"></span><span><b>① NMN 프레쉬 버블 토너</b><small>145 mL · NMN 라인</small></span></div>
+      <div><span class="ph" style="background-image:url(../images/products/serum.png)"></span><span><b>② NMN 인텐시브 세럼</b><small>50 mL · NMN 라인</small></span></div>
+      <div><span class="ph" style="background-image:url(../images/products/comfort-cream.png)"></span><span><b>③ 데일리 릴리프(밸런스) 컴포트 크림</b><small>50 mL · 밸런스 라인</small></span></div>
+    </div>
+    <p class="dis" style="margin-top:10px">응대 팁: 버블 토너는 145mL라 기내 반입 불가 → 위탁 수하물 안내. 추가 권유는 결과 화면 '다른 구성 보기'에서 확인.</p>
+  </div>
+</div></div>
+<div class="note"><b>특징</b> 관광객 매장 응대에 <b>가장 실용적</b>이에요. 고객은 위쪽을 읽고, 직원은 아래쪽만 보고 <b>사진·한국어 이름으로 바로 꺼내요</b> (말 안 통해도 OK).
+<ul><li>위챗에서 열면 "长按保存图片(길게 눌러 저장)" 안내가 함께 나와요</li><li>인쇄하면 점선 따라 잘라 직원용만 계산대에 둘 수 있어요</li><li>약사 응대 팁 한 줄로 판매직원 교육 부담 ↓</li></ul></div>
+</div>
+
+<!-- ================= R4 ================= -->
+<div class="opt-h"><b>R4. 아침·밤 루틴 중심형</b><span>추천 제품을 '언제 쓰는지'로 배치 — 루틴을 처음 만드는 고객용</span><i>日本語 · 참고 예시</i></div>
+<div class="row">
+<div class="a4 r4"><div class="pad">
+  <div style="display:flex;justify-content:space-between;align-items:flex-start"><div><img class="logo" src="../images/brand/siore-logo-official-black.png"><div class="hd"><h3>わたしの肌別ケアソリューション</h3></div><div class="me"><span class="pill">脂性・すこやか・ハリ集中タイプ</span><span class="pill">混合肌・敏感肌</span><span class="pill">① ハリ ② 皮脂</span></div></div><div class="qr"></div></div>
+  <div class="tl">
+    <div class="col am"><b>☀ 朝 · メイク前の2ステップ</b>
+      <div class="s"><span class="ph" style="background-image:url(../images/products/bubble-toner.png)"></span><div><h4>NMN フレッシュバブルトナー</h4><p>皮脂が気になる方へ · 泡でキメを整え、うるおいを与える</p><div class="fact"><b>+403%</b>肌のツヤ<small>1回使用直後 · 韓国皮膚科学研究院 · 39–63歳女性22名</small></div></div></div>
+      <div class="s"><span class="ph" style="background-image:url(../images/products/comfort-cream.png)"></span><div><h4>デイリーバランス コンフォートクリーム</h4><p>敏感肌の方へ · バリア保湿でやさしく仕上げ</p><div class="fact"><b>+110.79%</b>肌の水分量<small>1回使用直後 · SIORÉ 公式製品資料</small></div></div></div>
+      <p class="dis" style="margin-top:10px">→ 最後に日焼け止め・メイク</p></div>
+    <div class="col pm"><b>☾ 夜 · 集中ケア</b>
+      <div class="s"><span class="ph" style="background-image:url(../images/products/bubble-toner.png)"></span><div><h4>① トナー</h4><p>朝と同じ</p></div></div>
+      <div class="s"><span class="ph" style="background-image:url(../images/products/serum.png)"></span><div><h4>② NMN インテンシブセラム</h4><p>ハリが気になる方へ · NMN 10,000 ppm 集中ケア</p><div class="fact"><b>13.60%</b>肌のハリ<small>SIORÉ 公式製品ガイド</small></div></div></div>
+      <div class="s"><span class="ph" style="background-image:url(../images/products/comfort-cream.png)"></span><div><h4>③ クリーム</h4><p>朝と同じ · たっぷり</p></div></div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:14px;margin-top:16px">
+    <div style="border:1px solid var(--line);border-radius:14px;padding:14px 16px"><span class="mono">このルーティンを選んだ理由</span>
+      <ol style="padding-left:18px;margin-top:8px;font-size:13px;line-height:1.9;color:var(--sub)"><li><b style="color:var(--ink)">皮脂</b>が気になる → 泡トナーで軽く、キメを整える</li><li><b style="color:var(--ink)">ハリ</b>が気になる → 夜だけ NMN セラムで集中ケア</li><li><b style="color:var(--ink)">敏感肌</b> → 刺激テスト済みのバランスクリームで仕上げ</li></ol></div>
+    <div class="addon" style="flex-direction:column;align-items:flex-start"><span class="lbl">夜にプラス · 任意</span><div style="display:flex;gap:10px;align-items:center"><span class="ph" style="background-image:url(../images/products/cleansing.png)"></span><div><b>NMN ハイドロカプセル クレンジングミルク</b><p>メイク・日焼け止めをやさしくオフ</p><span class="ko">NMN 하이드로 캡슐 클렌징 밀크 · 150 mL</span></div></div></div>
+  </div>
+  <div style="margin-top:14px;border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;gap:16px;align-items:center">
+    <div style="flex:1"><span class="mono">スタッフに見せてください · 직원에게 보여주세요</span><p style="font-size:12.5px;font-weight:700;margin-top:4px;line-height:1.7">NMN 프레쉬 버블 토너 · NMN 인텐시브 세럼 · 데일리 릴리프(밸런스) 컴포트 크림</p></div>
+    <div><span class="badge no">✈ トナー 145mL：預け荷物</span><br><span class="badge ok" style="margin-top:4px">✈ セラム・クリーム：機内OK</span></div></div>
+  <p class="dis" style="position:absolute;bottom:0;left:0;right:0">価格は薬局により異なります。回答に基づく化粧品カウンセリングであり、診断ではありません。</p>
+</div></div>
+<div class="note"><b>특징</b> "언제, 어떤 순서로"가 가장 명확해요. 기존 아침·밤 블록(낮 크림·밤 블랙)을 그대로 살린 안.
+<ul><li>같은 제품이 아침·밤에 반복돼 보여 <b>3개만 사면 된다는 점은 R1보다 약해요</b></li><li>루틴 입문 고객·재구매 고객 설명용으로 좋아요</li></ul></div>
+</div>
+
+<section class="sim" style="margin-top:44px">
+  <h2>2. 공통 적용 원칙 (어느 안을 골라도)</h2>
+  <table>
+    <tr><th style="width:200px">항목</th><th>내용</th></tr>
+    <tr><td><b>결과 첫 화면</b></td><td>A4 한 장 결과지가 맨 위. 지금의 상세 근거·세트 비교·그래프·설명은 아래 '더 보기'로 접기(삭제 아님)</td></tr>
+    <tr><td><b>저장·공유</b></td><td>'결과 저장(이미지·PDF)'은 A4 한 장만 저장. 위챗·인앱 브라우저는 길게 눌러 저장 안내</td></tr>
+    <tr><td><b>언어</b></td><td>繁體中文 추가(번체). 고객 화면은 고객 언어 한 가지, 한국어는 제품명·직원용만</td></tr>
+    <tr><td><b>팩트 표기</b></td><td>수치 옆에 조건 한 줄 필수. 조건이 없으면 '공식 제품 가이드/자료 기재'로 출처 표기. 의약품 오인 표현(처방·치료·개선 효능 단정) 없이 '화장품 상담 · 진단 아님' 고지</td></tr>
+    <tr><td><b>확인 필요 (로건)</b></td><td>① 세럼·리치크림·앰플·컴포트크림 수치가 <b>상담링크 내 제품 가이드 수치와 products.json 수치가 서로 달라요</b>(예: 세럼 주름 11.36% vs 눈가 주름 9.12%) → 공식 기준 하나로 확정 필요 ② 공식 영문·중문(간·번)·일문 제품명 ③ 전성분 자료 ④ 버블 토너 외 제품의 시험 기관·대상·기간</td></tr>
+  </table>
+</section>
+</div></body></html>
