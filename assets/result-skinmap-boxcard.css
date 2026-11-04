@@ -306,3 +306,7 @@ details.bx-more>summary b{flex:0 0 auto}
 }
 /* 로고 비율 고정 */
 .bx-brand img,.bsf-top img,.rl-logo{aspect-ratio:588/221;width:auto!important;max-width:none!important;object-fit:contain}
+/* 로고 크고 굵게 (트림·볼드 버전, 비율 934:254) */
+.bx-brand img{aspect-ratio:934/254!important;height:30px!important;margin:6px 0 0!important}
+.bsf-top img{aspect-ratio:934/254!important;height:24px!important}
+@media (max-width:767px){.bx-top .bx-brand img{height:24px!important;margin-top:6px!important}}

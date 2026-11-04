@@ -224,7 +224,7 @@
     var langName={ko:'한국어',en:'English',zh:'中文',ja:'日本語'}[lang()]||'한국어';
     var host=document.querySelector('#focus-dialog')||document.body,old=document.querySelector('.bx-staff-full');if(old)old.remove();
     var el=document.createElement('div');el.className='bx-staff-full';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');
-    el.innerHTML='<div class="bsf-in"><div class="bsf-top"><img src="images/brand/siore-logo-official-black.png" alt="SIORÉ"><button type="button" data-staff-close aria-label="닫기">✕</button></div>'
+    el.innerHTML='<div class="bsf-in"><div class="bsf-top"><img src="images/brand/siore-logo-bold.png" alt="SIORÉ"><button type="button" data-staff-close aria-label="닫기">✕</button></div>'
       +'<small class="bsf-eye">FOR STAFF · 직원 확인용</small><h2>이 제품 '+items.length+'개 주세요</h2>'
       +'<p class="bsf-info">고객 언어: '+langName+(cs?'<br>고민: '+esc(cs):'')+'</p>'
       +items.map(function(w){var c=prod(w.k).capacity||'';return '<div class="bsf-it"><span class="n">'+(w.i+1)+'</span>'+(w.img?'<img src="'+esc(w.img)+'" alt="">':'')+'<span><b>'+esc(prod(w.k).name||w.name)+'</b><small>'+esc(c)+' · '+(w.nmn?'NMN 라인':'밸런스 라인')+'</small></span></div>'}).join('')
@@ -242,7 +242,7 @@
     var pk=picked(),keys=pk.keys;
     var nmnOn=NMN.some(function(p){return keys.indexOf(p[0])>-1}),relOn=REL.some(function(p){return keys.indexOf(p[0])>-1});
     var d=new Date(),date=d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0');
-    var logo='images/brand/siore-logo-official-black.png';
+    var logo='images/brand/siore-logo-bold.png';
     return '<section class="bx-wrap" aria-label="'+P(Q('나의 시오레 루틴 카드','My SIORÉ routine card','我的SIORÉ护理卡','わたしのSIORÉルーティンカード'))+'">'
       +'<div class="bx-kicker"><span>'+T(Q('나의 시오레 루틴 카드','My SIORÉ routine card','我的SIORÉ护理卡','わたしのSIORÉルーティンカード'))+'</span>'+(pk.tier?'<em>'+esc(pk.tier)+'</em>':'')+'</div>'
       +'<div class="bx-card">'
