@@ -166,15 +166,60 @@
       +'<div class="bx-i"><small>Last 3 Days.</small><b class="sm">'+sig+'</b></div>'
       +'</div>';
   }
+  /* ---------- 통합 처방전 (2026-11-04): 내 피부 → 추천·이유·근거 → 사용법 → 직원 확인용 ---------- */
+  var GUIDE=Q('시오레 공식 제품 가이드 기재','SIORÉ official product guide','SIORÉ 官方产品指南','SIORÉ 公式製品ガイド');
+  var ONCE=function(t){return Q('1회 사용 직후 · '+t.ko,'Right after one use · '+t.en,'使用1次后即刻 · '+t.zh,'1回使用直後・'+t.ja)};
+  var FACT={
+    cleansing:['99.48%',Q('노폐물 세정력','Impurity cleansing','污垢清洁力','汚れ洗浄力'),GUIDE],
+    bubbleToner:['+403%',Q('피부 광채','Skin radiance','肌肤光泽','肌のツヤ'),ONCE(Q('한국피부과학연구원 · 39–63세 여성 22명 · 2025.06–07','Korea dermatology research institute · 22 women aged 39–63 · Jun–Jul 2025','韩国皮肤科学研究院 · 39–63岁女性22名 · 2025.06–07','韓国皮膚科学研究院・39–63歳女性22名・2025.06–07'))],
+    essenceToner:['+136.58%',Q('피부 수분량','Skin hydration','肌肤水分','肌の水分量'),GUIDE],
+    repairAmpoule:['',Q('여드름성 피부 사용 적합 · 논코메도제닉 시험 완료','Tested for acne-prone skin · non-comedogenic','已完成痘痘肌适用·无致粉刺测试','ニキビ肌使用適合・ノンコメドジェニック試験済み'),GUIDE],
+    serum:['13.60%',Q('피부 탄력','Skin firmness','肌肤弹力','肌のハリ'),GUIDE],
+    soothingCream:['+148.87%',Q('피부 보습량','Skin moisture','肌肤保湿量','肌の保湿量'),GUIDE],
+    richCream:['+45.11%',Q('피부 보습','Skin moisture','肌肤保湿','肌の保湿'),GUIDE],
+    soothingGel:['+61.23%',Q('피부 수분량','Skin hydration','肌肤水分','肌の水分量'),ONCE(Q('22명 대상 인체적용시험','human application test, 22 participants','22名人体测试','22名ヒト使用試験'))],
+    comfortCream:['+110.79%',Q('피부 수분량','Skin hydration','肌肤水分','肌の水分量'),ONCE(Q('시오레 공식 제품 자료','SIORÉ official product data','SIORÉ 官方产品资料','SIORÉ 公式製品資料'))]
+  };
+  var CN={'건조':Q('건조','Dryness','干燥','乾燥'),'민감':Q('민감','Sensitivity','敏感','敏感'),'열감홍조':Q('열감·홍조','Heat / redness','热感 / 泛红','ほてり / 赤み'),'안티에이징':Q('안티에이징','Firmness','弹力','エイジングケア'),'광채톤업':Q('광채·톤업','Radiance','光泽 / 肤色','ツヤ / トーン'),'트러블':Q('트러블','Blemishes','痘痘困扰','肌荒れ'),'피지':Q('피지','Sebum','油脂','皮脂'),'장벽회복':Q('장벽','Barrier care','屏障修护','バリアケア'),'각질':Q('각질','Texture','角质','角質')};
+  function prod(k){try{return products[k]||{}}catch(e){return {}}}
+  function pname(k){var p=prod(k),l=lang();if(l==='ko')return p.name||'';var n=p.i18n&&p.i18n[l]&&p.i18n[l].name;return n||p.name||''}
+  function forWhat(k){
+    var s=st(),pc=prod(k).concerns||[],hit=s.concerns.filter(function(c){return pc.indexOf(c)>-1})[0];
+    if(hit&&CN[hit])return P(CN[hit]);
+    if(has(s.types,'민감성')&&['comfortCream','essenceToner','repairAmpoule','soothingGel','cleansing'].indexOf(k)>-1)return P(Q('민감성 피부','Sensitive skin','敏感肌','敏感肌'));
+    return '';
+  }
+  var ROLE={toner:['bubbleToner','essenceToner'],treat:['serum','repairAmpoule'],cream:['soothingGel','soothingCream','comfortCream','richCream']};
+  var RN={bubbleToner:Q('토너','Toner','爽肤水','トナー'),essenceToner:Q('토너','Toner','爽肤水','トナー'),serum:Q('세럼','Serum','精华','セラム'),repairAmpoule:Q('앰플','Ampoule','安瓶','アンプル'),soothingGel:Q('젤','Gel','凝胶','ジェル'),soothingCream:Q('크림','Cream','面霜','クリーム'),comfortCream:Q('크림','Cream','面霜','クリーム'),richCream:Q('크림','Cream','面霜','クリーム'),cleansing:Q('클렌징','Cleanser','洁面','クレンジング')};
+  function useRows(keys){
+    var f=function(list){return list.filter(function(k){return keys.indexOf(k)>-1})};
+    var t=f(ROLE.toner),tr=f(ROLE.treat),cr=f(ROLE.cream),ar=' → ';
+    var am=[].concat(t.slice(0,1),cr.slice(0,1)).map(function(k){return P(RN[k])});am.push(P(Q('선크림','Sunscreen','防晒','日焼け止め')));
+    var pm=[].concat(keys.indexOf('cleansing')>-1?['cleansing']:[],t.slice(0,1),tr,cr.slice(-1)).map(function(k){return P(RN[k])});
+    return {am:am.join(ar),pm:pm.join(ar)};
+  }
   function rxDirections(){
-    var items=whyItems(),ci=codeInfo(),sg=ci.sg;if(!items.length)return '';
-    var many=sg.often.length>=3;
-    var note=many?Q('최근 예민 신호가 많아요. 약사님과 먼저 상담한 뒤 순한 단계부터 시작해 주세요.','Many recent sensitivity signals. Talk to the pharmacist first, then start gently.','近期敏感信号较多，请先咨询药师，再从温和步骤开始。','最近の敏感サインが多めです。まず薬剤師に相談し、やさしいステップから始めてください。')
-      :ci.S?Q('첫 1주는 순한 단계 위주로, 크림은 소량부터 시작해 주세요.','For the first week, focus on gentle steps and start with a small amount of cream.','第一周以温和步骤为主，面霜从少量开始。','最初の1週間はやさしいステップ中心に、クリームは少量から。')
-      :Q('아침·저녁 같은 순서로 꾸준히 사용해 주세요.','Use in the same order morning and night.','早晚按相同顺序坚持使用。','朝晩同じ順番で続けてお使いください。');
-    return '<div class="bx-dir"><div class="bx-dir-h"><small>Directions.</small><span>'+P(Q('사용 순서와 이유','Order of use & reason','使用顺序与理由','使う順番と理由'))+'</span></div><ol>'
-      +items.map(function(w){return '<li class="'+(w.nmn?'nm':'bl')+'"><i>'+(w.i+1)+'</i><div><b>'+esc(w.name)+'</b><span>'+w.lead+w.sig+w.reason+'</span></div></li>'}).join('')+'</ol>'
-      +'<div class="bx-note"><small>Notes.</small><p>'+P(note)+'</p><p class="bx-disc">'+P(Q('자가 문진 기반 화장품 상담 결과이며, 측정·진단이 아닙니다.','Cosmetic consultation based on your answers — not a measurement or diagnosis.','基于自我问答的化妆品咨询结果，并非测量或诊断。','回答に基づく化粧品相談の結果であり、測定・診断ではありません。'))+'</p></div></div>';
+    var items=whyItems();if(!items.length)return '';
+    var rows=items.map(function(w){var k=w.k,fc=FACT[k]||['',Q('','','',''),GUIDE],fw=forWhat(k),cap=prod(k).capacity||'';
+      var nm=pname(k)||w.name,ko=prod(k).name||'';
+      return '<li class="bx-rx '+(w.nmn?'nm':'bl')+'"><i><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11" fill="'+(w.nmn?'#b9736a':'#5877a8')+'"/><text x="11" y="15" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Pretendard,Arial,sans-serif">'+(w.i+1)+'</text></svg></i>'+(w.img?'<img src="'+esc(w.img)+'" alt="">':'<span class="bx-noimg"></span>')
+        +'<div class="bx-rx-m"><b>'+esc(nm)+(cap?' <em>'+esc(cap)+'</em>':'')+'</b>'+(lang()!=='ko'&&ko?'<small class="bx-ko">'+esc(ko)+'</small>':'')
+        +'<span>'+(fw?'<u>'+P(Q('이런 고민에','For','针对','こんな悩みに'))+' · '+fw+'</u> — ':'')+w.reason+'</span></div>'
+        +'<div class="bx-rx-f">'+(fc[0]?'<strong>'+fc[0]+'</strong>':'')+'<span>'+P(fc[1])+'</span><small>'+P(fc[2])+'</small></div></li>'}).join('');
+    var keys=items.map(function(w){return w.k}),u=useRows(keys);
+    var add=keys.indexOf('cleansing')<0?'<div class="bx-add"><img src="images/products/cleansing.png" alt=""><div><small>'+P(Q('밤에 추가하면 좋아요','Night add-on','晚间可加购','夜にプラス'))+'</small><b>'+esc(pname('cleansing'))+'</b><span>'+P(Q('메이크업·선크림을 부드럽게 지워요','Gently removes makeup and sunscreen','温和卸除彩妆与防晒','メイク・日焼け止めをやさしくオフ'))+'</span></div></div>':'';
+    return '<div class="bx-dir"><div class="bx-dir-h"><small>Directions.</small><span>'+P(Q('시오레 추천 · 이 순서로 사용하세요','SIORÉ recommends · use in this order','SIORÉ 推荐 · 请按此顺序使用','SIORÉ おすすめ・この順番で'))+'</span></div><ol>'+rows+'</ol></div>'
+      +'<div class="bx-use"><div class="d"><small>☀ '+P(Q('아침','Morning','早上','朝'))+'</small><b>'+u.am+'</b></div><div class="n"><small>☾ '+P(Q('저녁','Night','晚上','夜'))+'</small><b>'+u.pm+'</b></div>'+add+'</div>';
+  }
+  function staffBlock(){
+    var items=whyItems();if(!items.length)return '';var s=st();
+    var cs=s.concerns.map(function(c){return CN[c]?CN[c].ko:c}).join(' → ');
+    var langName={ko:'한국어',en:'English',zh:'中文',ja:'日本語'}[lang()]||'한국어';
+    var cap=lang()==='ko'?'직원 확인용':P(Q('','Show to staff','请出示给店员','スタッフにお見せください'))+' · 직원 확인용';
+    return '<div class="bx-staff"><div class="bx-cut"><span>✂ '+cap+'</span></div>'
+      +'<div class="bx-staff-h"><b>이 제품 '+items.length+'개 주세요</b><span>고객 언어: '+langName+(cs?' · 고민: '+esc(cs):'')+'</span></div>'
+      +'<ul>'+items.map(function(w){var c=prod(w.k).capacity||'';return '<li>'+(w.img?'<img src="'+esc(w.img)+'" alt="">':'')+'<span><b>'+(w.i+1)+'. '+esc(prod(w.k).name||w.name)+'</b><small>'+esc(c)+' · '+(w.nmn?'NMN 라인':'밸런스 라인')+'</small></span></li>'}).join('')+'</ul>'
+      +'<p>응대 팁: 밤 클렌징 밀크를 함께 권하면 아침·저녁 루틴이 완성돼요. 다른 구성은 아래 \'더 보기\'에서 확인.</p></div>';
   }
 
   function boxCard(){
@@ -198,7 +243,8 @@
           +'<div class="bx-line bx-rel"><div class="bx-tab">Balance(Relief) Line</div><ul class="bx-list">'+REL.map(function(p){return item(p,keys)}).join('')+'</ul></div>'
         +'</div>'
         +rxDirections()
-        +'<div class="bx-foot"><span>'+T(Q('이 카드를 약사·판매직원에게 보여주세요','Show this card to the pharmacy staff','请向药师或店员出示此卡','このカードを薬剤師・スタッフにお見せください'))+'</span><time>'+date+'</time></div>'
+        +'<div class="bx-foot"><span class="bx-disc2">'+P(Q('자가 문진 기반 화장품 상담 결과이며 측정·진단이 아니에요. 수치는 표기된 시험 또는 시오레 공식 제품 자료 기준이며 개인차가 있어요. 가격은 약국마다 달라요.','Cosmetic consultation based on your answers — not a diagnosis. Figures are from the stated tests or SIORÉ official product materials; results vary. Prices vary by pharmacy.','基于您回答的化妆品咨询，并非诊断。数据来自所标注的测试或SIORÉ官方产品资料，因人而异。价格因药店而异。','回答に基づく化粧品カウンセリングであり、診断ではありません。数値は記載の試験またはSIORÉ公式製品資料によるもので、個人差があります。価格は薬局により異なります。'))+'</span><time>'+date+'</time></div>'
+        +staffBlock()
       +'</div></section>';
   }
 
@@ -365,7 +411,18 @@
     if(diag){diag.classList.add('sm-one');var old=sheet.querySelector('.sm-skinmap');if(old)old.remove();diag.insertAdjacentHTML('afterend',skinMap());var oc=sheet.querySelector('.cd-card');if(oc)oc.remove();var sm=sheet.querySelector('.sm-skinmap');if(sm)sm.insertAdjacentHTML('afterend',codeCard());}
     var ow=sheet.querySelector('.why-card');if(ow)ow.remove();var mx=sheet.querySelector('.rx-matrix');if(mx)mx.insertAdjacentHTML('afterend',whyCard());
     var oldBox=sheet.querySelector('.bx-wrap');if(oldBox)oldBox.remove();
-    sheet.insertAdjacentHTML('beforeend',boxCard());
+    var head=sheet.querySelector('.rx-prescription-head');
+    if(head)head.insertAdjacentHTML('afterend',boxCard());else sheet.insertAdjacentHTML('afterbegin',boxCard());
+    foldRest(sheet);
+  }
+  function foldRest(sheet){
+    var bx=sheet.querySelector('.bx-wrap');if(!bx)return;
+    var det=sheet.querySelector('details.bx-more');
+    if(!det){det=document.createElement('details');det.className='bx-more';det.innerHTML='<summary></summary><div class="bx-more-in"></div>';}
+    det.querySelector('summary').innerHTML='<b>'+P(Q('더 보기','More details','查看更多','もっと見る'))+'</b><span>'+P(Q('피부 그래프·피부 코드 · 제품별 상세 근거 · 다른 구성(프리미엄 5종·1PICK)','Skin graphs & code · detailed evidence · other sets (Premium 5 · 1PICK)','肌肤图表与代码 · 详细依据 · 其他组合(进阶5件·1PICK)','肌グラフ・スキンコード・詳しい根拠・ほかの組み合わせ(プレミアム5・1PICK)'))+'</span><i aria-hidden="true">＋</i>';
+    var box=det.querySelector('.bx-more-in');
+    ['.rx-diagnosis','.sm-skinmap','.cd-card','.rx-overview'].forEach(function(sel){var n=sheet.querySelector(sel);if(n&&!box.contains(n))box.appendChild(n)});
+    bx.insertAdjacentElement('afterend',det);
   }
   function syncBox(){var w=document.querySelector('.solution-sheet .bx-wrap');if(w)w.outerHTML=boxCard();var y=document.querySelector('.solution-sheet .why-card');if(y){var h=whyCard();if(h)y.outerHTML=h;}}
 

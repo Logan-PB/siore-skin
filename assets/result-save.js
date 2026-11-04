@@ -16,7 +16,7 @@
   const t=k=>{const a=L[k];const m=window.languageMode;if(m==='bilingual'||m==='ko-en')return a[0]+' · '+a[1];return a[li()]};
   const load=src=>new Promise((ok,no)=>{if(document.querySelector(`script[src="${src}"]`)&&(window.html2canvas&&src===LIBS.h2c||window.jspdf&&src===LIBS.pdf))return ok();const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)});
   const stamp=()=>{const d=new Date(),z=n=>String(n).padStart(2,'0');return `${d.getFullYear()}${z(d.getMonth()+1)}${z(d.getDate())}_${z(d.getHours())}${z(d.getMinutes())}`};
-  const target=()=>document.querySelector('#step3 .paper-pair')||document.querySelector('#step3');
+  const target=()=>document.querySelector('#step3 .bx-wrap')||document.querySelector('#step3 .paper-pair')||document.querySelector('#step3');
 
   const PROPS=['fill','fill-opacity','stroke','stroke-width','stroke-opacity','stroke-dasharray','stroke-linecap','stroke-linejoin','opacity','font-size','font-weight','letter-spacing','text-anchor','dominant-baseline','visibility','display','transform-origin'];
   async function svgUrls(el){
@@ -43,8 +43,10 @@
       windowWidth:Math.max(w+40,document.documentElement.clientWidth),
       ignoreElements:n=>n.classList&&(n.classList.contains('panel-actions')||n.classList.contains('rs-menu')||n.classList.contains('care-tier-options')||n.hasAttribute&&n.hasAttribute('data-save-ignore')),
       onclone:doc=>{
-        const dst=[...(doc.querySelector('#step3 .paper-pair')||doc.querySelector('#step3')).querySelectorAll('svg')];
+        const dst=[...(doc.querySelector('#step3 .bx-wrap')||doc.querySelector('#step3 .paper-pair')||doc.querySelector('#step3')).querySelectorAll('svg')];
         dst.forEach((dv,i)=>{const u=urls[i];if(!u)return;const im=doc.createElement('img');im.src=u.src;im.width=u.w;im.height=u.h;im.style.cssText=`width:${u.w}px;height:${u.h}px;display:${u.disp};margin:${u.mg};vertical-align:middle;max-width:none`;dv.replaceWith(im)});
+        doc.querySelectorAll('.bx-rx>i').forEach(n=>{n.style.cssText+=';display:block!important;width:22px!important;height:22px!important;line-height:22px!important;padding:0!important;margin:0!important;text-align:center!important;font-size:11px!important'});
+        doc.querySelectorAll('.bx-use .n small').forEach(n=>{n.style.color='#f0c3a8'});
         const fd=doc.querySelector('#focus-dialog');if(fd)Object.assign(fd.style,{position:'static',overflow:'visible',height:'auto',maxHeight:'none'});
         const st=doc.createElement('style');
         st.textContent='*{animation:none!important;transition:none!important}.paper-pair{backdrop-filter:none!important}';
