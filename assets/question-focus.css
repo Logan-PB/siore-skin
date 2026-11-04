@@ -1,7 +1,7 @@
 /* SIORÉ 상담 질문 박스 O1 '스포트라이트' (2026-11-04)
    - '체크해주세요' 띠지·깜빡이는 테두리 제거 → 지금 답할 박스에 회전 테두리 빛 + 숨쉬기 빛 + 표면 빛줄기
    - 아직 차례가 아닌 박스는 한 단계 물러나 보이고, 손가락/마우스를 올리면 다시 또렷해짐 */
-#focus-dialog{--qf-c:#a5684f;--qf-l:#f3d2c3;--qf-w:#fff4ee;--qf-glow:212,149,123}
+#focus-dialog{--qf-c:#3f6fb5;--qf-l:#c7d8f2;--qf-w:#f1f6fd;--qf-glow:74,124,196}
 @property --qf-ang{syntax:'<angle>';initial-value:0deg;inherits:false}
 @keyframes qfSpin{to{--qf-ang:360deg}}
 @property --qf-g{syntax:'<length>';initial-value:3px;inherits:false}
