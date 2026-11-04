@@ -1,22 +1,23 @@
 /* SIORÉ 상담 질문 박스 O1 '스포트라이트' (2026-11-04)
    - '체크해주세요' 띠지·깜빡이는 테두리 제거 → 지금 답할 박스에 회전 테두리 빛 + 숨쉬기 빛 + 표면 빛줄기
    - 아직 차례가 아닌 박스는 한 단계 물러나 보이고, 손가락/마우스를 올리면 다시 또렷해짐 */
+#focus-dialog{--qf-c:#a5684f;--qf-l:#f3d2c3;--qf-w:#fff4ee;--qf-glow:212,149,123}
 @property --qf-ang{syntax:'<angle>';initial-value:0deg;inherits:false}
 @keyframes qfSpin{to{--qf-ang:360deg}}
 @property --qf-g{syntax:'<length>';initial-value:3px;inherits:false}
 @keyframes qfBreathe{0%,100%{--qf-g:3px}50%{--qf-g:8px}}
 @keyframes qfSweep{0%{background-position:170% 0}55%,100%{background-position:-70% 0}}
-@keyframes qfBtn{0%,100%{box-shadow:0 14px 28px -14px rgba(140,74,52,.7),0 0 0 0 rgba(212,149,123,.45)}50%{box-shadow:0 14px 28px -14px rgba(140,74,52,.7),0 0 0 8px rgba(212,149,123,0)}}
+@keyframes qfBtn{0%,100%{box-shadow:0 14px 28px -14px rgba(140,74,52,.7),0 0 0 0 rgba(var(--qf-glow),.5)}50%{box-shadow:0 14px 28px -14px rgba(140,74,52,.7),0 0 0 8px rgba(var(--qf-glow),0)}}
 
 /* 지금 답할 박스 */
 #focus-dialog .step-panel .consult-checkpoint-active:not(.panel-actions):not(.solution-sheet):not(.prescription-layout){
   position:relative!important;z-index:2!important;outline:0!important;border-color:transparent!important;
   background-image:none!important;background-color:#fff!important;
-  box-shadow:0 0 0 var(--qf-g) rgba(212,149,123,.2),0 18px 40px -20px rgba(165,104,79,.6)!important;animation:qfBreathe 2.8s ease-in-out infinite!important;transform:translateY(-1px);transition:transform .25s}
+  box-shadow:0 0 0 var(--qf-g) rgba(var(--qf-glow),.22),0 18px 40px -20px rgba(var(--qf-glow),.65)!important;animation:qfBreathe 2.8s ease-in-out infinite!important;transform:translateY(-1px);transition:transform .25s}
 /* 회전하는 테두리 빛 + 숨쉬기 */
 #focus-dialog .step-panel .consult-checkpoint-active:not(.panel-actions):not(.solution-sheet):not(.prescription-layout)::before{
   content:''!important;display:block!important;position:absolute!important;inset:-2px!important;border:0!important;border-radius:inherit!important;padding:2px!important;opacity:1!important;pointer-events:none!important;
-  background:conic-gradient(from var(--qf-ang),#f3d2c3,#a5684f 18%,#f3d2c3 34%,#fff4ee 50%,#c9866c 70%,#f3d2c3)!important;
+  background:conic-gradient(from var(--qf-ang),var(--qf-l),var(--qf-c) 18%,var(--qf-l) 34%,var(--qf-w) 50%,var(--qf-c) 70%,var(--qf-l))!important;
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);
   animation:qfSpin 6s linear infinite!important}
 /* 표면을 지나가는 빛줄기 ('체크해주세요' 글자 대신) */
