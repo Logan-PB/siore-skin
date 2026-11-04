@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIORÉ 상담 질문 박스 — 집중도 개선 시안 3</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#3b2620;--sub:#6f564c;--mute:#9a8378;--cu:#a5684f;--g1:#d4957b;--g2:#a86a55;--line:rgba(168,112,92,.18)}
+@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;background:#e9ddd4;color:var(--ink);padding:34px 0 70px;-webkit-font-smoothing:antialiased;word-break:keep-all}
+.page-h,.opt-h,.note,.row{width:1300px;margin-left:auto;margin-right:auto}
+.page-h small{font-size:11px;letter-spacing:.26em;color:var(--cu);font-weight:600}
+.page-h h1{font-size:26px;margin:6px 0 4px;letter-spacing:-.02em}
+.page-h p{font-size:13.5px;color:var(--sub);line-height:1.65}
+.opt-h{margin-top:40px;margin-bottom:10px;display:flex;align-items:baseline;gap:10px}
+.opt-h b{font-size:19px}.opt-h span{font-size:13px;color:var(--sub)}
+.opt-h em{font-style:normal;font-size:10.5px;font-weight:700;letter-spacing:.14em;color:#fff;background:linear-gradient(90deg,var(--g1),var(--g2));padding:4px 10px;border-radius:99px}
+.note{margin-top:10px;font-size:12.5px;color:var(--sub);line-height:1.7}.note b{color:var(--ink)}
+.row{display:flex;gap:24px;align-items:flex-start}
+.stage{container-type:inline-size;border-radius:26px;overflow:hidden;background:linear-gradient(165deg,#faf6f0,#f3e9e1 55%,#eedfd5);box-shadow:0 30px 60px -30px rgba(90,52,38,.45);padding:26px 30px 0;position:relative}
+.stage.pc{width:900px;height:760px}
+.stage.ph{width:376px;height:760px;padding:18px 14px 0;border-radius:36px;box-shadow:0 30px 60px -30px rgba(90,52,38,.5),0 0 0 8px #2b211d}
+.hd{text-align:center;margin-bottom:16px}
+.hd small{font-size:10.5px;letter-spacing:.22em;color:var(--cu);font-weight:700}
+.hd h2{font-size:24px;margin:4px 0 2px;letter-spacing:-.02em}
+.hd p{font-size:12.5px;color:var(--sub)}
+.prog{height:4px;border-radius:9px;background:#ead9cf;margin:0 0 14px;overflow:hidden}.prog i{display:block;height:100%;width:38%;background:linear-gradient(90deg,var(--g1),var(--g2))}
+.blocks{display:flex;flex-direction:column;gap:10px}
+.blk{position:relative;border-radius:20px;background:#fffaf6;border:1px solid var(--line);padding:16px 18px}
+.bh{display:flex;align-items:center;gap:10px}
+.no{flex:0 0 auto;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-size:12.5px;font-weight:700;color:#fff;background:#c9a593}
+.bh b{font-size:16px;letter-spacing:-.01em}
+.bh small{display:block;font-size:12px;color:var(--mute);font-weight:500;margin-top:1px}
+.bh .r{margin-left:auto;font-size:11.5px;font-weight:700;color:var(--sub);white-space:nowrap}
+.q{margin-top:12px}
+.q h4{font-size:19px;letter-spacing:-.02em;display:flex;gap:8px;align-items:center}
+.q h4 span{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--cu);background:#f6e9e1;padding:4px 8px;border-radius:99px}
+.q p{font-size:12.5px;color:var(--sub);margin:4px 0 12px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.opts span{display:flex;align-items:center;justify-content:center;flex-direction:column;height:62px;border-radius:14px;background:#fff;border:1px solid var(--line);font-size:15px;font-weight:700}
+.opts span small{font-size:11px;color:var(--mute);font-weight:500;margin-top:2px}
+.dots{display:flex;gap:5px;margin-left:auto}.dots i{width:22px;height:5px;border-radius:9px;background:#ead9cf}.dots i.on{background:var(--cu)}.dots i.now{background:#3b2620}
+.sum{display:flex;gap:6px;margin-left:auto;align-items:center}
+.sum span{font-size:12.5px;font-weight:600;padding:5px 10px;border-radius:99px;background:#f4e8e0;color:var(--ink)}
+.sum em{font-style:normal;font-size:11.5px;color:var(--cu);font-weight:700;margin-left:4px}
+.acts{position:absolute;left:0;right:0;bottom:0;display:flex;gap:10px;padding:14px 30px 18px;background:linear-gradient(180deg,rgba(243,233,225,0),#f1e5dc 40%)}
+.acts span{height:50px;border-radius:99px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.acts .bk{width:140px;background:#fff;border:1px solid var(--line)}
+.acts .go{flex:1;color:#fff;background:linear-gradient(90deg,var(--g1),var(--g2));opacity:.45}
+.ph .acts{padding:12px 14px 16px}.ph .acts .bk{width:90px}
+/* 공통 샤인 */
+@keyframes sweep{0%{transform:translateX(-120%) skewX(-18deg)}55%,100%{transform:translateX(220%) skewX(-18deg)}}
+@keyframes spin{to{--ang:360deg}}
+@keyframes breathe{0%,100%{box-shadow:0 18px 40px -18px rgba(165,104,79,.55),0 0 0 4px rgba(212,149,123,.14)}50%{box-shadow:0 22px 46px -16px rgba(165,104,79,.65),0 0 0 7px rgba(212,149,123,.22)}}
+@keyframes sweepbg{0%{background-position:160% 0}55%,100%{background-position:-60% 0}}
+.shine::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(105deg,transparent 38%,rgba(255,255,255,.8) 50%,transparent 62%) no-repeat;background-size:260% 100%;pointer-events:none;animation:sweepbg 3.6s ease-in-out infinite;mix-blend-mode:soft-light}
+.shine>*{position:relative;z-index:1}
+.o1 .now-tag,.shine>.now-tag{position:absolute;z-index:3}
+
+/* ============ O1 스포트라이트 ============ */
+.o1 .blk.done{padding:11px 16px;background:rgba(255,255,255,.55)}
+.o1 .blk.done .no{background:#8c9a7d}
+.o1 .blk.done .no::before{content:"✓"}
+.o1 .blk.next{opacity:.5;filter:saturate(.6)}
+.o1 .blk.next .no{background:#d8c6bb}
+.o1 .blk.now{background:#fff;border:2px solid transparent;padding:18px 20px;
+  background:linear-gradient(#fff,#fff) padding-box,conic-gradient(from var(--ang),#f3d2c3,#a5684f,#f3d2c3 30%,#fff3ec 50%,#a5684f 75%,#f3d2c3) border-box;
+  animation:spin 6s linear infinite,breathe 2.8s ease-in-out infinite;transform:translateY(-2px)}
+.o1 .blk.now .no{background:linear-gradient(135deg,var(--g1),var(--g2))}
+.o1 .now-tag{position:absolute;top:-11px;left:22px;font-size:10.5px;font-weight:800;letter-spacing:.14em;color:#fff;background:#3b2620;padding:4px 10px;border-radius:99px}
+.o1 .blk.now .opts span{border-color:rgba(165,104,79,.3)}
+
+/* ============ O2 섹션 컬러 ============ */
+.o2 .blk{border:0;padding-left:22px;box-shadow:0 10px 26px -20px rgba(90,52,38,.5)}
+.o2 .blk::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:5px;border-radius:0 6px 6px 0;background:var(--c)}
+.o2 .blk .no{background:var(--c)}
+.o2 .blk .bh b{color:var(--cd)}
+.o2 .c1{--c:#a5684f;--cd:#7d4734;--ct:#f7ebe4}
+.o2 .c2{--c:#c07a74;--cd:#94514c;--ct:#fbeeee}
+.o2 .c3{--c:#b0915f;--cd:#7f6436;--ct:#f8f1e4}
+.o2 .c4{--c:#6f8db8;--cd:#456189;--ct:#edf2f9}
+.o2 .blk.done{padding-top:11px;padding-bottom:11px}
+.o2 .blk.done .sum span{background:var(--ct);color:var(--cd)}
+.o2 .blk.now{background:linear-gradient(160deg,#fff 0%,var(--ct) 100%);box-shadow:0 18px 40px -18px color-mix(in srgb,var(--c) 70%,transparent),inset 0 0 0 1.5px var(--c)}
+.o2 .blk.now .q h4 span{background:#fff;color:var(--cd)}
+.o2 .blk.now .opts span{border-color:color-mix(in srgb,var(--c) 35%,transparent)}
+.o2 .blk.next{background:#fffdfb}
+.o2 .blk.next .bh b{opacity:.75}
+
+/* ============ O3 한 장씩 ============ */
+.o3 .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:14px}
+.o3 .chips span{font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:99px;background:rgba(255,255,255,.75);border:1px solid var(--line)}
+.o3 .chips span b{color:var(--cu);margin-right:5px}
+.o3 .deck{position:relative;margin:0 auto;max-width:640px}
+.o3 .deck .peek{position:absolute;left:4%;right:4%;height:40px;bottom:-14px;border-radius:22px;background:rgba(255,255,255,.6);border:1px solid var(--line)}
+.o3 .deck .peek.p2{left:8%;right:8%;bottom:-26px;background:rgba(255,255,255,.4)}
+.o3 .card{position:relative;z-index:2;border-radius:26px;padding:24px 24px 22px;background:#fff;box-shadow:0 26px 50px -24px rgba(110,66,50,.55);border:1px solid rgba(255,255,255,.9)}
+.o3 .ring{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.o3 .ring svg{width:46px;height:46px}
+.o3 .ring b{font-size:12px;letter-spacing:.14em;color:var(--cu)}
+.o3 .ring small{display:block;font-size:12px;color:var(--mute)}
+.o3 .card h4{font-size:24px;letter-spacing:-.03em;margin-bottom:6px}
+.o3 .card p{font-size:13px;color:var(--sub);margin-bottom:16px}
+.o3 .opts{grid-template-columns:1fr;gap:9px}
+.o3 .opts span{height:58px;flex-direction:row;justify-content:flex-start;gap:12px;padding:0 18px;font-size:16px}
+.o3 .opts span i{width:22px;height:22px;border-radius:50%;border:2px solid #d9c2b4;flex:0 0 auto}
+.o3 .opts span small{margin:0 0 0 auto}
+.o3 .next-l{text-align:center;font-size:12.5px;color:var(--mute);margin-top:38px}
+
+/* 폰 */
+@container (max-width:420px){
+  .hd h2{font-size:20px}.hd p{display:none}
+  .blk{padding:13px 13px}
+  .bh b{font-size:14.5px}
+  .sum span{font-size:11.5px;padding:4px 8px}
+  .q h4{font-size:17px}
+  .opts{grid-template-columns:1fr;gap:7px}
+  .opts span{height:50px;flex-direction:row;gap:8px}
+  .opts span small{margin-top:0}
+  .o1 .blk.now{padding:15px 14px}
+  .dots i{width:14px}
+  .o3 .card{padding:18px 16px}
+  .o3 .card h4{font-size:20px}
+  .o3 .opts span{height:52px;font-size:15px}
+  .sum .hide-m{display:none}
+}
+</style></head><body>
+<header class="page-h">
+  <small>SIORÉ CONSULTATION · QUESTION FOCUS OPTIONS</small>
+  <h1>상담 질문 박스 — 지금 답할 곳에 집중되게 하는 시안 3가지</h1>
+  <p>공통: 깜빡이는 '체크해주세요' 띠지는 없애고, <b>지금 답할 박스 자체</b>가 빛나요. 답한 질문은 한 줄로 접히고(눌러서 수정), 아직 차례가 아닌 질문은 한 단계 물러나 보여요. 질문 내용·순서·추천 결과는 그대로예요. 실제 움직임은 HTML 파일을 열면 보여요.</p>
+</header>
+<script>
+function body(opt){
+  const top=`<div class="hd"><small>SIORE · SKIN CONSULTATION / 02</small><h2>피부 상태 확인</h2><p>기본 피부 상태와 5개 빠른 문항, 제형·민감도·현재 사용 습관을 순서대로 확인합니다.</p></div><div class="prog"><i></i></div>`;
+  const acts=`<div class="acts"><span class="bk">이전</span><span class="go">맞춤 솔루션 보기</span></div>`;
+  if(opt==='o3'){
+    return top+`<div class="chips"><span><b>✓</b>복합성 · 민감성</span><span><b>✓</b>1. 세안 후 · 편안해요</span></div>
+    <div class="deck"><div class="peek p2"></div><div class="peek"></div><div class="card shine">
+      <div class="ring"><svg viewBox="0 0 46 46"><circle cx="23" cy="23" r="19" fill="none" stroke="#efe1d8" stroke-width="5"/><circle cx="23" cy="23" r="19" fill="none" stroke="url(#gr)" stroke-width="5" stroke-linecap="round" stroke-dasharray="119.4" stroke-dashoffset="83.6" transform="rotate(-90 23 23)"/><defs><linearGradient id="gr"><stop offset="0" stop-color="#d4957b"/><stop offset="1" stop-color="#a86a55"/></linearGradient></defs><text x="23" y="27" text-anchor="middle" font-size="11" font-weight="700" fill="#3b2620">3/8</text></svg>
+        <span><b>QUICK SKIN CHECK · 2 / 5</b><small>AXIS 2 · 민감 반응</small></span></div>
+      <h4>새 제품을 바르면 피부가 어떤가요?</h4><p>가장 가까운 답 하나를 골라 주세요.</p>
+      <div class="opts"><span><i></i>대체로 괜찮아요<small>편안함</small></span><span><i></i>가끔 따끔해요<small>약간 예민</small></span><span><i></i>자주 붉어지거나 따가워요<small>예민함</small></span></div>
+    </div></div><p class="next-l">다음 · 피부 톤 → 탄력 → 피지 → 사용감·민감도 → 최근 3일(선택)</p>`+acts;
+  }
+  const c=opt==='o2';
+  const done=`<div class="blk done ${c?'c1':''}"><div class="bh"><span class="no">${opt==='o1'?'':'✓'}</span><b>평소 피부 타입</b><span class="sum"><span>복합성</span><span>민감성</span><em>수정</em></span></div></div>`;
+  const now=`<div class="blk now shine ${c?'c2':''}">${opt==='o1'?'<span class="now-tag">지금 답할 질문</span>':''}<div class="bh"><span class="no">02</span><span><b>빠른 피부 체크</b><small>생각하지 말고 가장 가까운 답을 눌러 주세요</small></span><span class="dots"><i class="on"></i><i class="now"></i><i></i><i></i><i></i></span></div>
+    <div class="q"><h4><span>2 / 5</span>새 제품을 바르면 피부가 어떤가요?</h4><p>가장 가까운 답 하나를 선택하세요.</p>
+    <div class="opts"><span>대체로 괜찮아요<small>편안함</small></span><span>가끔 따끔해요<small>약간 예민</small></span><span>자주 붉어져요<small>예민함</small></span></div></div></div>`;
+  const n1=`<div class="blk next ${c?'c3':''}"><div class="bh"><span class="no">03</span><span><b>사용감 · 민감도</b><small>편한 제형과 평소 민감도</small></span><span class="r">필수 2개</span></div></div>`;
+  const n2=`<div class="blk next ${c?'c4':''}"><div class="bh"><span class="no">04</span><span><b>최근 3일 민감 신호 · 사용 습관</b><small>선택 입력 · 건너뛰어도 결과를 볼 수 있어요</small></span><span class="r">선택</span></div></div>`;
+  return top+`<div class="blocks">${done}${now}${n1}${n2}</div>`+acts;
+}
+const OPTS=[
+ ['o1','O1. 스포트라이트','지금 질문만 빛나는 테두리 + 은은한 숨쉬기 빛, 나머지는 물러나게','추천','<b>포인트</b> 지금 답할 박스를 테두리 빛이 천천히 돌고, 박스 표면에 빛줄기가 3~4초마다 지나가요. 답한 질문은 초록 ✓ 한 줄로 접히고, 다음 질문은 반투명이라 <b>눈이 한 곳에만 가요</b>. 지금 구조를 그대로 쓰면서 바꿀 수 있어 적용이 가장 쉬워요.'],
+ ['o2','O2. 섹션 컬러','질문 묶음마다 색을 다르게 — 피부 타입·피부 체크·사용감·민감 신호','','<b>포인트</b> 묶음마다 왼쪽 색 띠와 번호 색이 달라서(코코아·로즈·샌드·블루) <b>지금 어느 단계인지 색으로 바로 구분</b>돼요. 지금 질문은 그 색으로 은은하게 물들고 빛이 지나가요. 결과지의 NMN 핑크·밸런스 블루 톤과도 이어져요.'],
+ ['o3','O3. 한 장씩 카드','한 번에 질문 하나만 크게 — 답하면 다음 카드가 올라와요','','<b>포인트</b> 질문 하나만 보여서 <b>집중도가 가장 높고</b> 휴대폰에서 특히 편해요. 진행 링(3/8)으로 얼마나 남았는지 보이고, 답한 내용은 위에 칩으로 쌓여요. 대신 화면 흐름이 바뀌는 큰 변경이라 적용 시간이 조금 더 걸려요.']
+];
+OPTS.forEach(([k,t,s,tag,n])=>{document.write(`<div class="opt-h"><b>${t}</b><span>${s}</span>${tag?'<em>'+tag+'</em>':''}</div><div class="row"><section class="stage pc ${k}">${body(k)}</section><section class="stage ph ${k}">${body(k)}</section></div><p class="note">${n}</p>`)});
+</script>
+</body></html>
