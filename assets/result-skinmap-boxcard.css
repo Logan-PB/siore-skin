@@ -304,3 +304,5 @@ details.bx-more>summary b{flex:0 0 auto}
   .bx-use>div{padding:7px 9px}
   .bx-use b{font-size:11.5px}
 }
+/* 로고 비율 고정 */
+.bx-brand img,.bsf-top img,.rl-logo{aspect-ratio:588/221;width:auto!important;max-width:none!important;object-fit:contain}
