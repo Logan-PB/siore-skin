@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIORÉ 결과지 혼합안 R1+R3 — A4 + 실제 휴대폰 결과 화면</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#2f211c;--sub:#6f564c;--mute:#9a8378;--cu:#a5684f;--g1:#d4957b;--g2:#a86a55;--pink:#b9736a;--blue:#3f6fb5;--line:#e6d7cd;--paper:#fffdfa}
+body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;background:#e7dbd2;color:var(--ink);padding:30px 0 70px;-webkit-font-smoothing:antialiased;word-break:keep-all}
+.mono{font-size:9.5px;letter-spacing:.2em;font-weight:800;color:var(--cu)}
+.ph{border-radius:12px;background:#f5eee9 center/86% no-repeat;flex:0 0 auto}
+.step{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;color:#fff;font-size:11px;font-weight:800;flex:0 0 auto}
+.nmn{background:var(--pink)}.rel{background:var(--blue)}
+.dis{font-size:9.5px;color:var(--mute);line-height:1.55}
+.qr{width:62px;height:62px;background:#fff url(../assets/skin-consultation-qr.svg) center/90% no-repeat;border:1px solid var(--line);border-radius:8px;flex:0 0 auto}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;background:#f4e8e0;color:#7d4734}
+.fact b{color:#8a4f3c;font-size:16px;margin-right:4px;letter-spacing:-.01em}
+.fact{font-size:11.5px;color:var(--sub);line-height:1.45}
+.fact small{display:block;color:var(--mute);font-size:9.5px;margin-top:2px}
+
+/* ================= A4 ================= */
+.a4{width:794px;height:1123px;margin:0 auto;background:var(--paper);position:relative;overflow:hidden;box-shadow:0 30px 60px -30px rgba(60,35,25,.55)}
+.a4 .pad{position:absolute;inset:42px 46px 36px}
+.a4 .hd{display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:12px;border-bottom:1.2px solid var(--ink)}
+.a4 .hd h3{font-size:27px;letter-spacing:-.02em;margin-top:6px}
+.a4 .hd .meta{text-align:right;font-size:10.5px;color:var(--sub);line-height:1.7}
+.a4 .sec{padding:14px 0 12px;border-bottom:1px solid var(--line)}
+.a4 .me{display:grid;grid-template-columns:1.05fr 1fr 1.1fr;gap:16px;align-items:center;margin-top:8px}
+.a4 .code{display:flex;gap:6px}.a4 .code span{width:36px;height:42px;border:1px solid var(--ink);display:grid;place-items:center;font-size:21px;font-weight:300}
+.a4 .code-n{font-size:14.5px;font-weight:700;margin-top:6px}
+.a4 .kv b{display:block;font-size:10px;color:var(--mute);font-weight:700;letter-spacing:.04em}
+.a4 .kv span{font-size:14.5px;font-weight:700}
+.a4 .rx{display:grid;grid-template-columns:26px 70px 1fr 200px;gap:12px;align-items:center;padding:11px 0;border-bottom:1px dashed var(--line)}
+.a4 .rx:last-child{border-bottom:0}
+.a4 .rx .ph{width:70px;height:70px}
+.a4 .rx h4{font-size:16px;letter-spacing:-.01em}
+.a4 .rx .vol{font-size:10.5px;color:var(--mute);margin-left:6px;font-weight:500}
+.a4 .rx .why{font-size:12px;color:var(--sub);margin-top:4px;line-height:1.45}
+.a4 .rx .use{font-size:10.5px;color:var(--mute);margin-top:4px}
+.a4 .am{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:8px;margin-top:8px}
+.a4 .am>div{border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.5}
+.a4 .am b{display:block;font-size:10px;letter-spacing:.12em;margin-bottom:2px}
+.a4 .am .d{background:#fbf3ec}.a4 .am .d b{color:var(--cu)}
+.a4 .am .n{background:#2b211d;color:#f3e9e2}.a4 .am .n b{color:#f0c3a8}
+.a4 .am .a{border:1px dashed #d9bfb1;background:#fffaf6;display:flex;gap:8px;align-items:center}
+.a4 .am .a .ph{width:40px;height:40px}
+.a4 .cut{position:absolute;left:-46px;right:-46px;top:812px;border-top:1.5px dashed #c9b3a6}
+.a4 .cut span{position:absolute;left:50%;top:-10px;transform:translateX(-50%);background:var(--paper);padding:0 12px;font-size:10px;color:var(--mute);letter-spacing:.1em}
+.a4 .staff{position:absolute;left:0;right:0;top:832px;bottom:0}
+.a4 .staff .t{display:flex;justify-content:space-between;align-items:baseline}
+.a4 .staff h4{font-size:19px}
+.a4 .sl{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.a4 .sl div{display:flex;gap:10px;align-items:center;border:1.5px solid var(--ink);border-radius:12px;padding:8px}
+.a4 .sl .ph{width:54px;height:54px}
+.a4 .sl b{font-size:12.5px;display:block;line-height:1.35}.a4 .sl small{font-size:10px;color:var(--mute)}
+.a4 .tip{display:flex;gap:10px;align-items:center;margin-top:10px}
+
+/* ================= 페이지 틀 ================= */
+.wrap{width:1300px;margin:0 auto}
+.page-h small{font-size:11px;letter-spacing:.26em;color:var(--cu);font-weight:700}
+.page-h h1{font-size:26px;margin:6px 0 6px;letter-spacing:-.02em}
+.page-h p{font-size:13.5px;color:var(--sub);line-height:1.7}
+.blk-h{margin:36px 0 14px;display:flex;align-items:baseline;gap:10px}
+.blk-h b{font-size:20px}.blk-h span{font-size:13px;color:var(--sub)}
+.phones{display:flex;gap:26px;justify-content:center;flex-wrap:wrap}
+.pcol{display:flex;flex-direction:column;align-items:center;gap:10px}
+.pcap{font-size:13px;font-weight:700;color:var(--ink);text-align:center;line-height:1.5}
+.pcap small{display:block;font-weight:500;color:var(--sub);font-size:12px}
+
+/* ================= 휴대폰 ================= */
+.phone{width:390px;height:844px;border-radius:44px;overflow:hidden;position:relative;background:linear-gradient(170deg,#faf6f0,#f1e5dc);box-shadow:0 30px 60px -30px rgba(90,52,38,.5),0 0 0 9px #2b211d}
+.scr{position:absolute;inset:0;overflow:hidden}
+.tb{display:flex;align-items:center;gap:8px;padding:14px 14px 10px;background:rgba(250,246,240,.92);border-bottom:1px solid var(--line)}
+.tb img{height:17px}
+.tb .lg{margin-left:auto;display:flex;gap:2px;background:#fff;border-radius:99px;padding:3px;border:1px solid var(--line)}
+.tb .lg i{font-style:normal;font-size:11px;font-weight:700;padding:5px 8px;border-radius:99px;color:var(--sub)}
+.tb .lg i.on{background:linear-gradient(90deg,var(--g1),var(--g2));color:#fff}
+.stepper{display:flex;justify-content:space-between;padding:8px 18px 2px;font-size:10.5px;color:var(--mute);font-weight:600}
+.stepper .on{color:var(--cu)}
+.m-body{padding:10px 12px 0}
+.card{background:#fffdfa;border-radius:22px;box-shadow:0 18px 36px -22px rgba(90,52,38,.5);padding:16px 14px;border:1px solid rgba(255,255,255,.9)}
+.card .h{display:flex;justify-content:space-between;align-items:flex-start}
+.card h3{font-size:20px;letter-spacing:-.02em;margin-top:3px}
+.card .date{font-size:10.5px;color:var(--mute)}
+.card .sv{display:flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--g1),var(--g2));padding:7px 11px;border-radius:99px}
+.msec{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.mme{display:flex;gap:10px;align-items:center;margin-top:6px}
+.mme .code{display:flex;gap:4px}.mme .code span{width:26px;height:30px;border:1px solid var(--ink);display:grid;place-items:center;font-size:15px;font-weight:300;background:#fff}
+.mme b{font-size:14px;display:block}.mme small{font-size:11.5px;color:var(--sub)}
+.mrx{display:grid;grid-template-columns:22px 58px 1fr;gap:10px;align-items:start;padding:10px 0;border-bottom:1px dashed var(--line)}
+.mrx:last-child{border-bottom:0}
+.mrx .ph{width:58px;height:58px}
+.mrx h4{font-size:14.5px;letter-spacing:-.01em;line-height:1.3}
+.mrx .vol{font-size:10.5px;color:var(--mute);font-weight:500}
+.mrx .why{font-size:11.5px;color:var(--sub);margin:3px 0 5px;line-height:1.4}
+.mrx .fact b{font-size:14.5px}
+.mrx .fact{font-size:11px}
+.mrx .step{margin-top:3px}
+.mam{display:flex;gap:6px;margin-top:8px}
+.mam div{flex:1;border-radius:10px;padding:8px 9px;font-size:11px;line-height:1.45}
+.mam .d{background:#fbf3ec}.mam .n{background:#2b211d;color:#f3e9e2}
+.mam b{display:block;font-size:9.5px;letter-spacing:.1em}
+.mam .d b{color:var(--cu)}.mam .n b{color:#f0c3a8}
+.staffbtn{margin-top:10px;display:flex;align-items:center;gap:10px;border:1.5px solid var(--ink);border-radius:14px;padding:10px 12px;background:#fff}
+.staffbtn b{font-size:13.5px;display:block}.staffbtn small{font-size:11px;color:var(--sub)}
+.staffbtn .ar{margin-left:auto;font-size:18px}
+.more{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.more div{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.75);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:13px;font-weight:700}
+.more div small{display:block;font-size:11px;color:var(--mute);font-weight:500;margin-top:1px}
+.more div i{font-style:normal;margin-left:auto;color:var(--cu);font-size:15px}
+.mbar{position:absolute;left:0;right:0;bottom:0;padding:10px 12px 18px;background:linear-gradient(180deg,rgba(241,229,220,0),#f1e5dc 30%);display:flex;flex-direction:column;gap:7px}
+.mbar .p{height:48px;border-radius:99px;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;font-size:15px;color:#fff;background:linear-gradient(90deg,var(--g1),var(--g2));box-shadow:0 14px 26px -14px rgba(140,74,52,.75)}
+.mbar .r{display:flex;gap:7px}.mbar .r span{flex:1;height:40px;border-radius:99px;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:700;background:#fff;border:1px solid var(--line)}
+.fade{position:absolute;left:0;right:0;height:26px;background:linear-gradient(180deg,rgba(241,229,220,0),rgba(241,229,220,.9))}
+/* 직원 전체화면 */
+.staff-full{position:absolute;inset:0;background:#fff;padding:18px 16px}
+.staff-full .x{display:flex;justify-content:space-between;align-items:center}
+.staff-full .x span{font-size:22px}
+.staff-full h2{font-size:26px;letter-spacing:-.03em;margin:14px 0 4px}
+.staff-full .info{font-size:12px;color:var(--sub);line-height:1.6;background:#f8f1ec;border-radius:12px;padding:10px 12px;margin:10px 0 12px}
+.staff-full .it{display:flex;gap:12px;align-items:center;border:2px solid var(--ink);border-radius:16px;padding:10px;margin-bottom:10px}
+.staff-full .it .ph{width:88px;height:88px}
+.staff-full .it b{font-size:18px;line-height:1.3;display:block}
+.staff-full .it small{font-size:12px;color:var(--mute)}
+.staff-full .it .n{font-size:28px;font-weight:800;color:var(--cu);width:26px}
+.staff-full .tip{font-size:12px;color:var(--sub);line-height:1.6;border-top:1px dashed var(--line);padding-top:10px}
+.mark{position:absolute;z-index:9;background:#3f6fb5;color:#fff;font-size:11px;font-weight:800;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;box-shadow:0 0 0 3px rgba(63,111,181,.25)}
+.legend{max-width:1100px;margin:18px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.legend div{background:#fffaf6;border-radius:14px;padding:12px 14px;font-size:12.5px;color:var(--sub);line-height:1.6}
+.legend b{color:var(--ink)}
+.legend .mk{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#3f6fb5;color:#fff;font-size:11px;font-weight:800;margin-right:6px}
+</style></head><body><div class="wrap">
+<header class="page-h">
+  <small>SIORÉ RESULT · MIX R1 + R3 · KOREAN</small>
+  <h1>혼합안: R1 처방전형 + R3 직원 확인용 — 한글 버전</h1>
+  <p>위쪽은 고객이 읽는 <b>처방전형 결과지(R1)</b>, 아래쪽은 직원이 바로 제품을 꺼내는 <b>확인용 칸(R3)</b>. ① A4 한 장(저장·인쇄용) ② 실제 휴대폰 결과 화면 순서로 보여드려요. 예시 고객: 복합성·민감성 / 고민 ① 안티에이징 ② 피지 / 코어 3종.</p>
+</header>
+
+<div class="blk-h"><b>① A4 한 장 (결과 저장·인쇄용)</b><span>'결과 저장(이미지·PDF)'을 누르면 이 한 장이 저장돼요</span></div>
+<div class="a4"><div class="pad">
+  <div class="hd"><div><img src="../images/brand/siore-logo-official-black.png" style="height:21px"><h3>나의 피부 맞춤 솔루션</h3></div>
+    <div class="meta">2026.11.04 · 상담 약국<br>약사가 설계한 바르는 피부 영양제<br><span class="pill">코어 3종</span></div></div>
+  <div class="sec"><span class="mono">01 · 내 피부</span>
+    <div class="me">
+      <div><div class="code"><span>O</span><span>C</span><span>E</span><span>F</span></div><div class="code-n">유분·편안·균일 · 탄력 집중형</div></div>
+      <div class="kv"><b>피부 타입</b><span>복합성 · 민감성</span><b style="margin-top:8px">신경 쓰이는 고민</b><span>① 안티에이징 ② 피지</span></div>
+      <div class="kv"><b>한 줄 정리</b><span style="font-size:12.5px;font-weight:500;color:var(--sub);line-height:1.6;display:block">번들거리지만 피부는 편안한 편이에요. 가벼운 수분을 기본으로, 탄력 케어를 더하세요.</span></div>
+    </div></div>
+  <div class="sec"><span class="mono">02 · 시오레 추천 · 이 순서로 사용하세요</span>
+    <div class="rx"><span class="step nmn">1</span><span class="ph" style="background-image:url(../images/products/bubble-toner.png)"></span>
+      <div><h4>NMN 프레쉬 버블 토너<span class="vol">145 mL</span></h4><div class="why">이런 고민에: <b>피지</b> — 거품으로 피부결을 정돈하고 수분을 채워요</div><div class="use">거품을 손바닥에 덜어 가볍게 눌러 흡수 · 아침·저녁</div></div>
+      <div class="fact"><b>+403%</b>피부 광채<small>1회 사용 직후 · 한국피부과학연구원 · 39–63세 여성 22명 · 2025.06–07</small></div></div>
+    <div class="rx"><span class="step nmn">2</span><span class="ph" style="background-image:url(../images/products/serum.png)"></span>
+      <div><h4>NMN 인텐시브 세럼<span class="vol">50 mL</span></h4><div class="why">이런 고민에: <b>안티에이징</b> — NMN 10,000 ppm 집중 탄력 케어</div><div class="use">신경 쓰이는 부위에 2–3방울 · 저녁</div></div>
+      <div class="fact"><b>13.60%</b>피부 탄력<small>시오레 공식 제품 가이드 기재</small></div></div>
+    <div class="rx"><span class="step rel">3</span><span class="ph" style="background-image:url(../images/products/comfort-cream.png)"></span>
+      <div><h4>데일리 릴리프(밸런스) 컴포트 크림<span class="vol">50 mL</span></h4><div class="why">이런 피부에: <b>민감성</b> — 보습막으로 편안하게 마무리</div><div class="use">마지막 단계에 넉넉히 · 아침·저녁</div></div>
+      <div class="fact"><b>+110.79%</b>피부 수분량<small>1회 사용 직후 · 시오레 공식 제품 자료 기재</small></div></div>
+  </div>
+  <div class="sec" style="border:0"><span class="mono">03 · 사용법</span>
+    <div class="am"><div class="d"><b>☀ 아침</b>토너 → 크림<br>→ 선크림·메이크업</div><div class="n"><b>☾ 저녁</b>토너 → 세럼 → 크림</div>
+      <div class="a"><span class="ph" style="background-image:url(../images/products/cleansing.png)"></span><div><b style="color:var(--cu);letter-spacing:.08em">밤에 추가하면 좋아요</b>NMN 하이드로 캡슐 클렌징 밀크<br><span class="dis">메이크업·선크림을 부드럽게 지워요</span></div></div></div>
+    <div style="display:flex;gap:12px;align-items:center;margin-top:10px"><div class="qr"></div><p class="dis" style="flex:1">QR로 이 결과를 다시 열 수 있어요. 가격은 약국마다 달라 직원에게 문의해 주세요.<br>자가 문진 기반 화장품 상담 결과이며 측정·진단이 아니에요. 수치는 표기된 시험 또는 시오레 공식 제품 자료 기준이며 개인차가 있어요.</p></div>
+  </div>
+  <div class="cut"><span>✂ 직원 확인용</span></div>
+  <div class="staff">
+    <div class="t"><h4>이 제품 3개 주세요</h4><span class="dis" style="font-size:11px">고객 언어: 한국어 · 고민: 안티에이징 → 피지 · 피부: 복합성·민감성</span></div>
+    <div class="sl">
+      <div><span class="ph" style="background-image:url(../images/products/bubble-toner.png)"></span><span><b>① NMN 프레쉬 버블 토너</b><small>145 mL · NMN 라인</small></span></div>
+      <div><span class="ph" style="background-image:url(../images/products/serum.png)"></span><span><b>② NMN 인텐시브 세럼</b><small>50 mL · NMN 라인</small></span></div>
+      <div><span class="ph" style="background-image:url(../images/products/comfort-cream.png)"></span><span><b>③ 데일리 릴리프(밸런스) 컴포트 크림</b><small>50 mL · 밸런스 라인</small></span></div>
+    </div>
+    <p class="dis" style="margin-top:10px;font-size:10.5px">응대 팁: 밤 클렌징 밀크를 함께 권하면 아침·저녁 루틴이 완성돼요. 다른 구성(프리미엄 5종·1PICK)은 결과 화면 '다른 구성 보기'에서 확인.</p>
+  </div>
+</div></div>
+
+<div class="blk-h"><b>② 실제 휴대폰 결과 화면 (한국어)</b><span>결과 화면을 열면 바로 이 순서로 보여요 · 파란 번호는 아래 설명</span></div>
+<div class="phones">
+  <!-- 화면 1: 첫 화면 -->
+  <div class="pcol"><div class="phone"><div class="scr">
+    <div class="tb"><img src="../images/brand/siore-logo-official-black.png"><div class="lg"><i class="on">KR</i><i>EN</i><i>繁</i><i>简</i><i>日</i></div></div>
+    <div class="stepper"><span>✓ 기본 정보</span><span>✓ 피부 상태</span><span class="on">③ 맞춤 솔루션</span></div>
+    <div class="m-body"><div class="card">
+      <div class="h"><div><span class="mono">MY SKIN SOLUTION</span><h3>나의 피부 맞춤 솔루션</h3><span class="date">2026.11.04 · 코어 3종</span></div><span class="sv">⤓ 저장</span></div>
+      <div class="msec"><span class="mono">01 · 내 피부</span>
+        <div class="mme"><div class="code"><span>O</span><span>C</span><span>E</span><span>F</span></div><div><b>유분·편안·균일 · 탄력 집중형</b><small>복합성·민감성 · ① 안티에이징 ② 피지</small></div></div></div>
+      <div class="msec"><span class="mono">02 · 시오레 추천 · 사용 순서</span>
+        <div class="mrx"><span class="step nmn">1</span><span class="ph" style="background-image:url(../images/products/bubble-toner.png)"></span><div><h4>NMN 프레쉬 버블 토너 <span class="vol">145 mL</span></h4><div class="why">피지 고민 · 거품으로 피부결 정돈·수분</div><div class="fact"><b>+403%</b>피부 광채<small>1회 사용 직후 · 한국피부과학연구원 · 39–63세 여성 22명</small></div></div></div>
+        <div class="mrx"><span class="step nmn">2</span><span class="ph" style="background-image:url(../images/products/serum.png)"></span><div><h4>NMN 인텐시브 세럼 <span class="vol">50 mL</span></h4><div class="why">안티에이징 고민 · NMN 10,000 ppm 탄력 케어</div><div class="fact"><b>13.60%</b>피부 탄력<small>시오레 공식 제품 가이드 기재</small></div></div></div>
+        <div class="mrx"><span class="step rel">3</span><span class="ph" style="background-image:url(../images/products/comfort-cream.png)"></span><div><h4>데일리 릴리프(밸런스) 컴포트 크림 <span class="vol">50 mL</span></h4><div class="why">민감성 피부 · 보습막으로 편안하게 마무리</div><div class="fact"><b>+110.79%</b>피부 수분량<small>1회 사용 직후 · 시오레 공식 제품 자료</small></div></div></div>
+      </div>
+    </div></div>
+    <div class="fade" style="bottom:126px"></div>
+    <div class="mbar"><span class="p">⤓ 결과 저장 (이미지·PDF)</span><div class="r"><span>직원에게 보여주기</span><span>처음으로</span></div></div>
+    <span class="mark" style="top:104px;right:96px">1</span><span class="mark" style="top:212px;right:22px">2</span><span class="mark" style="top:300px;right:22px">3</span><span class="mark" style="bottom:108px;right:20px">4</span>
+  </div></div><div class="pcap">화면 1 · 결과 첫 화면<small>열자마자 내 피부 + 추천 3종 + 근거가 한눈에</small></div></div>
+
+  <!-- 화면 2: 아래로 스크롤 -->
+  <div class="pcol"><div class="phone"><div class="scr">
+    <div class="tb"><img src="../images/brand/siore-logo-official-black.png"><div class="lg"><i class="on">KR</i><i>EN</i><i>繁</i><i>简</i><i>日</i></div></div>
+    <div class="m-body"><div class="card" style="border-radius:0 0 22px 22px;padding-top:6px">
+      <div class="mrx" style="border-bottom:0;padding-top:0"><span class="step rel">3</span><span class="ph" style="background-image:url(../images/products/comfort-cream.png)"></span><div><h4>데일리 릴리프(밸런스) 컴포트 크림 <span class="vol">50 mL</span></h4><div class="why">민감성 피부 · 보습막으로 편안하게 마무리</div><div class="fact"><b>+110.79%</b>피부 수분량<small>1회 사용 직후 · 시오레 공식 제품 자료</small></div></div></div>
+      <div class="msec"><span class="mono">03 · 사용법</span>
+        <div class="mam"><div class="d"><b>☀ 아침</b>토너 → 크림 → 선크림</div><div class="n"><b>☾ 저녁</b>토너 → 세럼 → 크림</div></div>
+        <div style="display:flex;gap:8px;align-items:center;margin-top:8px;border:1px dashed #d9bfb1;border-radius:10px;padding:8px 10px;background:#fffaf6"><span class="ph" style="width:38px;height:38px;background-image:url(../images/products/cleansing.png)"></span><div style="font-size:11.5px;line-height:1.4"><b style="color:var(--cu);font-size:10px;letter-spacing:.08em">밤에 추가하면 좋아요</b><br><b>NMN 하이드로 캡슐 클렌징 밀크</b></div></div></div>
+      <div class="staffbtn"><span style="font-size:22px">🧾</span><div><b>직원에게 보여주기</b><small>제품 사진 + 한국어 이름을 크게 보여줘요</small></div><span class="ar">›</span></div>
+      <p class="dis" style="margin-top:8px">자가 문진 기반 화장품 상담이며 진단이 아니에요. 가격은 약국마다 달라요.</p>
+    </div>
+    <div class="more"><span class="mono" style="margin:4px 4px 0">더 보기 · 필요할 때만 펼쳐요</span>
+      <div>📊<span>피부 위치·고민 그래프<small>입체 그래프 · 4축 피부 코드 자세히</small></span><i>＋</i></div>
+      <div>🔬<span>추천 이유·임상 근거 자세히<small>제품별 시험 조건·전체 수치</small></span><i>＋</i></div>
+      <div>🧴<span>다른 구성 보기<small>프리미엄 5종 · 1PICK · 약사 추천 세트</small></span><i>＋</i></div>
+    </div></div>
+    <div class="mbar"><span class="p">⤓ 결과 저장 (이미지·PDF)</span><div class="r"><span>상담기록 저장</span><span>처음으로</span></div></div>
+    <span class="mark" style="top:330px;right:22px">5</span><span class="mark" style="top:452px;right:22px">6</span><span class="mark" style="top:548px;right:22px">7</span>
+  </div></div><div class="pcap">화면 2 · 아래로 내리면<small>사용법 → 직원에게 보여주기 → 나머지는 '더 보기'로 접힘</small></div></div>
+
+  <!-- 화면 3: 직원에게 보여주기 -->
+  <div class="pcol"><div class="phone"><div class="scr">
+    <div class="staff-full">
+      <div class="x"><img src="../images/brand/siore-logo-official-black.png" style="height:17px"><span>✕</span></div>
+      <span class="mono" style="display:block;margin-top:14px">FOR STAFF · 직원 확인용</span>
+      <h2>이 제품 3개 주세요</h2>
+      <div class="info">고객 언어: 한국어<br>고민: ① 안티에이징 ② 피지 · 피부: 복합성·민감성</div>
+      <div class="it"><span class="n">1</span><span class="ph" style="background-image:url(../images/products/bubble-toner.png)"></span><span><b>NMN 프레쉬 버블 토너</b><small>145 mL · NMN 라인</small></span></div>
+      <div class="it"><span class="n">2</span><span class="ph" style="background-image:url(../images/products/serum.png)"></span><span><b>NMN 인텐시브 세럼</b><small>50 mL · NMN 라인</small></span></div>
+      <div class="it"><span class="n">3</span><span class="ph" style="background-image:url(../images/products/comfort-cream.png)"></span><span><b>데일리 릴리프(밸런스) 컴포트 크림</b><small>50 mL · 밸런스 라인</small></span></div>
+      <p class="tip">응대 팁: 밤 클렌징 밀크를 함께 권하면 루틴이 완성돼요.</p>
+    </div>
+    <span class="mark" style="top:150px;right:22px">8</span>
+  </div></div><div class="pcap">화면 3 · '직원에게 보여주기'를 누르면<small>휴대폰을 직원에게 내밀면 끝 — 말이 안 통해도 OK</small></div></div>
+</div>
+
+<div class="legend">
+  <div><span class="mk">1</span><b>저장 버튼을 맨 위에</b> — 결과를 보자마자 저장. A4 한 장(①)이 그대로 저장돼요</div>
+  <div><span class="mk">2</span><b>내 피부 한 줄</b> — 피부 코드 + 타입 + 고른 고민만. 그래프는 '더 보기'로</div>
+  <div><span class="mk">3</span><b>추천 3종 + 이유 + 근거</b> — 제품마다 '어떤 고민에' + 대표 수치 1개 + 시험 조건</div>
+  <div><span class="mk">4</span><b>하단 고정 버튼</b> — 저장 / 직원에게 보여주기 / 처음으로 (지금 4개 → 3개로 정리)</div>
+  <div><span class="mk">5</span><b>사용법 한 줄</b> — 아침·저녁 순서 + 밤 추가 제품 1개(객단가 ↑)</div>
+  <div><span class="mk">6</span><b>직원에게 보여주기</b> — R3 절취 칸을 휴대폰에선 버튼으로. 누르면 화면 3</div>
+  <div><span class="mk">7</span><b>더 보기 3개</b> — 지금 있는 그래프·임상 근거·다른 구성은 지우지 않고 접어 둬요</div>
+  <div><span class="mk">8</span><b>직원용 전체 화면</b> — 큰 사진 + 한국어 이름 + 응대 팁. 외국어 고객도 화면만 보여주면 돼요</div>
+  <div style="background:#fff2ea"><b>지금과 달라지는 점</b><br>결과 첫 화면: 약 6화면 → <b>1.5화면</b> · 결과 버튼 39개 → <b>약 8개</b> (나머지는 '더 보기' 안)</div>
+</div>
+</div></body></html>
