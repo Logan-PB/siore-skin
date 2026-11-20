@@ -146,3 +146,5 @@ body[data-page=products] .pc-hero + .sku-entry{margin-top:10px}
 .pc-split{grid-template-columns:1fr;margin:-26px 14px 0}.pc-side.ps-rel{border-left:0;border-top:1px solid #E4DCD6}.pc-thumbs,.ps-rel .pc-thumbs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px}.pc-thumbs button{flex:0 0 31%;scroll-snap-align:start}}
 @media(max-width:650px){.pc-side{padding:16px 14px}.pc-side-h b{font-size:14px}.pc-side-h small{display:none}.pc-thumbs span{height:76px}.pc-thumbs img{max-height:72px}.pc-thumbs b{font-size:11.5px}.pc-side-tag{font-size:9px;padding:6px 10px;bottom:38px}}
 .pc-side-tag{display:none!important}
+.rrp{display:block;margin-top:6px;font-size:11px;color:#8A7F79;font-style:normal}.rrp b{color:#1F1B19;font-size:13px}
+.pc-thumbs .rrp{margin-top:2px;font-size:10px}.pc-thumbs .rrp b{font-size:11.5px}
