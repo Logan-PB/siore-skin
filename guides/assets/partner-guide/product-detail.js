@@ -7,7 +7,8 @@ const won=n=>n?n.toLocaleString('ko-KR')+'원':'';
 let cur=0,tx=null;
 /* 제품별 인증 (상담링크 인증서·시험결과표·리플렛 기준) */
 const CERT_META={dermatest:['dermatest-excellent-2025','Dermatest EXCELLENT'],irritation:['cert-irritation','피부자극지수 0.00'],noncomedo:['cert-noncomedo','논코메도제닉']};
-const CERTS={0:['irritation','noncomedo'],1:['irritation'],2:['dermatest','irritation'],3:['irritation'],4:['irritation'],5:['irritation'],6:['noncomedo'],7:['irritation','noncomedo'],8:['irritation','noncomedo'],9:[]};
+/* 더마테스트 EXCELLENT·자극지수 0.00: 스킨케어 전 제품 / 논코메도제닉: 클렌징밀크·리페어앰플·카밍수딩젤·컴포트크림 */
+const _B=['dermatest','irritation'],_N=[...['dermatest','irritation'],'noncomedo'];const CERTS={0:_N,1:_B,2:_B,3:_B,4:_B,5:_B,6:_N,7:_N,8:_N,9:[]};
 window.SIORE_CERTS=CERTS;window.SIORE_CERT_META=CERT_META;
 window.certBadges=(id,cls='cert-col')=>{const c=CERTS[id]||[];return c.length?`<span class="${cls}">${c.map(k=>`<span class="cert-b" title="${CERT_META[k][1]}"><img src="../images/cert/${CERT_META[k][0]}.png?v=2" alt="${CERT_META[k][1]}"></span>`).join('')}</span>`:'';};
 /* 제품별 인체적용시험 결과 카드 */
