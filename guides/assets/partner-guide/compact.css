@@ -148,3 +148,7 @@ body[data-page=products] .pc-hero + .sku-entry{margin-top:10px}
 .pc-side-tag{display:none!important}
 .rrp{display:block;margin-top:6px;font-size:11px;color:#8A7F79;font-style:normal}.rrp b{color:#1F1B19;font-size:13px}
 .pc-thumbs .rrp{margin-top:2px;font-size:10px}.pc-thumbs .rrp b{font-size:11.5px}
+.core-sum{display:inline-block;margin:12px 0 0!important;padding:8px 14px;border-radius:99px;background:#fff;border:1px solid #ead9cf;font-size:13px!important;color:#6f564c}.core-sum b{color:#8F4A35;font-size:15px}
+strong.rrp{display:block!important;position:static!important;height:auto!important;width:auto!important;margin-top:6px;font-weight:400;font-size:11px;color:#8A7F79}strong.rrp b{display:inline!important;margin:0!important;font-weight:700;color:#1F1B19;font-size:13px}
+.pc-thumbs strong.rrp{font-size:10px;margin-top:2px}.pc-thumbs strong.rrp b{font-size:12px}
+.pc-card strong.rrp{margin-top:8px;font-size:12px}.pc-card strong.rrp b{font-size:15px}
