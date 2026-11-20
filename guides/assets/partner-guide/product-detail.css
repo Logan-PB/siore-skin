@@ -49,3 +49,27 @@
 .pd-graphs{display:flex;gap:10px;overflow-x:auto;margin-top:12px;padding-bottom:6px;scroll-snap-type:x mandatory}.pd-graphs img{flex:0 0 auto;height:250px;width:auto;border-radius:10px;background:#F7F2EE;scroll-snap-align:start}
 @media(max-width:650px){.pd-stage .cert-col{left:auto;right:12px;top:60px;bottom:auto}.cert-b{width:38px;height:38px}.pd-graphs img{height:200px}}
 .pc-img{position:relative}.pc-img .cert-col{position:absolute;right:10px;top:10px}.pc-img .cert-b{width:38px;height:38px}@media(max-width:650px){.pc-img .cert-b{width:28px;height:28px;padding:2px}.pc-img .cert-col{gap:4px;right:6px;top:6px}}
+
+/* ===== 반응형 마감 (2026-11-20) ===== */
+/* 1) 단어 중간 줄바꿈 방지 · 가격 쪼개짐 방지 */
+h1,h2,h3,.section-head h2,.pc-name,.pc-focus,.starter-products b,.recommend-products b,.pd-name,.pd-head,.pc-thumbs b,.value-grid b,.pv-h1,.pc-head h2,.pc-head p,.pv-lead{word-break:keep-all;overflow-wrap:break-word}
+.rrp b,strong.rrp b,.pd-meta b,.core-sum b,.pv-proofs b{white-space:nowrap}
+.pd-meta{flex-wrap:wrap;row-gap:2px}
+/* 2) 제품·근거 첫 화면: 1180px 이하에서는 제목을 사진 위가 아닌 위쪽에 배치 */
+@media(max-width:1180px){
+ .pc-stage{height:auto!important;min-height:0!important;flex-direction:column}
+ .pc-photo-img{width:100%!important;height:auto!important;max-height:none;-webkit-mask-image:none!important;mask-image:none!important;order:2}
+ .pc-stage .pc-copy{position:relative!important;left:auto!important;top:auto!important;transform:none!important;max-width:none!important;padding:96px 42px 22px;background:#f6f0eb;order:1}
+ .pc-stage .pc-copy h1{flex-direction:row!important;flex-wrap:wrap;align-items:baseline;gap:4px 14px!important;font-size:40px}
+}
+@media(max-width:820px){.pc-stage .pc-copy{padding:24px 20px 18px}.pc-stage .pc-copy h1{flex-direction:column!important;font-size:32px}}
+@media(max-width:1180px) and (min-width:821px){.pc-split{margin-top:-30px}}
+/* 3) 320~380px 초소형 화면 */
+@media(max-width:380px){
+ main{padding-left:14px!important;padding-right:14px!important}
+ .pv-h1{font-size:29px!important}.section-head h2{font-size:22px!important}
+ .pc-grid{gap:7px}.pc-card{padding:8px 8px 10px}.pc-name{font-size:13px}.pc-kpi em{font-size:14px}
+ .pv-proofs b{font-size:16px}.pv-proofs span{font-size:10px}
+ .pd-body{padding:16px 14px 12px}.pd-name{font-size:19px}.pd-stats b{font-size:16px}
+ nav a{padding:7px 9px!important;font-size:11.5px!important}.wordmark{font-size:22px!important}
+}
