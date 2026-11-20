@@ -4629,7 +4629,7 @@ function detBadgeHtml(p) {
     {src:'images/cert/dermatest-excellent-2025.png', label:'DERMATEST'},
     {src:'images/cert/cert-irritation.png', label:'무자극'}
   ];
-  const hasNonComedo = p.claims.some(c => c.includes('논코메도제닉')) || /클렌징|세럼/.test(p.name);
+  const hasNonComedo = /클렌징|앰플|수딩 젤|수딩젤|컴포트/.test(p.name); /* 논코메도제닉: 클렌징밀크·리페어앰플·카밍수딩젤·컴포트크림 4종만 */
   if (hasNonComedo) {
     badges.push({src:'images/cert/cert-noncomedo.png', label:'논코메도제닉'});
   }
