@@ -112,3 +112,10 @@ body[data-page=products] .sku-entry-grid>button{background:#f8efe9;border-color:
 .pc-photo{background-color:#efefed;background-size:auto 100%;background-position:right center}
 @media(max-width:820px){.pc-photo{height:66.7vw;max-height:none;background-size:cover;background-position:center}}
 .pc-legend{max-width:420px}@media(max-width:820px){.pc-legend{max-width:none}}
+.starter-products{grid-template-columns:repeat(5,1fr)}.selection-dialog .recommend-products{grid-template-columns:repeat(5,1fr)}
+@media(max-width:820px){.starter-products{grid-template-columns:repeat(3,1fr)}.selection-dialog .recommend-products{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:650px){.starter-products,.selection-dialog .recommend-products{grid-template-columns:1fr 1fr}}
+.selection-dialog .recommend-products:has(article:nth-child(5)){grid-template-columns:repeat(5,1fr)!important;gap:9px}
+.selection-dialog .recommend-products:has(article:nth-child(5)) b{font-size:13px}
+@media(max-width:650px){.selection-dialog .recommend-products:has(article:nth-child(5)){grid-template-columns:1fr 1fr!important}}
+.recommend-products b,.starter-products b{word-break:keep-all}
