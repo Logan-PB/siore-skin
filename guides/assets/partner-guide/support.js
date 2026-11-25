@@ -1,0 +1,44 @@
+/* ───────── 시오레 약국 파트너 가이드 · 세팅/인플루언서/포스팅 지원 확장 ─────────
+   ✏️ 수정 포인트는 아래 SUPPORT_CONFIG 한 곳에 모았습니다. (문구·링크·조건만 바꾸면 화면 전체 반영) */
+const SUPPORT_CONFIG={
+  seedingForm:'https://docs.google.com/forms/d/e/1FAIpQLScBMYsK1Uu-9zJ6oon1CRINne1SjBeql7DoBhRhSs3ulPXq-Q/viewform',
+  phone:'01031093106',phoneLabel:'010-3109-3106',
+  /* 포스팅 지원 신청 조건 — 실제 운영 조건으로 바꿔 주세요 */
+  conditions:[
+    ['시오레 거래 약국','B2B몰 등업(약국 등급 승인)이 완료된 약국'],
+    ['시오레 진열 세팅','시오레 제품이 진열되어 촬영 가능한 약국'],
+    ['촬영·태그 협조','약국 내 촬영과 SNS 게시물 내 약국명·위치 노출에 동의'],
+  ],
+  conditionNote:'인플루언서 선정·방문 일정·채널은 마케팅팀 배정 상황에 따라 조정되며, 신청이 곧 확정은 아닙니다. 담당자가 확인 후 개별 안내드립니다.'
+};
+const REF='assets/partner-guide/assets/ref/';
+let SETUPS=[{"src": "ref/zone.jpg", "tag": "L · 브랜드존", "title": "아일랜드형 브랜드존", "desc": "NMN·DAILY RELIEF 라인을 한 공간에. 매장 중앙에서 브랜드를 경험하게 합니다.", "wide": true}, {"src": "ref/nmn.jpg", "tag": "M · 라인 매대", "title": "NMN LINE 매대", "desc": "제품별 효능 디바이더와 테스터로, 설명 없이도 고객이 먼저 고릅니다.", "wide": false}, {"src": "ref/relief.jpg", "tag": "M · 라인 매대", "title": "DAILY RELIEF 매대", "desc": "진정·보습 라인을 피부 고민별로 나눠 상담 동선을 짧게.", "wide": false}, {"src": "ref/counter.jpg", "tag": "S · 카운터", "title": "카운터 솔루션 진열", "desc": "계산대 앞 한 칸으로 시작하는 NMN 안티에이징 스테이션.", "wide": true}, {"src": "ref/best3.jpg", "tag": "S · 선반 1칸", "title": "Pharmacy BEST 3 선반", "desc": "핵심 3종 + 인증 배지 POP. 좁은 공간에서도 브랜드가 보입니다.", "wide": false}, {"src": "ref/rrp.jpg", "tag": "S · 엔드캡", "title": "외국인 상권 엔드캡", "desc": "통로 끝 집중 진열로 관광객 고객의 시선을 먼저 잡습니다.", "wide": false}];
+const SETUP_TYPES=[
+  ['S','공간이 좁을 때','카운터·선반 1칸','핵심 3~5종 + 아크릴 POP로 가볍게 시작'],
+  ['M','라인으로 보여줄 때','매대 1~2단','라인 디바이더·테스터·다국어 POP로 셀프 선택 유도'],
+  ['L','브랜드를 키울 때','브랜드존·아일랜드','전 라인 집중 진열로 대표 브랜드 공간 구성']
+];
+const INFLUENCERS=[
+  {name:'송오브스킨',handle:'Song Of Skin',fol:'약 127만',label:'K-뷰티 크리에이터',plat:'Instagram',img:'song.jpg',url:'https://www.instagram.com/reels/Dd4lUixvrSU/',feat:true},
+  {name:'tiffanymoonmd',handle:'@tiffanymoonmd',fol:'94만',label:'뷰티 전문가',plat:'Instagram',url:'https://www.instagram.com/p/Df4ycNRufeX/'},
+  {name:'aniichakhunashvili',handle:'@aniichakhunashvili',fol:'30.4만',label:'뷰티 크리에이터',plat:'Instagram',url:'https://www.instagram.com/reel/Df1if6boqVc/'},
+  {name:'kpharmacist_story',handle:'@kpharmacist_story',fol:'11.1만',label:'약사 · 약들약',plat:'Instagram',url:'https://www.instagram.com/reel/Df8da1tNaMs/'},
+  {name:'tiffanymoonmd',handle:'@tiffanymoonmd',fol:'94만',label:'숏폼 버전',plat:'TikTok',url:'https://www.tiktok.com/@tiffanymoonmd/video/7709529488521989407'}
+];
+const OWNER_QA=[
+  ['고객이 정말 찾을까요?','해외 뷰티 크리에이터·약사 채널에서 시오레가 소개되고 있고, 원하는 약국에는 방문 촬영 콘텐츠까지 연결해 드립니다.','support','인플루언서 사례 보기'],
+  ['진열 공간이 부족한데요.','카운터 한 칸(S)부터 매대(M), 브랜드존(L)까지 약국 공간에 맞춰 세팅을 제안합니다.','support','세팅 사례 보기'],
+  ['처음 들이는 재고가 부담돼요.','출고일 기준 90일 이내, 훼손되지 않은 정상 제품은 거래 조건에 따라 반품을 지원합니다. (기획출고 제품은 제한될 수 있음)','enrollment','거래 조건 보기'],
+  ['직원이 설명할 수 있을까요?','제품별 인체적용시험 근거, 피부 고민별 상담 링크, 다국어 POP·교육자료로 처음 응대하는 직원도 설명할 수 있게 돕습니다.','products','제품·근거 보기'],
+  ['가격이 흐트러지진 않나요?','지정 약국 내 판매 조건으로 공급하며 온라인 유통은 불가합니다. 권장 소비자가는 공식몰 판매가 기준입니다.','enrollment','거래 조건 보기']
+];
+const arrow='<i aria-hidden="true">→</i>';
+function ownerCheck(){return `<section class="owner-check"><div class="section-head"><span class="overline">OWNER'S CHECKLIST</span><h2>국장님이 먼저 물으시는<br>다섯 가지에 답합니다.</h2><p>새 브랜드를 들일 때 따지시는 것 — 수요, 공간, 재고, 응대, 가격. 시오레의 답부터 확인하세요.</p></div><div class="qa-grid">${OWNER_QA.map(([q,a,to,cta],i)=>`<article><span class="qa-n">Q${i+1}</span><b>${q}</b><p>${a}</p><a href="#${to}">${cta} ${arrow}</a></article>`).join('')}</div></section>`;}
+function supportTeaser(){return `<section class="support-teaser"><div class="st-copy"><span class="overline">AFTER YOUR FIRST ORDER</span><h2>입점은 시작일 뿐,<br>팔리는 매대까지 함께 만듭니다.</h2><ul><li><b>VMD 세팅</b><span>공간 맞춤 S·M·L 진열 제안</span></li><li><b>인플루언서 포스팅</b><span>약국 방문 촬영 · SNS 후기 연결</span></li><li><b>다국어 상담 도구</b><span>KR·EN·中·日 POP·상담 링크</span></li></ul><div class="st-cta"><a class="primary" href="#support">세팅 사례 · 인플루언서 지원 보기 →</a><a href="${SUPPORT_CONFIG.seedingForm}" target="_blank" rel="noopener">포스팅 지원 신청 ↗</a></div></div><div class="st-photos"><img src="${REF}zone.jpg" alt="시오레 브랜드존 세팅"><img src="${REF}nmn.jpg" alt="NMN 라인 매대 세팅"><img src="${REF}song.jpg" alt="인플루언서 시오레 소개 콘텐츠"></div></section>`;}
+function closingCta(){return `<section class="closing-cta"><span class="overline">START WITH SIORÉ</span><h2>우리 약국에 맞는 시오레,<br>지금 시작해 보세요.</h2><p>B2B몰 가입 → 등록증 회신 → 등급 승인 → 재로그인 후 첫 주문. 세팅과 포스팅 지원은 담당자가 함께 준비합니다.</p><div class="cc-actions"><a class="primary" href="${MALL}" target="_blank" rel="noopener">B2B몰 가입하기 ↗</a><a href="#enrollment">입점 절차 자세히</a><a href="tel:${SUPPORT_CONFIG.phone}">담당자 전화 ${SUPPORT_CONFIG.phoneLabel}</a><a href="sms:${SUPPORT_CONFIG.phone}">문자 문의</a></div></section>`;}
+function support(){return `<section class="sp-hero"><div><span class="overline">PARTNER SUPPORT</span><h1>약국이 혼자 팔지 않도록,<br><em>진열부터 SNS까지</em> 함께합니다.</h1><p>실제 거래약국의 세팅 사례와 인플루언서 콘텐츠를 확인하고, 우리 약국에 맞는 지원을 신청하세요.</p><nav class="sp-jump"><a href="#" data-jump="sp-setup">01 세팅 사례</a><a href="#" data-jump="sp-influencer">02 인플루언서 사례</a><a href="#" data-jump="sp-apply">03 포스팅 지원 신청</a></nav></div><img src="${REF}zone.jpg" alt="시오레 약국 브랜드존"></section>
+<section class="sp-block" id="sp-setup"><div class="section-head"><span class="overline">01 · SETTING REFERENCE</span><h2>실제 시오레 세팅 사례</h2><p>사진을 누르면 크게 볼 수 있습니다. 공간과 집기 규격에 맞춰 구성을 제안하며, 지원 범위는 약국별 상담으로 정합니다.</p></div><div class="ref-gallery">${SETUPS.map((s,i)=>`<${EDIT?'div':'button'} class="ref${s.wide?' wide':''}" data-ref="${i}" data-setup="${i}"><img src="${s.preview||asset+s.src}" alt="${s.title}" loading="lazy"><span class="ref-cap"><em>${s.tag}</em><b>${s.title}</b><small>${s.desc}</small></span></${EDIT?'div':'button'}>`).join('')}${window.editAddTile?editAddTile():''}</div><div class="setup-types">${SETUP_TYPES.map(t=>`<article><span class="sz">${t[0]}</span><div><b>${t[1]}</b><small>${t[2]}</small><p>${t[3]}</p></div></article>`).join('')}</div></section>
+<section class="sp-block" id="sp-influencer"><div class="section-head"><span class="overline">02 · INFLUENCER & CONTENTS</span><h2>SNS에서 먼저 만나고,<br>약국에서 상담받게 합니다.</h2><p>국내외 뷰티 크리에이터·약사 채널이 시오레를 소개하고 있습니다. 거래 약국에는 인플루언서 방문 촬영을 연결해, 콘텐츠를 본 고객이 우리 약국으로 찾아오게 합니다.</p></div><div class="inf-layout"><a class="inf-feature" href="${INFLUENCERS[0].url}" target="_blank" rel="noopener"><img src="${REF}${INFLUENCERS[0].img}" alt="송오브스킨 시오레 소개 영상"><span class="inf-play">▶</span><div><em>FEATURED · ${INFLUENCERS[0].plat}</em><b>${INFLUENCERS[0].name} <small>${INFLUENCERS[0].handle}</small></b><span>${INFLUENCERS[0].fol} 팔로워 · ${INFLUENCERS[0].label}</span></div></a><div class="inf-side"><a class="inf-visit" href="#" data-ref="visit"><img src="${REF}visit.jpg" alt="부산 블루랩약국 방문 콘텐츠"><div><em>PHARMACY VISIT</em><b>부산 블루랩약국 방문 사례</b><span>약국 방문·촬영 → 중화권 SNS 후기로 연결</span></div></a><ul class="inf-list">${INFLUENCERS.slice(1).map(c=>`<li><a href="${c.url}" target="_blank" rel="noopener"><i class="${c.plat==='TikTok'?'tt':'ig'}">${c.plat==='TikTok'?SNS_TT:SNS_IG}</i><span><b>${c.handle}</b><small>${c.label}</small></span><strong>${c.fol}</strong><em>↗</em></a></li>`).join('')}</ul></div></div><p class="fine">팔로워 수는 외부 집계 기준이며 시점에 따라 달라질 수 있습니다.</p><ol class="inf-flow">${[['신청서 작성','아래 지원서로 약국 정보 제출'],['조건 확인','담당자가 거래·진열 상태 확인'],['인플루언서 배정','마케팅팀이 채널·일정 매칭'],['방문 촬영·게시','약국 방문 후 SNS 후기 업로드']].map((f,i)=>`<li><span>0${i+1}</span><b>${f[0]}</b><small>${f[1]}</small></li>`).join('')}</ol></section>
+<section class="sp-apply" id="sp-apply"><div><span class="overline">03 · POSTING SUPPORT</span><h2>인플루언서 포스팅 지원,<br>우리 약국도 신청하세요.</h2><p>아래 조건을 충족하는 시오레 거래 약국이라면 신청할 수 있습니다.</p><a class="apply-btn" href="${SUPPORT_CONFIG.seedingForm}" target="_blank" rel="noopener">포스팅 지원 신청서 작성 ↗</a><small>약 2~3분 · 구글폼으로 열립니다</small></div><div class="cond"><b>신청 조건</b><ul>${SUPPORT_CONFIG.conditions.map(c=>`<li><i>${ico('check')}</i><span><b>${c[0]}</b><small>${c[1]}</small></span></li>`).join('')}</ul><p>${SUPPORT_CONFIG.conditionNote}</p></div></section>${closingCta()}`;}
+function openRef(key){const d=document.getElementById('detail');d.classList.remove('selection-dialog');d.classList.add('ref-dialog');const s=key==='visit'?{src:'ref/visit.jpg',title:'부산 블루랩약국 방문 사례',desc:'약국 방문·촬영을 중화권 SNS 후기로 연결한 사례입니다.',tag:'PHARMACY VISIT'}:SETUPS[Number(key)];document.getElementById('detail-body').innerHTML=`<img src="${s.preview||asset+s.src}" alt="${s.title}"><div class="ref-dbody"><span class="overline">${s.tag}</span><h2>${s.title}</h2><p>${s.desc}</p></div>`;d.showModal();}
+function bindSupport(){document.querySelectorAll('[data-ref]').forEach(b=>b.onclick=e=>{e.preventDefault();openRef(b.dataset.ref)});const d=document.getElementById('detail');if(!d.dataset.sb){d.dataset.sb=1;d.addEventListener('close',()=>d.classList.remove('ref-dialog'));d.addEventListener('click',e=>{if(e.target===d)d.close()});}}
