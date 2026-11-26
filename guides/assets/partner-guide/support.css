@@ -152,3 +152,12 @@ dialog.ref-dialog .close{position:absolute;top:10px;right:10px;z-index:2;width:3
 .editing [data-ek].ed-long{outline:2px solid #d9452b!important;background:#d9452b12}
 .ed-mini{position:absolute;z-index:55}.ed-mini button{padding:6px 11px;border-radius:8px;border:0;background:#1f1512;color:#fff;font-size:12px;font-weight:700;box-shadow:0 6px 16px #0004}
 .editing .ed-legend{}
+/* 글자색 팔레트 (공개 화면에도 적용) */
+.hl{font-style:normal}
+.hl-copper{color:#a5684f!important}.hl-deep{color:#3b2620!important}.hl-peach{color:#f2c3ad!important}.hl-red{color:#c4452c!important}.hl-bold{font-weight:800!important}
+.ed-pal{display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border:1px solid #ffffff30;border-radius:10px}
+.ed-pal em{font-style:normal;font-size:11px;color:#d9c6bc;margin-right:2px}
+.ed-bar .ed-pal button{min-height:0;width:24px;height:24px;padding:0;border-radius:50%;background:var(--c);border:2px solid #ffffffcc}
+.ed-bar .ed-pal button.ed-b,.ed-bar .ed-pal button.ed-x{border-radius:7px;background:#ffffff18;border:1px solid #ffffff50;font-size:12px;width:26px}
+.ed-bar .ed-pal button:hover{transform:scale(1.15)}
+@media(max-width:1500px){.ed-bar .ed-hint{display:none}}
