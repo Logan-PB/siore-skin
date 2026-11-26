@@ -5,17 +5,17 @@
 const GH={owner:'logan-pb',repo:'siore-skin',branch:'main',base:'guides/assets/partner-guide/'};
 let HERO={eyebrow:'약사가 설계한 바르는 피부 영양제',title:'고객이 묻고,<br><em>약국이 설명할 수 있는</em><br>스킨케어.',lead:'약사가 설계한 제품과 피부 고민별 상담 도구, 제품별 인체적용시험 근거를 하나의 약국 상담 경험으로 연결합니다.'};
 const EDIT=new URLSearchParams(location.search).has('edit');
-let pendingUploads={};/* src → base64 */let dirty=false;
-async function loadContent(){try{const r=await fetch('assets/partner-guide/content.json?t='+Date.now(),{cache:'no-store'});if(r.ok){const c=await r.json();if(c.hero)HERO=c.hero;if(Array.isArray(c.setups)&&c.setups.length)SETUPS=c.setups;}}catch(e){}if(EDIT)setupEditor();}
+let TEXTS={};let pendingUploads={};/* src → base64 */let dirty=false;
+async function loadContent(){try{const r=await fetch('assets/partner-guide/content.json?t='+Date.now(),{cache:'no-store'});if(r.ok){const c=await r.json();if(c.hero)HERO=c.hero;if(Array.isArray(c.setups)&&c.setups.length)SETUPS=c.setups;if(c.texts)TEXTS=c.texts;}}catch(e){}watchApp();if(EDIT)setupEditor();}
 const clean=h=>h.replace(/<(?!\/?(br|em)\b)[^>]*>/gi,'').replace(/<(br|em)\b[^>]*>/gi,'<$1>').replace(/&nbsp;/g,' ').trim();
 function markDirty(){dirty=true;const b=document.getElementById('ed-save');if(b){b.disabled=false;b.textContent='저장하기 ●'}}
 function editAddTile(){return EDIT?`<label class="ed-add"><input type="file" accept="image/*" multiple hidden><span>＋</span><b>세팅 사진 추가</b><small>여러 장 선택 가능 · 자동 압축</small></label>`:''}
-function setupEditor(){document.body.classList.add('editing');const bar=document.createElement('div');bar.className='ed-bar';bar.innerHTML=`<b>✏️ 편집모드</b><span class="ed-hint">글자를 눌러 바로 수정 · 사진은 '세팅·지원' 탭에서 추가/삭제</span><button id="ed-em" title="선택한 글자를 강조색으로">강조색</button><button id="ed-key">저장 열쇠</button><button id="ed-save" class="ed-primary" disabled>저장됨</button><a href="${location.pathname}${location.hash}" class="ed-exit">나가기</a>`;document.body.appendChild(bar);
+function setupEditor(){document.body.classList.add('editing');const bar=document.createElement('div');bar.className='ed-bar';bar.innerHTML=`<b>✏️ 편집모드</b><span class="ed-hint">점선 글자를 눌러 수정 · 가격·연락처는 잠금 · 사진은 '세팅·지원' 탭</span><button id="ed-em" title="선택한 글자를 강조색으로">강조색</button><button id="ed-key">저장 열쇠</button><button id="ed-save" class="ed-primary" disabled>저장됨</button><a href="${location.pathname}${location.hash}" class="ed-exit">나가기</a>`;document.body.appendChild(bar);
  document.getElementById('ed-key').onclick=askToken;
  document.getElementById('ed-save').onclick=saveAll;
- document.getElementById('ed-em').onmousedown=e=>{e.preventDefault();const sel=getSelection();if(!sel.rangeCount||sel.isCollapsed)return alert('대표 문구에서 강조할 글자를 먼저 드래그해 주세요.');const r=sel.getRangeAt(0);const host=r.commonAncestorContainer.parentElement?.closest('[data-hero]');if(!host)return alert('대표 문구 안의 글자만 강조할 수 있어요.');const inEm=r.commonAncestorContainer.parentElement.closest('em');if(inEm){inEm.replaceWith(...inEm.childNodes)}else{const em=document.createElement('em');em.appendChild(r.extractContents());r.insertNode(em)}HERO[host.dataset.hero]=clean(host.innerHTML);markDirty();};
+ document.getElementById('ed-em').onmousedown=e=>{e.preventDefault();const sel=getSelection();if(!sel.rangeCount||sel.isCollapsed)return alert('대표 문구에서 강조할 글자를 먼저 드래그해 주세요.');const r=sel.getRangeAt(0);const host=r.commonAncestorContainer.parentElement?.closest('[data-hero],[data-ek]');if(!host)return alert('편집 가능한 글자(점선) 안에서만 강조할 수 있어요.');const inEm=r.commonAncestorContainer.parentElement.closest('em');if(inEm){inEm.replaceWith(...inEm.childNodes)}else{const em=document.createElement('em');em.appendChild(r.extractContents());r.insertNode(em)}host.dispatchEvent(new Event('input'));};
  window.addEventListener('beforeunload',e=>{if(dirty){e.preventDefault();e.returnValue=''}});
- new MutationObserver(bindEditor).observe(document.getElementById('app'),{childList:true});}
+}
 function bindEditor(){if(!EDIT)return;
  document.querySelectorAll('[data-hero]').forEach(el=>{if(el.dataset.ed)return;el.dataset.ed=1;el.contentEditable='true';el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(el.dataset.hero==='title')document.execCommand('insertLineBreak')}});el.addEventListener('input',()=>{HERO[el.dataset.hero]=clean(el.innerHTML);markDirty()})});
  document.querySelectorAll('[data-setup]').forEach(card=>{if(card.dataset.ed)return;card.dataset.ed=1;const i=Number(card.dataset.setup);card.onclick=e=>e.preventDefault();
@@ -31,8 +31,27 @@ const b64=s=>btoa(unescape(encodeURIComponent(s)));
 async function saveAll(){if(!token()&&!askToken())return;const btn=document.getElementById('ed-save');btn.disabled=true;
  try{const used=new Set(SETUPS.map(s=>s.src));const ups=Object.keys(pendingUploads).filter(k=>used.has(k));let n=0;
   for(const src of ups){btn.textContent=`사진 올리는 중 ${++n}/${ups.length}`;await gh(src,'PUT',{message:'편집모드: 세팅 사진 추가',content:pendingUploads[src],branch:GH.branch});delete pendingUploads[src]}
-  btn.textContent='저장 중…';const cur=await gh('content.json');const data={hero:HERO,setups:SETUPS.map(({preview,...s})=>s)};
+  btn.textContent='저장 중…';const cur=await gh('content.json');const data={hero:HERO,setups:SETUPS.map(({preview,...s})=>s),texts:TEXTS};
   await gh('content.json','PUT',{message:'편집모드: 대표 문구·세팅 사진 수정',content:b64(JSON.stringify(data,null,1)),sha:cur?.sha,branch:GH.branch});
   dirty=false;btn.textContent='저장됨 ✓';toast('저장 완료! 약 1~2분 뒤 약국용 링크에 반영돼요.')}
  catch(e){btn.disabled=false;btn.textContent='다시 저장';toast('⚠️ '+e.message,true);if(/열쇠/.test(e.message))askToken()}}
 function toast(m,bad){const t=document.createElement('div');t.className='ed-toast'+(bad?' bad':'');t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),5000)}
+
+/* ───── 전 페이지 문구 편집 (레이아웃 보호) ───── */
+const INLINE=new Set(['BR','EM','B','STRONG','SMALL','I','SPAN','SUP','SUB']);
+const LOCK_SEL='header,.ed-bar,[data-hero],.ref,.ed-add,svg,script,style,input,textarea,select,img,.inf-list strong';
+const LOCK_TXT=/(\d[\d,]*\s*원)|₩|0\d{1,2}-?\d{3,4}-?\d{4}|https?:|\.co\.kr|\.com\b|@\w|\d+\s*ppm|\d+\.\d+|^\s*[\d,.+%만]+\s*$/;
+const norm=h=>h.replace(/\s+/g,' ').replace(/ ?<br[^>]*> ?/gi,'<br>').trim();
+const cleanRich=h=>norm(h.replace(/<(?!\/?(br|em|b|strong|small|i|span|sup|sub)\b)[^>]*>/gi,'').replace(/<(\w+)[^>]*?(\sclass="[^"]*")?[^>]*>/g,(m,t,c)=>`<${t}${c||''}>`).replace(/&nbsp;/g,' '));
+function textUnits(root){const out=[];root.querySelectorAll('*').forEach(el=>{if(el.closest(LOCK_SEL)||el.closest('[data-ek-u]'))return;if(INLINE.has(el.tagName)&&el.parentElement&&el.parentElement.closest('[data-ek-u]'))return;const kids=[...el.childNodes];if(!kids.some(n=>n.nodeType===3&&n.textContent.trim()))return;if(!kids.every(n=>n.nodeType===3||(n.nodeType===1&&INLINE.has(n.tagName)&&![...n.children].some(c=>c.tagName!=='BR'))))return;const txt=el.textContent.trim();if(txt.length<2||LOCK_TXT.test(txt))return;el.setAttribute('data-ek-u','');out.push(el)});return out}
+let applying=false;
+function applyTexts(){const app=document.getElementById('app');if(!app)return;applying=true;textUnits(app).forEach(el=>{if(el.dataset.ek!==undefined)return;const key=norm(el.innerHTML);el.dataset.ek=key;if(TEXTS[key]!=null){el.innerHTML=TEXTS[key];if(EDIT)el.classList.add('ed-changed')}});if(EDIT){bindEditor();bindTexts()}applying=false}
+function watchApp(){const app=document.getElementById('app');new MutationObserver(()=>{if(!applying)applyTexts()}).observe(app,{childList:true,subtree:true});applyTexts()}
+let miniBar;
+function bindTexts(){document.querySelectorAll('[data-ek]').forEach(el=>{if(el.dataset.eb)return;el.dataset.eb=1;const key=el.dataset.ek;const origLen=el.textContent.trim().length;const max=Math.max(origLen*1.6+8,14);el.contentEditable='true';
+ el.addEventListener('click',e=>{e.preventDefault();e.stopPropagation()},true);
+ el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(e.shiftKey)document.execCommand('insertLineBreak');else el.blur()}if(e.key==='Escape')el.blur()});
+ el.addEventListener('paste',e=>{e.preventDefault();document.execCommand('insertText',false,(e.clipboardData||window.clipboardData).getData('text').replace(/\s+/g,' '))});
+ el.addEventListener('input',()=>{const len=el.textContent.trim().length;el.classList.toggle('ed-long',len>max);if(len>max){toast(`원래보다 많이 길어서 레이아웃이 흐트러질 수 있어요 (권장 ${Math.round(max)}자 이내)`,true)}const v=cleanRich(el.innerHTML);if(v===key){delete TEXTS[key];el.classList.remove('ed-changed')}else{TEXTS[key]=v;el.classList.add('ed-changed')}markDirty();placeMini(el)});
+ el.addEventListener('focus',()=>placeMini(el));el.addEventListener('blur',()=>setTimeout(()=>{if(miniBar&&!miniBar.matches(':hover'))miniBar.hidden=true},150))})}
+function placeMini(el){if(!miniBar){miniBar=document.createElement('div');miniBar.className='ed-mini';miniBar.innerHTML='<button>↺ 원래 문구로</button>';document.body.appendChild(miniBar)}const key=el.dataset.ek;miniBar.hidden=!(key in TEXTS);if(miniBar.hidden)return;const r=el.getBoundingClientRect();miniBar.style.top=(window.scrollY+r.top-38)+'px';miniBar.style.left=(window.scrollX+r.left)+'px';miniBar.firstChild.onmousedown=e=>{e.preventDefault();delete TEXTS[key];el.innerHTML=key;el.classList.remove('ed-changed','ed-long');miniBar.hidden=true;markDirty()}}

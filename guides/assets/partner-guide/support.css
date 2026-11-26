@@ -145,3 +145,10 @@ dialog.ref-dialog .close{position:absolute;top:10px;right:10px;z-index:2;width:3
 .ed-toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:60;background:#2e7d4f;color:#fff;padding:13px 20px;border-radius:12px;font-size:14px;font-weight:700;box-shadow:0 10px 30px #0004;max-width:90vw;text-align:center}
 .ed-toast.bad{background:#b3261e}
 @media(max-width:650px){.ed-bar .ed-hint{display:none}.ed-bar{bottom:10px;padding:8px}}
+.editing [data-ek]{outline:1px dashed #e08a6399;outline-offset:3px;border-radius:3px;cursor:text}
+.editing [data-ek]:hover{outline-color:#e08a63;background:#e08a630d}
+.editing [data-ek]:focus{outline:2px solid #e08a63;background:#fff9}
+.editing [data-ek].ed-changed{outline:1.5px solid #2e9d5f;background:#2e9d5f0d}
+.editing [data-ek].ed-long{outline:2px solid #d9452b!important;background:#d9452b12}
+.ed-mini{position:absolute;z-index:55}.ed-mini button{padding:6px 11px;border-radius:8px;border:0;background:#1f1512;color:#fff;font-size:12px;font-weight:700;box-shadow:0 6px 16px #0004}
+.editing .ed-legend{}
