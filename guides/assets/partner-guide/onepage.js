@@ -1,7 +1,7 @@
 /* ───────── 시오레 입점 신청 약국 전달용 원페이지 (화이트 · 오렌지) ─────────
    ✏️ 접수 주소(JOIN_ENDPOINT)는 Apps Script 웹앱 배포 후 넣습니다. 비어 있으면 담당자 연락 안내로 대체됩니다. */
 const OP={
-  JOIN_ENDPOINT:'',
+  JOIN_ENDPOINT:'https://script.google.com/macros/s/AKfycby4jFHBBJ7lCAY9dvHk77IMwZTrkubrjND0mYk3BteQWFL9-utUXQRxTpFf-8Pmb5_S/exec',
   phone:'01031093106',phoneLabel:'010-3109-3106',
   mall:'https://siorekorea.co.kr/',
   sns:[['Instagram','@siore_global','https://www.instagram.com/siore_global/'],['TikTok','@siore_global','https://www.tiktok.com/@siore_global'],['공식몰','siore.co.kr','https://www.siore.co.kr'],['Amazon','amazon.com/siore','https://www.amazon.com/siore']]
