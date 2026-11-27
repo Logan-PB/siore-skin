@@ -68,15 +68,15 @@ return `<div class="op">
 <a class="op-link" href="#enrollment">입점 절차 · 거래 조건 자세히 →</a></section>
 
 <section id="op-join" class="op-sec op-join"><div class="op-wrap">
-<p class="op-eye">07 · JOIN B2B MALL</p><h2>B2B몰 가입, 두 단계면 끝나요</h2>
-<p class="op-p">로그인과 주문은 시오레 B2B몰에서 이루어지기 때문에, 회원가입은 B2B몰 화면에서 해 주셔야 합니다. 가입하신 뒤 이 페이지로 돌아와 아이디와 등록증을 보내 주시면 바로 약국 등급으로 승인해 드립니다.</p>
+<p class="op-eye">07 · JOIN B2B MALL</p><h2>B2B몰 가입 → 승인 요청, 두 단계면 끝나요</h2>
+<p class="op-p">로그인과 주문은 시오레 B2B몰에서 이루어지기 때문에, <b>회원가입은 아래 버튼으로 열리는 시오레 B2B몰(카페24) 화면에서 진행</b>됩니다. 가입을 마치신 뒤 이 페이지로 돌아와 STEP 2로 아이디와 등록증을 보내 주시면, 확인 후 바로 약국 등급으로 승인해 드립니다.</p>
 <div class="op-join-in">
 <div class="op-j1"><span class="op-jn">STEP 1</span><b class="op-jt">B2B몰 회원가입</b>
 <ul class="op-tips"><li><b>회원구분</b> 개인회원으로 가입</li><li><b>아이디</b> 영문 소문자·숫자 4~16자 <small>(이메일 주소가 아니라 따로 정하는 아이디예요)</small></li><li><b>비밀번호</b> 대소문자·숫자·특수문자 중 2가지 이상, 10~16자 · 확인용으로 한 번 더 입력</li><li><b>그 외</b> 비밀번호 확인 질문·답변, 이름, 주소, 전화, 휴대전화, 이메일</li></ul>
 <a class="op-btn lg" href="${OP.mall}member/agreement.html" target="_blank" rel="noopener">B2B몰 회원가입 하러 가기 ↗</a>
 <p class="op-sub">이미 회원이신가요? <a href="${OP.mall}member/login.html" target="_blank" rel="noopener" class="op-u">B2B몰 로그인 ↗</a></p></div>
 <form class="op-form" id="op-form" novalidate>
-<b class="op-form-h"><span class="op-jn">STEP 2</span> 아이디와 등록증 보내기</b>
+<b class="op-form-h"><span class="op-jn">STEP 2</span> 가입 후 승인 요청하기</b><p class="op-sub" style="margin:-4px 0 6px">B2B몰 가입만 하시면 담당자가 알 수 없어요. 여기서 보내 주셔야 빠르게 승인됩니다.</p>
 <label><span class="op-lb">약국명 <i>*</i></span><input name="pharmacy" required placeholder="○○약국" autocomplete="organization"></label>
 <label><span class="op-lb">대표약사 성함 <i>*</i></span><input name="owner" required autocomplete="name"></label>
 <label><span class="op-lb">B2B몰 아이디 <i>*</i></span><input name="mallId" required placeholder="STEP 1에서 만든 아이디" autocapitalize="off" autocomplete="username"></label>
@@ -86,13 +86,13 @@ return `<div class="op">
 <label class="full"><span class="op-lb">전달 사항 <span class="op-hint">(선택)</span></span><input name="memo" placeholder="희망 첫 주문 시기, 진열 공간 등"></label>
 <label class="full op-agree"><input type="checkbox" name="agree" required><span>개인정보 수집·이용에 동의합니다 <i>*</i><small>수집 항목: 약국명, 성함, B2B몰 아이디, 휴대폰 번호, 사업자등록번호, 등록증 · 목적: B2B 거래 개설과 약국 등급 승인 · 보유 기간: 거래 종료 후 관계 법령에 따른 기간까지</small></span></label>
 <p class="op-err" id="op-err" role="alert"></p>
-<button type="submit" class="op-submit" id="op-submit">보내고 가입 마치기</button>
+<button type="submit" class="op-submit" id="op-submit">승인 요청 보내기</button>
 </form>
-<div class="op-done" id="op-done" hidden><span class="op-done-ic" aria-hidden="true">✓</span><b id="op-done-h">가입을 환영합니다!</b><p>서류를 확인한 뒤 약국 등급으로 승인해 드립니다. <strong>승인이 끝나면 <span id="op-done-phone"></span>으로 주문 가능 안내 문자를 보내드릴 예정입니다.</strong></p><p class="op-done-s">문자를 받으신 뒤 B2B몰에 <b>다시 로그인</b>하시면 약국 공급가가 보이고 바로 주문하실 수 있어요.</p><a class="op-btn ghost" href="${OP.mall}member/login.html" target="_blank" rel="noopener">B2B몰 로그인 ↗</a><small>문의 ${OP.phoneLabel}</small></div>
+<div class="op-done" id="op-done" hidden><span class="op-done-ic" aria-hidden="true">✓</span><b id="op-done-h">승인 요청이 접수됐어요!</b><p>서류를 확인한 뒤 약국 등급으로 승인해 드립니다. <strong>승인이 끝나면 <span id="op-done-phone"></span>으로 주문 가능 안내 문자를 보내드릴 예정입니다.</strong></p><p class="op-done-s">문자를 받으신 뒤 B2B몰에 <b>다시 로그인</b>하시면 약국 공급가가 보이고 바로 주문하실 수 있어요.</p><a class="op-btn ghost" href="${OP.mall}member/login.html" target="_blank" rel="noopener">B2B몰 로그인 ↗</a><small>문의 ${OP.phoneLabel}</small></div>
 </div></div></section>
 
 <footer class="op-foot"><div class="op-wrap"><b>SIORÉ</b><span>입점 · 주문 문의 ${OP.phoneLabel} · (주)파마브로스</span></div></footer>
-<a class="op-float" href="#" data-opjump="op-join">B2B몰<br>가입</a>
+<a class="op-float" href="${OP.mall}member/agreement.html" target="_blank" rel="noopener">B2B몰<br>가입</a>
 <dialog class="op-modal" id="op-modal" aria-label="제품 상세"><div class="op-m-in"><img id="op-m-img" alt=""><div class="op-m-info" id="op-m-info"></div><button type="button" class="op-m-x" aria-label="닫기">✕</button><button type="button" class="op-m-nav prev" aria-label="이전 제품">‹</button><button type="button" class="op-m-nav next" aria-label="다음 제품">›</button>
 <div class="op-m-bar"><b id="op-m-name"></b><div class="op-dots" id="op-dots"></div><a class="op-btn" href="#" data-opjump="op-join" data-close>이 제품으로 시작하기 · 가입</a></div></div></dialog>
 </div>`}
