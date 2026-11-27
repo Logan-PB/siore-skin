@@ -63,31 +63,33 @@ return `<div class="op">
 <div class="op-acc"><b>시오레 공식 계정</b>${OP.sns.map(([k,v,u])=>`<a href="${u}" target="_blank" rel="noopener"><b>${k}</b><span>${v} ↗</span></a>`).join('')}<a class="op-btn" href="${SUPPORT_CONFIG.seedingForm}" target="_blank" rel="noopener">우리 약국 포스팅 지원 신청 ↗</a></div></div></section>
 
 <section id="op-order" class="op-sec op-wrap"><p class="op-eye">06 · ORDER GUIDE</p><h2>주문 · 입점 안내</h2>
-<div class="op-flow"><div><b>01</b><strong>B2B몰 가입</strong><span>이 페이지 아래 양식으로 약국 정보와 등록증을 보내고, 같은 이메일로 B2B몰에 가입합니다.</span></div><div><b>02</b><strong>등급 승인</strong><span>담당자가 서류를 확인하고 약국 등급으로 올려 드립니다.</span></div><div><b>03</b><strong>다시 로그인</strong><span>승인 안내를 받으면 다시 로그인해야 공급가가 보입니다.</span></div><div><b>04</b><strong>첫 주문</strong><span>공급가를 확인하고 주문합니다. 진열 세팅은 담당자와 일정을 잡습니다.</span></div></div>
+<div class="op-flow"><div><b>01</b><strong>B2B몰 가입</strong><span>B2B몰에 회원가입한 뒤, 이 페이지 아래에서 아이디와 등록증을 보냅니다.</span></div><div><b>02</b><strong>등급 승인</strong><span>담당자가 서류를 확인하고 약국 등급으로 올려 드립니다.</span></div><div><b>03</b><strong>다시 로그인</strong><span>승인 안내를 받으면 다시 로그인해야 공급가가 보입니다.</span></div><div><b>04</b><strong>첫 주문</strong><span>공급가를 확인하고 주문합니다. 진열 세팅은 담당자와 일정을 잡습니다.</span></div></div>
 <div class="op-terms"><div><span class="op-pill">출고</span><p>평일 낮 12시 이전 주문은 당일 출고합니다(제주 제외). 보통 1~2일 안에 도착합니다.</p></div><div><span class="op-pill">교품 · 반품</span><p>출고일로부터 90일 이내의 정상 제품은 거래 조건에 따라 지원합니다. 기획 출고 제품은 제한될 수 있습니다.</p></div><div><span class="op-pill">판매 조건</span><p>지정 약국 내 판매를 조건으로 공급하며, 온라인 재판매는 허용하지 않습니다.</p></div></div>
 <a class="op-link" href="#enrollment">입점 절차 · 거래 조건 자세히 →</a></section>
 
-<section id="op-join" class="op-sec op-join"><div class="op-wrap op-join-in">
-<div class="op-join-t"><p class="op-eye">07 · JOIN B2B MALL</p><h2>여기서 바로<br>B2B몰 가입을 시작하세요</h2>
-<p class="op-p">약국 정보와 등록증을 먼저 보내 주시면, 같은 이메일로 B2B몰에 가입하시는 즉시 담당자가 약국 등급으로 승인해 드립니다. 서류를 따로 회신하실 필요가 없어요.</p>
-<ul class="op-check"><li>약사 전용 공급가 확인</li><li>24시간 주문 · 주문 내역 조회</li><li>진열 · POP · 포스팅 지원 신청</li></ul>
-<p class="op-sub">이미 회원이신가요? <a href="${OP.mall}" target="_blank" rel="noopener" class="op-u">B2B몰 로그인 ↗</a></p></div>
+<section id="op-join" class="op-sec op-join"><div class="op-wrap">
+<p class="op-eye">07 · JOIN B2B MALL</p><h2>B2B몰 가입, 두 단계면 끝나요</h2>
+<p class="op-p">로그인과 주문은 시오레 B2B몰에서 이루어지기 때문에, 회원가입은 B2B몰 화면에서 해 주셔야 합니다. 가입하신 뒤 이 페이지로 돌아와 아이디와 등록증을 보내 주시면 바로 약국 등급으로 승인해 드립니다.</p>
+<div class="op-join-in">
+<div class="op-j1"><span class="op-jn">STEP 1</span><b class="op-jt">B2B몰 회원가입</b>
+<ul class="op-tips"><li><b>회원구분</b> 개인회원으로 가입</li><li><b>아이디</b> 영문 소문자·숫자 4~16자 <small>(이메일 주소가 아니라 따로 정하는 아이디예요)</small></li><li><b>비밀번호</b> 대소문자·숫자·특수문자 중 2가지 이상, 10~16자 · 확인용으로 한 번 더 입력</li><li><b>그 외</b> 비밀번호 확인 질문·답변, 이름, 주소, 전화, 휴대전화, 이메일</li></ul>
+<a class="op-btn lg" href="${OP.mall}member/agreement.html" target="_blank" rel="noopener">B2B몰 회원가입 하러 가기 ↗</a>
+<p class="op-sub">이미 회원이신가요? <a href="${OP.mall}member/login.html" target="_blank" rel="noopener" class="op-u">B2B몰 로그인 ↗</a></p></div>
 <form class="op-form" id="op-form" novalidate>
-<b class="op-form-h">약국 가입 신청</b>
+<b class="op-form-h"><span class="op-jn">STEP 2</span> 아이디와 등록증 보내기</b>
 <label><span class="op-lb">약국명 <i>*</i></span><input name="pharmacy" required placeholder="○○약국" autocomplete="organization"></label>
 <label><span class="op-lb">대표약사 성함 <i>*</i></span><input name="owner" required autocomplete="name"></label>
+<label><span class="op-lb">B2B몰 아이디 <i>*</i></span><input name="mallId" required placeholder="STEP 1에서 만든 아이디" autocapitalize="off" autocomplete="username"></label>
 <label><span class="op-lb">휴대폰 번호 <i>*</i></span><input name="phone" type="tel" required placeholder="010-0000-0000" autocomplete="tel"></label>
-<label><span class="op-lb">이메일 <i>*</i> <span class="op-hint">B2B몰 아이디로 쓸 이메일</span></span><input name="email" type="email" required placeholder="pharmacy@example.com" autocomplete="email"></label>
-<label><span class="op-lb">사업자등록번호 <i>*</i></span><input name="bizno" required placeholder="000-00-00000" inputmode="numeric"></label>
-<label class="full"><span class="op-lb">약국 주소 (배송지) <i>*</i></span><input name="address" required autocomplete="street-address"></label>
+<label class="full"><span class="op-lb">사업자등록번호 <i>*</i></span><input name="bizno" required placeholder="000-00-00000" inputmode="numeric"></label>
 <label class="full"><span class="op-lb">사업자등록증 · 약국개설등록증 <i>*</i></span><span class="op-drop" id="op-drop"><input type="file" name="docs" id="op-docs" accept="image/*,application/pdf" multiple><span id="op-drop-t">사진 또는 PDF를 눌러서 올리기 (2장)</span></span></label>
 <label class="full"><span class="op-lb">전달 사항 <span class="op-hint">(선택)</span></span><input name="memo" placeholder="희망 첫 주문 시기, 진열 공간 등"></label>
-<label class="full op-agree"><input type="checkbox" name="agree" required><span>개인정보 수집·이용에 동의합니다 <i>*</i><small>수집 항목: 약국명, 성함, 연락처, 이메일, 사업자등록번호, 주소, 등록증 · 목적: B2B 거래 개설과 약국 등급 승인 · 보유 기간: 거래 종료 후 관계 법령에 따른 기간까지</small></span></label>
+<label class="full op-agree"><input type="checkbox" name="agree" required><span>개인정보 수집·이용에 동의합니다 <i>*</i><small>수집 항목: 약국명, 성함, B2B몰 아이디, 휴대폰 번호, 사업자등록번호, 등록증 · 목적: B2B 거래 개설과 약국 등급 승인 · 보유 기간: 거래 종료 후 관계 법령에 따른 기간까지</small></span></label>
 <p class="op-err" id="op-err" role="alert"></p>
-<button type="submit" class="op-submit" id="op-submit">가입 신청 보내기</button>
+<button type="submit" class="op-submit" id="op-submit">보내고 가입 마치기</button>
 </form>
-<div class="op-done" id="op-done" hidden><b>✓ 접수되었습니다</b><p>이제 <strong id="op-done-mail"></strong>(으)로 B2B몰에 가입해 주세요. 가입하시면 담당자가 바로 약국 등급으로 승인해 드립니다.</p><a class="op-btn lg" href="${OP.mall}" target="_blank" rel="noopener">B2B몰 회원가입 하러 가기 ↗</a><small>문의 ${OP.phoneLabel}</small></div>
-</div></section>
+<div class="op-done" id="op-done" hidden><span class="op-done-ic" aria-hidden="true">✓</span><b id="op-done-h">가입을 환영합니다!</b><p>서류를 확인한 뒤 약국 등급으로 승인해 드립니다. <strong>승인이 끝나면 <span id="op-done-phone"></span>으로 주문 가능 안내 문자를 보내드릴 예정입니다.</strong></p><p class="op-done-s">문자를 받으신 뒤 B2B몰에 <b>다시 로그인</b>하시면 약국 공급가가 보이고 바로 주문하실 수 있어요.</p><a class="op-btn ghost" href="${OP.mall}member/login.html" target="_blank" rel="noopener">B2B몰 로그인 ↗</a><small>문의 ${OP.phoneLabel}</small></div>
+</div></div></section>
 
 <footer class="op-foot"><div class="op-wrap"><b>SIORÉ</b><span>입점 · 주문 문의 ${OP.phoneLabel} · (주)파마브로스</span></div></footer>
 <a class="op-float" href="#" data-opjump="op-join">B2B몰<br>가입</a>
@@ -112,9 +114,9 @@ function bindJoin(f){const docs=f.querySelector('#op-docs'),t=f.querySelector('#
  docs.onchange=()=>{t.textContent=docs.files.length?[...docs.files].map(x=>x.name).join(', '):'사진 또는 PDF를 눌러서 올리기 (2장)';f.querySelector('#op-drop').classList.toggle('has',!!docs.files.length)};
  f.onsubmit=async e=>{e.preventDefault();err.textContent='';
   const d=Object.fromEntries(new FormData(f).entries());
-  const miss=['pharmacy','owner','phone','email','bizno','address'].filter(k=>!String(d[k]||'').trim());
+  const miss=['pharmacy','owner','mallId','phone','bizno'].filter(k=>!String(d[k]||'').trim());
   if(miss.length){err.textContent='* 표시된 항목을 모두 채워 주세요.';f.querySelector(`[name=${miss[0]}]`).focus();return}
-  if(!/^\S+@\S+\.\S+$/.test(d.email)){err.textContent='이메일 주소를 확인해 주세요.';return}
+  if(!/^[a-z0-9]{4,16}$/.test(String(d.mallId).trim())){err.textContent='B2B몰 아이디는 영문 소문자·숫자 4~16자예요. 가입하신 아이디를 확인해 주세요.';f.mallId.focus();return}
   if(!docs.files.length){err.textContent='사업자등록증과 약국개설등록증을 올려 주세요.';return}
   if([...docs.files].some(x=>x.size>15*1024*1024)){err.textContent='파일 하나당 15MB 이하로 올려 주세요.';return}
   if(!f.agree.checked){err.textContent='개인정보 수집·이용에 동의해 주세요.';return}
@@ -123,5 +125,5 @@ function bindJoin(f){const docs=f.querySelector('#op-docs'),t=f.querySelector('#
   try{const files=await Promise.all([...docs.files].slice(0,4).map(opShrink));
    delete d.docs;d.agree='Y';d.page=location.href;
    await fetch(OP.JOIN_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({...d,files})});
-   f.hidden=true;const done=document.getElementById('op-done');done.querySelector('#op-done-mail').textContent=d.email;done.hidden=false;done.scrollIntoView({behavior:'smooth',block:'center'})}
-  catch(x){btn.disabled=false;btn.textContent='가입 신청 보내기';err.innerHTML=`보내지 못했어요. 잠시 후 다시 시도하시거나 <a href="sms:${OP.phone}">${OP.phoneLabel}</a>로 문자 주세요.`}}}
+   f.hidden=true;const done=document.getElementById('op-done');done.querySelector('#op-done-h').textContent=`가입을 환영합니다, ${d.pharmacy} ${d.owner} 약사님!`;done.querySelector('#op-done-phone').textContent=d.phone;done.hidden=false;done.scrollIntoView({behavior:'smooth',block:'center'})}
+  catch(x){btn.disabled=false;btn.textContent='보내고 가입 마치기';err.innerHTML=`보내지 못했어요. 잠시 후 다시 시도하시거나 <a href="sms:${OP.phone}">${OP.phoneLabel}</a>로 문자 주세요.`}}}
