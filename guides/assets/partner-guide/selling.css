@@ -1,0 +1,92 @@
+/* ───── 셀링카드 ───── */
+.sc-hero{padding:10px 0 34px}
+.sc-hero h1{font-size:40px;line-height:1.25;margin:12px 0 14px}.sc-hero h1 em{font-style:normal;color:#a5684f}
+.sc-hero>p{max-width:640px;font-size:15px}
+.sc-print{background:#4a2d25!important;color:#fff!important;border-color:#4a2d25!important}
+.sc-more{margin-left:18px}
+.sc-block{margin:0 0 64px;scroll-margin-top:90px}
+.sc-lhead{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding-bottom:14px;margin-bottom:18px;border-bottom:1px solid #e6d8cf}
+.sc-lhead b{font-size:22px;letter-spacing:.18em;color:#3b2620}.sc-lhead small{font-size:13px;color:#8b766c}
+.sc-lhead .dot{width:9px;height:9px;border-radius:50%;background:#a5684f;align-self:center}.sc-lhead .d-r{background:#3d6f8e}
+.sc-grid{display:grid;gap:12px}.sc-grid.g5{grid-template-columns:repeat(5,1fr)}.sc-grid.g4{grid-template-columns:repeat(4,1fr)}
+.sc{display:flex;flex-direction:column;background:#fff;border:1px solid #eadfd8;border-radius:18px;overflow:hidden;scroll-margin-top:120px;transition:box-shadow .3s}
+.sc.is-hero{border-color:#a5684f;box-shadow:0 0 0 1px #a5684f inset}
+.sc.flash{animation:scflash 1.4s}
+@keyframes scflash{0%,40%{box-shadow:0 0 0 4px #e08a63aa}100%{box-shadow:none}}
+.sc-top{position:relative;padding:16px 16px 14px;text-align:center;background:linear-gradient(180deg,#f8f1ec,#fff)}
+.sc-top img{height:150px;width:100%;object-fit:contain;margin:4px 0 10px}
+.sc-badges{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;min-height:22px}
+.scb{font-size:10px;font-weight:700;padding:3px 8px;border-radius:99px;background:#f1e6df;color:#7a4b39;white-space:nowrap}
+.scb.hero{background:#a5684f;color:#fff}.scb.nc{background:#fde9ea;color:#b4434f}.scb.ir{background:#e7f0f6;color:#3d6f8e}
+.sc-line{display:block;font-size:10.5px;letter-spacing:.08em;color:#9a8378;font-weight:700}
+.sc-name{display:block;font-size:17px;margin:3px 0 4px;color:#3b2620;letter-spacing:-.3px}
+.sc-rrp{font-size:11.5px;color:#8b766c}.sc-rrp strong{color:#3b2620;font-size:13px}
+.sc-band{background:#4a2d25;color:#fff;text-align:center;padding:11px 10px}
+.sc-band b{display:block;font-size:15px}.sc-band small{font-size:10.5px;color:#e6cfc3}
+.sc .d-r~*{}
+#sc-dr .sc-band{background:#2f5068}#sc-dr .sc-band small{color:#cfe0ec}
+.sc-who,.sc-proof,.sc-talk{padding:14px 16px;border-bottom:1px dashed #eadfd8;text-align:center}
+.sc em{display:block;font-style:normal;font-size:10px;font-weight:700;letter-spacing:.12em;color:#a5684f;margin-bottom:5px}
+.sc-who b{display:block;font-size:14.5px;color:#3b2620;line-height:1.4}.sc-who small{display:block;margin-top:5px;font-size:10.5px;line-height:1.5;color:#8b766c}
+.sc-proof{background:#fbf6f3}.sc-proof strong{display:block;font-size:22px;color:#a5684f;letter-spacing:-.5px}
+.sc-proof span{display:block;font-size:12.5px;font-weight:700;color:#3b2620}.sc-proof small{font-size:10.5px;color:#9a8378}
+.sc-talk{flex:1;text-align:left}.sc-talk em{text-align:left}.sc-talk p{margin:0;font-size:12.5px;line-height:1.7;color:#4d3d36}
+.sc-pair{display:flex;gap:10px;align-items:center;padding:12px 14px;background:#f8f1ec;transition:.2s}
+.sc-pair:hover{background:#f2e4db}
+.sc-pair img{width:38px;height:44px;object-fit:contain;flex:none}
+.sc-pair em{margin:0 0 1px;text-align:left}.sc-pair b{display:block;font-size:13px;color:#3b2620}.sc-pair small{font-size:11px;color:#8b766c}
+.sc-note{margin:0;padding:8px 14px 10px;font-size:10px!important;color:#9a8378!important;background:#f8f1ec}
+/* 기초세트 */
+.ss-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+.ss{display:flex;flex-direction:column;padding:22px;border-radius:20px;background:#fff;border:1px solid #eadfd8}
+.ss-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ss-n{font-size:10px;font-weight:800;letter-spacing:.14em;color:#fff;background:#4a2d25;padding:4px 9px;border-radius:99px}
+.ss-tag{font-size:12px;font-weight:700;color:#a5684f}.ss-head small{font-size:10.5px;color:#9a8378;letter-spacing:.04em}
+.ss-calm .ss-n,.ss-trouble .ss-n{background:#2f5068}.ss-calm .ss-tag,.ss-trouble .ss-tag{color:#3d6f8e}
+.ss-first{background:linear-gradient(160deg,#4a2d25,#6b4336);color:#fff;border:0}
+.ss-first .ss-n{background:#fff;color:#4a2d25}.ss-first .ss-tag{color:#f2c3ad}.ss-first .ss-title,.ss-first .ss-steps b{color:#fff}.ss-first .ss-for,.ss-first .ss-head small{color:#e6cfc3}
+.ss-first .ss-steps a{background:#ffffff14;border-color:#ffffff22}.ss-first .ss-steps em{color:#f2c3ad}
+.ss-first .ss-talk{background:#ffffff12}.ss-first .ss-talk p{color:#f6ece6}.ss-first .ss-total{border-color:#ffffff30}.ss-first .ss-total span{color:#e6cfc3}.ss-first .ss-total strong{color:#fff}.ss-first .ss-add,.ss-first .ss-add a{color:#e6cfc3}
+.ss-title{font-size:20px;margin:12px 0 4px;color:#3b2620;letter-spacing:-.4px}
+.ss-for{font-size:12.5px;color:#7a6a62;margin:0 0 14px}
+.ss-steps{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:7px}
+.ss-steps a{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid #f0e6e0;border-radius:12px;background:#fbf7f4;position:relative}
+.ss-steps li:not(:last-child) a:after{content:'';position:absolute;left:27px;bottom:-8px;width:1px;height:8px;background:#d9c6bc}
+.ss-steps img{width:34px;height:40px;object-fit:contain}
+.ss-steps em{display:block;font-style:normal;font-size:9.5px;font-weight:700;letter-spacing:.1em;color:#a5684f}
+.ss-steps b{font-size:13.5px;color:#3b2620}
+.ss-talk{padding:12px 14px;border-radius:12px;background:#f8f1ec;margin-bottom:14px;flex:1}
+.ss-talk em{display:block;font-style:normal;font-size:10px;font-weight:700;letter-spacing:.12em;color:#a5684f;margin-bottom:4px}
+.ss-talk p{margin:0;font-size:12.5px;line-height:1.7;color:#4d3d36}.ss-talk small{display:block;margin-top:6px;font-size:10px;color:#9a8378}
+.ss-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;border-top:1px solid #eadfd8}
+.ss-total span{font-size:11.5px;color:#8b766c}.ss-total strong{font-size:20px;color:#3b2620}
+.ss-add{margin:8px 0 0;font-size:11px;color:#8b766c}.ss-add a{color:#a5684f;font-weight:700;text-decoration:underline}
+.sc-fine{font-size:11px;color:#9a8378;margin:-30px 0 40px;line-height:1.6}
+@media(max-width:1180px){.sc-grid.g5,.sc-grid.g4{grid-template-columns:repeat(3,1fr)}.ss-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.sc-grid.g5,.sc-grid.g4{grid-template-columns:repeat(2,1fr)}.sc-top img{height:120px}}
+@media(max-width:520px){.sc-hero h1{font-size:28px}.sc-grid.g5,.sc-grid.g4,.ss-grid{grid-template-columns:1fr}.sc-more{display:block;margin:10px 0 0}}
+/* 인쇄: 셀링카드 탭만 A4 가로로 */
+@media print{
+ @page{size:A4 landscape;margin:10mm}
+ body[data-page=selling] header,body[data-page=selling] .sc-hero nav,body[data-page=selling] .closing-cta,.ed-bar,.ed-toast,.ed-mini{display:none!important}
+ body[data-page=selling]{background:#fff}
+ body[data-page=selling] .sc-block{break-inside:avoid;page-break-after:always;margin:0}
+ body[data-page=selling] .sc-grid.g5{grid-template-columns:repeat(5,1fr)}body[data-page=selling] .sc-grid.g4{grid-template-columns:repeat(4,1fr)}
+ body[data-page=selling] .ss-grid{grid-template-columns:repeat(3,1fr)}body[data-page=selling] .ss{break-inside:avoid}
+ body[data-page=selling] *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media(min-width:1181px){.ss-grid{grid-template-columns:repeat(6,1fr)}.ss{grid-column:span 2}.ss:nth-child(4),.ss:nth-child(5){grid-column:span 3}}
+@media print{body[data-page=selling] .ss-grid{grid-template-columns:repeat(5,1fr)!important}body[data-page=selling] .ss{grid-column:auto!important;padding:12px}}
+/* 메뉴 4개: 좁은 화면에서도 한 줄 유지 */
+header nav a{white-space:nowrap}
+@media(max-width:520px){header{gap:8px}header .logo{font-size:20px;letter-spacing:.18em;flex:none}header nav{gap:0;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap}header nav::-webkit-scrollbar{display:none}header nav a{font-size:12.5px;padding:10px 7px}}
+@media(max-width:360px){header nav a{font-size:11.5px;padding:10px 5px}}
+header nav .ns{display:none}
+@media(max-width:380px){header nav .nl{display:none}header nav .ns{display:inline}header nav a{font-size:12.5px;padding:10px 8px}}
+@media print{
+ body[data-page=selling] main{zoom:.58}
+ body[data-page=selling] .sc-hero{padding:0 0 8px}body[data-page=selling] .sc-hero>p{display:none}body[data-page=selling] .sc-hero h1{font-size:26px;margin:4px 0}
+ body[data-page=selling] .sc-block{page-break-after:auto;page-break-before:always}body[data-page=selling] #sc-nmn{page-break-before:avoid}
+ body[data-page=selling] .sc-fine{margin:10px 0}
+}
+@media print{body[data-page=selling] main{zoom:.66;max-width:none!important;width:auto!important;margin:0!important;padding:0!important}body[data-page=selling] #app,body[data-page=selling] main>section{max-width:none!important;margin-left:0!important;margin-right:0!important}}
