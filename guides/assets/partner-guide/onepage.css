@@ -174,3 +174,8 @@ body[data-page=partner] main{max-width:none!important;padding:0!important;margin
 .op-toc a.hot.on{background:var(--od);border-color:var(--od)}
 .op-tabbed .op-sec.on{min-height:60vh}
 .op-next{grid-column:1/-1;margin-top:40px;display:flex;justify-content:flex-end}.op-next a{padding:12px 20px;border:1px solid var(--o);border-radius:999px;color:var(--od);font-weight:700}.op-next a:hover{background:var(--o);color:#fff}
+.op-hero[hidden]{display:none}
+.op-toc{box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.op-toc .op-wrap{justify-content:center}
+@media(max-width:1100px){.op-toc .op-wrap{justify-content:flex-start}}
+@media(max-width:640px){.op-top{flex-wrap:nowrap;padding-top:10px;padding-bottom:10px}.op-brand span{display:none}.op-tact .op-btn{padding:9px 14px;font-size:13px}}

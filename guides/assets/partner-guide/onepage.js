@@ -30,14 +30,14 @@ const OP_REVIEWS=[
 function partner(){const nmn=OP_PRODUCTS.slice(0,5).map((p,i)=>opCard(p,i)).join(''),dr=OP_PRODUCTS.slice(5).map((p,i)=>opCard(p,i+5)).join('');
 return `<div class="op">
 <header class="op-top"><div class="op-brand"><b>SIORÉ</b><span>약국 파트너 전용 안내</span></div><div class="op-tact"><a href="tel:${OP.phone}">담당자 상담 ${OP.phoneLabel}</a><a class="op-btn" href="#" data-opjump="op-join">B2B몰 가입하기</a></div></header>
-<section class="op-hero"><div class="op-wrap op-hero-in"><div class="op-hero-t">
+<nav class="op-toc" aria-label="페이지 목차"><div class="op-wrap">${[['op-brand-s','01 브랜드'],['op-product','02 제품 라인업'],['op-setting','03 세팅 사례'],['op-review','04 사용 후기'],['op-sns','05 SNS · 공식계정'],['op-order','06 주문 · 입점 안내'],['op-join','07 B2B몰 가입']].map(([k,n])=>`<a href="#" data-opjump="${k}"${k==='op-join'?' class="hot"':''}>${n}</a>`).join('')}</div></nav>
+<section class="op-hero" id="op-hero"><div class="op-wrap op-hero-in"><div class="op-hero-t">
 <p class="op-eye">WELCOME, PARTNER</p>
 <h1>입점 신청해 주셔서<br>감사합니다.</h1>
 <p class="op-lead">시오레를 약국에 들이기 전 필요한 내용을 메뉴별로 정리했습니다. 궁금한 메뉴만 골라 보시고, B2B몰 가입까지 바로 마치실 수 있어요.</p>
 <ol class="op-steps"><li class="done"><small>STEP 1 · 완료</small><b>입점 신청 ✓</b></li><li class="now"><small>STEP 2 · 지금</small><b>B2B몰 가입</b></li><li><small>STEP 3</small><b>등급 승인</b></li><li><small>STEP 4</small><b>첫 주문</b></li></ol>
 <div class="op-cta"><a class="op-btn lg" href="#" data-opjump="op-join">지금 B2B몰 가입하기 · 약 3분</a><a class="op-btn ghost lg" href="#" data-opjump="op-order">주문 안내 먼저 보기</a></div>
 </div><img class="op-hero-img" src="${OPA}brand/hero-products.jpg" alt="시오레 전 제품"></div></section>
-<nav class="op-toc" aria-label="페이지 목차"><div class="op-wrap">${[['op-brand-s','01 브랜드'],['op-product','02 제품 라인업'],['op-setting','03 세팅 사례'],['op-review','04 사용 후기'],['op-sns','05 SNS · 공식계정'],['op-order','06 주문 · 입점 안내'],['op-join','07 B2B몰 가입']].map(([k,n])=>`<a href="#" data-opjump="${k}"${k==='op-join'?' class="hot"':''}>${n}</a>`).join('')}</div></nav>
 
 <section id="op-brand-s" class="op-sec op-wrap op-split"><img src="${OPA}brand/story-model.jpg" alt="시오레 브랜드">
 <div><p class="op-eye">01 · BRAND</p><h2>약국 카운터의 질문에서 시작된,<br>약사가 설계한 바르는 피부 영양제</h2>
@@ -101,12 +101,12 @@ let opIdx=0;
 function opShow(i){const n=OP_PRODUCTS.length;opIdx=(i+n)%n;const p=OP_PRODUCTS[opIdx];const img=document.getElementById('op-m-img');img.src=`${OPA}slides/${p.slide}.jpg`;img.alt=p.kr+' 상세';document.getElementById('op-m-name').innerHTML=`${p.kr} <span>· ${opIdx+1} / ${n}</span>`;const sp=(window.SELL||{})[opIdx],pr=(typeof PRODUCTS!=='undefined'?PRODUCTS:[]).find(x=>x.id===opIdx)||{},st=sp&&pr.stats?pr.stats[sp.proof]||{}:{};document.getElementById('op-m-info').innerHTML=`<img src="${OPA}product-${p.pic}.png" alt=""><div><em>${p.badge||(opIdx<5?'NMN LINE':'DAILY RELIEF')}</em><b>${p.kr}</b><small>${p.size} / ${opWon(p.price)}</small></div>${sp?`<p class="band"><b>${sp.band[0]}</b><span>${sp.band[1]}</span></p><dl><dt>이런 고객에게</dt><dd>${sp.who[0]}</dd>${st.value?`<dt>대표 시험 결과</dt><dd><strong>${st.value}</strong> ${st.label} <small>(${st.condition||''})</small></dd>`:''}<dt>이렇게 권하세요</dt><dd>${sp.talk}</dd></dl>`:`<p>${p.desc}</p>`}<a class="op-m-full" href="${OPA}slides/${p.slide}.jpg" target="_blank" rel="noopener">소개서 상세 페이지 크게 보기 ↗</a>`;document.getElementById('op-dots').innerHTML=OP_PRODUCTS.map((q,k)=>`<button type="button" aria-label="${q.kr}" class="${k===opIdx?'on':''}" data-dot="${k}"></button>`).join('');document.querySelectorAll('[data-dot]').forEach(b=>b.onclick=()=>opShow(+b.dataset.dot))}
 const OP_TABS=['op-brand-s','op-product','op-setting','op-review','op-sns','op-order','op-join'];
 const OP_TAB_NAMES=['브랜드','제품 라인업','세팅 사례','사용 후기','SNS · 공식계정','주문 · 입점 안내','B2B몰 가입'];
-function opTab(id){OP_TABS.forEach((k,i)=>{const s=document.getElementById(k);if(!s||s.querySelector('.op-next')||i===OP_TABS.length-1)return;
+function opTab(id){const hero=document.getElementById('op-hero');if(hero)hero.hidden=id!=='op-brand-s';OP_TABS.forEach((k,i)=>{const s=document.getElementById(k);if(!s||s.querySelector('.op-next')||i===OP_TABS.length-1)return;
   const b=document.createElement('div');b.className='op-next';b.innerHTML=`<a href="#" data-opjump="${OP_TABS[i+1]}">다음: ${OP_TAB_NAMES[i+1]} →</a>`;
   b.querySelector('a').onclick=e=>{e.preventDefault();opJump(OP_TABS[i+1])};(s.querySelector('.op-wrap')||s).appendChild(b)});
 OP_TABS.forEach(k=>{const s=document.getElementById(k);if(s)s.classList.toggle('on',k===id)});
  document.querySelectorAll('.op-toc a[data-opjump]').forEach(a=>a.classList.toggle('on',a.dataset.opjump===id))}
-function opJump(id){if(OP_TABS.includes(id)){opTab(id);const n=document.querySelector('.op-toc');if(n)window.scrollTo({top:n.getBoundingClientRect().top+scrollY-0,behavior:'smooth'});return}
+function opJump(id){if(OP_TABS.includes(id)){opTab(id);window.scrollTo({top:0,behavior:'smooth'});return}
  const t=document.getElementById(id);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}
 function bindPartner(){if(!document.querySelector('.op'))return;
  document.querySelector('.op').classList.add('op-tabbed');opTab('op-brand-s');
