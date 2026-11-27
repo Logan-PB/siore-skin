@@ -168,3 +168,21 @@ dialog.ref-dialog .close{position:absolute;top:10px;right:10px;z-index:2;width:3
 .ed-pick input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 @media(min-width:1100px){.ed-bar{flex-wrap:nowrap;white-space:nowrap}}
 .ed-toast{bottom:110px}
+/* 인증마크: 흰 배경 제거 + 크기 조절(--cert) + 설명 */
+:root{--cert:56px}
+.pv-certs{display:flex;flex-wrap:wrap;align-items:flex-start;gap:14px 18px;margin-bottom:6px}
+.pv-certs .cert-i{margin:0;display:flex;align-items:center;gap:9px}
+.pv-certs .cert-i img{width:var(--cert);height:var(--cert);object-fit:contain;background:none;padding:0;border-radius:0;box-shadow:none;filter:drop-shadow(0 3px 6px rgba(80,45,30,.12))}
+.pv-certs figcaption{display:flex;flex-direction:column;line-height:1.35}
+.pv-certs figcaption b{font-size:12px;color:#3b2620;font-weight:700}
+.pv-certs figcaption small{font-size:10.5px;color:#8b766c}
+.cert-b{background:none!important;padding:0!important;box-shadow:none!important;border-radius:0!important;width:calc(var(--cert)*.8)!important;height:calc(var(--cert)*.8)!important}
+.cert-b img{filter:drop-shadow(0 2px 4px rgba(60,35,25,.18))}
+@media(max-width:650px){
+.pv-certs{gap:10px 12px}
+.pv-certs .cert-i{flex-direction:column;align-items:flex-start;gap:5px;max-width:31%}
+.pv-certs .cert-i img{width:calc(var(--cert)*.85);height:calc(var(--cert)*.85)}
+.pv-certs figcaption b{font-size:11px}.pv-certs figcaption small{font-size:9.5px}
+.cert-b{width:calc(var(--cert)*.6)!important;height:calc(var(--cert)*.6)!important}
+}
+.ed-cert b{font-size:11px;min-width:22px;text-align:center;color:#fff}
