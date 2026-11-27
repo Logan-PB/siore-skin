@@ -64,7 +64,7 @@ return `<div class="op">
 
 <section id="op-order" class="op-sec op-wrap"><p class="op-eye">06 · ORDER GUIDE</p><h2>주문 · 입점 안내</h2>
 <div class="op-flow"><div><b>01</b><strong>B2B몰 가입</strong><span>B2B몰에 회원가입한 뒤, 이 페이지 아래에서 아이디와 등록증을 보냅니다.</span></div><div><b>02</b><strong>등급 승인</strong><span>담당자가 서류를 확인하고 약국 등급으로 올려 드립니다.</span></div><div><b>03</b><strong>다시 로그인</strong><span>승인 안내를 받으면 다시 로그인해야 공급가가 보입니다.</span></div><div><b>04</b><strong>첫 주문</strong><span>공급가를 확인하고 주문합니다. 진열 세팅은 담당자와 일정을 잡습니다.</span></div></div>
-<div class="op-terms"><div><span class="op-pill">출고</span><p>평일 낮 12시 이전 주문은 당일 출고합니다(제주 제외). 보통 1~2일 안에 도착합니다.</p></div><div><span class="op-pill">교품 · 반품</span><p>출고일로부터 90일 이내의 정상 제품은 거래 조건에 따라 지원합니다. 기획 출고 제품은 제한될 수 있습니다.</p></div><div><span class="op-pill">판매 조건</span><p>지정 약국 내 판매를 조건으로 공급하며, 온라인 재판매는 허용하지 않습니다.</p></div></div>
+<div class="op-terms"><div><span class="op-pill">출고</span><p>평일 12:30 이전 주문은 당일 집하가 시작됩니다(제주 제외). 보통 1~2일 안에 도착합니다.</p></div><div><span class="op-pill">교품 · 반품</span><p>출고일로부터 90일 이내의 정상 제품은 거래 조건에 따라 지원합니다. 기획 출고 제품은 제한될 수 있습니다.</p></div><div><span class="op-pill">판매 조건</span><p>지정 약국 내 판매를 조건으로 공급하며, 온라인 재판매는 허용하지 않습니다.</p></div></div>
 <a class="op-link" href="#enrollment">입점 절차 · 거래 조건 자세히 →</a></section>
 
 <section id="op-join" class="op-sec op-join"><div class="op-wrap">
