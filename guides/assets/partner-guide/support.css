@@ -186,3 +186,4 @@ dialog.ref-dialog .close{position:absolute;top:10px;right:10px;z-index:2;width:3
 .cert-b{width:calc(var(--cert)*.6)!important;height:calc(var(--cert)*.6)!important}
 }
 .ed-cert b{font-size:11px;min-width:22px;text-align:center;color:#fff}
+.pv-certs .cert-note{font-weight:500;color:#8b766c;font-size:.9em}
